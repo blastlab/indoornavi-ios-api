@@ -8,68 +8,34 @@
 
 /* Begin PBXBuildFile section */
 		66FED138445065096C61D508 /* Pods_IndoorNaviTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B4DF181EE1B23D0C81FAEE0 /* Pods_IndoorNaviTests.framework */; };
+		7B7F3A22206D1C2400CB17F2 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A03206D1C2400CB17F2 /* .gitignore */; };
+		7B7F3A23206D1C2400CB17F2 /* jsLibraryMappings.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A05206D1C2400CB17F2 /* jsLibraryMappings.xml */; };
+		7B7F3A24206D1C2400CB17F2 /* misc.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A06206D1C2400CB17F2 /* misc.xml */; };
+		7B7F3A25206D1C2400CB17F2 /* modules.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A07206D1C2400CB17F2 /* modules.xml */; };
+		7B7F3A26206D1C2400CB17F2 /* vcs.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A08206D1C2400CB17F2 /* vcs.xml */; };
+		7B7F3A27206D1C2400CB17F2 /* Gruntfile.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A09206D1C2400CB17F2 /* Gruntfile.js */; };
+		7B7F3A28206D1C2400CB17F2 /* indoornavi_api.iml in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A0A206D1C2400CB17F2 /* indoornavi_api.iml */; };
+		7B7F3A29206D1C2400CB17F2 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A0C206D1C2400CB17F2 /* index.html */; };
+		7B7F3A2A206D1C2400CB17F2 /* indoorNavi.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A0D206D1C2400CB17F2 /* indoorNavi.js */; };
+		7B7F3A2B206D1C2400CB17F2 /* indoorNavi.spec.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A0E206D1C2400CB17F2 /* indoorNavi.spec.js */; };
+		7B7F3A2C206D1C2400CB17F2 /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A0F206D1C2400CB17F2 /* package.json */; };
+		7B7F3A2D206D1C2400CB17F2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A10206D1C2400CB17F2 /* README.md */; };
+		7B7F3A2E206D1C2400CB17F2 /* indoornavi.spec.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A12206D1C2400CB17F2 /* indoornavi.spec.js */; };
+		7B7F3A2F206D1C2400CB17F2 /* jasmine.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A14206D1C2400CB17F2 /* jasmine.json */; };
+		7B7F3A30206D1C2400CB17F2 /* area.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A16206D1C2400CB17F2 /* area.js */; };
+		7B7F3A31206D1C2400CB17F2 /* geometric.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A17206D1C2400CB17F2 /* geometric.js */; };
+		7B7F3A32206D1C2400CB17F2 /* communication.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A19206D1C2400CB17F2 /* communication.js */; };
+		7B7F3A33206D1C2400CB17F2 /* dom.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A1A206D1C2400CB17F2 /* dom.js */; };
+		7B7F3A34206D1C2400CB17F2 /* http.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A1B206D1C2400CB17F2 /* http.js */; };
+		7B7F3A35206D1C2400CB17F2 /* indoornavi.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A1C206D1C2400CB17F2 /* indoornavi.js */; };
+		7B7F3A36206D1C2400CB17F2 /* areaEvent.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A1E206D1C2400CB17F2 /* areaEvent.js */; };
+		7B7F3A37206D1C2400CB17F2 /* coordinates.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A1F206D1C2400CB17F2 /* coordinates.js */; };
+		7B7F3A38206D1C2400CB17F2 /* polyline.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A20206D1C2400CB17F2 /* polyline.js */; };
+		7B7F3A39206D1C2400CB17F2 /* report.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A21206D1C2400CB17F2 /* report.js */; };
 		7BD4676E206CF34A00B9F2AD /* IndoorNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD46764206CF34A00B9F2AD /* IndoorNavi.framework */; };
 		7BD46773206CF34A00B9F2AD /* IndoorNaviTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD46772206CF34A00B9F2AD /* IndoorNaviTests.swift */; };
 		7BD46775206CF34A00B9F2AD /* IndoorNavi.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BD46767206CF34A00B9F2AD /* IndoorNavi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7BD4679D206CF59500B9F2AD /* IndoorNavi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD4679C206CF59500B9F2AD /* IndoorNavi.swift */; };
-		7BD467E8206D0E8A00B9F2AD /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467A2206D0E8A00B9F2AD /* .gitignore */; };
-		7BD467E9206D0E8A00B9F2AD /* jsLibraryMappings.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467A4206D0E8A00B9F2AD /* jsLibraryMappings.xml */; };
-		7BD467EA206D0E8A00B9F2AD /* misc.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467A5206D0E8A00B9F2AD /* misc.xml */; };
-		7BD467EB206D0E8A00B9F2AD /* modules.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467A6206D0E8A00B9F2AD /* modules.xml */; };
-		7BD467EC206D0E8A00B9F2AD /* vcs.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467A7206D0E8A00B9F2AD /* vcs.xml */; };
-		7BD467ED206D0E8A00B9F2AD /* Gruntfile.js in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467A8206D0E8A00B9F2AD /* Gruntfile.js */; };
-		7BD467EE206D0E8A00B9F2AD /* indoornavi_api.iml in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467A9206D0E8A00B9F2AD /* indoornavi_api.iml */; };
-		7BD467EF206D0E8A00B9F2AD /* Area.html in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467AB206D0E8A00B9F2AD /* Area.html */; };
-		7BD467F0206D0E8A00B9F2AD /* AreaEvent.html in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467AC206D0E8A00B9F2AD /* AreaEvent.html */; };
-		7BD467F1206D0E8A00B9F2AD /* Coordinates.html in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467AD206D0E8A00B9F2AD /* Coordinates.html */; };
-		7BD467F2206D0E8A00B9F2AD /* OpenSans-Bold-webfont.eot in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467AF206D0E8A00B9F2AD /* OpenSans-Bold-webfont.eot */; };
-		7BD467F3206D0E8A00B9F2AD /* OpenSans-Bold-webfont.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467B0206D0E8A00B9F2AD /* OpenSans-Bold-webfont.svg */; };
-		7BD467F4206D0E8A00B9F2AD /* OpenSans-Bold-webfont.woff in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467B1206D0E8A00B9F2AD /* OpenSans-Bold-webfont.woff */; };
-		7BD467F5206D0E8A00B9F2AD /* OpenSans-BoldItalic-webfont.eot in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467B2206D0E8A00B9F2AD /* OpenSans-BoldItalic-webfont.eot */; };
-		7BD467F6206D0E8A00B9F2AD /* OpenSans-BoldItalic-webfont.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467B3206D0E8A00B9F2AD /* OpenSans-BoldItalic-webfont.svg */; };
-		7BD467F7206D0E8A00B9F2AD /* OpenSans-BoldItalic-webfont.woff in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467B4206D0E8A00B9F2AD /* OpenSans-BoldItalic-webfont.woff */; };
-		7BD467F8206D0E8A00B9F2AD /* OpenSans-Italic-webfont.eot in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467B5206D0E8A00B9F2AD /* OpenSans-Italic-webfont.eot */; };
-		7BD467F9206D0E8A00B9F2AD /* OpenSans-Italic-webfont.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467B6206D0E8A00B9F2AD /* OpenSans-Italic-webfont.svg */; };
-		7BD467FA206D0E8A00B9F2AD /* OpenSans-Italic-webfont.woff in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467B7206D0E8A00B9F2AD /* OpenSans-Italic-webfont.woff */; };
-		7BD467FB206D0E8A00B9F2AD /* OpenSans-Light-webfont.eot in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467B8206D0E8A00B9F2AD /* OpenSans-Light-webfont.eot */; };
-		7BD467FC206D0E8A00B9F2AD /* OpenSans-Light-webfont.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467B9206D0E8A00B9F2AD /* OpenSans-Light-webfont.svg */; };
-		7BD467FD206D0E8A00B9F2AD /* OpenSans-Light-webfont.woff in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467BA206D0E8A00B9F2AD /* OpenSans-Light-webfont.woff */; };
-		7BD467FE206D0E8A00B9F2AD /* OpenSans-LightItalic-webfont.eot in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467BB206D0E8A00B9F2AD /* OpenSans-LightItalic-webfont.eot */; };
-		7BD467FF206D0E8A00B9F2AD /* OpenSans-LightItalic-webfont.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467BC206D0E8A00B9F2AD /* OpenSans-LightItalic-webfont.svg */; };
-		7BD46800206D0E8A00B9F2AD /* OpenSans-LightItalic-webfont.woff in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467BD206D0E8A00B9F2AD /* OpenSans-LightItalic-webfont.woff */; };
-		7BD46801206D0E8A00B9F2AD /* OpenSans-Regular-webfont.eot in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467BE206D0E8A00B9F2AD /* OpenSans-Regular-webfont.eot */; };
-		7BD46802206D0E8A00B9F2AD /* OpenSans-Regular-webfont.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467BF206D0E8A00B9F2AD /* OpenSans-Regular-webfont.svg */; };
-		7BD46803206D0E8A00B9F2AD /* OpenSans-Regular-webfont.woff in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467C0206D0E8A00B9F2AD /* OpenSans-Regular-webfont.woff */; };
-		7BD46804206D0E8A00B9F2AD /* Geometry.html in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467C1206D0E8A00B9F2AD /* Geometry.html */; };
-		7BD46805206D0E8A00B9F2AD /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467C2206D0E8A00B9F2AD /* index.html */; };
-		7BD46806206D0E8A00B9F2AD /* IndoorNavi.html in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467C3206D0E8A00B9F2AD /* IndoorNavi.html */; };
-		7BD46807206D0E8A00B9F2AD /* indoorNavi.js.html in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467C4206D0E8A00B9F2AD /* indoorNavi.js.html */; };
-		7BD46808206D0E8A00B9F2AD /* Polyline.html in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467C5206D0E8A00B9F2AD /* Polyline.html */; };
-		7BD46809206D0E8A00B9F2AD /* Report.html in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467C6206D0E8A00B9F2AD /* Report.html */; };
-		7BD4680A206D0E8A00B9F2AD /* linenumber.js in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467C8206D0E8A00B9F2AD /* linenumber.js */; };
-		7BD4680B206D0E8A00B9F2AD /* Apache-License-2.0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467CA206D0E8A00B9F2AD /* Apache-License-2.0.txt */; };
-		7BD4680C206D0E8A00B9F2AD /* lang-css.js in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467CB206D0E8A00B9F2AD /* lang-css.js */; };
-		7BD4680D206D0E8A00B9F2AD /* prettify.js in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467CC206D0E8A00B9F2AD /* prettify.js */; };
-		7BD4680E206D0E8A00B9F2AD /* jsdoc-default.css in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467CE206D0E8A00B9F2AD /* jsdoc-default.css */; };
-		7BD4680F206D0E8A00B9F2AD /* prettify-jsdoc.css in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467CF206D0E8A00B9F2AD /* prettify-jsdoc.css */; };
-		7BD46810206D0E8A00B9F2AD /* prettify-tomorrow.css in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467D0206D0E8A00B9F2AD /* prettify-tomorrow.css */; };
-		7BD46811206D0E8A00B9F2AD /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467D2206D0E8A00B9F2AD /* index.html */; };
-		7BD46812206D0E8A00B9F2AD /* indoorNavi.js in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467D3206D0E8A00B9F2AD /* indoorNavi.js */; };
-		7BD46813206D0E8A00B9F2AD /* indoorNavi.spec.js in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467D4206D0E8A00B9F2AD /* indoorNavi.spec.js */; };
-		7BD46814206D0E8A00B9F2AD /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467D5206D0E8A00B9F2AD /* package.json */; };
-		7BD46815206D0E8A00B9F2AD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467D6206D0E8A00B9F2AD /* README.md */; };
-		7BD46816206D0E8A00B9F2AD /* indoornavi.spec.js in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467D8206D0E8A00B9F2AD /* indoornavi.spec.js */; };
-		7BD46817206D0E8A00B9F2AD /* jasmine.json in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467DA206D0E8A00B9F2AD /* jasmine.json */; };
-		7BD46818206D0E8A00B9F2AD /* area.js in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467DC206D0E8A00B9F2AD /* area.js */; };
-		7BD46819206D0E8A00B9F2AD /* geometric.js in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467DD206D0E8A00B9F2AD /* geometric.js */; };
-		7BD4681A206D0E8A00B9F2AD /* communication.js in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467DF206D0E8A00B9F2AD /* communication.js */; };
-		7BD4681B206D0E8A00B9F2AD /* dom.js in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467E0206D0E8A00B9F2AD /* dom.js */; };
-		7BD4681C206D0E8A00B9F2AD /* http.js in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467E1206D0E8A00B9F2AD /* http.js */; };
-		7BD4681D206D0E8A00B9F2AD /* indoornavi.js in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467E2206D0E8A00B9F2AD /* indoornavi.js */; };
-		7BD4681E206D0E8A00B9F2AD /* areaEvent.js in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467E4206D0E8A00B9F2AD /* areaEvent.js */; };
-		7BD4681F206D0E8A00B9F2AD /* coordinates.js in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467E5206D0E8A00B9F2AD /* coordinates.js */; };
-		7BD46820206D0E8A00B9F2AD /* polyline.js in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467E6206D0E8A00B9F2AD /* polyline.js */; };
-		7BD46821206D0E8A00B9F2AD /* report.js in Resources */ = {isa = PBXBuildFile; fileRef = 7BD467E7206D0E8A00B9F2AD /* report.js */; };
 		CD62AE38094F44C9C5E7DDE3 /* Pods_IndoorNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8C5CD95C081778ADA0ED270 /* Pods_IndoorNavi.framework */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +51,30 @@
 
 /* Begin PBXFileReference section */
 		2B4DF181EE1B23D0C81FAEE0 /* Pods_IndoorNaviTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IndoorNaviTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B7F3A03206D1C2400CB17F2 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		7B7F3A05206D1C2400CB17F2 /* jsLibraryMappings.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = jsLibraryMappings.xml; sourceTree = "<group>"; };
+		7B7F3A06206D1C2400CB17F2 /* misc.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = misc.xml; sourceTree = "<group>"; };
+		7B7F3A07206D1C2400CB17F2 /* modules.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = modules.xml; sourceTree = "<group>"; };
+		7B7F3A08206D1C2400CB17F2 /* vcs.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = vcs.xml; sourceTree = "<group>"; };
+		7B7F3A09206D1C2400CB17F2 /* Gruntfile.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Gruntfile.js; sourceTree = "<group>"; };
+		7B7F3A0A206D1C2400CB17F2 /* indoornavi_api.iml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = indoornavi_api.iml; sourceTree = "<group>"; };
+		7B7F3A0C206D1C2400CB17F2 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		7B7F3A0D206D1C2400CB17F2 /* indoorNavi.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = indoorNavi.js; sourceTree = "<group>"; };
+		7B7F3A0E206D1C2400CB17F2 /* indoorNavi.spec.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = indoorNavi.spec.js; sourceTree = "<group>"; };
+		7B7F3A0F206D1C2400CB17F2 /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
+		7B7F3A10206D1C2400CB17F2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		7B7F3A12206D1C2400CB17F2 /* indoornavi.spec.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = indoornavi.spec.js; sourceTree = "<group>"; };
+		7B7F3A14206D1C2400CB17F2 /* jasmine.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = jasmine.json; sourceTree = "<group>"; };
+		7B7F3A16206D1C2400CB17F2 /* area.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = area.js; sourceTree = "<group>"; };
+		7B7F3A17206D1C2400CB17F2 /* geometric.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = geometric.js; sourceTree = "<group>"; };
+		7B7F3A19206D1C2400CB17F2 /* communication.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = communication.js; sourceTree = "<group>"; };
+		7B7F3A1A206D1C2400CB17F2 /* dom.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = dom.js; sourceTree = "<group>"; };
+		7B7F3A1B206D1C2400CB17F2 /* http.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = http.js; sourceTree = "<group>"; };
+		7B7F3A1C206D1C2400CB17F2 /* indoornavi.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = indoornavi.js; sourceTree = "<group>"; };
+		7B7F3A1E206D1C2400CB17F2 /* areaEvent.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = areaEvent.js; sourceTree = "<group>"; };
+		7B7F3A1F206D1C2400CB17F2 /* coordinates.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = coordinates.js; sourceTree = "<group>"; };
+		7B7F3A20206D1C2400CB17F2 /* polyline.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = polyline.js; sourceTree = "<group>"; };
+		7B7F3A21206D1C2400CB17F2 /* report.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = report.js; sourceTree = "<group>"; };
 		7BD46764206CF34A00B9F2AD /* IndoorNavi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IndoorNavi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BD46767206CF34A00B9F2AD /* IndoorNavi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IndoorNavi.h; sourceTree = "<group>"; };
 		7BD46768206CF34A00B9F2AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -92,64 +82,6 @@
 		7BD46772206CF34A00B9F2AD /* IndoorNaviTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndoorNaviTests.swift; sourceTree = "<group>"; };
 		7BD46774206CF34A00B9F2AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BD4679C206CF59500B9F2AD /* IndoorNavi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndoorNavi.swift; sourceTree = "<group>"; };
-		7BD467A2206D0E8A00B9F2AD /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		7BD467A4206D0E8A00B9F2AD /* jsLibraryMappings.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = jsLibraryMappings.xml; sourceTree = "<group>"; };
-		7BD467A5206D0E8A00B9F2AD /* misc.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = misc.xml; sourceTree = "<group>"; };
-		7BD467A6206D0E8A00B9F2AD /* modules.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = modules.xml; sourceTree = "<group>"; };
-		7BD467A7206D0E8A00B9F2AD /* vcs.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = vcs.xml; sourceTree = "<group>"; };
-		7BD467A8206D0E8A00B9F2AD /* Gruntfile.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Gruntfile.js; sourceTree = "<group>"; };
-		7BD467A9206D0E8A00B9F2AD /* indoornavi_api.iml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = indoornavi_api.iml; sourceTree = "<group>"; };
-		7BD467AB206D0E8A00B9F2AD /* Area.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Area.html; sourceTree = "<group>"; };
-		7BD467AC206D0E8A00B9F2AD /* AreaEvent.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = AreaEvent.html; sourceTree = "<group>"; };
-		7BD467AD206D0E8A00B9F2AD /* Coordinates.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Coordinates.html; sourceTree = "<group>"; };
-		7BD467AF206D0E8A00B9F2AD /* OpenSans-Bold-webfont.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold-webfont.eot"; sourceTree = "<group>"; };
-		7BD467B0206D0E8A00B9F2AD /* OpenSans-Bold-webfont.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "OpenSans-Bold-webfont.svg"; sourceTree = "<group>"; };
-		7BD467B1206D0E8A00B9F2AD /* OpenSans-Bold-webfont.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold-webfont.woff"; sourceTree = "<group>"; };
-		7BD467B2206D0E8A00B9F2AD /* OpenSans-BoldItalic-webfont.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic-webfont.eot"; sourceTree = "<group>"; };
-		7BD467B3206D0E8A00B9F2AD /* OpenSans-BoldItalic-webfont.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "OpenSans-BoldItalic-webfont.svg"; sourceTree = "<group>"; };
-		7BD467B4206D0E8A00B9F2AD /* OpenSans-BoldItalic-webfont.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic-webfont.woff"; sourceTree = "<group>"; };
-		7BD467B5206D0E8A00B9F2AD /* OpenSans-Italic-webfont.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic-webfont.eot"; sourceTree = "<group>"; };
-		7BD467B6206D0E8A00B9F2AD /* OpenSans-Italic-webfont.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "OpenSans-Italic-webfont.svg"; sourceTree = "<group>"; };
-		7BD467B7206D0E8A00B9F2AD /* OpenSans-Italic-webfont.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic-webfont.woff"; sourceTree = "<group>"; };
-		7BD467B8206D0E8A00B9F2AD /* OpenSans-Light-webfont.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light-webfont.eot"; sourceTree = "<group>"; };
-		7BD467B9206D0E8A00B9F2AD /* OpenSans-Light-webfont.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "OpenSans-Light-webfont.svg"; sourceTree = "<group>"; };
-		7BD467BA206D0E8A00B9F2AD /* OpenSans-Light-webfont.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light-webfont.woff"; sourceTree = "<group>"; };
-		7BD467BB206D0E8A00B9F2AD /* OpenSans-LightItalic-webfont.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-LightItalic-webfont.eot"; sourceTree = "<group>"; };
-		7BD467BC206D0E8A00B9F2AD /* OpenSans-LightItalic-webfont.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "OpenSans-LightItalic-webfont.svg"; sourceTree = "<group>"; };
-		7BD467BD206D0E8A00B9F2AD /* OpenSans-LightItalic-webfont.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-LightItalic-webfont.woff"; sourceTree = "<group>"; };
-		7BD467BE206D0E8A00B9F2AD /* OpenSans-Regular-webfont.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular-webfont.eot"; sourceTree = "<group>"; };
-		7BD467BF206D0E8A00B9F2AD /* OpenSans-Regular-webfont.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "OpenSans-Regular-webfont.svg"; sourceTree = "<group>"; };
-		7BD467C0206D0E8A00B9F2AD /* OpenSans-Regular-webfont.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular-webfont.woff"; sourceTree = "<group>"; };
-		7BD467C1206D0E8A00B9F2AD /* Geometry.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Geometry.html; sourceTree = "<group>"; };
-		7BD467C2206D0E8A00B9F2AD /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
-		7BD467C3206D0E8A00B9F2AD /* IndoorNavi.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = IndoorNavi.html; sourceTree = "<group>"; };
-		7BD467C4206D0E8A00B9F2AD /* indoorNavi.js.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = indoorNavi.js.html; sourceTree = "<group>"; };
-		7BD467C5206D0E8A00B9F2AD /* Polyline.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Polyline.html; sourceTree = "<group>"; };
-		7BD467C6206D0E8A00B9F2AD /* Report.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Report.html; sourceTree = "<group>"; };
-		7BD467C8206D0E8A00B9F2AD /* linenumber.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = linenumber.js; sourceTree = "<group>"; };
-		7BD467CA206D0E8A00B9F2AD /* Apache-License-2.0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Apache-License-2.0.txt"; sourceTree = "<group>"; };
-		7BD467CB206D0E8A00B9F2AD /* lang-css.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "lang-css.js"; sourceTree = "<group>"; };
-		7BD467CC206D0E8A00B9F2AD /* prettify.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = prettify.js; sourceTree = "<group>"; };
-		7BD467CE206D0E8A00B9F2AD /* jsdoc-default.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "jsdoc-default.css"; sourceTree = "<group>"; };
-		7BD467CF206D0E8A00B9F2AD /* prettify-jsdoc.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "prettify-jsdoc.css"; sourceTree = "<group>"; };
-		7BD467D0206D0E8A00B9F2AD /* prettify-tomorrow.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "prettify-tomorrow.css"; sourceTree = "<group>"; };
-		7BD467D2206D0E8A00B9F2AD /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
-		7BD467D3206D0E8A00B9F2AD /* indoorNavi.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = indoorNavi.js; sourceTree = "<group>"; };
-		7BD467D4206D0E8A00B9F2AD /* indoorNavi.spec.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = indoorNavi.spec.js; sourceTree = "<group>"; };
-		7BD467D5206D0E8A00B9F2AD /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
-		7BD467D6206D0E8A00B9F2AD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		7BD467D8206D0E8A00B9F2AD /* indoornavi.spec.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = indoornavi.spec.js; sourceTree = "<group>"; };
-		7BD467DA206D0E8A00B9F2AD /* jasmine.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = jasmine.json; sourceTree = "<group>"; };
-		7BD467DC206D0E8A00B9F2AD /* area.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = area.js; sourceTree = "<group>"; };
-		7BD467DD206D0E8A00B9F2AD /* geometric.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = geometric.js; sourceTree = "<group>"; };
-		7BD467DF206D0E8A00B9F2AD /* communication.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = communication.js; sourceTree = "<group>"; };
-		7BD467E0206D0E8A00B9F2AD /* dom.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = dom.js; sourceTree = "<group>"; };
-		7BD467E1206D0E8A00B9F2AD /* http.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = http.js; sourceTree = "<group>"; };
-		7BD467E2206D0E8A00B9F2AD /* indoornavi.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = indoornavi.js; sourceTree = "<group>"; };
-		7BD467E4206D0E8A00B9F2AD /* areaEvent.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = areaEvent.js; sourceTree = "<group>"; };
-		7BD467E5206D0E8A00B9F2AD /* coordinates.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = coordinates.js; sourceTree = "<group>"; };
-		7BD467E6206D0E8A00B9F2AD /* polyline.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = polyline.js; sourceTree = "<group>"; };
-		7BD467E7206D0E8A00B9F2AD /* report.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = report.js; sourceTree = "<group>"; };
 		7C0FCB942B663F100F26A53A /* Pods-IndoorNavi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IndoorNavi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IndoorNavi/Pods-IndoorNavi.debug.xcconfig"; sourceTree = "<group>"; };
 		874219EFD7BB7C3FC2480821 /* Pods-IndoorNavi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IndoorNavi.release.xcconfig"; path = "Pods/Target Support Files/Pods-IndoorNavi/Pods-IndoorNavi.release.xcconfig"; sourceTree = "<group>"; };
 		927E341C05271CA85EA9D3A1 /* Pods-IndoorNaviTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IndoorNaviTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IndoorNaviTests/Pods-IndoorNaviTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -187,6 +119,93 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7B7F3A02206D1C2400CB17F2 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				7B7F3A03206D1C2400CB17F2 /* .gitignore */,
+				7B7F3A04206D1C2400CB17F2 /* .idea */,
+				7B7F3A09206D1C2400CB17F2 /* Gruntfile.js */,
+				7B7F3A0A206D1C2400CB17F2 /* indoornavi_api.iml */,
+				7B7F3A0B206D1C2400CB17F2 /* output */,
+				7B7F3A0F206D1C2400CB17F2 /* package.json */,
+				7B7F3A10206D1C2400CB17F2 /* README.md */,
+				7B7F3A11206D1C2400CB17F2 /* spec */,
+				7B7F3A15206D1C2400CB17F2 /* src */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		7B7F3A04206D1C2400CB17F2 /* .idea */ = {
+			isa = PBXGroup;
+			children = (
+				7B7F3A05206D1C2400CB17F2 /* jsLibraryMappings.xml */,
+				7B7F3A06206D1C2400CB17F2 /* misc.xml */,
+				7B7F3A07206D1C2400CB17F2 /* modules.xml */,
+				7B7F3A08206D1C2400CB17F2 /* vcs.xml */,
+			);
+			path = .idea;
+			sourceTree = "<group>";
+		};
+		7B7F3A0B206D1C2400CB17F2 /* output */ = {
+			isa = PBXGroup;
+			children = (
+				7B7F3A0C206D1C2400CB17F2 /* index.html */,
+				7B7F3A0D206D1C2400CB17F2 /* indoorNavi.js */,
+				7B7F3A0E206D1C2400CB17F2 /* indoorNavi.spec.js */,
+			);
+			path = output;
+			sourceTree = "<group>";
+		};
+		7B7F3A11206D1C2400CB17F2 /* spec */ = {
+			isa = PBXGroup;
+			children = (
+				7B7F3A12206D1C2400CB17F2 /* indoornavi.spec.js */,
+				7B7F3A13206D1C2400CB17F2 /* support */,
+			);
+			path = spec;
+			sourceTree = "<group>";
+		};
+		7B7F3A13206D1C2400CB17F2 /* support */ = {
+			isa = PBXGroup;
+			children = (
+				7B7F3A14206D1C2400CB17F2 /* jasmine.json */,
+			);
+			path = support;
+			sourceTree = "<group>";
+		};
+		7B7F3A15206D1C2400CB17F2 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				7B7F3A16206D1C2400CB17F2 /* area.js */,
+				7B7F3A17206D1C2400CB17F2 /* geometric.js */,
+				7B7F3A18206D1C2400CB17F2 /* helper */,
+				7B7F3A1C206D1C2400CB17F2 /* indoornavi.js */,
+				7B7F3A1D206D1C2400CB17F2 /* model */,
+				7B7F3A20206D1C2400CB17F2 /* polyline.js */,
+				7B7F3A21206D1C2400CB17F2 /* report.js */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		7B7F3A18206D1C2400CB17F2 /* helper */ = {
+			isa = PBXGroup;
+			children = (
+				7B7F3A19206D1C2400CB17F2 /* communication.js */,
+				7B7F3A1A206D1C2400CB17F2 /* dom.js */,
+				7B7F3A1B206D1C2400CB17F2 /* http.js */,
+			);
+			path = helper;
+			sourceTree = "<group>";
+		};
+		7B7F3A1D206D1C2400CB17F2 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				7B7F3A1E206D1C2400CB17F2 /* areaEvent.js */,
+				7B7F3A1F206D1C2400CB17F2 /* coordinates.js */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		7BD4675A206CF34A00B9F2AD = {
 			isa = PBXGroup;
 			children = (
@@ -210,7 +229,7 @@
 		7BD46766206CF34A00B9F2AD /* IndoorNavi */ = {
 			isa = PBXGroup;
 			children = (
-				7BD467A1206D0E8A00B9F2AD /* javascript-api */,
+				7B7F3A02206D1C2400CB17F2 /* API */,
 				7BD46767206CF34A00B9F2AD /* IndoorNavi.h */,
 				7BD46768206CF34A00B9F2AD /* Info.plist */,
 				7BD4679C206CF59500B9F2AD /* IndoorNavi.swift */,
@@ -225,167 +244,6 @@
 				7BD46774206CF34A00B9F2AD /* Info.plist */,
 			);
 			path = IndoorNaviTests;
-			sourceTree = "<group>";
-		};
-		7BD467A1206D0E8A00B9F2AD /* javascript-api */ = {
-			isa = PBXGroup;
-			children = (
-				7BD467A2206D0E8A00B9F2AD /* .gitignore */,
-				7BD467A3206D0E8A00B9F2AD /* .idea */,
-				7BD467A8206D0E8A00B9F2AD /* Gruntfile.js */,
-				7BD467A9206D0E8A00B9F2AD /* indoornavi_api.iml */,
-				7BD467AA206D0E8A00B9F2AD /* out */,
-				7BD467D1206D0E8A00B9F2AD /* output */,
-				7BD467D5206D0E8A00B9F2AD /* package.json */,
-				7BD467D6206D0E8A00B9F2AD /* README.md */,
-				7BD467D7206D0E8A00B9F2AD /* spec */,
-				7BD467DB206D0E8A00B9F2AD /* src */,
-			);
-			path = "javascript-api";
-			sourceTree = "<group>";
-		};
-		7BD467A3206D0E8A00B9F2AD /* .idea */ = {
-			isa = PBXGroup;
-			children = (
-				7BD467A4206D0E8A00B9F2AD /* jsLibraryMappings.xml */,
-				7BD467A5206D0E8A00B9F2AD /* misc.xml */,
-				7BD467A6206D0E8A00B9F2AD /* modules.xml */,
-				7BD467A7206D0E8A00B9F2AD /* vcs.xml */,
-			);
-			path = .idea;
-			sourceTree = "<group>";
-		};
-		7BD467AA206D0E8A00B9F2AD /* out */ = {
-			isa = PBXGroup;
-			children = (
-				7BD467AB206D0E8A00B9F2AD /* Area.html */,
-				7BD467AC206D0E8A00B9F2AD /* AreaEvent.html */,
-				7BD467AD206D0E8A00B9F2AD /* Coordinates.html */,
-				7BD467AE206D0E8A00B9F2AD /* fonts */,
-				7BD467C1206D0E8A00B9F2AD /* Geometry.html */,
-				7BD467C2206D0E8A00B9F2AD /* index.html */,
-				7BD467C3206D0E8A00B9F2AD /* IndoorNavi.html */,
-				7BD467C4206D0E8A00B9F2AD /* indoorNavi.js.html */,
-				7BD467C5206D0E8A00B9F2AD /* Polyline.html */,
-				7BD467C6206D0E8A00B9F2AD /* Report.html */,
-				7BD467C7206D0E8A00B9F2AD /* scripts */,
-				7BD467CD206D0E8A00B9F2AD /* styles */,
-			);
-			path = out;
-			sourceTree = "<group>";
-		};
-		7BD467AE206D0E8A00B9F2AD /* fonts */ = {
-			isa = PBXGroup;
-			children = (
-				7BD467AF206D0E8A00B9F2AD /* OpenSans-Bold-webfont.eot */,
-				7BD467B0206D0E8A00B9F2AD /* OpenSans-Bold-webfont.svg */,
-				7BD467B1206D0E8A00B9F2AD /* OpenSans-Bold-webfont.woff */,
-				7BD467B2206D0E8A00B9F2AD /* OpenSans-BoldItalic-webfont.eot */,
-				7BD467B3206D0E8A00B9F2AD /* OpenSans-BoldItalic-webfont.svg */,
-				7BD467B4206D0E8A00B9F2AD /* OpenSans-BoldItalic-webfont.woff */,
-				7BD467B5206D0E8A00B9F2AD /* OpenSans-Italic-webfont.eot */,
-				7BD467B6206D0E8A00B9F2AD /* OpenSans-Italic-webfont.svg */,
-				7BD467B7206D0E8A00B9F2AD /* OpenSans-Italic-webfont.woff */,
-				7BD467B8206D0E8A00B9F2AD /* OpenSans-Light-webfont.eot */,
-				7BD467B9206D0E8A00B9F2AD /* OpenSans-Light-webfont.svg */,
-				7BD467BA206D0E8A00B9F2AD /* OpenSans-Light-webfont.woff */,
-				7BD467BB206D0E8A00B9F2AD /* OpenSans-LightItalic-webfont.eot */,
-				7BD467BC206D0E8A00B9F2AD /* OpenSans-LightItalic-webfont.svg */,
-				7BD467BD206D0E8A00B9F2AD /* OpenSans-LightItalic-webfont.woff */,
-				7BD467BE206D0E8A00B9F2AD /* OpenSans-Regular-webfont.eot */,
-				7BD467BF206D0E8A00B9F2AD /* OpenSans-Regular-webfont.svg */,
-				7BD467C0206D0E8A00B9F2AD /* OpenSans-Regular-webfont.woff */,
-			);
-			path = fonts;
-			sourceTree = "<group>";
-		};
-		7BD467C7206D0E8A00B9F2AD /* scripts */ = {
-			isa = PBXGroup;
-			children = (
-				7BD467C8206D0E8A00B9F2AD /* linenumber.js */,
-				7BD467C9206D0E8A00B9F2AD /* prettify */,
-			);
-			path = scripts;
-			sourceTree = "<group>";
-		};
-		7BD467C9206D0E8A00B9F2AD /* prettify */ = {
-			isa = PBXGroup;
-			children = (
-				7BD467CA206D0E8A00B9F2AD /* Apache-License-2.0.txt */,
-				7BD467CB206D0E8A00B9F2AD /* lang-css.js */,
-				7BD467CC206D0E8A00B9F2AD /* prettify.js */,
-			);
-			path = prettify;
-			sourceTree = "<group>";
-		};
-		7BD467CD206D0E8A00B9F2AD /* styles */ = {
-			isa = PBXGroup;
-			children = (
-				7BD467CE206D0E8A00B9F2AD /* jsdoc-default.css */,
-				7BD467CF206D0E8A00B9F2AD /* prettify-jsdoc.css */,
-				7BD467D0206D0E8A00B9F2AD /* prettify-tomorrow.css */,
-			);
-			path = styles;
-			sourceTree = "<group>";
-		};
-		7BD467D1206D0E8A00B9F2AD /* output */ = {
-			isa = PBXGroup;
-			children = (
-				7BD467D2206D0E8A00B9F2AD /* index.html */,
-				7BD467D3206D0E8A00B9F2AD /* indoorNavi.js */,
-				7BD467D4206D0E8A00B9F2AD /* indoorNavi.spec.js */,
-			);
-			path = output;
-			sourceTree = "<group>";
-		};
-		7BD467D7206D0E8A00B9F2AD /* spec */ = {
-			isa = PBXGroup;
-			children = (
-				7BD467D8206D0E8A00B9F2AD /* indoornavi.spec.js */,
-				7BD467D9206D0E8A00B9F2AD /* support */,
-			);
-			path = spec;
-			sourceTree = "<group>";
-		};
-		7BD467D9206D0E8A00B9F2AD /* support */ = {
-			isa = PBXGroup;
-			children = (
-				7BD467DA206D0E8A00B9F2AD /* jasmine.json */,
-			);
-			path = support;
-			sourceTree = "<group>";
-		};
-		7BD467DB206D0E8A00B9F2AD /* src */ = {
-			isa = PBXGroup;
-			children = (
-				7BD467DC206D0E8A00B9F2AD /* area.js */,
-				7BD467DD206D0E8A00B9F2AD /* geometric.js */,
-				7BD467DE206D0E8A00B9F2AD /* helper */,
-				7BD467E2206D0E8A00B9F2AD /* indoornavi.js */,
-				7BD467E3206D0E8A00B9F2AD /* model */,
-				7BD467E6206D0E8A00B9F2AD /* polyline.js */,
-				7BD467E7206D0E8A00B9F2AD /* report.js */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
-		7BD467DE206D0E8A00B9F2AD /* helper */ = {
-			isa = PBXGroup;
-			children = (
-				7BD467DF206D0E8A00B9F2AD /* communication.js */,
-				7BD467E0206D0E8A00B9F2AD /* dom.js */,
-				7BD467E1206D0E8A00B9F2AD /* http.js */,
-			);
-			path = helper;
-			sourceTree = "<group>";
-		};
-		7BD467E3206D0E8A00B9F2AD /* model */ = {
-			isa = PBXGroup;
-			children = (
-				7BD467E4206D0E8A00B9F2AD /* areaEvent.js */,
-				7BD467E5206D0E8A00B9F2AD /* coordinates.js */,
-			);
-			path = model;
 			sourceTree = "<group>";
 		};
 		C850BAD938FC692A5A2EBFCE /* Pods */ = {
@@ -498,64 +356,30 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BD467FC206D0E8A00B9F2AD /* OpenSans-Light-webfont.svg in Resources */,
-				7BD467F0206D0E8A00B9F2AD /* AreaEvent.html in Resources */,
-				7BD46806206D0E8A00B9F2AD /* IndoorNavi.html in Resources */,
-				7BD4680D206D0E8A00B9F2AD /* prettify.js in Resources */,
-				7BD46819206D0E8A00B9F2AD /* geometric.js in Resources */,
-				7BD4680B206D0E8A00B9F2AD /* Apache-License-2.0.txt in Resources */,
-				7BD467EA206D0E8A00B9F2AD /* misc.xml in Resources */,
-				7BD46816206D0E8A00B9F2AD /* indoornavi.spec.js in Resources */,
-				7BD46821206D0E8A00B9F2AD /* report.js in Resources */,
-				7BD4681C206D0E8A00B9F2AD /* http.js in Resources */,
-				7BD467FD206D0E8A00B9F2AD /* OpenSans-Light-webfont.woff in Resources */,
-				7BD467FA206D0E8A00B9F2AD /* OpenSans-Italic-webfont.woff in Resources */,
-				7BD46815206D0E8A00B9F2AD /* README.md in Resources */,
-				7BD46818206D0E8A00B9F2AD /* area.js in Resources */,
-				7BD467EC206D0E8A00B9F2AD /* vcs.xml in Resources */,
-				7BD4681B206D0E8A00B9F2AD /* dom.js in Resources */,
-				7BD46801206D0E8A00B9F2AD /* OpenSans-Regular-webfont.eot in Resources */,
-				7BD467E8206D0E8A00B9F2AD /* .gitignore in Resources */,
-				7BD467F5206D0E8A00B9F2AD /* OpenSans-BoldItalic-webfont.eot in Resources */,
-				7BD467F1206D0E8A00B9F2AD /* Coordinates.html in Resources */,
-				7BD46808206D0E8A00B9F2AD /* Polyline.html in Resources */,
-				7BD467F6206D0E8A00B9F2AD /* OpenSans-BoldItalic-webfont.svg in Resources */,
-				7BD4680E206D0E8A00B9F2AD /* jsdoc-default.css in Resources */,
-				7BD4680F206D0E8A00B9F2AD /* prettify-jsdoc.css in Resources */,
-				7BD467F4206D0E8A00B9F2AD /* OpenSans-Bold-webfont.woff in Resources */,
-				7BD46809206D0E8A00B9F2AD /* Report.html in Resources */,
-				7BD4681A206D0E8A00B9F2AD /* communication.js in Resources */,
-				7BD467ED206D0E8A00B9F2AD /* Gruntfile.js in Resources */,
-				7BD46803206D0E8A00B9F2AD /* OpenSans-Regular-webfont.woff in Resources */,
-				7BD46811206D0E8A00B9F2AD /* index.html in Resources */,
-				7BD467FB206D0E8A00B9F2AD /* OpenSans-Light-webfont.eot in Resources */,
-				7BD46805206D0E8A00B9F2AD /* index.html in Resources */,
-				7BD467F3206D0E8A00B9F2AD /* OpenSans-Bold-webfont.svg in Resources */,
-				7BD46817206D0E8A00B9F2AD /* jasmine.json in Resources */,
-				7BD46802206D0E8A00B9F2AD /* OpenSans-Regular-webfont.svg in Resources */,
-				7BD467F7206D0E8A00B9F2AD /* OpenSans-BoldItalic-webfont.woff in Resources */,
-				7BD46820206D0E8A00B9F2AD /* polyline.js in Resources */,
-				7BD46813206D0E8A00B9F2AD /* indoorNavi.spec.js in Resources */,
-				7BD46812206D0E8A00B9F2AD /* indoorNavi.js in Resources */,
-				7BD46814206D0E8A00B9F2AD /* package.json in Resources */,
-				7BD4680C206D0E8A00B9F2AD /* lang-css.js in Resources */,
-				7BD4681E206D0E8A00B9F2AD /* areaEvent.js in Resources */,
-				7BD46804206D0E8A00B9F2AD /* Geometry.html in Resources */,
-				7BD467E9206D0E8A00B9F2AD /* jsLibraryMappings.xml in Resources */,
-				7BD467F8206D0E8A00B9F2AD /* OpenSans-Italic-webfont.eot in Resources */,
-				7BD467FE206D0E8A00B9F2AD /* OpenSans-LightItalic-webfont.eot in Resources */,
-				7BD467F9206D0E8A00B9F2AD /* OpenSans-Italic-webfont.svg in Resources */,
-				7BD46810206D0E8A00B9F2AD /* prettify-tomorrow.css in Resources */,
-				7BD46807206D0E8A00B9F2AD /* indoorNavi.js.html in Resources */,
-				7BD4680A206D0E8A00B9F2AD /* linenumber.js in Resources */,
-				7BD467F2206D0E8A00B9F2AD /* OpenSans-Bold-webfont.eot in Resources */,
-				7BD467FF206D0E8A00B9F2AD /* OpenSans-LightItalic-webfont.svg in Resources */,
-				7BD4681D206D0E8A00B9F2AD /* indoornavi.js in Resources */,
-				7BD467EF206D0E8A00B9F2AD /* Area.html in Resources */,
-				7BD4681F206D0E8A00B9F2AD /* coordinates.js in Resources */,
-				7BD467EB206D0E8A00B9F2AD /* modules.xml in Resources */,
-				7BD467EE206D0E8A00B9F2AD /* indoornavi_api.iml in Resources */,
-				7BD46800206D0E8A00B9F2AD /* OpenSans-LightItalic-webfont.woff in Resources */,
+				7B7F3A2E206D1C2400CB17F2 /* indoornavi.spec.js in Resources */,
+				7B7F3A33206D1C2400CB17F2 /* dom.js in Resources */,
+				7B7F3A2A206D1C2400CB17F2 /* indoorNavi.js in Resources */,
+				7B7F3A36206D1C2400CB17F2 /* areaEvent.js in Resources */,
+				7B7F3A27206D1C2400CB17F2 /* Gruntfile.js in Resources */,
+				7B7F3A24206D1C2400CB17F2 /* misc.xml in Resources */,
+				7B7F3A26206D1C2400CB17F2 /* vcs.xml in Resources */,
+				7B7F3A38206D1C2400CB17F2 /* polyline.js in Resources */,
+				7B7F3A34206D1C2400CB17F2 /* http.js in Resources */,
+				7B7F3A35206D1C2400CB17F2 /* indoornavi.js in Resources */,
+				7B7F3A28206D1C2400CB17F2 /* indoornavi_api.iml in Resources */,
+				7B7F3A2F206D1C2400CB17F2 /* jasmine.json in Resources */,
+				7B7F3A30206D1C2400CB17F2 /* area.js in Resources */,
+				7B7F3A23206D1C2400CB17F2 /* jsLibraryMappings.xml in Resources */,
+				7B7F3A2B206D1C2400CB17F2 /* indoorNavi.spec.js in Resources */,
+				7B7F3A25206D1C2400CB17F2 /* modules.xml in Resources */,
+				7B7F3A32206D1C2400CB17F2 /* communication.js in Resources */,
+				7B7F3A39206D1C2400CB17F2 /* report.js in Resources */,
+				7B7F3A31206D1C2400CB17F2 /* geometric.js in Resources */,
+				7B7F3A37206D1C2400CB17F2 /* coordinates.js in Resources */,
+				7B7F3A22206D1C2400CB17F2 /* .gitignore in Resources */,
+				7B7F3A29206D1C2400CB17F2 /* index.html in Resources */,
+				7B7F3A2D206D1C2400CB17F2 /* README.md in Resources */,
+				7B7F3A2C206D1C2400CB17F2 /* package.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

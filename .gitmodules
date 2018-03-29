@@ -1,0 +1,3 @@
+[submodule "IndoorNavi/IndoorNavi/API"]
+	path = IndoorNavi/IndoorNavi/API
+	url = git@gitlab.blastlab.local:indoornavi/javascript-api.git
