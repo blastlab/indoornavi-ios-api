@@ -9,14 +9,14 @@
 import UIKit
 import WebKit
 
-public class IndoorNavi: UIView, WKUIDelegate, WKScriptMessageHandler, GCDWebServerDelegate {
+public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, GCDWebServerDelegate {
     
     private var webView: WKWebView!
     private var serverURL : URL!
     private var server: GCDWebServer!
     
     private let html = "<html><head></head><body><div id=\"map\"></div></body><script src=\"indoorNavi.js\"></script></html>"
-    private let indoorNaviTemplate = "const navi = new IndoorNavi('%@','%@','%@',{width:%f,height:%f}"
+    private let indoorNaviTemplate = "var navi = new IndoorNavi(\"%@\",\"%@\",\"%@\",{width:%f,height:%f});"
     
     private var indoorNaviFrame: CGRect!
     private var targetHost: String!
@@ -24,14 +24,29 @@ public class IndoorNavi: UIView, WKUIDelegate, WKScriptMessageHandler, GCDWebSer
     private var containerId: String!
     
     public func load(_ mapId: Int) {
-        let javaScriptString = String(format: "navi.load(%i)", mapId)
+        let javaScriptString = String(format: "navi.load(%i);", mapId)
         
-        webView.evaluateJavaScript(javaScriptString, completionHandler: nil)
+        webView.evaluateJavaScript(javaScriptString, completionHandler: nil);
+    }
+    
+    public func testFunc() {
+        webView.evaluateJavaScript("var a = 5;", completionHandler: { result, error in
+            print("Test error: \(String(describing: error?.localizedDescription))")
+        });
+        webView.evaluateJavaScript("a;", completionHandler: { result, error in
+            print("Test error: \(String(describing: error?.localizedDescription))")
+        });
     }
     
     // Initialization
     public init(frame: CGRect, targetHost: String, apiKey: String, containerId: String) {
         super.init(frame: frame)
+        
+        self.indoorNaviFrame = frame
+        self.targetHost = targetHost
+        self.apiKey = apiKey
+        self.containerId = containerId
+        
         setupWebView(withFrame: frame)
         setupServer()
     }
@@ -51,15 +66,22 @@ public class IndoorNavi: UIView, WKUIDelegate, WKScriptMessageHandler, GCDWebSer
     }
     
     private func exportToJavaScript() {
-        let javaScriptString = String(format: indoorNaviTemplate, targetHost, apiKey, containerId, indoorNaviFrame.width, indoorNaviFrame.height)
+        let scale = UIScreen.main.scale
+        print("Scale = %f",scale)
+        let javaScriptString = String(format: indoorNaviTemplate, targetHost, apiKey, containerId, scale * indoorNaviFrame.width, scale * indoorNaviFrame.height)
+        print("Java script string: \(javaScriptString)")
+        webView.evaluateJavaScript(javaScriptString, completionHandler: { response, error in
+            print("Error: \(String(describing: error?.localizedDescription))")
+            print("Response: \(String(describing: response))")
+        })
         
-        webView.evaluateJavaScript(javaScriptString, completionHandler: nil)
     }
     
     // Setups
     private func setupWebView(withFrame frame: CGRect) {
         webView = WKWebView.init(frame: frame, configuration: configuration)
         webView.uiDelegate = self
+        webView.navigationDelegate = self
         self.addSubview(webView)
     }
     
@@ -72,7 +94,7 @@ public class IndoorNavi: UIView, WKUIDelegate, WKScriptMessageHandler, GCDWebSer
             return GCDWebServerDataResponse(html: self.html)
         })
         
-//        server.addGETHandler(forPath: "/indoornavi.js", filePath: indoorNaviPath!, isAttachment: true, cacheAge: 3600, allowRangeRequests: true)
+        server.addGETHandler(forPath: "/indoornavi.js", filePath: indoorNaviPath!, isAttachment: true, cacheAge: 3600, allowRangeRequests: true)
 //        server.addGETHandler(forPath: "/dom.js", filePath: domPath!, isAttachment: true, cacheAge: 3600, allowRangeRequests: true)
         
         let options: [String : Any] = [GCDWebServerOption_RequestNATPortMapping : true, GCDWebServerOption_Port : 3000]
@@ -85,17 +107,6 @@ public class IndoorNavi: UIView, WKUIDelegate, WKScriptMessageHandler, GCDWebSer
     }
     
     // Paths
-    private var indexHtmlPath: String? {
-        let bundle = Bundle(for: IndoorNavi.self)
-        if let path = bundle.path(forResource: "index", ofType: "html") {
-            print("Path: ",path)
-            return path
-        } else {
-            print("Path error")
-            return nil
-        }
-    }
-    
     private var indoorNaviPath: String? {
         let bundle = Bundle(for: IndoorNavi.self)
         if let path = bundle.path(forResource: "indoorNavi", ofType: "js") {
@@ -121,6 +132,12 @@ public class IndoorNavi: UIView, WKUIDelegate, WKScriptMessageHandler, GCDWebSer
     // WKScriptMessageHandler
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) { // JS -> Swift
         print("Received event \(message.body)")
+    }
+    
+    // WKNavigationDelegate
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        print("Finished navigating to url \(String(describing: webView.url))")
+        exportToJavaScript()
     }
     
     // WebServer delegate

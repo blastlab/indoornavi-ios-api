@@ -10,7 +10,9 @@ import UIKit
 import IndoorNavi
 
 class ViewController: UIViewController {
-
+    
+    var indoorNavi: IndoorNavi!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,11 +20,12 @@ class ViewController: UIViewController {
         frame.origin.y = frame.origin.y + 20
         frame.size.height = frame.size.height - 100
         
-        let indoorNavi = IndoorNavi(frame: frame, targetHost: "http://192.168.1.2:4200", apiKey: "TestAdmin", containerId: "map")
+        indoorNavi = IndoorNavi(frame: frame, targetHost: "http://192.168.1.2:4200", apiKey: "TestAdmin", containerId: "map")
         self.view.addSubview(indoorNavi)
-        
-        indoorNavi.load(2)
     }
 
+    @IBAction func action(_ sender: Any) {
+        indoorNavi.load(2)
+    }
 }
 
