@@ -95,7 +95,6 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
         })
         
         server.addGETHandler(forPath: "/indoornavi.js", filePath: indoorNaviPath!, isAttachment: true, cacheAge: 3600, allowRangeRequests: true)
-//        server.addGETHandler(forPath: "/dom.js", filePath: domPath!, isAttachment: true, cacheAge: 3600, allowRangeRequests: true)
         
         let options: [String : Any] = [GCDWebServerOption_RequestNATPortMapping : true, GCDWebServerOption_Port : 3000]
         
@@ -110,17 +109,6 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
     private var indoorNaviPath: String? {
         let bundle = Bundle(for: IndoorNavi.self)
         if let path = bundle.path(forResource: "indoorNavi", ofType: "js") {
-            print("Path: ",path)
-            return path
-        } else {
-            print("Path error")
-            return nil
-        }
-    }
-    
-    private var domPath: String? {
-        let bundle = Bundle(for: IndoorNavi.self)
-        if let path = bundle.path(forResource: "dom", ofType: "js") {
             print("Path: ",path)
             return path
         } else {
