@@ -8,24 +8,35 @@
 
 import UIKit
 import WebKit
-import GCDWebServer
 
-class IndoorNavi: UIView, WKUIDelegate, WKScriptMessageHandler, GCDWebServerDelegate {
+public class IndoorNavi: UIView, WKUIDelegate, WKScriptMessageHandler, GCDWebServerDelegate {
     
     private var webView: WKWebView!
     private var serverURL : URL!
     private var server: GCDWebServer!
     
+    private let html = "<html><head></head><body><div id=\"map\"></div></body><script src=\"indoorNavi.js\"></script></html>"
+    private let indoorNaviTemplate = "const navi = new IndoorNavi('%@','%@','%@',{width:%f,height:%f}"
+    
+    private var indoorNaviFrame: CGRect!
+    private var targetHost: String!
+    private var apiKey: String!
+    private var containerId: String!
+    
+    public func load(_ mapId: Int) {
+        let javaScriptString = String(format: "navi.load(%i)", mapId)
+        
+        webView.evaluateJavaScript(javaScriptString, completionHandler: nil)
+    }
+    
     // Initialization
-    init(frame: CGRect, targetHost: String, apiKey: String, containerId: String) {
+    public init(frame: CGRect, targetHost: String, apiKey: String, containerId: String) {
         super.init(frame: frame)
-        webView = WKWebView.init(frame: frame, configuration: configuration)
-        webView.uiDelegate = self
-        self.addSubview(webView)
+        setupWebView(withFrame: frame)
         setupServer()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -39,26 +50,30 @@ class IndoorNavi: UIView, WKUIDelegate, WKScriptMessageHandler, GCDWebServerDele
         return configuration
     }
     
+    private func exportToJavaScript() {
+        let javaScriptString = String(format: indoorNaviTemplate, targetHost, apiKey, containerId, indoorNaviFrame.width, indoorNaviFrame.height)
+        
+        webView.evaluateJavaScript(javaScriptString, completionHandler: nil)
+    }
+    
+    // Setups
+    private func setupWebView(withFrame frame: CGRect) {
+        webView = WKWebView.init(frame: frame, configuration: configuration)
+        webView.uiDelegate = self
+        self.addSubview(webView)
+    }
+    
     private func setupServer() {
         server = GCDWebServer()
         server.delegate = self
         
-        var html: String!
-        
-        do {
-            try html = String(contentsOf: URL(fileURLWithPath: indexHtmlPath!), encoding: String.Encoding.utf8)
-        } catch {
-            print("Error")
-            return
-        }
-        
         server.addDefaultHandler(forMethod: "GET", request: GCDWebServerRequest.self, processBlock: { request in
             
-            return GCDWebServerDataResponse(html: html)
+            return GCDWebServerDataResponse(html: self.html)
         })
         
-        server.addGETHandler(forPath: "/indoornavi.js", filePath: indoorNaviPath!, isAttachment: true, cacheAge: 3600, allowRangeRequests: true)
-        server.addGETHandler(forPath: "/dom.js", filePath: domPath!, isAttachment: true, cacheAge: 3600, allowRangeRequests: true)
+//        server.addGETHandler(forPath: "/indoornavi.js", filePath: indoorNaviPath!, isAttachment: true, cacheAge: 3600, allowRangeRequests: true)
+//        server.addGETHandler(forPath: "/dom.js", filePath: domPath!, isAttachment: true, cacheAge: 3600, allowRangeRequests: true)
         
         let options: [String : Any] = [GCDWebServerOption_RequestNATPortMapping : true, GCDWebServerOption_Port : 3000]
         
@@ -71,7 +86,8 @@ class IndoorNavi: UIView, WKUIDelegate, WKScriptMessageHandler, GCDWebServerDele
     
     // Paths
     private var indexHtmlPath: String? {
-        if let path = Bundle.main.path(forResource: "index", ofType: "html") {
+        let bundle = Bundle(for: IndoorNavi.self)
+        if let path = bundle.path(forResource: "index", ofType: "html") {
             print("Path: ",path)
             return path
         } else {
@@ -81,7 +97,8 @@ class IndoorNavi: UIView, WKUIDelegate, WKScriptMessageHandler, GCDWebServerDele
     }
     
     private var indoorNaviPath: String? {
-        if let path = Bundle.main.path(forResource: "indoorNavi", ofType: "js") {
+        let bundle = Bundle(for: IndoorNavi.self)
+        if let path = bundle.path(forResource: "indoorNavi", ofType: "js") {
             print("Path: ",path)
             return path
         } else {
@@ -91,7 +108,8 @@ class IndoorNavi: UIView, WKUIDelegate, WKScriptMessageHandler, GCDWebServerDele
     }
     
     private var domPath: String? {
-        if let path = Bundle.main.path(forResource: "dom", ofType: "js") {
+        let bundle = Bundle(for: IndoorNavi.self)
+        if let path = bundle.path(forResource: "dom", ofType: "js") {
             print("Path: ",path)
             return path
         } else {
@@ -101,12 +119,12 @@ class IndoorNavi: UIView, WKUIDelegate, WKScriptMessageHandler, GCDWebServerDele
     }
     
     // WKScriptMessageHandler
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) { // JS -> Swift
+    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) { // JS -> Swift
         print("Received event \(message.body)")
     }
     
     // WebServer delegate
-    func webServerDidUpdateNATPortMapping(_ server: GCDWebServer) {
+    public func webServerDidUpdateNATPortMapping(_ server: GCDWebServer) {
         print("Web server did update NAT port mapping")
         print("publicServerURL: \(String(describing: server.publicServerURL ))")
         print("serverURL: \(String(describing: server.serverURL))")

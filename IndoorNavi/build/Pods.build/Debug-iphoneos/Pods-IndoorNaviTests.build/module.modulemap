@@ -1,6 +1,0 @@
-framework module Pods_IndoorNaviTests {
-  umbrella header "Pods-IndoorNaviTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

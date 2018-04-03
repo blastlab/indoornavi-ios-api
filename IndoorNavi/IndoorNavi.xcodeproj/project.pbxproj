@@ -7,8 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		66FED138445065096C61D508 /* Pods_IndoorNaviTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B4DF181EE1B23D0C81FAEE0 /* Pods_IndoorNaviTests.framework */; };
-		7B7F3A22206D1C2400CB17F2 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A03206D1C2400CB17F2 /* .gitignore */; };
+		7B1D3C99207385C000CA57B1 /* GCDWebServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C7B207385C000CA57B1 /* GCDWebServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B1D3C9A207385C000CA57B1 /* GCDWebServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C7C207385C000CA57B1 /* GCDWebServer.m */; };
+		7B1D3C9B207385C000CA57B1 /* GCDWebServerConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C7D207385C000CA57B1 /* GCDWebServerConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B1D3C9C207385C000CA57B1 /* GCDWebServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C7E207385C000CA57B1 /* GCDWebServerConnection.m */; };
+		7B1D3C9D207385C000CA57B1 /* GCDWebServerFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C7F207385C000CA57B1 /* GCDWebServerFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B1D3C9E207385C000CA57B1 /* GCDWebServerFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C80207385C000CA57B1 /* GCDWebServerFunctions.m */; };
+		7B1D3C9F207385C000CA57B1 /* GCDWebServerHTTPStatusCodes.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C81207385C000CA57B1 /* GCDWebServerHTTPStatusCodes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B1D3CA0207385C000CA57B1 /* GCDWebServerPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C82207385C000CA57B1 /* GCDWebServerPrivate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B1D3CA1207385C000CA57B1 /* GCDWebServerRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C83207385C000CA57B1 /* GCDWebServerRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B1D3CA2207385C000CA57B1 /* GCDWebServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C84207385C000CA57B1 /* GCDWebServerRequest.m */; };
+		7B1D3CA3207385C000CA57B1 /* GCDWebServerResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C85207385C000CA57B1 /* GCDWebServerResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B1D3CA4207385C000CA57B1 /* GCDWebServerResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C86207385C000CA57B1 /* GCDWebServerResponse.m */; };
+		7B1D3CA5207385C000CA57B1 /* GCDWebServerDataRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C88207385C000CA57B1 /* GCDWebServerDataRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B1D3CA6207385C000CA57B1 /* GCDWebServerDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C89207385C000CA57B1 /* GCDWebServerDataRequest.m */; };
+		7B1D3CA7207385C000CA57B1 /* GCDWebServerFileRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C8A207385C000CA57B1 /* GCDWebServerFileRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B1D3CA8207385C000CA57B1 /* GCDWebServerFileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C8B207385C000CA57B1 /* GCDWebServerFileRequest.m */; };
+		7B1D3CA9207385C000CA57B1 /* GCDWebServerMultiPartFormRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C8C207385C000CA57B1 /* GCDWebServerMultiPartFormRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B1D3CAA207385C000CA57B1 /* GCDWebServerMultiPartFormRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C8D207385C000CA57B1 /* GCDWebServerMultiPartFormRequest.m */; };
+		7B1D3CAB207385C000CA57B1 /* GCDWebServerURLEncodedFormRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C8E207385C000CA57B1 /* GCDWebServerURLEncodedFormRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B1D3CAC207385C000CA57B1 /* GCDWebServerURLEncodedFormRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C8F207385C000CA57B1 /* GCDWebServerURLEncodedFormRequest.m */; };
+		7B1D3CAD207385C000CA57B1 /* GCDWebServerDataResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C91207385C000CA57B1 /* GCDWebServerDataResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B1D3CAE207385C000CA57B1 /* GCDWebServerDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C92207385C000CA57B1 /* GCDWebServerDataResponse.m */; };
+		7B1D3CAF207385C000CA57B1 /* GCDWebServerErrorResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C93207385C000CA57B1 /* GCDWebServerErrorResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B1D3CB0207385C000CA57B1 /* GCDWebServerErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C94207385C000CA57B1 /* GCDWebServerErrorResponse.m */; };
+		7B1D3CB1207385C000CA57B1 /* GCDWebServerFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C95207385C000CA57B1 /* GCDWebServerFileResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B1D3CB2207385C000CA57B1 /* GCDWebServerFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C96207385C000CA57B1 /* GCDWebServerFileResponse.m */; };
+		7B1D3CB3207385C000CA57B1 /* GCDWebServerStreamedResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C97207385C000CA57B1 /* GCDWebServerStreamedResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B1D3CB4207385C000CA57B1 /* GCDWebServerStreamedResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C98207385C000CA57B1 /* GCDWebServerStreamedResponse.m */; };
 		7B7F3A23206D1C2400CB17F2 /* jsLibraryMappings.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A05206D1C2400CB17F2 /* jsLibraryMappings.xml */; };
 		7B7F3A24206D1C2400CB17F2 /* misc.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A06206D1C2400CB17F2 /* misc.xml */; };
 		7B7F3A25206D1C2400CB17F2 /* modules.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A07206D1C2400CB17F2 /* modules.xml */; };
@@ -27,7 +53,6 @@
 		7B7F3A32206D1C2400CB17F2 /* communication.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A19206D1C2400CB17F2 /* communication.js */; };
 		7B7F3A33206D1C2400CB17F2 /* dom.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A1A206D1C2400CB17F2 /* dom.js */; };
 		7B7F3A34206D1C2400CB17F2 /* http.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A1B206D1C2400CB17F2 /* http.js */; };
-		7B7F3A35206D1C2400CB17F2 /* indoornavi.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A1C206D1C2400CB17F2 /* indoornavi.js */; };
 		7B7F3A36206D1C2400CB17F2 /* areaEvent.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A1E206D1C2400CB17F2 /* areaEvent.js */; };
 		7B7F3A37206D1C2400CB17F2 /* coordinates.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A1F206D1C2400CB17F2 /* coordinates.js */; };
 		7B7F3A38206D1C2400CB17F2 /* polyline.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A20206D1C2400CB17F2 /* polyline.js */; };
@@ -36,7 +61,6 @@
 		7BD46773206CF34A00B9F2AD /* IndoorNaviTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD46772206CF34A00B9F2AD /* IndoorNaviTests.swift */; };
 		7BD46775206CF34A00B9F2AD /* IndoorNavi.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BD46767206CF34A00B9F2AD /* IndoorNavi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7BD4679D206CF59500B9F2AD /* IndoorNavi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD4679C206CF59500B9F2AD /* IndoorNavi.swift */; };
-		CD62AE38094F44C9C5E7DDE3 /* Pods_IndoorNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8C5CD95C081778ADA0ED270 /* Pods_IndoorNavi.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,8 +74,34 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2B4DF181EE1B23D0C81FAEE0 /* Pods_IndoorNaviTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IndoorNaviTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7B7F3A03206D1C2400CB17F2 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		7B1D3C7B207385C000CA57B1 /* GCDWebServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServer.h; sourceTree = "<group>"; };
+		7B1D3C7C207385C000CA57B1 /* GCDWebServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServer.m; sourceTree = "<group>"; };
+		7B1D3C7D207385C000CA57B1 /* GCDWebServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerConnection.h; sourceTree = "<group>"; };
+		7B1D3C7E207385C000CA57B1 /* GCDWebServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerConnection.m; sourceTree = "<group>"; };
+		7B1D3C7F207385C000CA57B1 /* GCDWebServerFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerFunctions.h; sourceTree = "<group>"; };
+		7B1D3C80207385C000CA57B1 /* GCDWebServerFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerFunctions.m; sourceTree = "<group>"; };
+		7B1D3C81207385C000CA57B1 /* GCDWebServerHTTPStatusCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerHTTPStatusCodes.h; sourceTree = "<group>"; };
+		7B1D3C82207385C000CA57B1 /* GCDWebServerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerPrivate.h; sourceTree = "<group>"; };
+		7B1D3C83207385C000CA57B1 /* GCDWebServerRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerRequest.h; sourceTree = "<group>"; };
+		7B1D3C84207385C000CA57B1 /* GCDWebServerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerRequest.m; sourceTree = "<group>"; };
+		7B1D3C85207385C000CA57B1 /* GCDWebServerResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerResponse.h; sourceTree = "<group>"; };
+		7B1D3C86207385C000CA57B1 /* GCDWebServerResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerResponse.m; sourceTree = "<group>"; };
+		7B1D3C88207385C000CA57B1 /* GCDWebServerDataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerDataRequest.h; sourceTree = "<group>"; };
+		7B1D3C89207385C000CA57B1 /* GCDWebServerDataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerDataRequest.m; sourceTree = "<group>"; };
+		7B1D3C8A207385C000CA57B1 /* GCDWebServerFileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerFileRequest.h; sourceTree = "<group>"; };
+		7B1D3C8B207385C000CA57B1 /* GCDWebServerFileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerFileRequest.m; sourceTree = "<group>"; };
+		7B1D3C8C207385C000CA57B1 /* GCDWebServerMultiPartFormRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerMultiPartFormRequest.h; sourceTree = "<group>"; };
+		7B1D3C8D207385C000CA57B1 /* GCDWebServerMultiPartFormRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerMultiPartFormRequest.m; sourceTree = "<group>"; };
+		7B1D3C8E207385C000CA57B1 /* GCDWebServerURLEncodedFormRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerURLEncodedFormRequest.h; sourceTree = "<group>"; };
+		7B1D3C8F207385C000CA57B1 /* GCDWebServerURLEncodedFormRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerURLEncodedFormRequest.m; sourceTree = "<group>"; };
+		7B1D3C91207385C000CA57B1 /* GCDWebServerDataResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerDataResponse.h; sourceTree = "<group>"; };
+		7B1D3C92207385C000CA57B1 /* GCDWebServerDataResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerDataResponse.m; sourceTree = "<group>"; };
+		7B1D3C93207385C000CA57B1 /* GCDWebServerErrorResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerErrorResponse.h; sourceTree = "<group>"; };
+		7B1D3C94207385C000CA57B1 /* GCDWebServerErrorResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerErrorResponse.m; sourceTree = "<group>"; };
+		7B1D3C95207385C000CA57B1 /* GCDWebServerFileResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerFileResponse.h; sourceTree = "<group>"; };
+		7B1D3C96207385C000CA57B1 /* GCDWebServerFileResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerFileResponse.m; sourceTree = "<group>"; };
+		7B1D3C97207385C000CA57B1 /* GCDWebServerStreamedResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerStreamedResponse.h; sourceTree = "<group>"; };
+		7B1D3C98207385C000CA57B1 /* GCDWebServerStreamedResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerStreamedResponse.m; sourceTree = "<group>"; };
 		7B7F3A05206D1C2400CB17F2 /* jsLibraryMappings.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = jsLibraryMappings.xml; sourceTree = "<group>"; };
 		7B7F3A06206D1C2400CB17F2 /* misc.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = misc.xml; sourceTree = "<group>"; };
 		7B7F3A07206D1C2400CB17F2 /* modules.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = modules.xml; sourceTree = "<group>"; };
@@ -82,11 +132,6 @@
 		7BD46772206CF34A00B9F2AD /* IndoorNaviTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndoorNaviTests.swift; sourceTree = "<group>"; };
 		7BD46774206CF34A00B9F2AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BD4679C206CF59500B9F2AD /* IndoorNavi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndoorNavi.swift; sourceTree = "<group>"; };
-		7C0FCB942B663F100F26A53A /* Pods-IndoorNavi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IndoorNavi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IndoorNavi/Pods-IndoorNavi.debug.xcconfig"; sourceTree = "<group>"; };
-		874219EFD7BB7C3FC2480821 /* Pods-IndoorNavi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IndoorNavi.release.xcconfig"; path = "Pods/Target Support Files/Pods-IndoorNavi/Pods-IndoorNavi.release.xcconfig"; sourceTree = "<group>"; };
-		927E341C05271CA85EA9D3A1 /* Pods-IndoorNaviTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IndoorNaviTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IndoorNaviTests/Pods-IndoorNaviTests.debug.xcconfig"; sourceTree = "<group>"; };
-		A8C5CD95C081778ADA0ED270 /* Pods_IndoorNavi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IndoorNavi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D1546D1EBB55FA9CC9122AA2 /* Pods-IndoorNaviTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IndoorNaviTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IndoorNaviTests/Pods-IndoorNaviTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +139,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD62AE38094F44C9C5E7DDE3 /* Pods_IndoorNavi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,26 +147,74 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BD4676E206CF34A00B9F2AD /* IndoorNavi.framework in Frameworks */,
-				66FED138445065096C61D508 /* Pods_IndoorNaviTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0266F112A41356343CFB6618 /* Frameworks */ = {
+		7B1D3C79207385C000CA57B1 /* GCDWebServer */ = {
 			isa = PBXGroup;
 			children = (
-				A8C5CD95C081778ADA0ED270 /* Pods_IndoorNavi.framework */,
-				2B4DF181EE1B23D0C81FAEE0 /* Pods_IndoorNaviTests.framework */,
+				7B1D3C7A207385C000CA57B1 /* Core */,
+				7B1D3C87207385C000CA57B1 /* Requests */,
+				7B1D3C90207385C000CA57B1 /* Responses */,
 			);
-			name = Frameworks;
+			path = GCDWebServer;
+			sourceTree = "<group>";
+		};
+		7B1D3C7A207385C000CA57B1 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				7B1D3C7B207385C000CA57B1 /* GCDWebServer.h */,
+				7B1D3C7C207385C000CA57B1 /* GCDWebServer.m */,
+				7B1D3C7D207385C000CA57B1 /* GCDWebServerConnection.h */,
+				7B1D3C7E207385C000CA57B1 /* GCDWebServerConnection.m */,
+				7B1D3C7F207385C000CA57B1 /* GCDWebServerFunctions.h */,
+				7B1D3C80207385C000CA57B1 /* GCDWebServerFunctions.m */,
+				7B1D3C81207385C000CA57B1 /* GCDWebServerHTTPStatusCodes.h */,
+				7B1D3C82207385C000CA57B1 /* GCDWebServerPrivate.h */,
+				7B1D3C83207385C000CA57B1 /* GCDWebServerRequest.h */,
+				7B1D3C84207385C000CA57B1 /* GCDWebServerRequest.m */,
+				7B1D3C85207385C000CA57B1 /* GCDWebServerResponse.h */,
+				7B1D3C86207385C000CA57B1 /* GCDWebServerResponse.m */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		7B1D3C87207385C000CA57B1 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				7B1D3C88207385C000CA57B1 /* GCDWebServerDataRequest.h */,
+				7B1D3C89207385C000CA57B1 /* GCDWebServerDataRequest.m */,
+				7B1D3C8A207385C000CA57B1 /* GCDWebServerFileRequest.h */,
+				7B1D3C8B207385C000CA57B1 /* GCDWebServerFileRequest.m */,
+				7B1D3C8C207385C000CA57B1 /* GCDWebServerMultiPartFormRequest.h */,
+				7B1D3C8D207385C000CA57B1 /* GCDWebServerMultiPartFormRequest.m */,
+				7B1D3C8E207385C000CA57B1 /* GCDWebServerURLEncodedFormRequest.h */,
+				7B1D3C8F207385C000CA57B1 /* GCDWebServerURLEncodedFormRequest.m */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		7B1D3C90207385C000CA57B1 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				7B1D3C91207385C000CA57B1 /* GCDWebServerDataResponse.h */,
+				7B1D3C92207385C000CA57B1 /* GCDWebServerDataResponse.m */,
+				7B1D3C93207385C000CA57B1 /* GCDWebServerErrorResponse.h */,
+				7B1D3C94207385C000CA57B1 /* GCDWebServerErrorResponse.m */,
+				7B1D3C95207385C000CA57B1 /* GCDWebServerFileResponse.h */,
+				7B1D3C96207385C000CA57B1 /* GCDWebServerFileResponse.m */,
+				7B1D3C97207385C000CA57B1 /* GCDWebServerStreamedResponse.h */,
+				7B1D3C98207385C000CA57B1 /* GCDWebServerStreamedResponse.m */,
+			);
+			path = Responses;
 			sourceTree = "<group>";
 		};
 		7B7F3A02206D1C2400CB17F2 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				7B7F3A03206D1C2400CB17F2 /* .gitignore */,
 				7B7F3A04206D1C2400CB17F2 /* .idea */,
 				7B7F3A09206D1C2400CB17F2 /* Gruntfile.js */,
 				7B7F3A0A206D1C2400CB17F2 /* indoornavi_api.iml */,
@@ -212,8 +304,6 @@
 				7BD46766206CF34A00B9F2AD /* IndoorNavi */,
 				7BD46771206CF34A00B9F2AD /* IndoorNaviTests */,
 				7BD46765206CF34A00B9F2AD /* Products */,
-				C850BAD938FC692A5A2EBFCE /* Pods */,
-				0266F112A41356343CFB6618 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -229,6 +319,7 @@
 		7BD46766206CF34A00B9F2AD /* IndoorNavi */ = {
 			isa = PBXGroup;
 			children = (
+				7B1D3C79207385C000CA57B1 /* GCDWebServer */,
 				7B7F3A02206D1C2400CB17F2 /* API */,
 				7BD46767206CF34A00B9F2AD /* IndoorNavi.h */,
 				7BD46768206CF34A00B9F2AD /* Info.plist */,
@@ -246,17 +337,6 @@
 			path = IndoorNaviTests;
 			sourceTree = "<group>";
 		};
-		C850BAD938FC692A5A2EBFCE /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				7C0FCB942B663F100F26A53A /* Pods-IndoorNavi.debug.xcconfig */,
-				874219EFD7BB7C3FC2480821 /* Pods-IndoorNavi.release.xcconfig */,
-				927E341C05271CA85EA9D3A1 /* Pods-IndoorNaviTests.debug.xcconfig */,
-				D1546D1EBB55FA9CC9122AA2 /* Pods-IndoorNaviTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -265,6 +345,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BD46775206CF34A00B9F2AD /* IndoorNavi.h in Headers */,
+				7B1D3C99207385C000CA57B1 /* GCDWebServer.h in Headers */,
+				7B1D3CA7207385C000CA57B1 /* GCDWebServerFileRequest.h in Headers */,
+				7B1D3CAD207385C000CA57B1 /* GCDWebServerDataResponse.h in Headers */,
+				7B1D3C9D207385C000CA57B1 /* GCDWebServerFunctions.h in Headers */,
+				7B1D3CA5207385C000CA57B1 /* GCDWebServerDataRequest.h in Headers */,
+				7B1D3CA1207385C000CA57B1 /* GCDWebServerRequest.h in Headers */,
+				7B1D3C9B207385C000CA57B1 /* GCDWebServerConnection.h in Headers */,
+				7B1D3CA0207385C000CA57B1 /* GCDWebServerPrivate.h in Headers */,
+				7B1D3C9F207385C000CA57B1 /* GCDWebServerHTTPStatusCodes.h in Headers */,
+				7B1D3CB1207385C000CA57B1 /* GCDWebServerFileResponse.h in Headers */,
+				7B1D3CA9207385C000CA57B1 /* GCDWebServerMultiPartFormRequest.h in Headers */,
+				7B1D3CB3207385C000CA57B1 /* GCDWebServerStreamedResponse.h in Headers */,
+				7B1D3CA3207385C000CA57B1 /* GCDWebServerResponse.h in Headers */,
+				7B1D3CAB207385C000CA57B1 /* GCDWebServerURLEncodedFormRequest.h in Headers */,
+				7B1D3CAF207385C000CA57B1 /* GCDWebServerErrorResponse.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,12 +370,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7BD46778206CF34A00B9F2AD /* Build configuration list for PBXNativeTarget "IndoorNavi" */;
 			buildPhases = (
-				2659A636D4B57A4E3AE27AAF /* [CP] Check Pods Manifest.lock */,
 				7BD4675F206CF34A00B9F2AD /* Sources */,
 				7BD46760206CF34A00B9F2AD /* Frameworks */,
 				7BD46761206CF34A00B9F2AD /* Headers */,
 				7BD46762206CF34A00B9F2AD /* Resources */,
-				9BB7CDC088B48F7213C4A8C1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -356,16 +449,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B7F3A2A206D1C2400CB17F2 /* indoorNavi.js in Resources */,
 				7B7F3A2E206D1C2400CB17F2 /* indoornavi.spec.js in Resources */,
 				7B7F3A33206D1C2400CB17F2 /* dom.js in Resources */,
-				7B7F3A2A206D1C2400CB17F2 /* indoorNavi.js in Resources */,
 				7B7F3A36206D1C2400CB17F2 /* areaEvent.js in Resources */,
 				7B7F3A27206D1C2400CB17F2 /* Gruntfile.js in Resources */,
 				7B7F3A24206D1C2400CB17F2 /* misc.xml in Resources */,
 				7B7F3A26206D1C2400CB17F2 /* vcs.xml in Resources */,
 				7B7F3A38206D1C2400CB17F2 /* polyline.js in Resources */,
 				7B7F3A34206D1C2400CB17F2 /* http.js in Resources */,
-				7B7F3A35206D1C2400CB17F2 /* indoornavi.js in Resources */,
 				7B7F3A28206D1C2400CB17F2 /* indoornavi_api.iml in Resources */,
 				7B7F3A2F206D1C2400CB17F2 /* jasmine.json in Resources */,
 				7B7F3A30206D1C2400CB17F2 /* area.js in Resources */,
@@ -376,7 +468,6 @@
 				7B7F3A39206D1C2400CB17F2 /* report.js in Resources */,
 				7B7F3A31206D1C2400CB17F2 /* geometric.js in Resources */,
 				7B7F3A37206D1C2400CB17F2 /* coordinates.js in Resources */,
-				7B7F3A22206D1C2400CB17F2 /* .gitignore in Resources */,
 				7B7F3A29206D1C2400CB17F2 /* index.html in Resources */,
 				7B7F3A2D206D1C2400CB17F2 /* README.md in Resources */,
 				7B7F3A2C206D1C2400CB17F2 /* package.json in Resources */,
@@ -393,24 +484,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2659A636D4B57A4E3AE27AAF /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-IndoorNavi-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		38915DF8DE059FCC9A71BF01 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -427,24 +500,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IndoorNaviTests/Pods-IndoorNaviTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9BB7CDC088B48F7213C4A8C1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-IndoorNavi/Pods-IndoorNavi-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IndoorNavi/Pods-IndoorNavi-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A439F9E6687D512E499D36F3 /* [CP] Copy Pods Resources */ = {
@@ -490,7 +545,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B1D3CAE207385C000CA57B1 /* GCDWebServerDataResponse.m in Sources */,
+				7B1D3CA8207385C000CA57B1 /* GCDWebServerFileRequest.m in Sources */,
+				7B1D3CAA207385C000CA57B1 /* GCDWebServerMultiPartFormRequest.m in Sources */,
+				7B1D3CA6207385C000CA57B1 /* GCDWebServerDataRequest.m in Sources */,
+				7B1D3CB4207385C000CA57B1 /* GCDWebServerStreamedResponse.m in Sources */,
+				7B1D3C9A207385C000CA57B1 /* GCDWebServer.m in Sources */,
 				7BD4679D206CF59500B9F2AD /* IndoorNavi.swift in Sources */,
+				7B1D3CB0207385C000CA57B1 /* GCDWebServerErrorResponse.m in Sources */,
+				7B1D3C9E207385C000CA57B1 /* GCDWebServerFunctions.m in Sources */,
+				7B1D3C9C207385C000CA57B1 /* GCDWebServerConnection.m in Sources */,
+				7B1D3CB2207385C000CA57B1 /* GCDWebServerFileResponse.m in Sources */,
+				7B1D3CAC207385C000CA57B1 /* GCDWebServerURLEncodedFormRequest.m in Sources */,
+				7B1D3CA2207385C000CA57B1 /* GCDWebServerRequest.m in Sources */,
+				7B1D3CA4207385C000CA57B1 /* GCDWebServerResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,7 +696,6 @@
 		};
 		7BD46779206CF34A00B9F2AD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7C0FCB942B663F100F26A53A /* Pods-IndoorNavi.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -653,7 +720,6 @@
 		};
 		7BD4677A206CF34A00B9F2AD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 874219EFD7BB7C3FC2480821 /* Pods-IndoorNavi.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -677,7 +743,6 @@
 		};
 		7BD4677C206CF34A00B9F2AD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 927E341C05271CA85EA9D3A1 /* Pods-IndoorNaviTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -693,7 +758,6 @@
 		};
 		7BD4677D206CF34A00B9F2AD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D1546D1EBB55FA9CC9122AA2 /* Pods-IndoorNaviTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

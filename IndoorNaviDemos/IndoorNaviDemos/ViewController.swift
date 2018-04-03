@@ -7,19 +7,22 @@
 //
 
 import UIKit
+import IndoorNavi
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        var frame = self.view.frame
+        frame.origin.y = frame.origin.y + 20
+        frame.size.height = frame.size.height - 100
+        
+        let indoorNavi = IndoorNavi(frame: frame, targetHost: "http://192.168.1.2:4200", apiKey: "TestAdmin", containerId: "map")
+        self.view.addSubview(indoorNavi)
+        
+        indoorNavi.load(2)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 
