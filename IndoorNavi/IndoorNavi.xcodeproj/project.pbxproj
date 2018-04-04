@@ -35,6 +35,8 @@
 		7B1D3CB2207385C000CA57B1 /* GCDWebServerFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C96207385C000CA57B1 /* GCDWebServerFileResponse.m */; };
 		7B1D3CB3207385C000CA57B1 /* GCDWebServerStreamedResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C97207385C000CA57B1 /* GCDWebServerStreamedResponse.h */; };
 		7B1D3CB4207385C000CA57B1 /* GCDWebServerStreamedResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C98207385C000CA57B1 /* GCDWebServerStreamedResponse.m */; };
+		7B77E6E7207513860019D061 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B77E6E6207513860019D061 /* Constants.swift */; };
+		7B77E6E9207515010019D061 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B77E6E8207515010019D061 /* Paths.swift */; };
 		7B7F3A23206D1C2400CB17F2 /* jsLibraryMappings.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A05206D1C2400CB17F2 /* jsLibraryMappings.xml */; };
 		7B7F3A24206D1C2400CB17F2 /* misc.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A06206D1C2400CB17F2 /* misc.xml */; };
 		7B7F3A25206D1C2400CB17F2 /* modules.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A07206D1C2400CB17F2 /* modules.xml */; };
@@ -103,6 +105,8 @@
 		7B1D3C97207385C000CA57B1 /* GCDWebServerStreamedResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerStreamedResponse.h; sourceTree = "<group>"; };
 		7B1D3C98207385C000CA57B1 /* GCDWebServerStreamedResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerStreamedResponse.m; sourceTree = "<group>"; };
 		7B77E6E5207505C00019D061 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		7B77E6E6207513860019D061 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		7B77E6E8207515010019D061 /* Paths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paths.swift; sourceTree = "<group>"; };
 		7B7F3A05206D1C2400CB17F2 /* jsLibraryMappings.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = jsLibraryMappings.xml; sourceTree = "<group>"; };
 		7B7F3A06206D1C2400CB17F2 /* misc.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = misc.xml; sourceTree = "<group>"; };
 		7B7F3A07206D1C2400CB17F2 /* modules.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = modules.xml; sourceTree = "<group>"; };
@@ -334,6 +338,8 @@
 				7BD46767206CF34A00B9F2AD /* IndoorNavi.h */,
 				7BD46768206CF34A00B9F2AD /* Info.plist */,
 				7BD4679C206CF59500B9F2AD /* IndoorNavi.swift */,
+				7B77E6E6207513860019D061 /* Constants.swift */,
+				7B77E6E8207515010019D061 /* Paths.swift */,
 			);
 			path = IndoorNavi;
 			sourceTree = "<group>";
@@ -561,8 +567,10 @@
 				7B1D3CA6207385C000CA57B1 /* GCDWebServerDataRequest.m in Sources */,
 				7B1D3CB4207385C000CA57B1 /* GCDWebServerStreamedResponse.m in Sources */,
 				7B1D3C9A207385C000CA57B1 /* GCDWebServer.m in Sources */,
+				7B77E6E9207515010019D061 /* Paths.swift in Sources */,
 				7BD4679D206CF59500B9F2AD /* IndoorNavi.swift in Sources */,
 				7B1D3CB0207385C000CA57B1 /* GCDWebServerErrorResponse.m in Sources */,
+				7B77E6E7207513860019D061 /* Constants.swift in Sources */,
 				7B1D3C9E207385C000CA57B1 /* GCDWebServerFunctions.m in Sources */,
 				7B1D3C9C207385C000CA57B1 /* GCDWebServerConnection.m in Sources */,
 				7B1D3CB2207385C000CA57B1 /* GCDWebServerFileResponse.m in Sources */,

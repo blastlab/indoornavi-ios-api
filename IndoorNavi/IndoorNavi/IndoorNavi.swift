@@ -16,9 +16,6 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
     private var serverURL : URL!
     private var server: GCDWebServer!
     
-    private let html = "<html><head></head><body><div id=\"map\"></div></body><script src=\"indoorNavi.js\"></script></html>"
-    private let indoorNaviTemplate = "var navi = new IndoorNavi(\"%@\",\"%@\",\"%@\",{width:%f,height:%f});"
-    
     private var indoorNaviFrame: CGRect!
     private var targetHost: String!
     private var apiKey: String!
@@ -69,7 +66,7 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
     private func exportToJavaScript() {
         let scale = UIScreen.main.scale
         print("Scale = %f",scale)
-        let javaScriptString = String(format: indoorNaviTemplate, targetHost, apiKey, containerId, scale * indoorNaviFrame.width, scale * indoorNaviFrame.height)
+        let javaScriptString = String(format: Constants.indoorNaviInitialization, targetHost, apiKey, containerId, scale * indoorNaviFrame.width, scale * indoorNaviFrame.height)
         print("Java script string: \(javaScriptString)")
         webView.evaluateJavaScript(javaScriptString, completionHandler: { response, error in
             print("Error: \(String(describing: error?.localizedDescription))")
@@ -92,10 +89,10 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
         
         server.addDefaultHandler(forMethod: "GET", request: GCDWebServerRequest.self, processBlock: { request in
             
-            return GCDWebServerDataResponse(html: self.html)
+            return GCDWebServerDataResponse(html: Constants.indoorNaviHtml)
         })
         
-        server.addGETHandler(forPath: "/indoornavi.js", filePath: indoorNaviPath!, isAttachment: true, cacheAge: 3600, allowRangeRequests: true)
+        server.addGETHandler(forPath: "/indoornavi.js", filePath: Paths.indoorNaviPath!, isAttachment: true, cacheAge: 3600, allowRangeRequests: true)
         
         let options: [String : Any] = [GCDWebServerOption_RequestNATPortMapping : true, GCDWebServerOption_Port : 3000]
         
@@ -103,18 +100,6 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
             try server.start(options: options)
         } catch {
             print("Error starting a server")
-        }
-    }
-    
-    // Paths
-    private var indoorNaviPath: String? {
-        let bundle = Bundle(for: IndoorNavi.self)
-        if let path = bundle.path(forResource: "indoorNavi", ofType: "js") {
-            print("Path: ",path)
-            return path
-        } else {
-            print("Path error")
-            return nil
         }
     }
     
