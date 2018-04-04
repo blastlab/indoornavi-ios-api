@@ -1,0 +1,7 @@
+module GCDWebServer {
+    header "../Core/GCDWebServer.h"
+    header "../Core/GCDWebServerRequest.h"
+    header "../Responses/GCDWebServerDataResponse.h"
+    header "../Core/GCDWebServerResponse.h"
+    export *
+}

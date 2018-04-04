@@ -22,6 +22,7 @@ class ViewController: UIViewController {
         
         indoorNavi = IndoorNavi(frame: frame, targetHost: "http://192.168.1.2:4200", apiKey: "TestAdmin", containerId: "map")
         self.view.addSubview(indoorNavi)
+        
     }
 
     @IBAction func action(_ sender: Any) {
