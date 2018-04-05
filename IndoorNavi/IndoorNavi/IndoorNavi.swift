@@ -26,15 +26,6 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
         webView.evaluateJavaScript(javaScriptString, completionHandler: nil);
     }
     
-    public func testFunc() {
-        webView.evaluateJavaScript("var a = 5;", completionHandler: { result, error in
-            print("Test error: \(String(describing: error?.localizedDescription))")
-        });
-        webView.evaluateJavaScript("a;", completionHandler: { result, error in
-            print("Test error: \(String(describing: error?.localizedDescription))")
-        });
-    }
-    
     // Initialization
     public init(frame: CGRect, targetHost: String, apiKey: String) {
         super.init(frame: frame)
