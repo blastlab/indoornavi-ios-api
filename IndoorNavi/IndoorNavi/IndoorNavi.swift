@@ -19,7 +19,6 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
     private var indoorNaviFrame: CGRect!
     private var targetHost: String!
     private var apiKey: String!
-    private var containerId: String!
     
     public func load(_ mapId: Int) {
         let javaScriptString = String(format: "navi.load(%i);", mapId)
@@ -37,13 +36,12 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
     }
     
     // Initialization
-    public init(frame: CGRect, targetHost: String, apiKey: String, containerId: String) {
+    public init(frame: CGRect, targetHost: String, apiKey: String) {
         super.init(frame: frame)
         
         self.indoorNaviFrame = frame
         self.targetHost = targetHost
         self.apiKey = apiKey
-        self.containerId = containerId
         
         setupWebView(withFrame: frame)
         setupServer()
@@ -66,7 +64,7 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
     private func exportToJavaScript() {
         let scale = UIScreen.main.scale
         print("Scale = %f",scale)
-        let javaScriptString = String(format: Constants.indoorNaviInitialization, targetHost, apiKey, containerId, scale * indoorNaviFrame.width, scale * indoorNaviFrame.height)
+        let javaScriptString = String(format: Constants.indoorNaviInitialization, targetHost, apiKey, scale * indoorNaviFrame.width, scale * indoorNaviFrame.height)
         print("Java script string: \(javaScriptString)")
         webView.evaluateJavaScript(javaScriptString, completionHandler: { response, error in
             print("Error: \(String(describing: error?.localizedDescription))")
