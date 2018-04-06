@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 import GCDWebServer
 
-public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, GCDWebServerDelegate {
+public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
     
     private var webView: WKWebView!
     private var serverURL : URL!
@@ -65,7 +65,6 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
     
     private func setupServer() {
         server = GCDWebServer()
-        server.delegate = self
         
         server.addDefaultHandler(forMethod: "GET", request: GCDWebServerRequest.self, processBlock: { request in
             
@@ -74,12 +73,17 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
         
         server.addGETHandler(forPath: "/indoornavi.js", filePath: Paths.indoorNaviPath!, isAttachment: true, cacheAge: 3600, allowRangeRequests: true)
         
-        let options: [String : Any] = [GCDWebServerOption_RequestNATPortMapping : true, GCDWebServerOption_Port : 3000]
+        server.start(withPort: 3000, bonjourName: nil)
         
-        do {
-            try server.start(options: options)
-        } catch {
-            print("Error starting a server")
+        loadServerURL()
+    }
+    
+    private func loadServerURL() {
+        print("serverURL: \(String(describing: server.serverURL))")
+        if let url = server.serverURL {
+            print("URL: \(url)")
+            serverURL = url
+            webView.load( URLRequest(url: url) )
         }
     }
     
@@ -102,18 +106,5 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("Finished navigating to url \(String(describing: webView.url))")
         initInJavaScript()
-    }
-    
-    // WebServer delegate
-    public func webServerDidUpdateNATPortMapping(_ server: GCDWebServer) {
-        print("Web server did update NAT port mapping")
-        print("publicServerURL: \(String(describing: server.publicServerURL ))")
-        print("serverURL: \(String(describing: server.serverURL))")
-        
-        if let url = server.serverURL {
-            print("URL: \(url)")
-            serverURL = url
-            webView.load( URLRequest(url: url) )
-        }
     }
 }
