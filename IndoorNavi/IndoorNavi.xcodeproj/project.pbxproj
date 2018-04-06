@@ -37,28 +37,7 @@
 		7B1D3CB4207385C000CA57B1 /* GCDWebServerStreamedResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C98207385C000CA57B1 /* GCDWebServerStreamedResponse.m */; };
 		7B77E6E7207513860019D061 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B77E6E6207513860019D061 /* Constants.swift */; };
 		7B77E6E9207515010019D061 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B77E6E8207515010019D061 /* Paths.swift */; };
-		7B7F3A23206D1C2400CB17F2 /* jsLibraryMappings.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A05206D1C2400CB17F2 /* jsLibraryMappings.xml */; };
-		7B7F3A24206D1C2400CB17F2 /* misc.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A06206D1C2400CB17F2 /* misc.xml */; };
-		7B7F3A25206D1C2400CB17F2 /* modules.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A07206D1C2400CB17F2 /* modules.xml */; };
-		7B7F3A26206D1C2400CB17F2 /* vcs.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A08206D1C2400CB17F2 /* vcs.xml */; };
-		7B7F3A27206D1C2400CB17F2 /* Gruntfile.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A09206D1C2400CB17F2 /* Gruntfile.js */; };
-		7B7F3A28206D1C2400CB17F2 /* indoornavi_api.iml in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A0A206D1C2400CB17F2 /* indoornavi_api.iml */; };
-		7B7F3A29206D1C2400CB17F2 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A0C206D1C2400CB17F2 /* index.html */; };
-		7B7F3A2A206D1C2400CB17F2 /* indoorNavi.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A0D206D1C2400CB17F2 /* indoorNavi.js */; };
-		7B7F3A2B206D1C2400CB17F2 /* indoorNavi.spec.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A0E206D1C2400CB17F2 /* indoorNavi.spec.js */; };
-		7B7F3A2C206D1C2400CB17F2 /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A0F206D1C2400CB17F2 /* package.json */; };
-		7B7F3A2D206D1C2400CB17F2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A10206D1C2400CB17F2 /* README.md */; };
-		7B7F3A2E206D1C2400CB17F2 /* indoornavi.spec.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A12206D1C2400CB17F2 /* indoornavi.spec.js */; };
-		7B7F3A2F206D1C2400CB17F2 /* jasmine.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A14206D1C2400CB17F2 /* jasmine.json */; };
-		7B7F3A30206D1C2400CB17F2 /* area.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A16206D1C2400CB17F2 /* area.js */; };
-		7B7F3A31206D1C2400CB17F2 /* geometric.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A17206D1C2400CB17F2 /* geometric.js */; };
-		7B7F3A32206D1C2400CB17F2 /* communication.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A19206D1C2400CB17F2 /* communication.js */; };
-		7B7F3A33206D1C2400CB17F2 /* dom.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A1A206D1C2400CB17F2 /* dom.js */; };
-		7B7F3A34206D1C2400CB17F2 /* http.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A1B206D1C2400CB17F2 /* http.js */; };
-		7B7F3A36206D1C2400CB17F2 /* areaEvent.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A1E206D1C2400CB17F2 /* areaEvent.js */; };
-		7B7F3A37206D1C2400CB17F2 /* coordinates.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A1F206D1C2400CB17F2 /* coordinates.js */; };
-		7B7F3A38206D1C2400CB17F2 /* polyline.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A20206D1C2400CB17F2 /* polyline.js */; };
-		7B7F3A39206D1C2400CB17F2 /* report.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A21206D1C2400CB17F2 /* report.js */; };
+		7BB038172077BE7A0001A5EF /* indoorNavi.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A0D206D1C2400CB17F2 /* indoorNavi.js */; };
 		7BD4676E206CF34A00B9F2AD /* IndoorNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD46764206CF34A00B9F2AD /* IndoorNavi.framework */; };
 		7BD46773206CF34A00B9F2AD /* IndoorNaviTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD46772206CF34A00B9F2AD /* IndoorNaviTests.swift */; };
 		7BD46775206CF34A00B9F2AD /* IndoorNavi.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BD46767206CF34A00B9F2AD /* IndoorNavi.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -465,28 +444,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B7F3A2A206D1C2400CB17F2 /* indoorNavi.js in Resources */,
-				7B7F3A2E206D1C2400CB17F2 /* indoornavi.spec.js in Resources */,
-				7B7F3A33206D1C2400CB17F2 /* dom.js in Resources */,
-				7B7F3A36206D1C2400CB17F2 /* areaEvent.js in Resources */,
-				7B7F3A27206D1C2400CB17F2 /* Gruntfile.js in Resources */,
-				7B7F3A24206D1C2400CB17F2 /* misc.xml in Resources */,
-				7B7F3A26206D1C2400CB17F2 /* vcs.xml in Resources */,
-				7B7F3A38206D1C2400CB17F2 /* polyline.js in Resources */,
-				7B7F3A34206D1C2400CB17F2 /* http.js in Resources */,
-				7B7F3A28206D1C2400CB17F2 /* indoornavi_api.iml in Resources */,
-				7B7F3A2F206D1C2400CB17F2 /* jasmine.json in Resources */,
-				7B7F3A30206D1C2400CB17F2 /* area.js in Resources */,
-				7B7F3A23206D1C2400CB17F2 /* jsLibraryMappings.xml in Resources */,
-				7B7F3A2B206D1C2400CB17F2 /* indoorNavi.spec.js in Resources */,
-				7B7F3A25206D1C2400CB17F2 /* modules.xml in Resources */,
-				7B7F3A32206D1C2400CB17F2 /* communication.js in Resources */,
-				7B7F3A39206D1C2400CB17F2 /* report.js in Resources */,
-				7B7F3A31206D1C2400CB17F2 /* geometric.js in Resources */,
-				7B7F3A37206D1C2400CB17F2 /* coordinates.js in Resources */,
-				7B7F3A29206D1C2400CB17F2 /* index.html in Resources */,
-				7B7F3A2D206D1C2400CB17F2 /* README.md in Resources */,
-				7B7F3A2C206D1C2400CB17F2 /* package.json in Resources */,
+				7BB038172077BE7A0001A5EF /* indoorNavi.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
