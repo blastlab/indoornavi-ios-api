@@ -4,24 +4,15 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>IndoorNavi.xcscheme</key>
+		<key>Pods-IndoorNaviDemos.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>7BD46763206CF34A00B9F2AD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7BD4676C206CF34A00B9F2AD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-	</dict>
+	<dict/>
 </dict>
 </plist>

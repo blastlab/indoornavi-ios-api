@@ -1,0 +1,21 @@
+{
+  "name": "IndoorNavi",
+  "version": "0.0.1",
+  "summary": "IndoorNavi iOS framework",
+  "description": "An IndoorNavi framework to use int custom Apps",
+  "homepage": "http://EXAMPLE/IndoorNavi",
+  "license": "MIT",
+  "authors": {
+    "Michał Pastwa": "mpastwa@blastlab.co"
+  },
+  "platforms": {
+    "ios": null
+  },
+  "source": {
+    "path": "."
+  },
+  "ios": {
+    "vendored_frameworks": "IndoorNavi.framework"
+  },
+  "public_header_files": "IndoorNavi/IndoorNavi.h"
+}
