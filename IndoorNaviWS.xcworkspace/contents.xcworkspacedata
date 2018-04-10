@@ -5,6 +5,6 @@
       location = "group:IndoorNavi/IndoorNavi.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:IndoorNaviDemos/IndoorNaviDemos.xcodeproj">
+      location = "group:IndoorNaviDemos/IndoorNaviDemoDynamicFramework/IndoorNaviDemoDynamicFramework.xcodeproj">
    </FileRef>
 </Workspace>

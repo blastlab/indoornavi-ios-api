@@ -11,15 +11,27 @@ import UIKit
 public class Paths: NSObject {
     
     // API path
-    public static var indoorNaviPath: String? {
+    public static var indoorNaviJsPath: String {
         let bundle = Bundle(for: IndoorNavi.self)
-        if let path = bundle.path(forResource: "indoorNavi", ofType: "js") {
-            print("Path: ",path)
-            return path
-        } else {
-            print("Path error")
-            return nil
-        }
+        let path = bundle.path(forResource: "indoorNavi", ofType: "js")!
+        print("Path for indoorNavi.js : ",path)
+        return path
+    }
+    
+    public static var indoorNaviJsURL: URL {
+        return URL(fileURLWithPath: indoorNaviJsPath)
+    }
+    
+    // HTML Path
+    public static var indoorNaviHTMLPath: String {
+        let bundle = Bundle(for: IndoorNavi.self)
+        let path = bundle.path(forResource: "indoorNavi", ofType: "html")!
+        print("Path for indoorNavi.html : ",path)
+        return path
+    }
+    
+    public static var indoorNaviHtmlURL: URL {
+        return URL(fileURLWithPath: indoorNaviHTMLPath)
     }
     
 }

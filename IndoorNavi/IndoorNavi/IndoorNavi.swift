@@ -8,13 +8,10 @@
 
 import UIKit
 import WebKit
-import GCDWebServer
 
 public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
     
     private var webView: WKWebView!
-    private var serverURL : URL!
-    private var server: GCDWebServer!
     
     private var indoorNaviFrame: CGRect!
     private var targetHost: String!
@@ -34,7 +31,8 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
         self.apiKey = apiKey
         
         setupWebView(withFrame: frame)
-        setupServer()
+        
+        loadHTML()
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -63,28 +61,10 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
         self.addSubview(webView)
     }
     
-    private func setupServer() {
-        server = GCDWebServer()
+    private func loadHTML() {
+        let baseURL = URL(fileURLWithPath: Bundle.main.bundlePath, isDirectory: true)
         
-        server.addDefaultHandler(forMethod: "GET", request: GCDWebServerRequest.self, processBlock: { request in
-            
-            return GCDWebServerDataResponse(html: Constants.indoorNaviHtml)
-        })
-        
-        server.addGETHandler(forPath: "/indoornavi.js", filePath: Paths.indoorNaviPath!, isAttachment: true, cacheAge: 3600, allowRangeRequests: true)
-        
-        server.start(withPort: 3000, bonjourName: nil)
-        
-        loadServerURL()
-    }
-    
-    private func loadServerURL() {
-        print("serverURL: \(String(describing: server.serverURL))")
-        if let url = server.serverURL {
-            print("URL: \(url)")
-            serverURL = url
-            webView.load( URLRequest(url: url) )
-        }
+        webView.loadHTMLString(Constants.indoorNaviHtml, baseURL: baseURL)
     }
     
     private var configuration: WKWebViewConfiguration {

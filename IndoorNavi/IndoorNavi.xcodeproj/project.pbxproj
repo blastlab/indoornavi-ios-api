@@ -7,37 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7B1D3C99207385C000CA57B1 /* GCDWebServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C7B207385C000CA57B1 /* GCDWebServer.h */; };
-		7B1D3C9A207385C000CA57B1 /* GCDWebServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C7C207385C000CA57B1 /* GCDWebServer.m */; };
-		7B1D3C9B207385C000CA57B1 /* GCDWebServerConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C7D207385C000CA57B1 /* GCDWebServerConnection.h */; };
-		7B1D3C9C207385C000CA57B1 /* GCDWebServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C7E207385C000CA57B1 /* GCDWebServerConnection.m */; };
-		7B1D3C9D207385C000CA57B1 /* GCDWebServerFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C7F207385C000CA57B1 /* GCDWebServerFunctions.h */; };
-		7B1D3C9E207385C000CA57B1 /* GCDWebServerFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C80207385C000CA57B1 /* GCDWebServerFunctions.m */; };
-		7B1D3C9F207385C000CA57B1 /* GCDWebServerHTTPStatusCodes.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C81207385C000CA57B1 /* GCDWebServerHTTPStatusCodes.h */; };
-		7B1D3CA0207385C000CA57B1 /* GCDWebServerPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C82207385C000CA57B1 /* GCDWebServerPrivate.h */; };
-		7B1D3CA1207385C000CA57B1 /* GCDWebServerRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C83207385C000CA57B1 /* GCDWebServerRequest.h */; };
-		7B1D3CA2207385C000CA57B1 /* GCDWebServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C84207385C000CA57B1 /* GCDWebServerRequest.m */; };
-		7B1D3CA3207385C000CA57B1 /* GCDWebServerResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C85207385C000CA57B1 /* GCDWebServerResponse.h */; };
-		7B1D3CA4207385C000CA57B1 /* GCDWebServerResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C86207385C000CA57B1 /* GCDWebServerResponse.m */; };
-		7B1D3CA5207385C000CA57B1 /* GCDWebServerDataRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C88207385C000CA57B1 /* GCDWebServerDataRequest.h */; };
-		7B1D3CA6207385C000CA57B1 /* GCDWebServerDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C89207385C000CA57B1 /* GCDWebServerDataRequest.m */; };
-		7B1D3CA7207385C000CA57B1 /* GCDWebServerFileRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C8A207385C000CA57B1 /* GCDWebServerFileRequest.h */; };
-		7B1D3CA8207385C000CA57B1 /* GCDWebServerFileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C8B207385C000CA57B1 /* GCDWebServerFileRequest.m */; };
-		7B1D3CA9207385C000CA57B1 /* GCDWebServerMultiPartFormRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C8C207385C000CA57B1 /* GCDWebServerMultiPartFormRequest.h */; };
-		7B1D3CAA207385C000CA57B1 /* GCDWebServerMultiPartFormRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C8D207385C000CA57B1 /* GCDWebServerMultiPartFormRequest.m */; };
-		7B1D3CAB207385C000CA57B1 /* GCDWebServerURLEncodedFormRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C8E207385C000CA57B1 /* GCDWebServerURLEncodedFormRequest.h */; };
-		7B1D3CAC207385C000CA57B1 /* GCDWebServerURLEncodedFormRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C8F207385C000CA57B1 /* GCDWebServerURLEncodedFormRequest.m */; };
-		7B1D3CAD207385C000CA57B1 /* GCDWebServerDataResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C91207385C000CA57B1 /* GCDWebServerDataResponse.h */; };
-		7B1D3CAE207385C000CA57B1 /* GCDWebServerDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C92207385C000CA57B1 /* GCDWebServerDataResponse.m */; };
-		7B1D3CAF207385C000CA57B1 /* GCDWebServerErrorResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C93207385C000CA57B1 /* GCDWebServerErrorResponse.h */; };
-		7B1D3CB0207385C000CA57B1 /* GCDWebServerErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C94207385C000CA57B1 /* GCDWebServerErrorResponse.m */; };
-		7B1D3CB1207385C000CA57B1 /* GCDWebServerFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C95207385C000CA57B1 /* GCDWebServerFileResponse.h */; };
-		7B1D3CB2207385C000CA57B1 /* GCDWebServerFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C96207385C000CA57B1 /* GCDWebServerFileResponse.m */; };
-		7B1D3CB3207385C000CA57B1 /* GCDWebServerStreamedResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1D3C97207385C000CA57B1 /* GCDWebServerStreamedResponse.h */; };
-		7B1D3CB4207385C000CA57B1 /* GCDWebServerStreamedResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D3C98207385C000CA57B1 /* GCDWebServerStreamedResponse.m */; };
+		7B7180B4207CAF1B00EC3E34 /* indoorNavi.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B718096207CAF1B00EC3E34 /* indoorNavi.js */; };
+		7B7180C5207CB0F000EC3E34 /* indoorNavi.html in Resources */ = {isa = PBXBuildFile; fileRef = 7B7180AB207CAF1B00EC3E34 /* indoorNavi.html */; };
 		7B77E6E7207513860019D061 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B77E6E6207513860019D061 /* Constants.swift */; };
 		7B77E6E9207515010019D061 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B77E6E8207515010019D061 /* Paths.swift */; };
-		7BB038172077BE7A0001A5EF /* indoorNavi.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B7F3A0D206D1C2400CB17F2 /* indoorNavi.js */; };
 		7BD4676E206CF34A00B9F2AD /* IndoorNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD46764206CF34A00B9F2AD /* IndoorNavi.framework */; };
 		7BD46773206CF34A00B9F2AD /* IndoorNaviTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD46772206CF34A00B9F2AD /* IndoorNaviTests.swift */; };
 		7BD46775206CF34A00B9F2AD /* IndoorNavi.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BD46767206CF34A00B9F2AD /* IndoorNavi.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -55,60 +28,31 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7B1D3C7B207385C000CA57B1 /* GCDWebServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServer.h; sourceTree = "<group>"; };
-		7B1D3C7C207385C000CA57B1 /* GCDWebServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServer.m; sourceTree = "<group>"; };
-		7B1D3C7D207385C000CA57B1 /* GCDWebServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerConnection.h; sourceTree = "<group>"; };
-		7B1D3C7E207385C000CA57B1 /* GCDWebServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerConnection.m; sourceTree = "<group>"; };
-		7B1D3C7F207385C000CA57B1 /* GCDWebServerFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerFunctions.h; sourceTree = "<group>"; };
-		7B1D3C80207385C000CA57B1 /* GCDWebServerFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerFunctions.m; sourceTree = "<group>"; };
-		7B1D3C81207385C000CA57B1 /* GCDWebServerHTTPStatusCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerHTTPStatusCodes.h; sourceTree = "<group>"; };
-		7B1D3C82207385C000CA57B1 /* GCDWebServerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerPrivate.h; sourceTree = "<group>"; };
-		7B1D3C83207385C000CA57B1 /* GCDWebServerRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerRequest.h; sourceTree = "<group>"; };
-		7B1D3C84207385C000CA57B1 /* GCDWebServerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerRequest.m; sourceTree = "<group>"; };
-		7B1D3C85207385C000CA57B1 /* GCDWebServerResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerResponse.h; sourceTree = "<group>"; };
-		7B1D3C86207385C000CA57B1 /* GCDWebServerResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerResponse.m; sourceTree = "<group>"; };
-		7B1D3C88207385C000CA57B1 /* GCDWebServerDataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerDataRequest.h; sourceTree = "<group>"; };
-		7B1D3C89207385C000CA57B1 /* GCDWebServerDataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerDataRequest.m; sourceTree = "<group>"; };
-		7B1D3C8A207385C000CA57B1 /* GCDWebServerFileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerFileRequest.h; sourceTree = "<group>"; };
-		7B1D3C8B207385C000CA57B1 /* GCDWebServerFileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerFileRequest.m; sourceTree = "<group>"; };
-		7B1D3C8C207385C000CA57B1 /* GCDWebServerMultiPartFormRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerMultiPartFormRequest.h; sourceTree = "<group>"; };
-		7B1D3C8D207385C000CA57B1 /* GCDWebServerMultiPartFormRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerMultiPartFormRequest.m; sourceTree = "<group>"; };
-		7B1D3C8E207385C000CA57B1 /* GCDWebServerURLEncodedFormRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerURLEncodedFormRequest.h; sourceTree = "<group>"; };
-		7B1D3C8F207385C000CA57B1 /* GCDWebServerURLEncodedFormRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerURLEncodedFormRequest.m; sourceTree = "<group>"; };
-		7B1D3C91207385C000CA57B1 /* GCDWebServerDataResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerDataResponse.h; sourceTree = "<group>"; };
-		7B1D3C92207385C000CA57B1 /* GCDWebServerDataResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerDataResponse.m; sourceTree = "<group>"; };
-		7B1D3C93207385C000CA57B1 /* GCDWebServerErrorResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerErrorResponse.h; sourceTree = "<group>"; };
-		7B1D3C94207385C000CA57B1 /* GCDWebServerErrorResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerErrorResponse.m; sourceTree = "<group>"; };
-		7B1D3C95207385C000CA57B1 /* GCDWebServerFileResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerFileResponse.h; sourceTree = "<group>"; };
-		7B1D3C96207385C000CA57B1 /* GCDWebServerFileResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerFileResponse.m; sourceTree = "<group>"; };
-		7B1D3C97207385C000CA57B1 /* GCDWebServerStreamedResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerStreamedResponse.h; sourceTree = "<group>"; };
-		7B1D3C98207385C000CA57B1 /* GCDWebServerStreamedResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerStreamedResponse.m; sourceTree = "<group>"; };
-		7B77E6E5207505C00019D061 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		7B71808E207CAF1B00EC3E34 /* jsLibraryMappings.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = jsLibraryMappings.xml; sourceTree = "<group>"; };
+		7B71808F207CAF1B00EC3E34 /* misc.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = misc.xml; sourceTree = "<group>"; };
+		7B718090207CAF1B00EC3E34 /* modules.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = modules.xml; sourceTree = "<group>"; };
+		7B718091207CAF1B00EC3E34 /* vcs.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = vcs.xml; sourceTree = "<group>"; };
+		7B718092207CAF1B00EC3E34 /* Gruntfile.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Gruntfile.js; sourceTree = "<group>"; };
+		7B718093207CAF1B00EC3E34 /* indoornavi_api.iml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = indoornavi_api.iml; sourceTree = "<group>"; };
+		7B718095207CAF1B00EC3E34 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		7B718096207CAF1B00EC3E34 /* indoorNavi.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = indoorNavi.js; sourceTree = "<group>"; };
+		7B718097207CAF1B00EC3E34 /* indoorNavi.spec.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = indoorNavi.spec.js; sourceTree = "<group>"; };
+		7B718098207CAF1B00EC3E34 /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
+		7B71809B207CAF1B00EC3E34 /* indoornavi.spec.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = indoornavi.spec.js; sourceTree = "<group>"; };
+		7B71809D207CAF1B00EC3E34 /* jasmine.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = jasmine.json; sourceTree = "<group>"; };
+		7B71809F207CAF1B00EC3E34 /* area.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = area.js; sourceTree = "<group>"; };
+		7B7180A0207CAF1B00EC3E34 /* geometric.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = geometric.js; sourceTree = "<group>"; };
+		7B7180A2207CAF1B00EC3E34 /* communication.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = communication.js; sourceTree = "<group>"; };
+		7B7180A3207CAF1B00EC3E34 /* dom.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = dom.js; sourceTree = "<group>"; };
+		7B7180A4207CAF1B00EC3E34 /* http.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = http.js; sourceTree = "<group>"; };
+		7B7180A5207CAF1B00EC3E34 /* indoornavi.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = indoornavi.js; sourceTree = "<group>"; };
+		7B7180A7207CAF1B00EC3E34 /* areaEvent.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = areaEvent.js; sourceTree = "<group>"; };
+		7B7180A8207CAF1B00EC3E34 /* coordinates.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = coordinates.js; sourceTree = "<group>"; };
+		7B7180A9207CAF1B00EC3E34 /* polyline.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = polyline.js; sourceTree = "<group>"; };
+		7B7180AA207CAF1B00EC3E34 /* report.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = report.js; sourceTree = "<group>"; };
+		7B7180AB207CAF1B00EC3E34 /* indoorNavi.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = indoorNavi.html; sourceTree = "<group>"; };
 		7B77E6E6207513860019D061 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7B77E6E8207515010019D061 /* Paths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paths.swift; sourceTree = "<group>"; };
-		7B7F3A05206D1C2400CB17F2 /* jsLibraryMappings.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = jsLibraryMappings.xml; sourceTree = "<group>"; };
-		7B7F3A06206D1C2400CB17F2 /* misc.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = misc.xml; sourceTree = "<group>"; };
-		7B7F3A07206D1C2400CB17F2 /* modules.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = modules.xml; sourceTree = "<group>"; };
-		7B7F3A08206D1C2400CB17F2 /* vcs.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = vcs.xml; sourceTree = "<group>"; };
-		7B7F3A09206D1C2400CB17F2 /* Gruntfile.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Gruntfile.js; sourceTree = "<group>"; };
-		7B7F3A0A206D1C2400CB17F2 /* indoornavi_api.iml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = indoornavi_api.iml; sourceTree = "<group>"; };
-		7B7F3A0C206D1C2400CB17F2 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
-		7B7F3A0D206D1C2400CB17F2 /* indoorNavi.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = indoorNavi.js; sourceTree = "<group>"; };
-		7B7F3A0E206D1C2400CB17F2 /* indoorNavi.spec.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = indoorNavi.spec.js; sourceTree = "<group>"; };
-		7B7F3A0F206D1C2400CB17F2 /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
-		7B7F3A10206D1C2400CB17F2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		7B7F3A12206D1C2400CB17F2 /* indoornavi.spec.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = indoornavi.spec.js; sourceTree = "<group>"; };
-		7B7F3A14206D1C2400CB17F2 /* jasmine.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = jasmine.json; sourceTree = "<group>"; };
-		7B7F3A16206D1C2400CB17F2 /* area.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = area.js; sourceTree = "<group>"; };
-		7B7F3A17206D1C2400CB17F2 /* geometric.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = geometric.js; sourceTree = "<group>"; };
-		7B7F3A19206D1C2400CB17F2 /* communication.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = communication.js; sourceTree = "<group>"; };
-		7B7F3A1A206D1C2400CB17F2 /* dom.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = dom.js; sourceTree = "<group>"; };
-		7B7F3A1B206D1C2400CB17F2 /* http.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = http.js; sourceTree = "<group>"; };
-		7B7F3A1C206D1C2400CB17F2 /* indoornavi.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = indoornavi.js; sourceTree = "<group>"; };
-		7B7F3A1E206D1C2400CB17F2 /* areaEvent.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = areaEvent.js; sourceTree = "<group>"; };
-		7B7F3A1F206D1C2400CB17F2 /* coordinates.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = coordinates.js; sourceTree = "<group>"; };
-		7B7F3A20206D1C2400CB17F2 /* polyline.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = polyline.js; sourceTree = "<group>"; };
-		7B7F3A21206D1C2400CB17F2 /* report.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = report.js; sourceTree = "<group>"; };
 		7BD46764206CF34A00B9F2AD /* IndoorNavi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IndoorNavi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BD46767206CF34A00B9F2AD /* IndoorNavi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IndoorNavi.h; sourceTree = "<group>"; };
 		7BD46768206CF34A00B9F2AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -137,156 +81,96 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7B1D3C79207385C000CA57B1 /* GCDWebServer */ = {
+		7B71808A207CAF1B00EC3E34 /* Web resources */ = {
 			isa = PBXGroup;
 			children = (
-				7B77E6E4207505C00019D061 /* ProjectModule */,
-				7B1D3C7A207385C000CA57B1 /* Core */,
-				7B1D3C87207385C000CA57B1 /* Requests */,
-				7B1D3C90207385C000CA57B1 /* Responses */,
+				7B71808B207CAF1B00EC3E34 /* API */,
+				7B7180AB207CAF1B00EC3E34 /* indoorNavi.html */,
 			);
-			path = GCDWebServer;
+			path = "Web resources";
 			sourceTree = "<group>";
 		};
-		7B1D3C7A207385C000CA57B1 /* Core */ = {
+		7B71808B207CAF1B00EC3E34 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				7B1D3C7B207385C000CA57B1 /* GCDWebServer.h */,
-				7B1D3C7C207385C000CA57B1 /* GCDWebServer.m */,
-				7B1D3C7D207385C000CA57B1 /* GCDWebServerConnection.h */,
-				7B1D3C7E207385C000CA57B1 /* GCDWebServerConnection.m */,
-				7B1D3C7F207385C000CA57B1 /* GCDWebServerFunctions.h */,
-				7B1D3C80207385C000CA57B1 /* GCDWebServerFunctions.m */,
-				7B1D3C81207385C000CA57B1 /* GCDWebServerHTTPStatusCodes.h */,
-				7B1D3C82207385C000CA57B1 /* GCDWebServerPrivate.h */,
-				7B1D3C83207385C000CA57B1 /* GCDWebServerRequest.h */,
-				7B1D3C84207385C000CA57B1 /* GCDWebServerRequest.m */,
-				7B1D3C85207385C000CA57B1 /* GCDWebServerResponse.h */,
-				7B1D3C86207385C000CA57B1 /* GCDWebServerResponse.m */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
-		7B1D3C87207385C000CA57B1 /* Requests */ = {
-			isa = PBXGroup;
-			children = (
-				7B1D3C88207385C000CA57B1 /* GCDWebServerDataRequest.h */,
-				7B1D3C89207385C000CA57B1 /* GCDWebServerDataRequest.m */,
-				7B1D3C8A207385C000CA57B1 /* GCDWebServerFileRequest.h */,
-				7B1D3C8B207385C000CA57B1 /* GCDWebServerFileRequest.m */,
-				7B1D3C8C207385C000CA57B1 /* GCDWebServerMultiPartFormRequest.h */,
-				7B1D3C8D207385C000CA57B1 /* GCDWebServerMultiPartFormRequest.m */,
-				7B1D3C8E207385C000CA57B1 /* GCDWebServerURLEncodedFormRequest.h */,
-				7B1D3C8F207385C000CA57B1 /* GCDWebServerURLEncodedFormRequest.m */,
-			);
-			path = Requests;
-			sourceTree = "<group>";
-		};
-		7B1D3C90207385C000CA57B1 /* Responses */ = {
-			isa = PBXGroup;
-			children = (
-				7B1D3C91207385C000CA57B1 /* GCDWebServerDataResponse.h */,
-				7B1D3C92207385C000CA57B1 /* GCDWebServerDataResponse.m */,
-				7B1D3C93207385C000CA57B1 /* GCDWebServerErrorResponse.h */,
-				7B1D3C94207385C000CA57B1 /* GCDWebServerErrorResponse.m */,
-				7B1D3C95207385C000CA57B1 /* GCDWebServerFileResponse.h */,
-				7B1D3C96207385C000CA57B1 /* GCDWebServerFileResponse.m */,
-				7B1D3C97207385C000CA57B1 /* GCDWebServerStreamedResponse.h */,
-				7B1D3C98207385C000CA57B1 /* GCDWebServerStreamedResponse.m */,
-			);
-			path = Responses;
-			sourceTree = "<group>";
-		};
-		7B77E6E4207505C00019D061 /* ProjectModule */ = {
-			isa = PBXGroup;
-			children = (
-				7B77E6E5207505C00019D061 /* module.modulemap */,
-			);
-			path = ProjectModule;
-			sourceTree = "<group>";
-		};
-		7B7F3A02206D1C2400CB17F2 /* API */ = {
-			isa = PBXGroup;
-			children = (
-				7B7F3A04206D1C2400CB17F2 /* .idea */,
-				7B7F3A09206D1C2400CB17F2 /* Gruntfile.js */,
-				7B7F3A0A206D1C2400CB17F2 /* indoornavi_api.iml */,
-				7B7F3A0B206D1C2400CB17F2 /* output */,
-				7B7F3A0F206D1C2400CB17F2 /* package.json */,
-				7B7F3A10206D1C2400CB17F2 /* README.md */,
-				7B7F3A11206D1C2400CB17F2 /* spec */,
-				7B7F3A15206D1C2400CB17F2 /* src */,
+				7B71808D207CAF1B00EC3E34 /* .idea */,
+				7B718092207CAF1B00EC3E34 /* Gruntfile.js */,
+				7B718093207CAF1B00EC3E34 /* indoornavi_api.iml */,
+				7B718094207CAF1B00EC3E34 /* output */,
+				7B718098207CAF1B00EC3E34 /* package.json */,
+				7B71809A207CAF1B00EC3E34 /* spec */,
+				7B71809E207CAF1B00EC3E34 /* src */,
 			);
 			path = API;
 			sourceTree = "<group>";
 		};
-		7B7F3A04206D1C2400CB17F2 /* .idea */ = {
+		7B71808D207CAF1B00EC3E34 /* .idea */ = {
 			isa = PBXGroup;
 			children = (
-				7B7F3A05206D1C2400CB17F2 /* jsLibraryMappings.xml */,
-				7B7F3A06206D1C2400CB17F2 /* misc.xml */,
-				7B7F3A07206D1C2400CB17F2 /* modules.xml */,
-				7B7F3A08206D1C2400CB17F2 /* vcs.xml */,
+				7B71808E207CAF1B00EC3E34 /* jsLibraryMappings.xml */,
+				7B71808F207CAF1B00EC3E34 /* misc.xml */,
+				7B718090207CAF1B00EC3E34 /* modules.xml */,
+				7B718091207CAF1B00EC3E34 /* vcs.xml */,
 			);
 			path = .idea;
 			sourceTree = "<group>";
 		};
-		7B7F3A0B206D1C2400CB17F2 /* output */ = {
+		7B718094207CAF1B00EC3E34 /* output */ = {
 			isa = PBXGroup;
 			children = (
-				7B7F3A0C206D1C2400CB17F2 /* index.html */,
-				7B7F3A0D206D1C2400CB17F2 /* indoorNavi.js */,
-				7B7F3A0E206D1C2400CB17F2 /* indoorNavi.spec.js */,
+				7B718095207CAF1B00EC3E34 /* index.html */,
+				7B718096207CAF1B00EC3E34 /* indoorNavi.js */,
+				7B718097207CAF1B00EC3E34 /* indoorNavi.spec.js */,
 			);
 			path = output;
 			sourceTree = "<group>";
 		};
-		7B7F3A11206D1C2400CB17F2 /* spec */ = {
+		7B71809A207CAF1B00EC3E34 /* spec */ = {
 			isa = PBXGroup;
 			children = (
-				7B7F3A12206D1C2400CB17F2 /* indoornavi.spec.js */,
-				7B7F3A13206D1C2400CB17F2 /* support */,
+				7B71809B207CAF1B00EC3E34 /* indoornavi.spec.js */,
+				7B71809C207CAF1B00EC3E34 /* support */,
 			);
 			path = spec;
 			sourceTree = "<group>";
 		};
-		7B7F3A13206D1C2400CB17F2 /* support */ = {
+		7B71809C207CAF1B00EC3E34 /* support */ = {
 			isa = PBXGroup;
 			children = (
-				7B7F3A14206D1C2400CB17F2 /* jasmine.json */,
+				7B71809D207CAF1B00EC3E34 /* jasmine.json */,
 			);
 			path = support;
 			sourceTree = "<group>";
 		};
-		7B7F3A15206D1C2400CB17F2 /* src */ = {
+		7B71809E207CAF1B00EC3E34 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				7B7F3A16206D1C2400CB17F2 /* area.js */,
-				7B7F3A17206D1C2400CB17F2 /* geometric.js */,
-				7B7F3A18206D1C2400CB17F2 /* helper */,
-				7B7F3A1C206D1C2400CB17F2 /* indoornavi.js */,
-				7B7F3A1D206D1C2400CB17F2 /* model */,
-				7B7F3A20206D1C2400CB17F2 /* polyline.js */,
-				7B7F3A21206D1C2400CB17F2 /* report.js */,
+				7B71809F207CAF1B00EC3E34 /* area.js */,
+				7B7180A0207CAF1B00EC3E34 /* geometric.js */,
+				7B7180A1207CAF1B00EC3E34 /* helper */,
+				7B7180A5207CAF1B00EC3E34 /* indoornavi.js */,
+				7B7180A6207CAF1B00EC3E34 /* model */,
+				7B7180A9207CAF1B00EC3E34 /* polyline.js */,
+				7B7180AA207CAF1B00EC3E34 /* report.js */,
 			);
 			path = src;
 			sourceTree = "<group>";
 		};
-		7B7F3A18206D1C2400CB17F2 /* helper */ = {
+		7B7180A1207CAF1B00EC3E34 /* helper */ = {
 			isa = PBXGroup;
 			children = (
-				7B7F3A19206D1C2400CB17F2 /* communication.js */,
-				7B7F3A1A206D1C2400CB17F2 /* dom.js */,
-				7B7F3A1B206D1C2400CB17F2 /* http.js */,
+				7B7180A2207CAF1B00EC3E34 /* communication.js */,
+				7B7180A3207CAF1B00EC3E34 /* dom.js */,
+				7B7180A4207CAF1B00EC3E34 /* http.js */,
 			);
 			path = helper;
 			sourceTree = "<group>";
 		};
-		7B7F3A1D206D1C2400CB17F2 /* model */ = {
+		7B7180A6207CAF1B00EC3E34 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				7B7F3A1E206D1C2400CB17F2 /* areaEvent.js */,
-				7B7F3A1F206D1C2400CB17F2 /* coordinates.js */,
+				7B7180A7207CAF1B00EC3E34 /* areaEvent.js */,
+				7B7180A8207CAF1B00EC3E34 /* coordinates.js */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -312,8 +196,7 @@
 		7BD46766206CF34A00B9F2AD /* IndoorNavi */ = {
 			isa = PBXGroup;
 			children = (
-				7B1D3C79207385C000CA57B1 /* GCDWebServer */,
-				7B7F3A02206D1C2400CB17F2 /* API */,
+				7B71808A207CAF1B00EC3E34 /* Web resources */,
 				7BD46767206CF34A00B9F2AD /* IndoorNavi.h */,
 				7BD46768206CF34A00B9F2AD /* Info.plist */,
 				7BD4679C206CF59500B9F2AD /* IndoorNavi.swift */,
@@ -340,21 +223,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BD46775206CF34A00B9F2AD /* IndoorNavi.h in Headers */,
-				7B1D3C99207385C000CA57B1 /* GCDWebServer.h in Headers */,
-				7B1D3CA1207385C000CA57B1 /* GCDWebServerRequest.h in Headers */,
-				7B1D3CAD207385C000CA57B1 /* GCDWebServerDataResponse.h in Headers */,
-				7B1D3CA3207385C000CA57B1 /* GCDWebServerResponse.h in Headers */,
-				7B1D3CA7207385C000CA57B1 /* GCDWebServerFileRequest.h in Headers */,
-				7B1D3C9D207385C000CA57B1 /* GCDWebServerFunctions.h in Headers */,
-				7B1D3CA5207385C000CA57B1 /* GCDWebServerDataRequest.h in Headers */,
-				7B1D3C9B207385C000CA57B1 /* GCDWebServerConnection.h in Headers */,
-				7B1D3CA0207385C000CA57B1 /* GCDWebServerPrivate.h in Headers */,
-				7B1D3C9F207385C000CA57B1 /* GCDWebServerHTTPStatusCodes.h in Headers */,
-				7B1D3CB1207385C000CA57B1 /* GCDWebServerFileResponse.h in Headers */,
-				7B1D3CA9207385C000CA57B1 /* GCDWebServerMultiPartFormRequest.h in Headers */,
-				7B1D3CB3207385C000CA57B1 /* GCDWebServerStreamedResponse.h in Headers */,
-				7B1D3CAB207385C000CA57B1 /* GCDWebServerURLEncodedFormRequest.h in Headers */,
-				7B1D3CAF207385C000CA57B1 /* GCDWebServerErrorResponse.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,7 +312,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BB038172077BE7A0001A5EF /* indoorNavi.js in Resources */,
+				7B7180C5207CB0F000EC3E34 /* indoorNavi.html in Resources */,
+				7B7180B4207CAF1B00EC3E34 /* indoorNavi.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,22 +388,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B1D3CAE207385C000CA57B1 /* GCDWebServerDataResponse.m in Sources */,
-				7B1D3CA8207385C000CA57B1 /* GCDWebServerFileRequest.m in Sources */,
-				7B1D3CAA207385C000CA57B1 /* GCDWebServerMultiPartFormRequest.m in Sources */,
-				7B1D3CA6207385C000CA57B1 /* GCDWebServerDataRequest.m in Sources */,
-				7B1D3CB4207385C000CA57B1 /* GCDWebServerStreamedResponse.m in Sources */,
-				7B1D3C9A207385C000CA57B1 /* GCDWebServer.m in Sources */,
 				7B77E6E9207515010019D061 /* Paths.swift in Sources */,
 				7BD4679D206CF59500B9F2AD /* IndoorNavi.swift in Sources */,
-				7B1D3CB0207385C000CA57B1 /* GCDWebServerErrorResponse.m in Sources */,
 				7B77E6E7207513860019D061 /* Constants.swift in Sources */,
-				7B1D3C9E207385C000CA57B1 /* GCDWebServerFunctions.m in Sources */,
-				7B1D3C9C207385C000CA57B1 /* GCDWebServerConnection.m in Sources */,
-				7B1D3CB2207385C000CA57B1 /* GCDWebServerFileResponse.m in Sources */,
-				7B1D3CAC207385C000CA57B1 /* GCDWebServerURLEncodedFormRequest.m in Sources */,
-				7B1D3CA2207385C000CA57B1 /* GCDWebServerRequest.m in Sources */,
-				7B1D3CA4207385C000CA57B1 /* GCDWebServerResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -687,7 +543,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.blastlab.IndoorNavi;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = NO;
-				SWIFT_INCLUDE_PATHS = "\"$(SRCROOT)/IndoorNavi/GCDWebServer/ProjectModule\"";
+				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -712,7 +568,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.blastlab.IndoorNavi;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = NO;
-				SWIFT_INCLUDE_PATHS = "\"$(SRCROOT)/IndoorNavi/GCDWebServer/ProjectModule\"";
+				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
