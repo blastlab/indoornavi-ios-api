@@ -19,7 +19,10 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
     
     public func load(_ mapId: Int) {
         let javaScriptString = String(format: Constants.indoorNaviLoadMapTemplate, mapId)
-        webView.evaluateJavaScript(javaScriptString, completionHandler: nil);
+        webView.evaluateJavaScript(javaScriptString, completionHandler: { response, error in
+            print("Error: \(String(describing: error?.localizedDescription))")
+            print("Response: \(String(describing: response))")
+        })
     }
     
     // Initialization
@@ -63,8 +66,7 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
     
     private func loadHTML() {
         let baseURL = URL(fileURLWithPath: Bundle.main.bundlePath, isDirectory: true)
-        
-        webView.loadHTMLString(Constants.indoorNaviHtml, baseURL: baseURL)
+        webView.loadFileURL(Paths.indoorNaviHtmlURL, allowingReadAccessTo: baseURL)
     }
     
     private var configuration: WKWebViewConfiguration {
@@ -84,7 +86,6 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
     
     // WKNavigationDelegate
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("Finished navigating to url \(String(describing: webView.url))")
         initInJavaScript()
     }
 }
