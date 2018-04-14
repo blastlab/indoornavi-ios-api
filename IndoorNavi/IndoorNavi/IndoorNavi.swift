@@ -61,6 +61,14 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
         webView = WKWebView.init(frame: frame, configuration: configuration)
         webView.uiDelegate = self
         webView.navigationDelegate = self
+        
+        webView.scrollView.isScrollEnabled = true
+        webView.scrollView.bounces = false
+        webView.allowsBackForwardNavigationGestures = false
+        webView.contentMode = .scaleToFill
+        
+        webView.scrollView.delegate = NativeWebViewScrollViewDelegate.shared
+        
         self.addSubview(webView)
     }
     
@@ -72,6 +80,14 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
     private var configuration: WKWebViewConfiguration {
         let configuration = WKWebViewConfiguration()
         let controller = WKUserContentController()
+        
+        let viewportScript = WKUserScript(source: Constants.viewportScriptString, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        let disableSelectionScript = WKUserScript(source: Constants.disableSelectionScriptString, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        let disableCalloutScript = WKUserScript(source: Constants.disableCalloutScriptString, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        
+        controller.addUserScript(viewportScript)
+        controller.addUserScript(disableSelectionScript)
+        controller.addUserScript(disableCalloutScript)
         
         controller.add(self, name: "iOS")
         configuration.userContentController = controller
