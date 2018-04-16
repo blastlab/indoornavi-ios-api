@@ -14,7 +14,6 @@ public class Paths: NSObject {
     public static var indoorNaviJsPath: String {
         let bundle = Bundle(for: IndoorNavi.self)
         let path = bundle.path(forResource: "indoorNavi", ofType: "js")!
-        print("Path for indoorNavi.js : ",path)
         return path
     }
     
@@ -26,7 +25,6 @@ public class Paths: NSObject {
     public static var indoorNaviHTMLPath: String {
         let bundle = Bundle(for: IndoorNavi.self)
         let path = bundle.path(forResource: "indoorNavi", ofType: "html")!
-        print("Path for indoorNavi.html : ",path)
         return path
     }
     
