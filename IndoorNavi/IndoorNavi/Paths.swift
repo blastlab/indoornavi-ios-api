@@ -8,27 +8,27 @@
 
 import UIKit
 
-public class Paths: NSObject {
+class Paths: NSObject {
     
     // API path
-    public static var indoorNaviJsPath: String {
+    static var indoorNaviJsPath: String {
         let bundle = Bundle(for: IndoorNavi.self)
         let path = bundle.path(forResource: "indoorNavi", ofType: "js")!
         return path
     }
     
-    public static var indoorNaviJsURL: URL {
+    static var indoorNaviJsURL: URL {
         return URL(fileURLWithPath: indoorNaviJsPath)
     }
     
     // HTML Path
-    public static var indoorNaviHTMLPath: String {
+    static var indoorNaviHTMLPath: String {
         let bundle = Bundle(for: IndoorNavi.self)
         let path = bundle.path(forResource: "indoorNavi", ofType: "html")!
         return path
     }
     
-    public static var indoorNaviHtmlURL: URL {
+    static var indoorNaviHtmlURL: URL {
         return URL(fileURLWithPath: indoorNaviHTMLPath)
     }
     
