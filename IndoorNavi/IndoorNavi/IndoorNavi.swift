@@ -33,7 +33,7 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
         self.targetHost = targetHost
         self.apiKey = apiKey
         
-        setupWebView(withFrame: frame)
+        setupWebView(withFrame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
         
         loadHTML()
     }
@@ -43,10 +43,7 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
     }
     
     private func initInJavaScript() {
-        let scale = UIScreen.main.scale
-        print("Scale = %f",scale)
-        
-        let javaScriptString = String(format: Constants.indoorNaviInitializationTemplate, targetHost, apiKey, scale * indoorNaviFrame.width, scale * indoorNaviFrame.height)
+        let javaScriptString = String(format: Constants.indoorNaviInitializationTemplate, targetHost, apiKey)
         print("Java script string: \(javaScriptString)")
         
         webView.evaluateJavaScript(javaScriptString, completionHandler: { response, error in
@@ -62,11 +59,7 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
         webView.uiDelegate = self
         webView.navigationDelegate = self
         
-        webView.scrollView.isScrollEnabled = true
         webView.scrollView.bounces = false
-        webView.allowsBackForwardNavigationGestures = false
-        webView.contentMode = .scaleToFill
-        
         webView.scrollView.delegate = NativeWebViewScrollViewDelegate.shared
         
         self.addSubview(webView)
@@ -103,5 +96,10 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
     // WKNavigationDelegate
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         initInJavaScript()
+    }
+    
+    // Deinitialization
+    deinit {
+        webView.scrollView.delegate = nil
     }
 }
