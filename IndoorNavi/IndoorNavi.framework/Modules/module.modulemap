@@ -1,0 +1,11 @@
+framework module IndoorNavi {
+  umbrella header "IndoorNavi.h"
+
+  export *
+  module * { export * }
+}
+
+module IndoorNavi.Swift {
+    header "IndoorNavi-Swift.h"
+    requires objc
+}

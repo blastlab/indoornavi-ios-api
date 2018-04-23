@@ -1,0 +1,651 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7B7180B4207CAF1B00EC3E34 /* indoorNavi.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B718096207CAF1B00EC3E34 /* indoorNavi.js */; };
+		7B7180C5207CB0F000EC3E34 /* indoorNavi.html in Resources */ = {isa = PBXBuildFile; fileRef = 7B7180AB207CAF1B00EC3E34 /* indoorNavi.html */; };
+		7B77E6E7207513860019D061 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B77E6E6207513860019D061 /* Constants.swift */; };
+		7B77E6E9207515010019D061 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B77E6E8207515010019D061 /* Paths.swift */; };
+		7B9ABA3320820B6A00A8849F /* WebViewScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */; };
+		7BD4676E206CF34A00B9F2AD /* IndoorNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD46764206CF34A00B9F2AD /* IndoorNavi.framework */; };
+		7BD46773206CF34A00B9F2AD /* IndoorNaviTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD46772206CF34A00B9F2AD /* IndoorNaviTests.swift */; };
+		7BD46775206CF34A00B9F2AD /* IndoorNavi.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BD46767206CF34A00B9F2AD /* IndoorNavi.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7BD4679D206CF59500B9F2AD /* IndoorNavi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD4679C206CF59500B9F2AD /* IndoorNavi.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7BD4676F206CF34A00B9F2AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BD4675B206CF34A00B9F2AD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7BD46763206CF34A00B9F2AD;
+			remoteInfo = IndoorNavi;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7B71808E207CAF1B00EC3E34 /* jsLibraryMappings.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = jsLibraryMappings.xml; sourceTree = "<group>"; };
+		7B71808F207CAF1B00EC3E34 /* misc.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = misc.xml; sourceTree = "<group>"; };
+		7B718090207CAF1B00EC3E34 /* modules.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = modules.xml; sourceTree = "<group>"; };
+		7B718091207CAF1B00EC3E34 /* vcs.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = vcs.xml; sourceTree = "<group>"; };
+		7B718092207CAF1B00EC3E34 /* Gruntfile.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Gruntfile.js; sourceTree = "<group>"; };
+		7B718093207CAF1B00EC3E34 /* indoornavi_api.iml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = indoornavi_api.iml; sourceTree = "<group>"; };
+		7B718095207CAF1B00EC3E34 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		7B718096207CAF1B00EC3E34 /* indoorNavi.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = indoorNavi.js; sourceTree = "<group>"; };
+		7B718097207CAF1B00EC3E34 /* indoorNavi.spec.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = indoorNavi.spec.js; sourceTree = "<group>"; };
+		7B718098207CAF1B00EC3E34 /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
+		7B71809B207CAF1B00EC3E34 /* indoornavi.spec.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = indoornavi.spec.js; sourceTree = "<group>"; };
+		7B71809D207CAF1B00EC3E34 /* jasmine.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = jasmine.json; sourceTree = "<group>"; };
+		7B71809F207CAF1B00EC3E34 /* area.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = area.js; sourceTree = "<group>"; };
+		7B7180A0207CAF1B00EC3E34 /* geometric.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = geometric.js; sourceTree = "<group>"; };
+		7B7180A2207CAF1B00EC3E34 /* communication.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = communication.js; sourceTree = "<group>"; };
+		7B7180A3207CAF1B00EC3E34 /* dom.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = dom.js; sourceTree = "<group>"; };
+		7B7180A4207CAF1B00EC3E34 /* http.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = http.js; sourceTree = "<group>"; };
+		7B7180A5207CAF1B00EC3E34 /* indoornavi.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = indoornavi.js; sourceTree = "<group>"; };
+		7B7180A7207CAF1B00EC3E34 /* areaEvent.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = areaEvent.js; sourceTree = "<group>"; };
+		7B7180A8207CAF1B00EC3E34 /* coordinates.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = coordinates.js; sourceTree = "<group>"; };
+		7B7180A9207CAF1B00EC3E34 /* polyline.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = polyline.js; sourceTree = "<group>"; };
+		7B7180AA207CAF1B00EC3E34 /* report.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = report.js; sourceTree = "<group>"; };
+		7B7180AB207CAF1B00EC3E34 /* indoorNavi.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = indoorNavi.html; sourceTree = "<group>"; };
+		7B77E6E6207513860019D061 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		7B77E6E8207515010019D061 /* Paths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paths.swift; sourceTree = "<group>"; };
+		7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewScrollViewDelegate.swift; sourceTree = "<group>"; };
+		7BD46764206CF34A00B9F2AD /* IndoorNavi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IndoorNavi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BD46767206CF34A00B9F2AD /* IndoorNavi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IndoorNavi.h; sourceTree = "<group>"; };
+		7BD46768206CF34A00B9F2AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7BD4676D206CF34A00B9F2AD /* IndoorNaviTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IndoorNaviTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BD46772206CF34A00B9F2AD /* IndoorNaviTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndoorNaviTests.swift; sourceTree = "<group>"; };
+		7BD46774206CF34A00B9F2AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7BD4679C206CF59500B9F2AD /* IndoorNavi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndoorNavi.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7BD46760206CF34A00B9F2AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7BD4676A206CF34A00B9F2AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BD4676E206CF34A00B9F2AD /* IndoorNavi.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7B71808A207CAF1B00EC3E34 /* Web resources */ = {
+			isa = PBXGroup;
+			children = (
+				7B71808B207CAF1B00EC3E34 /* API */,
+				7B7180AB207CAF1B00EC3E34 /* indoorNavi.html */,
+			);
+			path = "Web resources";
+			sourceTree = "<group>";
+		};
+		7B71808B207CAF1B00EC3E34 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				7B71808D207CAF1B00EC3E34 /* .idea */,
+				7B718092207CAF1B00EC3E34 /* Gruntfile.js */,
+				7B718093207CAF1B00EC3E34 /* indoornavi_api.iml */,
+				7B718094207CAF1B00EC3E34 /* output */,
+				7B718098207CAF1B00EC3E34 /* package.json */,
+				7B71809A207CAF1B00EC3E34 /* spec */,
+				7B71809E207CAF1B00EC3E34 /* src */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		7B71808D207CAF1B00EC3E34 /* .idea */ = {
+			isa = PBXGroup;
+			children = (
+				7B71808E207CAF1B00EC3E34 /* jsLibraryMappings.xml */,
+				7B71808F207CAF1B00EC3E34 /* misc.xml */,
+				7B718090207CAF1B00EC3E34 /* modules.xml */,
+				7B718091207CAF1B00EC3E34 /* vcs.xml */,
+			);
+			path = .idea;
+			sourceTree = "<group>";
+		};
+		7B718094207CAF1B00EC3E34 /* output */ = {
+			isa = PBXGroup;
+			children = (
+				7B718095207CAF1B00EC3E34 /* index.html */,
+				7B718096207CAF1B00EC3E34 /* indoorNavi.js */,
+				7B718097207CAF1B00EC3E34 /* indoorNavi.spec.js */,
+			);
+			path = output;
+			sourceTree = "<group>";
+		};
+		7B71809A207CAF1B00EC3E34 /* spec */ = {
+			isa = PBXGroup;
+			children = (
+				7B71809B207CAF1B00EC3E34 /* indoornavi.spec.js */,
+				7B71809C207CAF1B00EC3E34 /* support */,
+			);
+			path = spec;
+			sourceTree = "<group>";
+		};
+		7B71809C207CAF1B00EC3E34 /* support */ = {
+			isa = PBXGroup;
+			children = (
+				7B71809D207CAF1B00EC3E34 /* jasmine.json */,
+			);
+			path = support;
+			sourceTree = "<group>";
+		};
+		7B71809E207CAF1B00EC3E34 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				7B71809F207CAF1B00EC3E34 /* area.js */,
+				7B7180A0207CAF1B00EC3E34 /* geometric.js */,
+				7B7180A1207CAF1B00EC3E34 /* helper */,
+				7B7180A5207CAF1B00EC3E34 /* indoornavi.js */,
+				7B7180A6207CAF1B00EC3E34 /* model */,
+				7B7180A9207CAF1B00EC3E34 /* polyline.js */,
+				7B7180AA207CAF1B00EC3E34 /* report.js */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		7B7180A1207CAF1B00EC3E34 /* helper */ = {
+			isa = PBXGroup;
+			children = (
+				7B7180A2207CAF1B00EC3E34 /* communication.js */,
+				7B7180A3207CAF1B00EC3E34 /* dom.js */,
+				7B7180A4207CAF1B00EC3E34 /* http.js */,
+			);
+			path = helper;
+			sourceTree = "<group>";
+		};
+		7B7180A6207CAF1B00EC3E34 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				7B7180A7207CAF1B00EC3E34 /* areaEvent.js */,
+				7B7180A8207CAF1B00EC3E34 /* coordinates.js */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		7BD4675A206CF34A00B9F2AD = {
+			isa = PBXGroup;
+			children = (
+				7BD46766206CF34A00B9F2AD /* IndoorNavi */,
+				7BD46771206CF34A00B9F2AD /* IndoorNaviTests */,
+				7BD46765206CF34A00B9F2AD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7BD46765206CF34A00B9F2AD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7BD46764206CF34A00B9F2AD /* IndoorNavi.framework */,
+				7BD4676D206CF34A00B9F2AD /* IndoorNaviTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7BD46766206CF34A00B9F2AD /* IndoorNavi */ = {
+			isa = PBXGroup;
+			children = (
+				7B71808A207CAF1B00EC3E34 /* Web resources */,
+				7BD46767206CF34A00B9F2AD /* IndoorNavi.h */,
+				7BD46768206CF34A00B9F2AD /* Info.plist */,
+				7BD4679C206CF59500B9F2AD /* IndoorNavi.swift */,
+				7B77E6E6207513860019D061 /* Constants.swift */,
+				7B77E6E8207515010019D061 /* Paths.swift */,
+				7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */,
+			);
+			path = IndoorNavi;
+			sourceTree = "<group>";
+		};
+		7BD46771206CF34A00B9F2AD /* IndoorNaviTests */ = {
+			isa = PBXGroup;
+			children = (
+				7BD46772206CF34A00B9F2AD /* IndoorNaviTests.swift */,
+				7BD46774206CF34A00B9F2AD /* Info.plist */,
+			);
+			path = IndoorNaviTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		7BD46761206CF34A00B9F2AD /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BD46775206CF34A00B9F2AD /* IndoorNavi.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		7BD46763206CF34A00B9F2AD /* IndoorNavi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7BD46778206CF34A00B9F2AD /* Build configuration list for PBXNativeTarget "IndoorNavi" */;
+			buildPhases = (
+				7BD4675F206CF34A00B9F2AD /* Sources */,
+				7BD46760206CF34A00B9F2AD /* Frameworks */,
+				7BD46761206CF34A00B9F2AD /* Headers */,
+				7BD46762206CF34A00B9F2AD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IndoorNavi;
+			productName = IndoorNavi;
+			productReference = 7BD46764206CF34A00B9F2AD /* IndoorNavi.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		7BD4676C206CF34A00B9F2AD /* IndoorNaviTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7BD4677B206CF34A00B9F2AD /* Build configuration list for PBXNativeTarget "IndoorNaviTests" */;
+			buildPhases = (
+				F940D1EFC4B41BC1059E9C46 /* [CP] Check Pods Manifest.lock */,
+				7BD46769206CF34A00B9F2AD /* Sources */,
+				7BD4676A206CF34A00B9F2AD /* Frameworks */,
+				7BD4676B206CF34A00B9F2AD /* Resources */,
+				38915DF8DE059FCC9A71BF01 /* [CP] Embed Pods Frameworks */,
+				A439F9E6687D512E499D36F3 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7BD46770206CF34A00B9F2AD /* PBXTargetDependency */,
+			);
+			name = IndoorNaviTests;
+			productName = IndoorNaviTests;
+			productReference = 7BD4676D206CF34A00B9F2AD /* IndoorNaviTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7BD4675B206CF34A00B9F2AD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = BlastLab;
+				TargetAttributes = {
+					7BD46763206CF34A00B9F2AD = {
+						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
+						ProvisioningStyle = Automatic;
+					};
+					7BD4676C206CF34A00B9F2AD = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 7BD4675E206CF34A00B9F2AD /* Build configuration list for PBXProject "IndoorNavi" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7BD4675A206CF34A00B9F2AD;
+			productRefGroup = 7BD46765206CF34A00B9F2AD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7BD46763206CF34A00B9F2AD /* IndoorNavi */,
+				7BD4676C206CF34A00B9F2AD /* IndoorNaviTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7BD46762206CF34A00B9F2AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B7180C5207CB0F000EC3E34 /* indoorNavi.html in Resources */,
+				7B7180B4207CAF1B00EC3E34 /* indoorNavi.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7BD4676B206CF34A00B9F2AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		38915DF8DE059FCC9A71BF01 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-IndoorNaviTests/Pods-IndoorNaviTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GCDWebServer/GCDWebServer.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GCDWebServer.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IndoorNaviTests/Pods-IndoorNaviTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A439F9E6687D512E499D36F3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-IndoorNaviTests/Pods-IndoorNaviTests-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IndoorNaviTests/Pods-IndoorNaviTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F940D1EFC4B41BC1059E9C46 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-IndoorNaviTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7BD4675F206CF34A00B9F2AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B9ABA3320820B6A00A8849F /* WebViewScrollViewDelegate.swift in Sources */,
+				7B77E6E9207515010019D061 /* Paths.swift in Sources */,
+				7BD4679D206CF59500B9F2AD /* IndoorNavi.swift in Sources */,
+				7B77E6E7207513860019D061 /* Constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7BD46769206CF34A00B9F2AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BD46773206CF34A00B9F2AD /* IndoorNaviTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7BD46770206CF34A00B9F2AD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7BD46763206CF34A00B9F2AD /* IndoorNavi */;
+			targetProxy = 7BD4676F206CF34A00B9F2AD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		7BD46776206CF34A00B9F2AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		7BD46777206CF34A00B9F2AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		7BD46779206CF34A00B9F2AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = N825MANMLC;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = IndoorNavi/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.blastlab.IndoorNavi;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = NO;
+				SWIFT_INCLUDE_PATHS = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7BD4677A206CF34A00B9F2AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = N825MANMLC;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = IndoorNavi/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.blastlab.IndoorNavi;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = NO;
+				SWIFT_INCLUDE_PATHS = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		7BD4677C206CF34A00B9F2AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N825MANMLC;
+				INFOPLIST_FILE = IndoorNaviTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.blastlab.IndoorNaviTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7BD4677D206CF34A00B9F2AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N825MANMLC;
+				INFOPLIST_FILE = IndoorNaviTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.blastlab.IndoorNaviTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7BD4675E206CF34A00B9F2AD /* Build configuration list for PBXProject "IndoorNavi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BD46776206CF34A00B9F2AD /* Debug */,
+				7BD46777206CF34A00B9F2AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7BD46778206CF34A00B9F2AD /* Build configuration list for PBXNativeTarget "IndoorNavi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BD46779206CF34A00B9F2AD /* Debug */,
+				7BD4677A206CF34A00B9F2AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7BD4677B206CF34A00B9F2AD /* Build configuration list for PBXNativeTarget "IndoorNaviTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BD4677C206CF34A00B9F2AD /* Debug */,
+				7BD4677D206CF34A00B9F2AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7BD4675B206CF34A00B9F2AD /* Project object */;
+}
