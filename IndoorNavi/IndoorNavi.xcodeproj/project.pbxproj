@@ -7,15 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B666AF020888FBF0031780A /* CoordinatesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B666AEF20888FBF0031780A /* CoordinatesHelper.swift */; };
+		7B666AF2208892AC0031780A /* INCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B666AF1208892AC0031780A /* INCoordinates.swift */; };
+		7B666AF42088D3A60031780A /* INObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B666AF32088D3A60031780A /* INObject.swift */; };
+		7B6948BB20863F1400E22BD9 /* INPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6948BA20863F1400E22BD9 /* INPolyline.swift */; };
 		7B7180B4207CAF1B00EC3E34 /* indoorNavi.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B718096207CAF1B00EC3E34 /* indoorNavi.js */; };
 		7B7180C5207CB0F000EC3E34 /* indoorNavi.html in Resources */ = {isa = PBXBuildFile; fileRef = 7B7180AB207CAF1B00EC3E34 /* indoorNavi.html */; };
 		7B77E6E7207513860019D061 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B77E6E6207513860019D061 /* Constants.swift */; };
 		7B77E6E9207515010019D061 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B77E6E8207515010019D061 /* Paths.swift */; };
+		7B85D3E8208DC1320091FC62 /* ClousureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85D3E7208DC1320091FC62 /* ClousureManager.swift */; };
 		7B9ABA3320820B6A00A8849F /* WebViewScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */; };
 		7BD4676E206CF34A00B9F2AD /* IndoorNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD46764206CF34A00B9F2AD /* IndoorNavi.framework */; };
 		7BD46773206CF34A00B9F2AD /* IndoorNaviTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD46772206CF34A00B9F2AD /* IndoorNaviTests.swift */; };
 		7BD46775206CF34A00B9F2AD /* IndoorNavi.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BD46767206CF34A00B9F2AD /* IndoorNavi.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7BD4679D206CF59500B9F2AD /* IndoorNavi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD4679C206CF59500B9F2AD /* IndoorNavi.swift */; };
+		7BD4679D206CF59500B9F2AD /* INMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD4679C206CF59500B9F2AD /* INMap.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +34,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B666AEF20888FBF0031780A /* CoordinatesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesHelper.swift; sourceTree = "<group>"; };
+		7B666AF1208892AC0031780A /* INCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INCoordinates.swift; sourceTree = "<group>"; };
+		7B666AF32088D3A60031780A /* INObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INObject.swift; sourceTree = "<group>"; };
+		7B6948BA20863F1400E22BD9 /* INPolyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INPolyline.swift; sourceTree = "<group>"; };
 		7B71808E207CAF1B00EC3E34 /* jsLibraryMappings.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = jsLibraryMappings.xml; sourceTree = "<group>"; };
 		7B71808F207CAF1B00EC3E34 /* misc.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = misc.xml; sourceTree = "<group>"; };
 		7B718090207CAF1B00EC3E34 /* modules.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = modules.xml; sourceTree = "<group>"; };
@@ -54,6 +63,7 @@
 		7B7180AB207CAF1B00EC3E34 /* indoorNavi.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = indoorNavi.html; sourceTree = "<group>"; };
 		7B77E6E6207513860019D061 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7B77E6E8207515010019D061 /* Paths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paths.swift; sourceTree = "<group>"; };
+		7B85D3E7208DC1320091FC62 /* ClousureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClousureManager.swift; sourceTree = "<group>"; };
 		7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewScrollViewDelegate.swift; sourceTree = "<group>"; };
 		7BD46764206CF34A00B9F2AD /* IndoorNavi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IndoorNavi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BD46767206CF34A00B9F2AD /* IndoorNavi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IndoorNavi.h; sourceTree = "<group>"; };
@@ -61,7 +71,7 @@
 		7BD4676D206CF34A00B9F2AD /* IndoorNaviTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IndoorNaviTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BD46772206CF34A00B9F2AD /* IndoorNaviTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndoorNaviTests.swift; sourceTree = "<group>"; };
 		7BD46774206CF34A00B9F2AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7BD4679C206CF59500B9F2AD /* IndoorNavi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndoorNavi.swift; sourceTree = "<group>"; };
+		7BD4679C206CF59500B9F2AD /* INMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INMap.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +93,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B6948B920863EF100E22BD9 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				7BD46767206CF34A00B9F2AD /* IndoorNavi.h */,
+				7BD46768206CF34A00B9F2AD /* Info.plist */,
+			);
+			path = "Supporting files";
+			sourceTree = "<group>";
+		};
 		7B71808A207CAF1B00EC3E34 /* Web resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,12 +196,20 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		7B94B814208A2F3C006A61BF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7BD4675A206CF34A00B9F2AD = {
 			isa = PBXGroup;
 			children = (
 				7BD46766206CF34A00B9F2AD /* IndoorNavi */,
 				7BD46771206CF34A00B9F2AD /* IndoorNaviTests */,
 				7BD46765206CF34A00B9F2AD /* Products */,
+				7B94B814208A2F3C006A61BF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -199,12 +226,16 @@
 			isa = PBXGroup;
 			children = (
 				7B71808A207CAF1B00EC3E34 /* Web resources */,
-				7BD46767206CF34A00B9F2AD /* IndoorNavi.h */,
-				7BD46768206CF34A00B9F2AD /* Info.plist */,
-				7BD4679C206CF59500B9F2AD /* IndoorNavi.swift */,
+				7B6948B920863EF100E22BD9 /* Supporting files */,
+				7BD4679C206CF59500B9F2AD /* INMap.swift */,
 				7B77E6E6207513860019D061 /* Constants.swift */,
 				7B77E6E8207515010019D061 /* Paths.swift */,
 				7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */,
+				7B6948BA20863F1400E22BD9 /* INPolyline.swift */,
+				7B666AEF20888FBF0031780A /* CoordinatesHelper.swift */,
+				7B666AF1208892AC0031780A /* INCoordinates.swift */,
+				7B666AF32088D3A60031780A /* INObject.swift */,
+				7B85D3E7208DC1320091FC62 /* ClousureManager.swift */,
 			);
 			path = IndoorNavi;
 			sourceTree = "<group>";
@@ -393,8 +424,13 @@
 			files = (
 				7B9ABA3320820B6A00A8849F /* WebViewScrollViewDelegate.swift in Sources */,
 				7B77E6E9207515010019D061 /* Paths.swift in Sources */,
-				7BD4679D206CF59500B9F2AD /* IndoorNavi.swift in Sources */,
+				7B666AF2208892AC0031780A /* INCoordinates.swift in Sources */,
+				7B6948BB20863F1400E22BD9 /* INPolyline.swift in Sources */,
+				7B666AF020888FBF0031780A /* CoordinatesHelper.swift in Sources */,
+				7BD4679D206CF59500B9F2AD /* INMap.swift in Sources */,
+				7B85D3E8208DC1320091FC62 /* ClousureManager.swift in Sources */,
 				7B77E6E7207513860019D061 /* Constants.swift in Sources */,
+				7B666AF42088D3A60031780A /* INObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,7 +581,11 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = IndoorNavi/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/IndoorNavi/Supporting files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -571,7 +611,11 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = IndoorNavi/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/IndoorNavi/Supporting files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

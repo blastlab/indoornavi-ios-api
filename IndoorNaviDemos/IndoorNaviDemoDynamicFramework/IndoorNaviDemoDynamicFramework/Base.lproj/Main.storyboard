@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iyb-xa-ELL">
-                                <rect key="frame" x="8" y="629" width="359" height="30"/>
+                                <rect key="frame" x="8" y="629" width="114.5" height="30"/>
                                 <state key="normal" title="Load map">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -27,12 +27,36 @@
                                     <action selector="action:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZCq-Rm-adM"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wEZ-6T-tQF">
+                                <rect key="frame" x="130.5" y="629" width="114" height="30"/>
+                                <state key="normal" title="Draw polyline">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="drawPolyline:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X1g-v1-8qU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aiN-FQ-EYs">
+                                <rect key="frame" x="252.5" y="629" width="114.5" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="action3:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qmv-yY-a9s"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.24502822760000001" green="0.47951000929999998" blue="0.99864953759999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Iyb-xa-ELL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="0AO-DA-xbc"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Iyb-xa-ELL" secondAttribute="trailing" constant="8" id="Q6B-4n-YfK"/>
+                            <constraint firstItem="aiN-FQ-EYs" firstAttribute="leading" secondItem="wEZ-6T-tQF" secondAttribute="trailing" constant="8" id="1kI-GK-W3o"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="wEZ-6T-tQF" secondAttribute="bottom" constant="8" id="IhS-O9-Pq1"/>
+                            <constraint firstItem="wEZ-6T-tQF" firstAttribute="leading" secondItem="Iyb-xa-ELL" secondAttribute="trailing" constant="8" id="cdh-U6-gC9"/>
+                            <constraint firstItem="aiN-FQ-EYs" firstAttribute="width" secondItem="Iyb-xa-ELL" secondAttribute="width" id="cqc-XQ-ed5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="aiN-FQ-EYs" secondAttribute="bottom" constant="8" id="h6i-H8-uJd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Iyb-xa-ELL" secondAttribute="bottom" constant="8" id="hW9-Ia-R0c"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aiN-FQ-EYs" secondAttribute="trailing" constant="8" id="jfM-je-LUv"/>
+                            <constraint firstItem="aiN-FQ-EYs" firstAttribute="width" secondItem="wEZ-6T-tQF" secondAttribute="width" id="uCk-Gt-suy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

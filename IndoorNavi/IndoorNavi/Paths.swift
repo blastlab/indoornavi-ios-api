@@ -12,7 +12,7 @@ class Paths: NSObject {
     
     // API path
     static var indoorNaviJsPath: String {
-        let bundle = Bundle(for: IndoorNavi.self)
+        let bundle = Bundle(for: INMap.self)
         let path = bundle.path(forResource: "indoorNavi", ofType: "js")!
         return path
     }
@@ -23,7 +23,7 @@ class Paths: NSObject {
     
     // HTML Path
     static var indoorNaviHTMLPath: String {
-        let bundle = Bundle(for: IndoorNavi.self)
+        let bundle = Bundle(for: INMap.self)
         let path = bundle.path(forResource: "indoorNavi", ofType: "html")!
         return path
     }

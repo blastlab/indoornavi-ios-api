@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 
 /// Class representing an INMap
-public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
+public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
     
     private var webView: WKWebView!
     
@@ -24,18 +24,14 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
      *  - Parameter mapId: ID number of the map you want to load.
      */
     public func load(_ mapId: Int) {
-        let javaScriptString = String(format: Constants.indoorNaviLoadMapTemplate, mapId)
-        webView.evaluateJavaScript(javaScriptString, completionHandler: { response, error in
-            print("Error: \(String(describing: error?.localizedDescription))")
-            print("Response: \(String(describing: response))")
-        })
+        let javaScriptString = String(format: Constants.inMapLoadMapTemplate, mapId)
+        evaluate(javaScriptString: javaScriptString)
     }
     
-    // Initialization
     /**
-     *   Initializes a new IndoorNavi object with the provided parameters to communicate with INMap frontend server.
+     *  Initializes a new INMap object with the provided parameters to communicate with INMap frontend server.
      *
-     *   - Parameters:
+     *  - Parameters:
      *      - frame: Frame of the view containing map.
      *      - targetHost: Address to the INMap server.
      *      - apiKey: The API key created on INMap server.
@@ -57,14 +53,8 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
     }
     
     private func initInJavaScript() {
-        let javaScriptString = String(format: Constants.indoorNaviInitializationTemplate, targetHost, apiKey)
-        print("Java script string: \(javaScriptString)")
-        
-        webView.evaluateJavaScript(javaScriptString, completionHandler: { response, error in
-            print("Error: \(String(describing: error?.localizedDescription))")
-            print("Response: \(String(describing: response))")
-        })
-        
+        let javaScriptString = String(format: Constants.inMapInitializationTemplate, targetHost, apiKey)
+        evaluate(javaScriptString: javaScriptString)
     }
     
     // Setups
@@ -96,7 +86,7 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
         controller.addUserScript(disableSelectionScript)
         controller.addUserScript(disableCalloutScript)
         
-        controller.add(self, name: "iOS")
+        controller.add(self, name: Constants.controllerName)
         configuration.userContentController = controller
         
         return configuration
@@ -105,11 +95,22 @@ public class IndoorNavi: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMes
     // WKScriptMessageHandler
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) { // JS -> Swift
         print("Received event \(message.body)")
+        if let uuid = message.body as? String {
+            ClousureManager.promiseResolved(withUUID: uuid)
+        }
     }
     
     // WKNavigationDelegate
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         initInJavaScript()
+    }
+    
+    internal func evaluate(javaScriptString string: String) {
+        print("Evaluating script: \(string)")
+        webView.evaluateJavaScript(string, completionHandler: { response, error in
+            print("Error: \(String(describing: error?.localizedDescription))")
+            print("Response: \(String(describing: response))")
+        })
     }
     
     // Deinitialization
