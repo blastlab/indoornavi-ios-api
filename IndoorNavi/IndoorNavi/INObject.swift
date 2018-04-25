@@ -21,7 +21,7 @@ public class INObject: NSObject {
     public func ready(readyClousure: @escaping () -> Void) {
         let uuid = UUID().uuidString
         ClousureManager.clousuresToPerform[uuid] = readyClousure
-        let javaScriptString = String(format: "%@.ready().then(() =>  webkit.messageHandlers.iOS.postMessage('%@'));", javaScriptVariableName, uuid)
+        let javaScriptString = String(format: "%@.ready().then(() => webkit.messageHandlers.iOS.postMessage('%@'));", javaScriptVariableName, uuid)
         map.evaluate(javaScriptString: javaScriptString)
     }
     

@@ -13,7 +13,7 @@ class ClousureManager: NSObject {
     static var clousuresToPerform = [String: () -> Void]()
     
     static func promiseResolved(withUUID uuid: String) {
-        print("Promise resolved with UUID: \(uuid)")
+        print("Resolving promise with UUID: \(uuid)...")
         
         print("Clousures in dictionary:")
         for clousure in clousuresToPerform {
