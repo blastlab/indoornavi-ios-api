@@ -11,6 +11,14 @@ import UIKit
 /// Class representing a INPolyline, creates the INPolyline in webView, communicates with indoornavi frontend server and draws INPolyline.
 public class INPolyline: INObject {
     
+    fileprivate struct ScriptTemplates {
+        static let VariableName = "poly%u"
+        static let InitializationTemplate = "var %@ = new INPolyline(navi);"
+        static let PointTemplate = "%@.points(points);"
+        static let PlaceTemplate = "%@.draw();"
+        static let SetLineColorTemplate = "%@.setLineColor('%@')"
+    }
+    
     /**
      *  Initializes a new Polyline object inside given INMap object.
      *
@@ -19,8 +27,8 @@ public class INPolyline: INObject {
     public override init(withMap map: INMap) {
         super.init(withMap: map)
         
-        javaScriptVariableName = String(format: Constants.polylineVariableName, self.hash)
-        let javaScriptString = String(format: Constants.polylineInitializationTemplate, javaScriptVariableName)
+        javaScriptVariableName = String(format: ScriptTemplates.VariableName, self.hash)
+        let javaScriptString = String(format: ScriptTemplates.InitializationTemplate, javaScriptVariableName)
         self.map.evaluate(javaScriptString:  javaScriptString)
     }
     
@@ -32,7 +40,7 @@ public class INPolyline: INObject {
     public func points(_ points: [INCoordinates]) {
         let pointsString = CoordinatesHelper.coordinatesArrayString(fromCoordinatesArray: points)
         map.evaluate(javaScriptString: String(format: Constants.pointsDeclarationTemplate, pointsString))
-        let javaScriptString = String(format: Constants.polylinePointTemplate, javaScriptVariableName)
+        let javaScriptString = String(format: ScriptTemplates.PointTemplate, javaScriptVariableName)
         map.evaluate(javaScriptString: javaScriptString)
     }
     
@@ -42,7 +50,7 @@ public class INPolyline: INObject {
      *  Use of this method is indispensable to draw polyline with set configuration.
      */
     public func draw() {
-        let javaScriptString = String(format: Constants.polylinePlaceTemplate, javaScriptVariableName)
+        let javaScriptString = String(format: ScriptTemplates.PlaceTemplate, javaScriptVariableName)
         map.evaluate(javaScriptString: javaScriptString)
     }
     
@@ -53,7 +61,7 @@ public class INPolyline: INObject {
      */
     public func set(lineColor color: UIColor) {
         let stringColor = colorString(fromColor: color)
-        let javaScriptString = String(format: Constants.polylineSetLineColorTemplate, javaScriptVariableName, stringColor)
+        let javaScriptString = String(format: ScriptTemplates.SetLineColorTemplate, javaScriptVariableName, stringColor)
         map.evaluate(javaScriptString: javaScriptString)
     }
     

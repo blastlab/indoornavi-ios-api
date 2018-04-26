@@ -12,6 +12,22 @@ import WebKit
 /// Class representing an INMap
 public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
     
+    fileprivate struct ScriptTemplates {
+        static let InitializationTemplate = "var navi = new INMap('%@','%@','map',{width:document.body.clientWidth,height:document.body.clientHeight});"
+        static let LoadMapTemplate = "navi.load(%i);"
+    }
+    
+    fileprivate struct WebViewConfigurationScripts {
+        static let ViewportScriptString = "var meta = document.createElement('meta');" +
+            "meta.name = 'viewport';" +
+            "meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';" +
+            "var head = document.getElementsByTagName('head')[0];" + "head.appendChild(meta);"
+        static let DisableSelectionScriptString = "document.documentElement.style.webkitUserSelect='none';"
+        static let DisableCalloutScriptString = "document.documentElement.style.webkitTouchCallout='none';"
+    }
+    
+    fileprivate static let ControllerName = "iOS"
+    
     private var webView: WKWebView!
     
     private var indoorNaviFrame: CGRect!
@@ -24,7 +40,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
      *  - Parameter mapId: ID number of the map you want to load.
      */
     public func load(_ mapId: Int) {
-        let javaScriptString = String(format: Constants.inMapLoadMapTemplate, mapId)
+        let javaScriptString = String(format: ScriptTemplates.LoadMapTemplate, mapId)
         evaluate(javaScriptString: javaScriptString)
     }
     
@@ -53,7 +69,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
     }
     
     private func initInJavaScript() {
-        let javaScriptString = String(format: Constants.inMapInitializationTemplate, targetHost, apiKey)
+        let javaScriptString = String(format: ScriptTemplates.InitializationTemplate, targetHost, apiKey)
         evaluate(javaScriptString: javaScriptString)
     }
     
@@ -78,15 +94,15 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
         let configuration = WKWebViewConfiguration()
         let controller = WKUserContentController()
         
-        let viewportScript = WKUserScript(source: Constants.viewportScriptString, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-        let disableSelectionScript = WKUserScript(source: Constants.disableSelectionScriptString, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-        let disableCalloutScript = WKUserScript(source: Constants.disableCalloutScriptString, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        let viewportScript = WKUserScript(source: WebViewConfigurationScripts.ViewportScriptString, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        let disableSelectionScript = WKUserScript(source: WebViewConfigurationScripts.DisableSelectionScriptString, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        let disableCalloutScript = WKUserScript(source: WebViewConfigurationScripts.DisableCalloutScriptString, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         
         controller.addUserScript(viewportScript)
         controller.addUserScript(disableSelectionScript)
         controller.addUserScript(disableCalloutScript)
         
-        controller.add(self, name: Constants.controllerName)
+        controller.add(self, name: INMap.ControllerName)
         configuration.userContentController = controller
         
         return configuration
@@ -106,11 +122,15 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
     }
     
     internal func evaluate(javaScriptString string: String) {
-        print("Evaluating script: \(string)")
-        webView.evaluateJavaScript(string, completionHandler: { response, error in
+        evaluate(javaScriptString: string) { response, error in
             print("Error: \(String(describing: error?.localizedDescription))")
             print("Response: \(String(describing: response))")
-        })
+        }
+    }
+    
+    internal func evaluate(javaScriptString string: String, completionHandler: @escaping (Any?, Error?) -> Void) {
+        print("Evaluating script: \(string)")
+        webView.evaluateJavaScript(string, completionHandler: completionHandler)
     }
     
     // Deinitialization

@@ -59,6 +59,10 @@ class ViewController: UIViewController {
             self.polyline2.points(points)
             self.polyline2.set(lineColor: UIColor.green)
             self.polyline2.draw()
+            
+            self.polyline2.getID { id in
+                print("ID: \(String(describing: id))")
+            }
         }
     }
     

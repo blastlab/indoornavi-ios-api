@@ -10,31 +10,6 @@ import UIKit
 
 class Constants: NSObject {
     
-    // JavaScript to iOS communication
-    static let controllerName = "iOS"
-    
-    // WebView configuration
-    static let viewportScriptString = "var meta = document.createElement('meta');" +
-        "meta.name = 'viewport';" +
-        "meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';" +
-        "var head = document.getElementsByTagName('head')[0];" + "head.appendChild(meta);"
-    static let disableSelectionScriptString = "document.documentElement.style.webkitUserSelect='none';"
-    static let disableCalloutScriptString = "document.documentElement.style.webkitTouchCallout='none';"
-    
-    // INMap templates
-    static let inMapInitializationTemplate = "var navi = new INMap('%@','%@','map',{width:document.body.clientWidth,height:document.body.clientHeight});"
-    static let inMapLoadMapTemplate = "navi.load(%i);"
-    
-    // INPolyline
-    static let polylineVariableName = "poly%u"
-    static let polylineInitializationTemplate = "var %@ = new INPolyline(navi);"
-    static let polylinePointTemplate = "%@.points(points);"
-    static let polylinePlaceTemplate = "%@.draw();"
-    static let polylineSetLineColorTemplate = "%@.setLineColor('%@')"
-    
-    // INObject
-    static let readyTemplate = "%@.ready().then(() => webkit.messageHandlers.iOS.postMessage('%@'));"
-    
     // Points
     static let pointsDeclarationTemplate = "var points = %@;"
 }
