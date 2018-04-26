@@ -12,11 +12,6 @@ class Constants: NSObject {
     
     // JavaScript to iOS communication
     static let controllerName = "iOS"
-    static let messagePostTemplate = "window.webkit.messageHandlers.iOS.postMessage(%@)"
-    
-    // IndoorNavi map templates
-    static let inMapInitializationTemplate = "var navi = new INMap('%@','%@','map',{width:document.body.clientWidth,height:document.body.clientHeight});"
-    static let inMapLoadMapTemplate = "navi.load(%i);"
     
     // WebView configuration
     static let viewportScriptString = "var meta = document.createElement('meta');" +
@@ -26,11 +21,20 @@ class Constants: NSObject {
     static let disableSelectionScriptString = "document.documentElement.style.webkitUserSelect='none';"
     static let disableCalloutScriptString = "document.documentElement.style.webkitTouchCallout='none';"
     
-    // Polyline
+    // INMap templates
+    static let inMapInitializationTemplate = "var navi = new INMap('%@','%@','map',{width:document.body.clientWidth,height:document.body.clientHeight});"
+    static let inMapLoadMapTemplate = "navi.load(%i);"
+    
+    // INPolyline
     static let polylineVariableName = "poly%u"
     static let polylineInitializationTemplate = "var %@ = new INPolyline(navi);"
-    static let polylinePointTemplate = "%@.points(%@);"
+    static let polylinePointTemplate = "%@.points(points);"
     static let polylinePlaceTemplate = "%@.draw();"
     static let polylineSetLineColorTemplate = "%@.setLineColor('%@')"
     
+    // INObject
+    static let readyTemplate = "%@.ready().then(() => webkit.messageHandlers.iOS.postMessage('%@'));"
+    
+    // Points
+    static let pointsDeclarationTemplate = "var points = %@;"
 }

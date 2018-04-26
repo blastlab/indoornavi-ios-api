@@ -19,7 +19,6 @@ public class INPolyline: INObject {
     public override init(withMap map: INMap) {
         super.init(withMap: map)
         
-        print("Hash = \(self.hash)")
         javaScriptVariableName = String(format: Constants.polylineVariableName, self.hash)
         let javaScriptString = String(format: Constants.polylineInitializationTemplate, javaScriptVariableName)
         self.map.evaluate(javaScriptString:  javaScriptString)
@@ -32,7 +31,8 @@ public class INPolyline: INObject {
      */
     public func points(_ points: [INCoordinates]) {
         let pointsString = CoordinatesHelper.coordinatesArrayString(fromCoordinatesArray: points)
-        let javaScriptString = String(format: Constants.polylinePointTemplate, javaScriptVariableName, pointsString)
+        map.evaluate(javaScriptString: String(format: Constants.pointsDeclarationTemplate, pointsString))
+        let javaScriptString = String(format: Constants.polylinePointTemplate, javaScriptVariableName)
         map.evaluate(javaScriptString: javaScriptString)
     }
     
@@ -63,10 +63,10 @@ public class INPolyline: INObject {
             let green = Int(colorComponents[1]*255)
             let blue = Int(colorComponents[2]*255)
             
-            let stringColor = String(format: "rgb(%d,%d,%d)", red, green, blue)
+            let stringColor = String(format: "#%02X%02X%02X", red, green, blue)
             return stringColor
         } else {
-            return String(format: "%02X%02X%02X", 0, 0, 0)
+            return String(format: "#000000")
         }
     }
  }

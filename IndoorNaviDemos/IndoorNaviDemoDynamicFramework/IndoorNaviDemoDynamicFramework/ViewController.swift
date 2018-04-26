@@ -12,7 +12,8 @@ import IndoorNavi
 class ViewController: UIViewController {
     
     var map: INMap!
-    var polyline: INPolyline!
+    var polyline1: INPolyline!
+    var polyline2: INPolyline!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,11 +30,8 @@ class ViewController: UIViewController {
         map.load(2)
     }
     
-    @IBAction func drawPolyline(_ sender: Any) {
-        polyline = INPolyline(withMap: map)
-    }
-    
-    @IBAction func action3(_ sender: Any) {
+    @IBAction func drawPolyline1(_ sender: Any) {
+        polyline1 = INPolyline(withMap: map)
         var points = [INCoordinates]()
         points.append(INCoordinates(x: 480, y: 480))
         points.append(INCoordinates(x: 1220, y: 480))
@@ -41,10 +39,27 @@ class ViewController: UIViewController {
         points.append(INCoordinates(x: 480, y: 1220))
         points.append(INCoordinates(x: 750, y: 750))
         
-        polyline.ready {
-            self.polyline.points(points)
-            self.polyline.set(lineColor: UIColor.red)
-            self.polyline.draw()
+        polyline1.ready {
+            self.polyline1.points(points)
+            self.polyline1.set(lineColor: UIColor.red)
+            self.polyline1.draw()
         }
     }
+    
+    @IBAction func drawPolyline2(_ sender: Any) {
+        polyline2 = INPolyline(withMap: map)
+        var points = [INCoordinates]()
+        points.append(INCoordinates(x: 2000, y: 2000))
+        points.append(INCoordinates(x: 2500, y: 2000))
+        points.append(INCoordinates(x: 3000, y: 2000))
+        points.append(INCoordinates(x: 3000, y: 1500))
+        points.append(INCoordinates(x: 2500, y: 1500))
+        
+        polyline2.ready {
+            self.polyline2.points(points)
+            self.polyline2.set(lineColor: UIColor.green)
+            self.polyline2.draw()
+        }
+    }
+    
 }
