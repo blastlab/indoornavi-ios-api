@@ -17,6 +17,7 @@ public class INPolyline: INObject {
         static let PointTemplate = "%@.points(points);"
         static let PlaceTemplate = "%@.draw();"
         static let SetLineColorTemplate = "%@.setLineColor('%@')"
+        static let PointsDeclaration = "var points = %@;"
     }
     
     /**
@@ -39,7 +40,7 @@ public class INPolyline: INObject {
      */
     public func points(_ points: [INCoordinates]) {
         let pointsString = CoordinatesHelper.coordinatesArrayString(fromCoordinatesArray: points)
-        map.evaluate(javaScriptString: String(format: Constants.pointsDeclarationTemplate, pointsString))
+        map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
         let javaScriptString = String(format: ScriptTemplates.PointTemplate, javaScriptVariableName)
         map.evaluate(javaScriptString: javaScriptString)
     }
