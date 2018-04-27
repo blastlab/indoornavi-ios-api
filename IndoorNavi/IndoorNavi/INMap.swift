@@ -14,7 +14,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
     
     fileprivate struct ScriptTemplates {
         static let InitializationTemplate = "var navi = new INMap('%@','%@','map',{width:document.body.clientWidth,height:document.body.clientHeight});"
-        static let LoadMapTemplate = "navi.load(%i);"
+        static let LoadMapTemplate = "navi.load(%d).then(() => webkit.messageHandlers.iOS.postMessage('%@'));"
     }
     
     fileprivate struct WebViewConfigurationScripts {
@@ -39,8 +39,10 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
      *
      *  - Parameter mapId: ID number of the map you want to load.
      */
-    public func load(_ mapId: Int) {
-        let javaScriptString = String(format: ScriptTemplates.LoadMapTemplate, mapId)
+    public func load(_ mapId: Int, onCompletion: (() -> Void)?) {
+        let uuid = UUID().uuidString
+        ClousureManager.clousuresToPerform[uuid] = onCompletion
+        let javaScriptString = String(format: ScriptTemplates.LoadMapTemplate, mapId, uuid)
         evaluate(javaScriptString: javaScriptString)
     }
     

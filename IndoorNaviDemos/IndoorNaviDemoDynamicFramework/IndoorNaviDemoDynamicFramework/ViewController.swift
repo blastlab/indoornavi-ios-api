@@ -27,7 +27,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func action(_ sender: Any) {
-        map.load(2)
+        map.load(2) {
+            print("Completed.")
+        }
     }
     
     @IBAction func drawPolyline1(_ sender: Any) {
