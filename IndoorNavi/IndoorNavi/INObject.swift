@@ -13,7 +13,9 @@ public class INObject: NSObject {
     fileprivate struct ScriptTemplates {
         static let ReadyTemplate = "%@.ready().then(() => webkit.messageHandlers.iOS.postMessage('%@'));"
         static let GetIDTemplate = "%@.getID();"
-        static let GetPointsTemplate = "%@.getPints();"
+        static let GetPointsTemplate = "%@.getPoints();"
+        static let IsWithinTemplate = "%@.isWithin(%@);"
+        static let RemoveTemplate = "%@.remove();"
     }
     
     var map: INMap!
@@ -35,13 +37,13 @@ public class INObject: NSObject {
         let javaScriptString = String(format: ScriptTemplates.GetIDTemplate, javaScriptVariableName)
         map.evaluate(javaScriptString: javaScriptString) { response, error in
             
-            guard error == nil else {
+            guard error == nil, response != nil else {
                 print("Error: \(String(describing: error))")
                 callbackHandler(nil)
                 return
             }
             
-            if let idNumber = response as? Int {
+            if let idNumber = response! as? Int {
                 callbackHandler(idNumber)
             } else {
                 callbackHandler(nil)
@@ -49,21 +51,47 @@ public class INObject: NSObject {
         }
     }
     
-    public func getPoints(callbackHandler: @escaping (INCoordinates?) -> Void) {
-        let javaScriptString = String(format: ScriptTemplates.GetIDTemplate, javaScriptVariableName)
+    public func getPoints(callbackHandler: @escaping ([INCoordinates]?) -> Void) {
+        let javaScriptString = String(format: ScriptTemplates.GetPointsTemplate, javaScriptVariableName)
         map.evaluate(javaScriptString: javaScriptString) { response, error in
+            print("Response: \(String(describing: response))")
+            print("Error: \(String(describing: error))")
             
-            guard error == nil else {
+            guard error == nil, response != nil else {
                 print("Error: \(String(describing: error))")
                 callbackHandler(nil)
                 return
             }
             
-            if let coordinates = response as? INCoordinates {
-                callbackHandler(coordinates)
+            let points = CoordinatesHelper.coordinatesArray(fromJSONObject: response!)
+            print("Points: ",points)
+            callbackHandler(points)
+        }
+    }
+    
+    public func isWithin(coordinates: [INCoordinates], callbackHandler: @escaping (Bool) -> Void) {
+        let coordinatesString = CoordinatesHelper.coordinatesArrayString(fromCoordinatesArray: coordinates)
+        let javaScriptString = String(format: ScriptTemplates.IsWithinTemplate, javaScriptVariableName, coordinatesString)
+        map.evaluate(javaScriptString: javaScriptString) { response, error in
+            print("Response: \(String(describing: response))")
+            print("Error: \(String(describing: error))")
+            
+            guard error == nil, response != nil else {
+                print("Error: \(String(describing: error))")
+                callbackHandler(false)
+                return
+            }
+            
+            if let isWithinCoordinates = response! as? Bool {
+                callbackHandler(isWithinCoordinates)
             } else {
-                callbackHandler(nil)
+                callbackHandler(false)
             }
         }
+    }
+    
+    public func remove() {
+        let javaScriptString = String(format: ScriptTemplates.RemoveTemplate, javaScriptVariableName)
+        map.evaluate(javaScriptString: javaScriptString)
     }
 }

@@ -43,6 +43,14 @@ class ViewController: UIViewController {
             self.polyline1.points(points)
             self.polyline1.set(lineColor: UIColor.red)
             self.polyline1.draw()
+            
+            self.polyline1.getID { id in
+                print("Polyline 1 ID:",id != nil ? id! : 0)
+            }
+            
+            self.polyline1.getPoints { coordinates in
+                print("Coordinates: \(String(describing: coordinates != nil ? coordinates : nil))")
+            }
         }
     }
     
@@ -61,7 +69,7 @@ class ViewController: UIViewController {
             self.polyline2.draw()
             
             self.polyline2.getID { id in
-                print("ID: \(String(describing: id))")
+                print("Polyline 2 ID: %d",id != nil ? id! : 0)
             }
         }
     }

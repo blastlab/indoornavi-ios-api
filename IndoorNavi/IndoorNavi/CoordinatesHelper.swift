@@ -27,4 +27,19 @@ class CoordinatesHelper {
         let coordinatesString = String(format: "{x: %d, y: %d}", coordinates.x, coordinates.y)
         return coordinatesString
     }
+    
+    static func coordinatesArray(fromJSONObject jsonObject: Any) -> [INCoordinates] {
+        var coordinatesArray = [INCoordinates]()
+        
+        if let points = jsonObject as? [[String: Int]] {
+            for point in points {
+                if let x = point["x"], let y = point["y"] {
+                    let coordinates = INCoordinates(x: x, y: y)
+                    coordinatesArray.append(coordinates)
+                }
+            }
+        }
+        
+        return coordinatesArray
+    }
 }
