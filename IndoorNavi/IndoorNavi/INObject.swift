@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Class INObject is the root of the IndoorNavi objects hierarchy. Every IN object has INObject as a superclass (except INMap).
 public class INObject: NSObject {
     
     fileprivate struct ScriptTemplates {
@@ -21,11 +22,21 @@ public class INObject: NSObject {
     var map: INMap!
     var javaScriptVariableName: String!
     
+    /**
+     *  INObject constructor.
+     *
+     *  - Parameter withMap: Instance of the INMap object.
+     */
     public init(withMap map: INMap) {
         super.init()
         self.map = map
     }
     
+    /**
+     *  Promise - that will resolve when connection to the frontend will be established, assures that instance of INMapObject has been created on the injected INMap class, this method should be executed before calling any other method on this object children.
+     *
+     *  - Parameter onCompletion: A block to invoke when connection to the frontend is established and the object is ready.
+     */
     public func ready(readyClousure: @escaping () -> Void) {
         let uuid = UUID().uuidString
         ClousureManager.clousuresToPerform[uuid] = readyClousure
@@ -33,6 +44,11 @@ public class INObject: NSObject {
         map.evaluate(javaScriptString: javaScriptString)
     }
     
+    /**
+     *  Returns the ID of the object.
+     *
+     *  - Parameter callbackHandler: A block to invoke when the ID is available.
+     */
     public func getID(callbackHandler: @escaping (Int?) -> Void) {
         let javaScriptString = String(format: ScriptTemplates.GetIDTemplate, javaScriptVariableName)
         map.evaluate(javaScriptString: javaScriptString) { response, error in
@@ -51,6 +67,11 @@ public class INObject: NSObject {
         }
     }
     
+    /**
+     *  Returns the coordinates of the object.
+     *
+     *  - Parameter callbackHandler: A block to invoke when the array of points is available.
+     */
     public func getPoints(callbackHandler: @escaping ([INCoordinates]?) -> Void) {
         let javaScriptString = String(format: ScriptTemplates.GetPointsTemplate, javaScriptVariableName)
         map.evaluate(javaScriptString: javaScriptString) { response, error in
@@ -69,6 +90,13 @@ public class INObject: NSObject {
         }
     }
     
+    /**
+     *  Checks if point of given coordinates is inside the object. Use of this method is optional.
+     *
+     *  - Parameters:
+     *      - coordinates: Coordinates that are described in real world dimensions. Coordinates are calculated to the map scale.
+     *      - callbackHandler: A block to invoke when the boolean is available.
+     */
     public func isWithin(coordinates: [INCoordinates], callbackHandler: @escaping (Bool) -> Void) {
         let coordinatesString = CoordinatesHelper.coordinatesArrayString(fromCoordinatesArray: coordinates)
         let javaScriptString = String(format: ScriptTemplates.IsWithinTemplate, javaScriptVariableName, coordinatesString)
@@ -90,6 +118,9 @@ public class INObject: NSObject {
         }
     }
     
+    /**
+     *  Removes object and destroys instance f the object in the frontend server, but do not destroys object class instance in your app.
+     */
     public func remove() {
         let javaScriptString = String(format: ScriptTemplates.RemoveTemplate, javaScriptVariableName)
         map.evaluate(javaScriptString: javaScriptString)

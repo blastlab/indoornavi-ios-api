@@ -37,7 +37,9 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
     /**
      *  Loads map specified in function call.
      *
-     *  - Parameter mapId: ID number of the map you want to load.
+     *  - Parameters:
+     *      - mapId: ID number of the map you want to load.
+     *      - onCompletion: A block to invoke when the map is loaded.
      */
     public func load(_ mapId: Int, onCompletion: (() -> Void)?) {
         let uuid = UUID().uuidString
