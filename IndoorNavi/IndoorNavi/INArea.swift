@@ -58,10 +58,13 @@ public class INArea: INObject {
      *  Fills Area whit given color. To apply this method it's necessary to call draw() after. Use of this method is optional.
      *
      *  - Parameters:
-     *      - red: Specifies the color.
+     *      - red: The red value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
+     *      - green: The green value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
+     *      - blue: The blue value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
      */
     public func setFillColor(red: CGFloat, green: CGFloat, blue: CGFloat) {
         let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
+        UIColor(red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>)
         let javaScriptString = String(format: ScriptTemplates.SetFillColorTemplate, javaScriptVariableName, stringColor)
         map.evaluate(javaScriptString: javaScriptString)
     }

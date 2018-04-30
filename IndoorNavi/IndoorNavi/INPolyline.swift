@@ -58,7 +58,10 @@ public class INPolyline: INObject {
     /**
      *  Sets polyline lines and points color.
      *
-     *  - Parameter lineColor: Specifies line color.
+     *  - Parameters:
+     *      - red: The red value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
+     *      - green: The green value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
+     *      - blue: The blue value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
      */
     public func set(red: CGFloat, green: CGFloat, blue: CGFloat) {
         let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
