@@ -10,12 +10,19 @@ import UIKit
 
 class ClousureManager: NSObject {
     
-    static var clousuresToPerform = [String: () -> Void]()
+    static var promises = [String: () -> Void]()
+    static var eventCallbacks = [String: () -> Void]()
     
-    static func promiseResolved(withUUID uuid: String) {
-        if let clousure = clousuresToPerform[uuid] {
+    static func receivedUUID(_ uuid: String) {
+        if let clousure = promises[uuid] {
             clousure()
-            clousuresToPerform.removeValue(forKey: uuid)
+            promises.removeValue(forKey: uuid)
+        } else if let clousure = eventCallbacks[uuid] {
+            clousure()
         }
+    }
+    
+    static func removeEventCallback(forUUID uuid: String) {
+        eventCallbacks.removeValue(forKey: uuid)
     }
 }

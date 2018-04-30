@@ -27,6 +27,12 @@ class ViewController: UIViewController {
         self.view.addSubview(map)
     }
     
+    func showAlert() {
+        let alert = UIAlertController(title: "ALERT!", message: "Marker touched!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func action(_ sender: Any) {
         map.load(2) {
             print("Completed.")
@@ -73,6 +79,20 @@ class ViewController: UIViewController {
             area.setFillColor(red: 0.8, green: 0.4, blue: 0.2)
             area.setOpacity(0.5)
             area.draw()
+        }
+    }
+    
+    @IBAction func placeMarker(_ sender: Any) {
+        let marker = INMarker(withMap: map)
+        
+        marker.ready {
+            marker.point(INCoordinates(x: 600, y: 600))
+            marker.setIcon(withPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png")
+            marker.setLabel(withText: "Tekst ABCD")
+            marker.addEventListener {
+                self.showAlert()
+            }
+            marker.draw()
         }
     }
 }

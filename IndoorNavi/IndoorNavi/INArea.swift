@@ -64,7 +64,6 @@ public class INArea: INObject {
      */
     public func setFillColor(red: CGFloat, green: CGFloat, blue: CGFloat) {
         let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
-        UIColor(red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>)
         let javaScriptString = String(format: ScriptTemplates.SetFillColorTemplate, javaScriptVariableName, stringColor)
         map.evaluate(javaScriptString: javaScriptString)
     }

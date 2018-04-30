@@ -39,7 +39,7 @@ public class INObject: NSObject {
      */
     public func ready(readyClousure: @escaping () -> Void) {
         let uuid = UUID().uuidString
-        ClousureManager.clousuresToPerform[uuid] = readyClousure
+        ClousureManager.promises[uuid] = readyClousure
         let javaScriptString = String(format: ScriptTemplates.ReadyTemplate, javaScriptVariableName, uuid)
         map.evaluate(javaScriptString: javaScriptString)
     }

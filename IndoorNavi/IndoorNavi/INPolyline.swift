@@ -21,9 +21,9 @@ public class INPolyline: INObject {
     }
     
     /**
-     *  Initializes a new Polyline object inside given INMap object.
+     *  Initializes a new INPolyline object inside given INMap object.
      *
-     *  - Parameter withMap: An INMap object, in which INPolyline is going to be created.
+     *  - Parameter withMap: An INMap object, in which INPolyline object is going to be created.
      */
     public override init(withMap map: INMap) {
         super.init(withMap: map)

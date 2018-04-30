@@ -43,7 +43,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
      */
     public func load(_ mapId: Int, onCompletion: (() -> Void)?) {
         let uuid = UUID().uuidString
-        ClousureManager.clousuresToPerform[uuid] = onCompletion
+        ClousureManager.promises[uuid] = onCompletion
         let javaScriptString = String(format: ScriptTemplates.LoadMapTemplate, mapId, uuid)
         evaluate(javaScriptString: javaScriptString)
     }
@@ -116,7 +116,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) { // JS -> Swift
         print("Received event \(message.body)")
         if let uuid = message.body as? String {
-            ClousureManager.promiseResolved(withUUID: uuid)
+            ClousureManager.receivedUUID(uuid)
         }
     }
     
