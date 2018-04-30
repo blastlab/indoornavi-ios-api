@@ -12,8 +12,9 @@ import IndoorNavi
 class ViewController: UIViewController {
     
     var map: INMap!
-    var polyline1: INPolyline!
-    var polyline2: INPolyline!
+    
+    let points1: [INCoordinates] = [INCoordinates(x: 480, y: 480), INCoordinates(x: 1220, y: 480), INCoordinates(x: 1220, y: 1220), INCoordinates(x: 480, y: 1220), INCoordinates(x: 750, y: 750)]
+    let points2: [INCoordinates] = [INCoordinates(x: 2000, y: 2000), INCoordinates(x: 2500, y: 2000), INCoordinates(x: 3000, y: 2000), INCoordinates(x: 3000, y: 1500), INCoordinates(x: 2500, y: 1500)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,47 +34,45 @@ class ViewController: UIViewController {
     }
     
     @IBAction func drawPolyline1(_ sender: Any) {
-        polyline1 = INPolyline(withMap: map)
-        var points = [INCoordinates]()
-        points.append(INCoordinates(x: 480, y: 480))
-        points.append(INCoordinates(x: 1220, y: 480))
-        points.append(INCoordinates(x: 1220, y: 1220))
-        points.append(INCoordinates(x: 480, y: 1220))
-        points.append(INCoordinates(x: 750, y: 750))
+        let polyline1 = INPolyline(withMap: map)
         
         polyline1.ready {
-            self.polyline1.points(points)
-            self.polyline1.set(lineColor: UIColor.red)
-            self.polyline1.draw()
+            polyline1.points(self.points1)
+            polyline1.set(red: 1.0, green: 0.5, blue: 0.5)
+            polyline1.draw()
             
-            self.polyline1.getID { id in
-                print("Polyline 1 ID:",id != nil ? id! : 0)
+            polyline1.getID { id in
+                print("Polyline 1 ID:", id != nil ? id! : 0)
             }
             
-            self.polyline1.getPoints { coordinates in
+            polyline1.getPoints { coordinates in
                 print("Coordinates: \(String(describing: coordinates != nil ? coordinates : nil))")
             }
         }
     }
     
     @IBAction func drawPolyline2(_ sender: Any) {
-        polyline2 = INPolyline(withMap: map)
-        var points = [INCoordinates]()
-        points.append(INCoordinates(x: 2000, y: 2000))
-        points.append(INCoordinates(x: 2500, y: 2000))
-        points.append(INCoordinates(x: 3000, y: 2000))
-        points.append(INCoordinates(x: 3000, y: 1500))
-        points.append(INCoordinates(x: 2500, y: 1500))
+        let polyline2 = INPolyline(withMap: map)
         
         polyline2.ready {
-            self.polyline2.points(points)
-            self.polyline2.set(lineColor: UIColor.green)
-            self.polyline2.draw()
+            polyline2.points(self.points2)
+            polyline2.set(red: 0.5, green: 1.0, blue: 0.5)
+            polyline2.draw()
             
-            self.polyline2.getID { id in
+            polyline2.getID { id in
                 print("Polyline 2 ID: %d",id != nil ? id! : 0)
             }
         }
     }
     
+    @IBAction func drawArea(_ sender: Any) {
+        let area = INArea(withMap: map)
+        
+        area.ready {
+            area.points(self.points1)
+            area.setFillColor(red: 0.8, green: 0.4, blue: 0.2)
+            area.setOpacity(0.5)
+            area.draw()
+        }
+    }
 }

@@ -49,10 +49,14 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1At-V7-ePm">
-                                <rect key="frame" x="228.5" y="629" width="65" height="30"/>
-                                <state key="normal" title="Button">
+                                <rect key="frame" x="228.5" y="630" width="65" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="Draw area">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="drawArea:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HoO-17-Vbh"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Fa-hJ-K80">
                                 <rect key="frame" x="301.5" y="629" width="65.5" height="30"/>

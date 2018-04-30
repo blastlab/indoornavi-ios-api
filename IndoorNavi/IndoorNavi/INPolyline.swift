@@ -14,8 +14,8 @@ public class INPolyline: INObject {
     fileprivate struct ScriptTemplates {
         static let VariableName = "poly%u"
         static let InitializationTemplate = "var %@ = new INPolyline(navi);"
-        static let PointTemplate = "%@.points(points);"
-        static let PlaceTemplate = "%@.draw();"
+        static let PointsTemplate = "%@.points(points);"
+        static let DrawTemplate = "%@.draw();"
         static let SetLineColorTemplate = "%@.setLineColor('%@')"
         static let PointsDeclaration = "var points = %@;"
     }
@@ -23,7 +23,7 @@ public class INPolyline: INObject {
     /**
      *  Initializes a new Polyline object inside given INMap object.
      *
-     *  - Parameter withMap: An INMap object, in which Polyline is going to be created.
+     *  - Parameter withMap: An INMap object, in which INPolyline is going to be created.
      */
     public override init(withMap map: INMap) {
         super.init(withMap: map)
@@ -41,7 +41,7 @@ public class INPolyline: INObject {
     public func points(_ points: [INCoordinates]) {
         let pointsString = CoordinatesHelper.coordinatesArrayString(fromCoordinatesArray: points)
         map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
-        let javaScriptString = String(format: ScriptTemplates.PointTemplate, javaScriptVariableName)
+        let javaScriptString = String(format: ScriptTemplates.PointsTemplate, javaScriptVariableName)
         map.evaluate(javaScriptString: javaScriptString)
     }
     
@@ -51,7 +51,7 @@ public class INPolyline: INObject {
      *  Use of this method is indispensable to draw polyline with set configuration.
      */
     public func draw() {
-        let javaScriptString = String(format: ScriptTemplates.PlaceTemplate, javaScriptVariableName)
+        let javaScriptString = String(format: ScriptTemplates.DrawTemplate, javaScriptVariableName)
         map.evaluate(javaScriptString: javaScriptString)
     }
     
@@ -60,22 +60,9 @@ public class INPolyline: INObject {
      *
      *  - Parameter lineColor: Specifies line color.
      */
-    public func set(lineColor color: UIColor) {
-        let stringColor = colorString(fromColor: color)
+    public func set(red: CGFloat, green: CGFloat, blue: CGFloat) {
+        let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
         let javaScriptString = String(format: ScriptTemplates.SetLineColorTemplate, javaScriptVariableName, stringColor)
         map.evaluate(javaScriptString: javaScriptString)
-    }
-    
-    private func colorString(fromColor color: UIColor) -> String {
-        if let colorComponents = color.cgColor.components {
-            let red = Int(colorComponents[0]*255)
-            let green = Int(colorComponents[1]*255)
-            let blue = Int(colorComponents[2]*255)
-            
-            let stringColor = String(format: "#%02X%02X%02X", red, green, blue)
-            return stringColor
-        } else {
-            return String(format: "#000000")
-        }
     }
  }

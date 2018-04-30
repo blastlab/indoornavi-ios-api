@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B5F039F20972F0900D112F6 /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5F039E20972F0900D112F6 /* ColorHelper.swift */; };
 		7B666AF020888FBF0031780A /* CoordinatesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B666AEF20888FBF0031780A /* CoordinatesHelper.swift */; };
 		7B666AF2208892AC0031780A /* INCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B666AF1208892AC0031780A /* INCoordinates.swift */; };
 		7B666AF42088D3A60031780A /* INObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B666AF32088D3A60031780A /* INObject.swift */; };
@@ -14,6 +15,7 @@
 		7B7180B4207CAF1B00EC3E34 /* indoorNavi.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B718096207CAF1B00EC3E34 /* indoorNavi.js */; };
 		7B7180C5207CB0F000EC3E34 /* indoorNavi.html in Resources */ = {isa = PBXBuildFile; fileRef = 7B7180AB207CAF1B00EC3E34 /* indoorNavi.html */; };
 		7B77E6E9207515010019D061 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B77E6E8207515010019D061 /* Paths.swift */; };
+		7B7FD56820936CE200AD409C /* INArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7FD56720936CE200AD409C /* INArea.swift */; };
 		7B85D3E8208DC1320091FC62 /* ClousureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85D3E7208DC1320091FC62 /* ClousureManager.swift */; };
 		7B9ABA3320820B6A00A8849F /* WebViewScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */; };
 		7BD4676E206CF34A00B9F2AD /* IndoorNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD46764206CF34A00B9F2AD /* IndoorNavi.framework */; };
@@ -33,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B5F039E20972F0900D112F6 /* ColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelper.swift; sourceTree = "<group>"; };
 		7B666AEF20888FBF0031780A /* CoordinatesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesHelper.swift; sourceTree = "<group>"; };
 		7B666AF1208892AC0031780A /* INCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INCoordinates.swift; sourceTree = "<group>"; };
 		7B666AF32088D3A60031780A /* INObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INObject.swift; sourceTree = "<group>"; };
@@ -61,6 +64,7 @@
 		7B7180AA207CAF1B00EC3E34 /* report.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = report.js; sourceTree = "<group>"; };
 		7B7180AB207CAF1B00EC3E34 /* indoorNavi.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = indoorNavi.html; sourceTree = "<group>"; };
 		7B77E6E8207515010019D061 /* Paths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paths.swift; sourceTree = "<group>"; };
+		7B7FD56720936CE200AD409C /* INArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INArea.swift; sourceTree = "<group>"; };
 		7B85D3E7208DC1320091FC62 /* ClousureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClousureManager.swift; sourceTree = "<group>"; };
 		7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewScrollViewDelegate.swift; sourceTree = "<group>"; };
 		7BD46764206CF34A00B9F2AD /* IndoorNavi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IndoorNavi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -233,6 +237,8 @@
 				7B666AF1208892AC0031780A /* INCoordinates.swift */,
 				7B666AF32088D3A60031780A /* INObject.swift */,
 				7B85D3E7208DC1320091FC62 /* ClousureManager.swift */,
+				7B7FD56720936CE200AD409C /* INArea.swift */,
+				7B5F039E20972F0900D112F6 /* ColorHelper.swift */,
 			);
 			path = IndoorNavi;
 			sourceTree = "<group>";
@@ -420,6 +426,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B9ABA3320820B6A00A8849F /* WebViewScrollViewDelegate.swift in Sources */,
+				7B5F039F20972F0900D112F6 /* ColorHelper.swift in Sources */,
+				7B7FD56820936CE200AD409C /* INArea.swift in Sources */,
 				7B77E6E9207515010019D061 /* Paths.swift in Sources */,
 				7B666AF2208892AC0031780A /* INCoordinates.swift in Sources */,
 				7B6948BB20863F1400E22BD9 /* INPolyline.swift in Sources */,
