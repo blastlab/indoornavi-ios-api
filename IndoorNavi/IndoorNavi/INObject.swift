@@ -119,7 +119,7 @@ public class INObject: NSObject {
     }
     
     /**
-     *  Removes object and destroys instance f the object in the frontend server, but do not destroys object class instance in your app.
+     *  Removes object and destroys instance of the object in the frontend server, but do not destroys object class instance in your app.
      */
     public func remove() {
         let javaScriptString = String(format: ScriptTemplates.RemoveTemplate, javaScriptVariableName)

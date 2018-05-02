@@ -47,7 +47,7 @@ public class INPolyline: INObject {
     
     /**
      *  Place polyline on the map with all given settings.
-     *  There is necessary to use points() method before place() method to indicate where polyline should to be located.
+     *  There is necessary to use `points()` before `draw()` to indicate where polyline should to be located.
      *  Use of this method is indispensable to draw polyline with set configuration.
      */
     public func draw() {

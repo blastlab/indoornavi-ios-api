@@ -34,7 +34,7 @@ public class INArea: INObject {
     }
     
     /**
-     *  Place area on the map with all given settings. There is necessary to use points() method before draw() method to indicate where area should to be located.
+     *  Place area on the map with all given settings. There is necessary to use `points()` before `draw()` to indicate where area should to be located.
      *  Use of this method is indispensable to draw area with set configuration in the IndoorNavi Map.
      */
     public func draw() {
@@ -55,7 +55,7 @@ public class INArea: INObject {
     }
     
     /**
-     *  Fills Area whit given color. To apply this method it's necessary to call draw() after. Use of this method is optional.
+     *  Fills Area whit given color. To apply this it's necessary to call `draw()` after. Use of this method is optional.
      *
      *  - Parameters:
      *      - red: The red value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
@@ -69,7 +69,7 @@ public class INArea: INObject {
     }
     
     /**
-     *  Sets Area opacity. To apply this method it's necessary to call draw() after. Use of this method is optional.
+     *  Sets Area opacity. To apply this it's necessary to call `draw()` after. Use of this method is optional.
      *
      *  - Parameter opacity: Number between 1.0 and 0. Set it to 1.0 for no opacity, 0 for maximum opacity. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
      */

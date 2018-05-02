@@ -38,6 +38,11 @@ public class INMarker: INObject {
         self.map.evaluate(javaScriptString: javaScriptString)
     }
     
+    /**
+     *  Adds a block to be invoked when the marker is tapped.
+     *
+     *  - Parameter onClickCallback: A block to invoke when marker is tapped.
+     */
     public func addEventListener(onClickCallback: @escaping () -> Void) {
         callbackUUID = UUID().uuidString
         ClousureManager.eventCallbacks[callbackUUID!] = onClickCallback
@@ -46,6 +51,9 @@ public class INMarker: INObject {
         map.evaluate(javaScriptString: javaScriptString)
     }
     
+    /**
+     *  Removes block invoked on tap if exists. Use of this method is optional.
+     */
     public func removeEventListener() {
         if let uuid = callbackUUID {
             ClousureManager.removeEventCallback(forUUID: uuid)
@@ -54,27 +62,49 @@ public class INMarker: INObject {
         }
     }
     
+    /**
+     *  Place market on the map with all given settings. There is necessary to use `point()` method before `draw()` to indicate the point where marker should to be located.
+     *  Use of this method is indispensable to display marker with set configuration in the IndoorNavi Map.
+     */
     public func draw() {
         let javaScriptString = String(format: ScriptTemplates.PlaceTemplate, javaScriptVariableName)
         map.evaluate(javaScriptString: javaScriptString)
     }
     
+    /**
+     *  Locates marker at given coordinates. Coordinates needs to be given as real world dimensions that map is representing. Use of this method is indispensable.
+     *
+     *  - Parameter point: Represents marker position in real world. Coordinates are calculated to the map scale and then displayed. Position will be clipped to the point in the bottom center of marker icon.
+     */
     public func point(_ point: INCoordinates) {
         let pointString = CoordinatesHelper.coordinatesString(fromCoordinates: point)
         let javaScriptString = String(format: ScriptTemplates.PointTemplate, javaScriptVariableName, pointString)
         map.evaluate(javaScriptString: javaScriptString)
     }
     
+    /**
+     *  Sets marker label. Use of this method is optional. If no text is set, label won't be displayed. In order to change label's text, call this method again passing new label as a string and call `draw()`.
+     *
+     *  - Parameter withText: `String` that will be used as a marker label.
+     */
     public func setLabel(withText text: String) {
         let javaScriptString = String(format: ScriptTemplates.SetLabelTemplate, javaScriptVariableName, text)
         map.evaluate(javaScriptString: javaScriptString)
     }
     
+    /**
+     *  Removes marker label. To remove label it is indispensable to call `draw()` again.
+     */
     public func removeLabel() {
         let javaScriptString = String(format: ScriptTemplates.RemoveLabelTemplate, javaScriptVariableName)
         map.evaluate(javaScriptString: javaScriptString)
     }
     
+    /**
+     *  Sets marker icon. To apply this method it's necessary to call `draw()` after. Use of this method is optional.
+     *
+     *  - Parameter path: URL path to icon.
+     */
     public func setIcon(withPath path: String) {
         let javaScriptString = String(format: ScriptTemplates.SetIconTemplate, javaScriptVariableName, path)
         map.evaluate(javaScriptString: javaScriptString)
