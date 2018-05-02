@@ -21,7 +21,7 @@ public class INArea: INObject {
     }
     
     /**
-     *  Initializes a new Area object inside given INMap object.
+     *  Initializes a new INArea object inside given INMap object.
      *
      *  - Parameter withMap: An INMap object, in which INArea is going to be created.
      */

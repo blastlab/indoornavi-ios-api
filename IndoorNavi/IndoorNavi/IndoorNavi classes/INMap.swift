@@ -34,6 +34,9 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
     private var targetHost: String!
     private var apiKey: String!
     
+    private var initializedInJavaScript = false
+    private var scriptsToEvaluateAfterInitialization = [String]()
+    
     /**
      *  Loads map specified in function call.
      *
@@ -74,6 +77,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
     
     private func initInJavaScript() {
         let javaScriptString = String(format: ScriptTemplates.InitializationTemplate, targetHost, apiKey)
+        initializedInJavaScript = true
         evaluate(javaScriptString: javaScriptString)
     }
     
@@ -112,6 +116,13 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
         return configuration
     }
     
+    private func evaluateSavedScripts() {
+        for script in scriptsToEvaluateAfterInitialization {
+            evaluate(javaScriptString: script)
+        }
+        scriptsToEvaluateAfterInitialization.removeAll()
+    }
+    
     // WKScriptMessageHandler
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) { // JS -> Swift
         print("Received event \(message.body)")
@@ -123,6 +134,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
     // WKNavigationDelegate
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         initInJavaScript()
+        evaluateSavedScripts()
     }
     
     internal func evaluate(javaScriptString string: String) {
@@ -133,8 +145,12 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
     }
     
     internal func evaluate(javaScriptString string: String, completionHandler: @escaping (Any?, Error?) -> Void) {
-        print("Evaluating script: \(string)")
-        webView.evaluateJavaScript(string, completionHandler: completionHandler)
+        if initializedInJavaScript {
+            print("Evaluating script: \(string)")
+            webView.evaluateJavaScript(string, completionHandler: completionHandler)
+        } else {
+            scriptsToEvaluateAfterInitialization.append(string)
+        }
     }
     
     // Deinitialization

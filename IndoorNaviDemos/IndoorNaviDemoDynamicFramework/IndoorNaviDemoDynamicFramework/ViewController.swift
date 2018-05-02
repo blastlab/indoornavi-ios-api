@@ -12,6 +12,7 @@ import IndoorNavi
 class ViewController: UIViewController {
     
     var map: INMap!
+    var marker: INMarker!
     
     let points1: [INCoordinates] = [INCoordinates(x: 480, y: 480), INCoordinates(x: 1220, y: 480), INCoordinates(x: 1220, y: 1220), INCoordinates(x: 480, y: 1220), INCoordinates(x: 750, y: 750)]
     let points2: [INCoordinates] = [INCoordinates(x: 2000, y: 2000), INCoordinates(x: 2500, y: 2000), INCoordinates(x: 3000, y: 2000), INCoordinates(x: 3000, y: 1500), INCoordinates(x: 2500, y: 1500)]
@@ -25,6 +26,9 @@ class ViewController: UIViewController {
         
         map = INMap(frame: frame, targetHost: "http://192.168.1.9:4200", apiKey: "TestAdmin")
         self.view.addSubview(map)
+        map.load(2) {
+            print("Completed.")
+        }
     }
     
     func showAlert() {
@@ -33,9 +37,15 @@ class ViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func action(_ sender: Any) {
-        map.load(2) {
-            print("Completed.")
+    @IBAction func drawInfoWindow(_ sender: Any) {
+        let infoWindow = INInfoWindow(withMap: map)
+        
+        infoWindow.ready {
+            infoWindow.setInnerHTML(string: "<h1>Lorem ipsum dolor sit amet</h1>")
+//            infoWindow.position = .top
+//            infoWindow.height = 200
+//            infoWindow.width = 100
+            infoWindow.open(object: self.marker)
         }
     }
     
@@ -83,16 +93,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction func placeMarker(_ sender: Any) {
-        let marker = INMarker(withMap: map)
+        marker = INMarker(withMap: map)
         
         marker.ready {
-            marker.point(INCoordinates(x: 600, y: 600))
-            marker.setIcon(withPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png")
-            marker.setLabel(withText: "Tekst ABCD")
-            marker.addEventListener {
+            self.marker.point(INCoordinates(x: 600, y: 600))
+            self.marker.setIcon(withPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png")
+            self.marker.setLabel(withText: "Tekst ABCD")
+            self.marker.addEventListener {
                 self.showAlert()
             }
-            marker.draw()
+            self.marker.draw()
         }
     }
 }

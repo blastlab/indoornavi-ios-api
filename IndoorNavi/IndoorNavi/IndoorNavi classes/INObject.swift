@@ -23,9 +23,9 @@ public class INObject: NSObject {
     var javaScriptVariableName: String!
     
     /**
-     *  INObject constructor.
+     *  Initializes a new INObject object inside given INMap object.
      *
-     *  - Parameter withMap: Instance of the INMap object.
+     *  - Parameter withMap: An INMap object, in which INObject is going to be created.
      */
     public init(withMap map: INMap) {
         super.init()
