@@ -58,7 +58,7 @@ public class INInfoWindow: INObject {
     }
     
     /**
-     *  Height dimension of info window. Setting this value is optional. Default value of info window height is 250px, minimum value is 50px.
+     *  Height dimension of info window. Setting this value is optional. Default value is 250px, minimum value is 50px.
      */
     public var height: Int = 250 {
         didSet {
@@ -68,7 +68,7 @@ public class INInfoWindow: INObject {
     }
     
     /**
-     *  Width dimension of info window. Setting this value is optional. Default value of info window height is 250px, minimum value is 50px.
+     *  Width dimension of info window. Setting this value is optional. Default value is 250px, minimum value is 50px.
      */
     public var width: Int = 250 {
         didSet {
