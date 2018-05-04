@@ -11,14 +11,9 @@ import UIKit
 class CoordinatesHelper {
     
     static func coordinatesArrayString(fromCoordinatesArray coordinatesArray: [INCoordinates]) -> String {
-        var coordinatesArrayString = "["
+        let coordinatesStrings = stringsArray(fromCoordinatesArray: coordinatesArray)
         
-        for coordinates in coordinatesArray {
-            coordinatesArrayString.append(self.coordinatesString(fromCoordinates: coordinates) + ",")
-        }
-        
-        coordinatesArrayString.removeLast()
-        coordinatesArrayString.append("]")
+        let coordinatesArrayString = "[" + coordinatesStrings.joined(separator: ",") + "]"
         
         return coordinatesArrayString
     }
@@ -41,5 +36,15 @@ class CoordinatesHelper {
         }
         
         return coordinatesArray
+    }
+    
+    static private func stringsArray(fromCoordinatesArray coordinatesArray:[INCoordinates]) -> [String] {
+        var stringsArray = [String]()
+        
+        for coordinates in coordinatesArray {
+            stringsArray.append(self.coordinatesString(fromCoordinates: coordinates))
+        }
+        
+        return stringsArray
     }
 }
