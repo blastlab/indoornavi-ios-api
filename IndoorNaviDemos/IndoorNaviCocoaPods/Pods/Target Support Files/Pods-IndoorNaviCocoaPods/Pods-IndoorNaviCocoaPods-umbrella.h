@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_IndoorNaviDemosVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_IndoorNaviDemosVersionString[];
+FOUNDATION_EXPORT double Pods_IndoorNaviCocoaPodsVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_IndoorNaviCocoaPodsVersionString[];
 

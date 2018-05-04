@@ -2,15 +2,15 @@ PODS:
   - IndoorNavi (0.0.1)
 
 DEPENDENCIES:
-  - IndoorNavi (from `../IndoorNavi`)
+  - IndoorNavi (from `../../IndoorNavi`)
 
 EXTERNAL SOURCES:
   IndoorNavi:
-    :path: ../IndoorNavi
+    :path: ../../IndoorNavi
 
 SPEC CHECKSUMS:
   IndoorNavi: a84719586b01f679861d167dd14a99343bb2d89d
 
-PODFILE CHECKSUM: d5a1f18d169397f8267454e5f7acbb33fb2deb4b
+PODFILE CHECKSUM: fe961d3472b8891fb76aa8b243f614fd2d7f295b
 
 COCOAPODS: 1.4.0
