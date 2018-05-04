@@ -11,14 +11,8 @@ import UIKit
 class CoordinatesHelper {
     
     static func coordinatesArrayString(fromCoordinatesArray coordinatesArray: [INCoordinates]) -> String {
-        var coordinatesArrayString = "["
-        
-        for coordinates in coordinatesArray {
-            coordinatesArrayString.append(self.coordinatesString(fromCoordinates: coordinates) + ",")
-        }
-        
-        coordinatesArrayString.removeLast()
-        coordinatesArrayString.append("]")
+        let coordinatesStrings = coordinatesArray.map { "{x: \($0.x), y: \($0.y)}" }
+        let coordinatesArrayString = "[" + coordinatesStrings.joined(separator: ",") + "]"
         
         return coordinatesArrayString
     }
@@ -29,17 +23,11 @@ class CoordinatesHelper {
     }
     
     static func coordinatesArray(fromJSONObject jsonObject: Any) -> [INCoordinates] {
-        var coordinatesArray = [INCoordinates]()
-        
         if let points = jsonObject as? [[String: Int]] {
-            for point in points {
-                if let x = point["x"], let y = point["y"] {
-                    let coordinates = INCoordinates(x: x, y: y)
-                    coordinatesArray.append(coordinates)
-                }
-            }
+            let coordinatesArray = points.map { INCoordinates(x: $0["x"]!, y: $0["y"]!) }
+            return coordinatesArray
+        } else {
+            return [INCoordinates]()
         }
-        
-        return coordinatesArray
     }
 }
