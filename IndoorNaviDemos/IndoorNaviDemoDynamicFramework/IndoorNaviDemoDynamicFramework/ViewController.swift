@@ -11,6 +11,9 @@ import IndoorNavi
 
 class ViewController: UIViewController {
     
+    let TargetHost = "http://192.168.1.13:4200"
+    let ApiKey = "TestAdmin"
+    
     var map: INMap!
     var marker: INMarker!
     
@@ -22,9 +25,9 @@ class ViewController: UIViewController {
         
         var frame = self.view.frame
         frame.origin.y = frame.origin.y + 20
-        frame.size.height = frame.size.height - 100
+        frame.size.height = frame.size.height - 150
         
-        map = INMap(frame: frame, targetHost: "http://192.168.1.13:4200", apiKey: "TestAdmin")
+        map = INMap(frame: frame, targetHost: TargetHost, apiKey: ApiKey)
         self.view.addSubview(map)
         map.load(2) {
             print("Completed.")
@@ -104,5 +107,19 @@ class ViewController: UIViewController {
             }
             self.marker.draw()
         }
+    }
+    @IBAction func createReport(_ sender: Any) {
+        let report = Report(map: map, targetHost: TargetHost, apiKey: ApiKey)
+        report.getAreaEvents(fromFloorWithID: 2, from: Date(timeIntervalSince1970: 1428105600), to: Date()) { areaEvents in
+            print("Area events: ", areaEvents)
+        }
+        
+        report.getCoordinates(fromFloorWithID: 2, from: Date(timeIntervalSince1970: 1428105600), to: Date()) { coordinates in
+            print("Coordinates: ", coordinates)
+        }
+    }
+    
+    @IBAction func getCoordinates(_ sender: Any) {
+        
     }
 }

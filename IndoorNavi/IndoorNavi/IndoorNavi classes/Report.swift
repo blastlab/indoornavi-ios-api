@@ -7,7 +7,7 @@
 //
 
 /// Class containing methods to retrieve historical data
-class Report: NSObject {
+public class Report: NSObject {
     
     fileprivate struct ScriptTemplates {
         static let VariableName = "report%u"
