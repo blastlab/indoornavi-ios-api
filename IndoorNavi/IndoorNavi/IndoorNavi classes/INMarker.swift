@@ -6,15 +6,13 @@
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
-import UIKit
-
 /// Class representing a Marker, creates the INMarker object in iframe that communicates with frontend server and places a marker.
 public class INMarker: INObject {
     
     fileprivate struct ScriptTemplates {
         static let VariableName = "marker%u"
         static let InitializationTemplate = "var %@ = new INMarker(navi);"
-        static let AddEventListenerTemplate = "%@.addEventListener(Event.MOUSE.CLICK, () => webkit.messageHandlers.iOS.postMessage('%@'));"
+        static let AddEventListenerTemplate = "%@.addEventListener(Event.MOUSE.CLICK, () => webkit.messageHandlers.EventCallbacksController.postMessage('%@'));"
         static let RemoveEventListenerTemplate = "%@.removeEventListener(Event.MOUSE.CLICK);"
         static let PlaceTemplate = "%@.draw();"
         static let PointTemplate = "%@.point(%@);"
@@ -23,7 +21,7 @@ public class INMarker: INObject {
         static let SetIconTemplate = "%@.setIcon('%@');"
     }
     
-    var callbackUUID: String?
+    private var callbackUUID: String?
     
     /**
      *  Initializes a new INMarker object inside given INMap object.
@@ -45,7 +43,7 @@ public class INMarker: INObject {
      */
     public func addEventListener(onClickCallback: @escaping () -> Void) {
         callbackUUID = UUID().uuidString
-        ClousureManager.eventCallbacks[callbackUUID!] = onClickCallback
+        map.eventCallbacksController.eventCallbacks[callbackUUID!] = onClickCallback
         
         let javaScriptString = String(format: ScriptTemplates.AddEventListenerTemplate, javaScriptVariableName, callbackUUID!)
         map.evaluate(javaScriptString: javaScriptString)
@@ -56,7 +54,7 @@ public class INMarker: INObject {
      */
     public func removeEventListener() {
         if let uuid = callbackUUID {
-            ClousureManager.removeEventCallback(forUUID: uuid)
+            map.eventCallbacksController.removeEventCallback(forUUID: uuid)
             let javaScriptString = String(format: ScriptTemplates.RemoveEventListenerTemplate, javaScriptVariableName)
             map.evaluate(javaScriptString: javaScriptString)
         }

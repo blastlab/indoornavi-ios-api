@@ -24,7 +24,7 @@ class ViewController: UIViewController {
         frame.origin.y = frame.origin.y + 20
         frame.size.height = frame.size.height - 100
         
-        map = INMap(frame: frame, targetHost: "http://192.168.1.9:4200", apiKey: "TestAdmin")
+        map = INMap(frame: frame, targetHost: "http://192.168.1.13:4200", apiKey: "TestAdmin")
         self.view.addSubview(map)
         map.load(2) {
             print("Completed.")
@@ -41,10 +41,10 @@ class ViewController: UIViewController {
         let infoWindow = INInfoWindow(withMap: map)
         
         infoWindow.ready {
-            infoWindow.setInnerHTML(string: "<h1>Lorem ipsum dolor sit amet</h1>")
-//            infoWindow.position = .top
-//            infoWindow.height = 200
-//            infoWindow.width = 100
+            infoWindow.setInnerHTML(string: "<h2>Lorem ipsum dolor sit amet</h2>")
+            infoWindow.position = .top
+            infoWindow.height = 100
+            infoWindow.width = 300
             infoWindow.open(object: self.marker)
         }
     }

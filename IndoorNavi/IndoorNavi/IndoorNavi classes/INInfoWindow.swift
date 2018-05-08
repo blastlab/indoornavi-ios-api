@@ -6,8 +6,6 @@
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
-import UIKit
-
 /// Class representing an info window, creates an INInfoWindow object in iframe that communicates with frontend server and adds info window to a given INObject child.
 public class INInfoWindow: INObject {
     

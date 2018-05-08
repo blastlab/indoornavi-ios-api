@@ -6,8 +6,6 @@
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
-import UIKit
-
 /// Structure representing point's coordinates on map in centimiters as integers from real distances.
 public struct INCoordinates {
     

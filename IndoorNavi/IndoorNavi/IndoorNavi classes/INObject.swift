@@ -6,13 +6,11 @@
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
-import UIKit
-
 /// Class INObject is the root of the IndoorNavi objects hierarchy. Every IN object has INObject as a superclass (except INMap).
 public class INObject: NSObject {
     
     fileprivate struct ScriptTemplates {
-        static let ReadyTemplate = "%@.ready().then(() => webkit.messageHandlers.iOS.postMessage('%@'));"
+        static let ReadyTemplate = "%@.ready().then(() => webkit.messageHandlers.PromisesController.postMessage('%@'));"
         static let GetIDTemplate = "%@.getID();"
         static let GetPointsTemplate = "%@.getPoints();"
         static let IsWithinTemplate = "%@.isWithin(%@);"
@@ -39,7 +37,7 @@ public class INObject: NSObject {
      */
     public func ready(readyClousure: @escaping () -> Void) {
         let uuid = UUID().uuidString
-        ClousureManager.promises[uuid] = readyClousure
+        map.promisesController.promises[uuid] = readyClousure
         let javaScriptString = String(format: ScriptTemplates.ReadyTemplate, javaScriptVariableName, uuid)
         map.evaluate(javaScriptString: javaScriptString)
     }

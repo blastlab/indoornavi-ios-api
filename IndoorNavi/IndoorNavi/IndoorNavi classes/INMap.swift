@@ -10,11 +10,11 @@ import UIKit
 import WebKit
 
 /// Class representing an INMap
-public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
+public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     
     fileprivate struct ScriptTemplates {
         static let InitializationTemplate = "var navi = new INMap('%@','%@','map',{width:document.body.clientWidth,height:document.body.clientHeight});"
-        static let LoadMapPromiseTemplate = "navi.load(%d).then(() => webkit.messageHandlers.iOS.postMessage('%@'));"
+        static let LoadMapPromiseTemplate = "navi.load(%d).then(() => webkit.messageHandlers.PromisesController.postMessage('%@'));"
         static let LoadMapTemplate = "navi.load(%d);"
     }
     
@@ -27,7 +27,10 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
         static let DisableCalloutScriptString = "document.documentElement.style.webkitTouchCallout='none';"
     }
     
-    fileprivate static let ControllerName = "iOS"
+    var promisesController = PromisesController()
+    var eventCallbacksController = EventCallbacksController()
+    var areaEventsCallbacksController = AreaEventsCallbacksController()
+    var coordinatesCallbacksController = CoordinatesCallbacksController()
     
     private var webView: WKWebView!
     
@@ -50,7 +53,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
         
         if onCompletion != nil {
             let uuid = UUID().uuidString
-            ClousureManager.promises[uuid] = onCompletion
+            promisesController.promises[uuid] = onCompletion
             javaScriptString = String(format: ScriptTemplates.LoadMapPromiseTemplate, mapId, uuid)
         } else {
             javaScriptString = String(format: ScriptTemplates.LoadMapTemplate, mapId)
@@ -65,7 +68,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
      *  - Parameters:
      *      - frame: Frame of the view containing map.
      *      - targetHost: Address to the INMap server.
-     *      - apiKey: The API key created on INMap server.
+     *      - apiKey: The API key created on the INMap server.
      */
     public init(frame: CGRect, targetHost: String, apiKey: String) {
         super.init(frame: frame)
@@ -118,7 +121,10 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
         controller.addUserScript(disableSelectionScript)
         controller.addUserScript(disableCalloutScript)
         
-        controller.add(self, name: INMap.ControllerName)
+        controller.add(promisesController, name: PromisesController.ControllerName)
+        controller.add(eventCallbacksController, name: EventCallbacksController.ControllerName)
+        controller.add(areaEventsCallbacksController, name: AreaEventsCallbacksController.ControllerName)
+        controller.add(coordinatesCallbacksController, name: CoordinatesCallbacksController.ControllerName)
         configuration.userContentController = controller
         
         return configuration
@@ -129,14 +135,6 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
             evaluate(javaScriptString: script)
         }
         scriptsToEvaluateAfterInitialization.removeAll()
-    }
-    
-    // WKScriptMessageHandler
-    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) { // JS -> Swift
-        print("Received event \(message.body)")
-        if let uuid = message.body as? String {
-            ClousureManager.receivedUUID(uuid)
-        }
     }
     
     // WKNavigationDelegate

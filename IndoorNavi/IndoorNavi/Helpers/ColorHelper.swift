@@ -6,8 +6,6 @@
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
-import UIKit
-
 class ColorHelper: NSObject {
     
     static func colorStringFromColorComponents(red: CGFloat, green: CGFloat, blue: CGFloat) -> String {
