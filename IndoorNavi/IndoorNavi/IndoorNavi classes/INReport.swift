@@ -7,14 +7,14 @@
 //
 
 /// Class containing methods to retrieve historical data
-public class Report: NSObject {
+public class INReport: NSObject {
     
     fileprivate struct ScriptTemplates {
         static let VariableName = "report%u"
-        static let InitializationTemplate = "var %@ = new Report('%@','%@');"
-        static let MessageTemplate = "{uuid: %@, response: res}"
-        static let GetAreaEventsTemplate = "%@.getAreaEvents(%d, new Date(%d), new Date(%d)).then(res => webkit.messageHandlers.AreaEventsCallbacksController.postMessage(%@)));"
-        static let GetCoordinatesTemplate = "%s.getCoordinates(%d, new Date(%d), new Date(%d)).then(res => webkit.messageHandlers.CoordinatesCallbacksController.postMessage(%@)));"
+        static let InitializationTemplate = "var %@ = new INReport('%@','%@');"
+        static let MessageTemplate = "{uuid: '%@', response: res}"
+        static let GetAreaEventsTemplate = "%@.getAreaEvents(%d, new Date(%d), new Date(%d)).then(res => webkit.messageHandlers.AreaEventsCallbacksController.postMessage(%@));"
+        static let GetCoordinatesTemplate = "%@.getCoordinates(%d, new Date(%d), new Date(%d)).then(res => webkit.messageHandlers.CoordinatesCallbacksController.postMessage(%@));"
     }
     
     private var map: INMap!
@@ -45,7 +45,7 @@ public class Report: NSObject {
         let uuid = UUID().uuidString
         map.areaEventsCallbacksController.areaEventCallbacks[uuid] = callbackHandler
         let message = String(format: ScriptTemplates.MessageTemplate, uuid)
-        let javaScriptString = String(format: ScriptTemplates.GetAreaEventsTemplate, javaScriptVariableName, floorID, from.timeIntervalSince1970, to.timeIntervalSince1970, message)
+        let javaScriptString = String(format: ScriptTemplates.GetAreaEventsTemplate, javaScriptVariableName, floorID, Int(from.timeIntervalSince1970), Int(to.timeIntervalSince1970), message)
         map.evaluate(javaScriptString: javaScriptString)
     }
     
@@ -53,7 +53,7 @@ public class Report: NSObject {
         let uuid = UUID().uuidString
         map.coordinatesCallbacksController.coordinatesCallbacks[uuid] = callbackHandler
         let message = String(format: ScriptTemplates.MessageTemplate, uuid)
-        let javaScriptString = String(format: ScriptTemplates.GetCoordinatesTemplate, javaScriptVariableName, floorID, from.timeIntervalSince1970, to.timeIntervalSince1970, message)
+        let javaScriptString = String(format: ScriptTemplates.GetCoordinatesTemplate, javaScriptVariableName, floorID, Int(from.timeIntervalSince1970), Int(to.timeIntervalSince1970), message)
         map.evaluate(javaScriptString: javaScriptString)
     }
 }
