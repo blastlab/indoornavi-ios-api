@@ -74,8 +74,8 @@ public class INMarker: INObject {
      *
      *  - Parameter point: Represents marker position in real world. Coordinates are calculated to the map scale and then displayed. Position will be clipped to the point in the bottom center of marker icon.
      */
-    public func point(_ point: INCoordinates) {
-        let pointString = CoordinatesHelper.coordinatesString(fromCoordinates: point)
+    public func point(_ point: Point) {
+        let pointString = PointHelper.coordinatesString(fromCoordinates: point)
         let javaScriptString = String(format: ScriptTemplates.PointTemplate, javaScriptVariableName, pointString)
         map.evaluate(javaScriptString: javaScriptString)
     }

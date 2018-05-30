@@ -1,43 +1,33 @@
 //
-//  Coordinates.swift
+//  CoordinatesHelper.swift
 //  IndoorNavi
 //
-//  Created by Michał Pastwa on 19.04.2018.
+//  Created by Michał Pastwa on 30.05.2018.
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
-class CoordinatesHelper {
+class CoordinatesHelper: NSObject {
     
-    static func coordinatesArrayString(fromCoordinatesArray coordinatesArray: [INCoordinates]) -> String {
-        var coordinatesArrayString = "["
-        
-        for coordinates in coordinatesArray {
-            coordinatesArrayString.append(self.coordinatesString(fromCoordinates: coordinates) + ",")
-        }
-        
-        coordinatesArrayString.removeLast()
-        coordinatesArrayString.append("]")
-        
-        return coordinatesArrayString
-    }
-    
-    static func coordinatesString(fromCoordinates coordinates: INCoordinates) -> String {
-        let coordinatesString = String(format: "{x: %d, y: %d}", coordinates.x, coordinates.y)
-        return coordinatesString
-    }
-    
-    static func coordinatesArray(fromJSONObject jsonObject: Any) -> [INCoordinates] {
-        var coordinatesArray = [INCoordinates]()
-        
-        if let points = jsonObject as? [[String: Int]] {
-            for point in points {
-                if let x = point["x"], let y = point["y"] {
-                    let coordinates = INCoordinates(x: x, y: y)
-                    coordinatesArray.append(coordinates)
+    static func coordinatesArray(fromJSONObject jsonObject: Any) -> [Coordinates] {
+        if let dictionaries = jsonObject as? [[String: Any]] {
+            
+            let coordinatesArray = dictionaries.compactMap { element -> Coordinates? in
+                
+                let x = element["x"] as? Int
+                let y = element["y"] as? Int
+                let tagID = element["tagId"] as? Int
+                let date = element["date"] as? Date
+                
+                if let x = x, let y = y, let tagID = tagID, let date = date {
+                    return Coordinates(x: x, y: y, tagID: tagID, date: date)
+                } else {
+                    return nil
                 }
             }
+            
+            return coordinatesArray
+        } else {
+            return [Coordinates]()
         }
-        
-        return coordinatesArray
     }
 }

@@ -12,7 +12,7 @@ class CoordinatesCallbacksController: NSObject, WKScriptMessageHandler {
     
     static let ControllerName = "CoordinatesCallbacksController"
     
-    var coordinatesCallbacks = [String: ([INCoordinates]) -> Void]()
+    var coordinatesCallbacks = [String: ([Coordinates]) -> Void]()
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         print("Received coordinates callback with body: \(message.body)")

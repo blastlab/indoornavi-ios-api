@@ -18,8 +18,8 @@ class ViewController: UIViewController {
     var map: INMap!
     var marker: INMarker!
     
-    let points1: [INCoordinates] = [INCoordinates(x: 480, y: 480), INCoordinates(x: 1220, y: 480), INCoordinates(x: 1220, y: 1220), INCoordinates(x: 480, y: 1220), INCoordinates(x: 750, y: 750)]
-    let points2: [INCoordinates] = [INCoordinates(x: 2000, y: 2000), INCoordinates(x: 2500, y: 2000), INCoordinates(x: 3000, y: 2000), INCoordinates(x: 3000, y: 1500), INCoordinates(x: 2500, y: 1500)]
+    let points1: [Point] = [Point(x: 480, y: 480), Point(x: 1220, y: 480), Point(x: 1220, y: 1220), Point(x: 480, y: 1220), Point(x: 750, y: 750)]
+    let points2: [Point] = [Point(x: 2000, y: 2000), Point(x: 2500, y: 2000), Point(x: 3000, y: 2000), Point(x: 3000, y: 1500), Point(x: 2500, y: 1500)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,7 +100,7 @@ class ViewController: UIViewController {
         marker = INMarker(withMap: map)
         
         marker.ready {
-            self.marker.point(INCoordinates(x: 600, y: 600))
+            self.marker.point(Point(x: 600, y: 600))
             self.marker.setIcon(withPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png")
             self.marker.setLabel(withText: "Tekst ABCD")
             self.marker.addEventListener {

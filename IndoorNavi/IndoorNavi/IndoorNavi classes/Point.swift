@@ -7,7 +7,7 @@
 //
 
 /// Structure representing point's coordinates on map in centimiters as integers from real distances.
-public struct INCoordinates {
+public struct Point {
     
     public var x: Int
     public var y: Int

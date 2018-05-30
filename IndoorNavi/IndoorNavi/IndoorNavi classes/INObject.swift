@@ -70,7 +70,7 @@ public class INObject: NSObject {
      *
      *  - Parameter callbackHandler: A block to invoke when the array of points is available.
      */
-    public func getPoints(callbackHandler: @escaping ([INCoordinates]?) -> Void) {
+    public func getPoints(callbackHandler: @escaping ([Point]?) -> Void) {
         let javaScriptString = String(format: ScriptTemplates.GetPointsTemplate, javaScriptVariableName)
         map.evaluate(javaScriptString: javaScriptString) { response, error in
             print("Response: \(String(describing: response))")
@@ -82,7 +82,7 @@ public class INObject: NSObject {
                 return
             }
             
-            let points = CoordinatesHelper.coordinatesArray(fromJSONObject: response!)
+            let points = PointHelper.coordinatesArray(fromJSONObject: response!)
             print("Points: ",points)
             callbackHandler(points)
         }
@@ -95,8 +95,8 @@ public class INObject: NSObject {
      *      - coordinates: Coordinates that are described in real world dimensions. Coordinates are calculated to the map scale.
      *      - callbackHandler: A block to invoke when the boolean is available.
      */
-    public func isWithin(coordinates: [INCoordinates], callbackHandler: @escaping (Bool) -> Void) {
-        let coordinatesString = CoordinatesHelper.coordinatesArrayString(fromCoordinatesArray: coordinates)
+    public func isWithin(coordinates: [Point], callbackHandler: @escaping (Bool) -> Void) {
+        let coordinatesString = PointHelper.coordinatesArrayString(fromCoordinatesArray: coordinates)
         let javaScriptString = String(format: ScriptTemplates.IsWithinTemplate, javaScriptVariableName, coordinatesString)
         map.evaluate(javaScriptString: javaScriptString) { response, error in
             print("Response: \(String(describing: response))")
@@ -108,8 +108,8 @@ public class INObject: NSObject {
                 return
             }
             
-            if let isWithinCoordinates = response! as? Bool {
-                callbackHandler(isWithinCoordinates)
+            if let isWithPoint = response! as? Bool {
+                callbackHandler(isWithPoint)
             } else {
                 callbackHandler(false)
             }

@@ -49,7 +49,7 @@ public class INReport: NSObject {
         map.evaluate(javaScriptString: javaScriptString)
     }
     
-    public func getCoordinates(fromFloorWithID floorID: Int, from: Date, to: Date, callbackHandler: @escaping ([INCoordinates]) -> Void) {
+    public func getCoordinates(fromFloorWithID floorID: Int, from: Date, to: Date, callbackHandler: @escaping ([Coordinates]) -> Void) {
         let uuid = UUID().uuidString
         map.coordinatesCallbacksController.coordinatesCallbacks[uuid] = callbackHandler
         let message = String(format: ScriptTemplates.MessageTemplate, uuid)

@@ -36,8 +36,8 @@ public class INPolyline: INObject {
      *
      *  - Parameter points: Array of Point's that are describing polyline in real world dimensions. Coordinates are calculated to the map scale and then displayed.
      */
-    public func points(_ points: [INCoordinates]) {
-        let pointsString = CoordinatesHelper.coordinatesArrayString(fromCoordinatesArray: points)
+    public func points(_ points: [Point]) {
+        let pointsString = PointHelper.coordinatesArrayString(fromCoordinatesArray: points)
         map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
         let javaScriptString = String(format: ScriptTemplates.PointsTemplate, javaScriptVariableName)
         map.evaluate(javaScriptString: javaScriptString)

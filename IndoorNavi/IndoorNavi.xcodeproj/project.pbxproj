@@ -12,8 +12,8 @@
 		7B560E9D2099C2B60055F42E /* INInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B560E9C2099C2B60055F42E /* INInfoWindow.swift */; };
 		7B5F039F20972F0900D112F6 /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5F039E20972F0900D112F6 /* ColorHelper.swift */; };
 		7B5F03A12097455B00D112F6 /* INMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5F03A02097455B00D112F6 /* INMarker.swift */; };
-		7B666AF020888FBF0031780A /* CoordinatesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B666AEF20888FBF0031780A /* CoordinatesHelper.swift */; };
-		7B666AF2208892AC0031780A /* INCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B666AF1208892AC0031780A /* INCoordinates.swift */; };
+		7B666AF020888FBF0031780A /* PointHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B666AEF20888FBF0031780A /* PointHelper.swift */; };
+		7B666AF2208892AC0031780A /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B666AF1208892AC0031780A /* Point.swift */; };
 		7B666AF42088D3A60031780A /* INObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B666AF32088D3A60031780A /* INObject.swift */; };
 		7B6948BB20863F1400E22BD9 /* INPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6948BA20863F1400E22BD9 /* INPolyline.swift */; };
 		7B714FB920A1D37200836BBD /* EventCallbacksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B714FB820A1D37200836BBD /* EventCallbacksController.swift */; };
@@ -27,6 +27,8 @@
 		7B9ABA3320820B6A00A8849F /* WebViewScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */; };
 		7BB78B3C20A1CF5C0087BFEC /* PromisesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB78B3B20A1CF5C0087BFEC /* PromisesController.swift */; };
 		7BCB74B920BE70C7006386D1 /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB74B820BE70C7006386D1 /* TimeIntervalExtension.swift */; };
+		7BCB74BB20BE7B96006386D1 /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB74BA20BE7B96006386D1 /* Coordinates.swift */; };
+		7BCB74BD20BE7F05006386D1 /* CoordinatesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB74BC20BE7F05006386D1 /* CoordinatesHelper.swift */; };
 		7BD4676E206CF34A00B9F2AD /* IndoorNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD46764206CF34A00B9F2AD /* IndoorNavi.framework */; };
 		7BD46773206CF34A00B9F2AD /* IndoorNaviTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD46772206CF34A00B9F2AD /* IndoorNaviTests.swift */; };
 		7BD46775206CF34A00B9F2AD /* IndoorNavi.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BD46767206CF34A00B9F2AD /* IndoorNavi.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -49,8 +51,8 @@
 		7B560E9C2099C2B60055F42E /* INInfoWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INInfoWindow.swift; sourceTree = "<group>"; };
 		7B5F039E20972F0900D112F6 /* ColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelper.swift; sourceTree = "<group>"; };
 		7B5F03A02097455B00D112F6 /* INMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INMarker.swift; sourceTree = "<group>"; };
-		7B666AEF20888FBF0031780A /* CoordinatesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesHelper.swift; sourceTree = "<group>"; };
-		7B666AF1208892AC0031780A /* INCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INCoordinates.swift; sourceTree = "<group>"; };
+		7B666AEF20888FBF0031780A /* PointHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHelper.swift; sourceTree = "<group>"; };
+		7B666AF1208892AC0031780A /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		7B666AF32088D3A60031780A /* INObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INObject.swift; sourceTree = "<group>"; };
 		7B6948BA20863F1400E22BD9 /* INPolyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INPolyline.swift; sourceTree = "<group>"; };
 		7B714FB820A1D37200836BBD /* EventCallbacksController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCallbacksController.swift; sourceTree = "<group>"; };
@@ -85,6 +87,8 @@
 		7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewScrollViewDelegate.swift; sourceTree = "<group>"; };
 		7BB78B3B20A1CF5C0087BFEC /* PromisesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromisesController.swift; sourceTree = "<group>"; };
 		7BCB74B820BE70C7006386D1 /* TimeIntervalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtension.swift; sourceTree = "<group>"; };
+		7BCB74BA20BE7B96006386D1 /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
+		7BCB74BC20BE7F05006386D1 /* CoordinatesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesHelper.swift; sourceTree = "<group>"; };
 		7BD46764206CF34A00B9F2AD /* IndoorNavi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IndoorNavi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BD46767206CF34A00B9F2AD /* IndoorNavi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IndoorNavi.h; sourceTree = "<group>"; };
 		7BD46768206CF34A00B9F2AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -118,13 +122,14 @@
 			children = (
 				7BD4679C206CF59500B9F2AD /* INMap.swift */,
 				7B6948BA20863F1400E22BD9 /* INPolyline.swift */,
-				7B666AF1208892AC0031780A /* INCoordinates.swift */,
+				7B666AF1208892AC0031780A /* Point.swift */,
 				7B666AF32088D3A60031780A /* INObject.swift */,
 				7B7FD56720936CE200AD409C /* INArea.swift */,
 				7B5F03A02097455B00D112F6 /* INMarker.swift */,
 				7B560E9C2099C2B60055F42E /* INInfoWindow.swift */,
 				7B46979020A095D200D6A22B /* INReport.swift */,
 				7B46979220A0A2B400D6A22B /* AreaEvent.swift */,
+				7BCB74BA20BE7B96006386D1 /* Coordinates.swift */,
 			);
 			path = "IndoorNavi classes";
 			sourceTree = "<group>";
@@ -141,10 +146,11 @@
 		7B714FBC20A1EE7800836BBD /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				7B666AEF20888FBF0031780A /* CoordinatesHelper.swift */,
+				7B666AEF20888FBF0031780A /* PointHelper.swift */,
 				7B5F039E20972F0900D112F6 /* ColorHelper.swift */,
 				7B714FBD20A1EEAF00836BBD /* AreaEventsHelper.swift */,
 				7BCB74B820BE70C7006386D1 /* TimeIntervalExtension.swift */,
+				7BCB74BC20BE7F05006386D1 /* CoordinatesHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -488,13 +494,15 @@
 				7B714FBE20A1EEAF00836BBD /* AreaEventsHelper.swift in Sources */,
 				7B46979120A095D200D6A22B /* INReport.swift in Sources */,
 				7B77E6E9207515010019D061 /* Paths.swift in Sources */,
-				7B666AF2208892AC0031780A /* INCoordinates.swift in Sources */,
+				7B666AF2208892AC0031780A /* Point.swift in Sources */,
 				7B714FB920A1D37200836BBD /* EventCallbacksController.swift in Sources */,
+				7BCB74BD20BE7F05006386D1 /* CoordinatesHelper.swift in Sources */,
 				7B714FC020A1FCB500836BBD /* CoordinatesCallbacksController.swift in Sources */,
 				7B6948BB20863F1400E22BD9 /* INPolyline.swift in Sources */,
-				7B666AF020888FBF0031780A /* CoordinatesHelper.swift in Sources */,
+				7B666AF020888FBF0031780A /* PointHelper.swift in Sources */,
 				7BD4679D206CF59500B9F2AD /* INMap.swift in Sources */,
 				7B666AF42088D3A60031780A /* INObject.swift in Sources */,
+				7BCB74BB20BE7B96006386D1 /* Coordinates.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
