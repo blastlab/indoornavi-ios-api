@@ -117,7 +117,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7B560E9B2099C2510055F42E /* IndoorNavi classes */ = {
+		7B560E9B2099C2510055F42E /* API */ = {
 			isa = PBXGroup;
 			children = (
 				7BD4679C206CF59500B9F2AD /* INMap.swift */,
@@ -131,7 +131,7 @@
 				7B46979220A0A2B400D6A22B /* AreaEvent.swift */,
 				7BCB74BA20BE7B96006386D1 /* Coordinates.swift */,
 			);
-			path = "IndoorNavi classes";
+			path = API;
 			sourceTree = "<group>";
 		};
 		7B6948B920863EF100E22BD9 /* Supporting files */ = {
@@ -291,7 +291,7 @@
 			children = (
 				7B71808A207CAF1B00EC3E34 /* Web resources */,
 				7B6948B920863EF100E22BD9 /* Supporting files */,
-				7B560E9B2099C2510055F42E /* IndoorNavi classes */,
+				7B560E9B2099C2510055F42E /* API */,
 				7BB78B3D20A1D0E00087BFEC /* HandlerControllers */,
 				7B714FBC20A1EE7800836BBD /* Helpers */,
 				7B77E6E8207515010019D061 /* Paths.swift */,

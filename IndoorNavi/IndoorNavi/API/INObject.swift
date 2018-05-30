@@ -6,7 +6,7 @@
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
-/// Class INObject is the root of the IndoorNavi objects hierarchy. Every IN object has INObject as a superclass (except INMap).
+/// Class `INObject` is the root of the IndoorNavi objects hierarchy. Every IN object has `INObject` as a superclass (except `INMap`).
 public class INObject: NSObject {
     
     fileprivate struct ScriptTemplates {
@@ -21,9 +21,9 @@ public class INObject: NSObject {
     var javaScriptVariableName: String!
     
     /**
-     *  Initializes a new INObject object inside given INMap object.
+     *  Initializes a new `INObject` object inside given `INMap` object.
      *
-     *  - Parameter withMap: An INMap object, in which INObject is going to be created.
+     *  - Parameter withMap: An `INMap` object, in which `INObject` is going to be created.
      */
     public init(withMap map: INMap) {
         super.init()
@@ -31,7 +31,7 @@ public class INObject: NSObject {
     }
     
     /**
-     *  Promise - that will resolve when connection to the frontend will be established, assures that instance of INMapObject has been created on the injected INMap class, this method should be executed before calling any other method on this object children.
+     *  Promise - that will resolve when connection to the frontend will be established, assures that instance of INMapObject has been created on the injected `INMap` class, this method should be executed before calling any other method on this object children.
      *
      *  - Parameter onCompletion: A block to invoke when connection to the frontend is established and the object is ready.
      */

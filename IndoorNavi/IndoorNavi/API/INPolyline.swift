@@ -6,7 +6,7 @@
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
-/// Class representing a INPolyline, creates the INPolyline in webView, communicates with indoornavi frontend server and draws INPolyline.
+/// Class representing a `INPolyline`, communicates with indoornavi frontend server and draws `INPolyline`.
 public class INPolyline: INObject {
     
     fileprivate struct ScriptTemplates {
@@ -19,9 +19,9 @@ public class INPolyline: INObject {
     }
     
     /**
-     *  Initializes a new INPolyline object inside given INMap object.
+     *  Initializes a new `INPolyline` object inside given INMap object.
      *
-     *  - Parameter withMap: An INMap object, in which INPolyline object is going to be created.
+     *  - Parameter withMap: An `INMap` object, in which `INPolyline` object is going to be created.
      */
     public override init(withMap map: INMap) {
         super.init(withMap: map)
@@ -34,7 +34,7 @@ public class INPolyline: INObject {
     /**
      *  Locates polyline at given coordinates. Coordinates needs to be given as real world dimensions that map is representing. Use of this method is indispensable.
      *
-     *  - Parameter points: Array of Point's that are describing polyline in real world dimensions. Coordinates are calculated to the map scale and then displayed.
+     *  - Parameter points: Array of `Point`'s that are describing polyline in real world dimensions. Coordinates are calculated to the map scale and then displayed.
      */
     public func points(_ points: [Point]) {
         let pointsString = PointHelper.coordinatesArrayString(fromCoordinatesArray: points)

@@ -6,6 +6,7 @@
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
+/// Class representing an `INArea`, communicates with frontend server and draws area.
 public class INArea: INObject {
     
     fileprivate struct ScriptTemplates {
@@ -19,9 +20,9 @@ public class INArea: INObject {
     }
     
     /**
-     *  Initializes a new INArea object inside given INMap object.
+     *  Initializes a new `INArea` object inside given `INMap` object.
      *
-     *  - Parameter withMap: An INMap object, in which INArea is going to be created.
+     *  - Parameter withMap: An `INMap` object, in which `INArea` is going to be created.
      */
     public override init(withMap map: INMap) {
         super.init(withMap: map)

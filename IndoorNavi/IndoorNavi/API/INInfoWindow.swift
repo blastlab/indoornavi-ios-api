@@ -6,7 +6,7 @@
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
-/// Class representing an info window, creates an INInfoWindow object in iframe that communicates with frontend server and adds info window to a given INObject child.
+/// Class representing an info window, creates an `INInfoWindow` object in iframe that communicates with frontend server and adds info window to a given `INObject` child.
 public class INInfoWindow: INObject {
     
     fileprivate struct ScriptTemplates {
@@ -20,7 +20,7 @@ public class INInfoWindow: INObject {
     }
     
     /**
-     *  Position regarding to related INObject object.
+     *  Position regarding to related `INObject` object.
      *
      *  - top: Top side position in regard to related object.
      *  - right: Right side position in regard to related object.
@@ -43,9 +43,9 @@ public class INInfoWindow: INObject {
     }
     
     /**
-     *  Initializes a new INInfoWindow object inside given INMap object.
+     *  Initializes a new `INInfoWindow` object inside given `INMap` object.
      *
-     *  - Parameter withMap: An INMap object, in which INArea is going to be created.
+     *  - Parameter withMap: An `INMap` object, in which `INArea` is going to be created.
      */
     public override init(withMap map: INMap) {
         super.init(withMap: map)
@@ -76,7 +76,7 @@ public class INInfoWindow: INObject {
     }
     
     /**
-     *  Displays info window in iframe on given `object`.
+     *  Displays info window in iframe on given object.
      *
      *  - Parameter object: An INObject object to append info window to.
      */

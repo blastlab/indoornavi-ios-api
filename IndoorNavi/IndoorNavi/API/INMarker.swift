@@ -6,7 +6,7 @@
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
-/// Class representing a Marker, creates the INMarker object in iframe that communicates with frontend server and places a marker.
+/// Class representing an `INMarker`, creates the `INMarker` object in iframe that communicates with frontend server and places a marker.
 public class INMarker: INObject {
     
     fileprivate struct ScriptTemplates {
@@ -24,9 +24,9 @@ public class INMarker: INObject {
     private var callbackUUID: String?
     
     /**
-     *  Initializes a new INMarker object inside given INMap object.
+     *  Initializes a new `INMarker` object inside given `INMap` object.
      *
-     *  - Parameter withMap: An INMap object, in which INMarker object is going to be created.
+     *  - Parameter withMap: An `INMap` object, in which `INMarker` object is going to be created.
      */
     public override init(withMap map: INMap) {
         super.init(withMap: map)

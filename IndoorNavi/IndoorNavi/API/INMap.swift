@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-/// Class representing an INMap
+/// Class representing an `INMap`, communicates with frontend server.
 public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     
     fileprivate struct ScriptTemplates {
@@ -63,7 +63,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     }
     
     /**
-     *  Initializes a new INMap object with the provided parameters to communicate with INMap frontend server.
+     *  Initializes a new `INMap` object with the provided parameters to communicate with `INMap` frontend server.
      *
      *  - Parameters:
      *      - frame: Frame of the view containing map.

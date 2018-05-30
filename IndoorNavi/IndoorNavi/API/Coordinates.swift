@@ -8,15 +8,20 @@
 
 import UIKit
 
+/// Structure representing Coordinates, registered on specific `date` for specific tag with `tagID`.
 public struct Coordinates {
     
+    /// Vertical coordinate in centimiters
     public var x: Int
+    /// Horizontal coordinate in centimiters
     public var y: Int
+    /// Short ID of the tag.
     public var tagID: Int
+    /// Date of `Coordinates` registration.
     public var date: Date
     
     /**
-     *  Initializes Coordinates structure.
+     *  Initializes `Coordinates` structure.
      *
      *  - Parameters:
      *      - x: Short ID of the tag that entered or left given area.

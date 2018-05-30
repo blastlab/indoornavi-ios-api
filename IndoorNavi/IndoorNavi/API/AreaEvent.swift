@@ -6,22 +6,33 @@
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
-/// Structure representing AreaEvent
+/// Structure representing AreaEvent.
 public struct AreaEvent {
     
+    /// Short ID of the tag that entered/left INArea.
     public var tagID: Int
+    /// ID of the `INArea` where `AreaEvent` occured.
     public var areaID: Int
+    /// Date when `AreaEvent` occured.
     public var date: Date
+    /// Name of the `INArea` where `AreaEvent` occured.
     public var areaName: String
+    /// Specifies `AreaEvent`'s `Mode`.
     public var mode: Mode
     
+    /**
+     *  Mode of `AreaEvent`.
+     *
+     *  - onLeave: Event on leaving `INArea`.
+     *  - onEnter: Event on entering `INArea`.
+     */
     public enum Mode: String {
         case onLeave = "ON_LEAVE"
         case onEnter = "ON_ENTER"
     }
     
     /**
-     *  Initializes AreaEvent structure.
+     *  Initializes `AreaEvent` structure.
      *
      *  - Parameters:
      *      - tagID: Short ID of the tag that entered or left given area.
