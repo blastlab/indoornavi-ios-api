@@ -24,7 +24,14 @@ class CoordinatesHelper {
     
     static func coordinatesArray(fromJSONObject jsonObject: Any) -> [INCoordinates] {
         if let points = jsonObject as? [[String: Int]] {
-            let coordinatesArray = points.map { INCoordinates(x: $0["x"]!, y: $0["y"]!) }
+            let coordinatesArray = points.compactMap { element -> INCoordinates? in
+                
+                if let x = element["x"], let y = element["y"] {
+                    return INCoordinates(x: x, y: y)
+                } else {
+                    return nil
+                }
+            }
             return coordinatesArray
         } else {
             return [INCoordinates]()
