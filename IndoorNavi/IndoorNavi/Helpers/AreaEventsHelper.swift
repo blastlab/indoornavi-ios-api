@@ -10,20 +10,21 @@ class AreaEventsHelper: NSObject {
     
     static func areaEvents(fromJSONObject jsonObject: Any) -> [AreaEvent] {
         if let dictionaries = jsonObject as? [[String: Any]] {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
             
-            let areaEvents = dictionaries.map { element -> AreaEvent in
+            let areaEvents = dictionaries.compactMap { element -> AreaEvent? in
                 
-                let dateString = element["date"] as! String
-                let date = dateFormatter.date(from: dateString)
+                let date = element["date"] as? Date
+                let tagID = element["tagId"] as? Int
+                let areaID = element["areaId"] as? Int
+                let areaName = element["areaName"] as? String
+                let modeString = element["mode"] as? String
+                let mode = modeString != nil ? AreaEvent.Mode(rawValue: modeString!) : nil
                 
-                let tagID = element["tagId"] as! Int
-                let areaID = element["areaId"] as! Int
-                let areaName = element["areaName"] as! String
-                let mode = element["mode"]! as! AreaEvent.Mode
-                
-                return AreaEvent(tagID: tagID, date: date!, areaID: areaID, areaName: areaName, mode: mode)
+                if let date = date, let tagID = tagID, let areaID = areaID, let areaName = areaName, let mode = mode {
+                    return AreaEvent(tagID: tagID, date: date, areaID: areaID, areaName: areaName, mode: mode)
+                } else {
+                    return nil
+                }
             }
             
             return areaEvents
