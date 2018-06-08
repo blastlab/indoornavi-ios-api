@@ -12,9 +12,7 @@ class ColorHelper: NSObject {
         let standarizedRed = Int(standarize(value: red) * 255)
         let standarizedGreen = Int(standarize(value: green) * 255)
         let standarizedBlue = Int(standarize(value: blue) * 255)
-        print("Red: \(standarizedRed), Green: \(standarizedGreen), Blue: \(standarizedBlue)")
         let colorString = String(format: "rgb(%i,%i,%i)", standarizedRed, standarizedGreen, standarizedBlue)
-        print("Color string: ",colorString)
         return colorString
     }
     
