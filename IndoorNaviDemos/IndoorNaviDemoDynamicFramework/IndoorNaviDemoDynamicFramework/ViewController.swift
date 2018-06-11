@@ -47,7 +47,7 @@ class ViewController: UIViewController {
         infoWindow.ready {
             infoWindow.setInnerHTML(string: "<h2>Lorem ipsum dolor sit amet</h2>")
             infoWindow.position = .top
-            infoWindow.height = 100
+            infoWindow.height = 49
             infoWindow.width = 300
             infoWindow.open(object: self.marker)
         }

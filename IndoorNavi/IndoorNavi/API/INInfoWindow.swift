@@ -60,6 +60,12 @@ public class INInfoWindow: INObject {
      */
     public var height: Int = 250 {
         didSet {
+            guard height >= 50 else {
+                height = oldValue
+                NSLog("Height of INInfoWindow must be greater than 50px")
+                return
+            }
+            
             let javaScriptString = String(format: ScriptTemplates.HeightTemplate, javaScriptVariableName, height)
             map.evaluate(javaScriptString: javaScriptString)
         }
@@ -70,6 +76,12 @@ public class INInfoWindow: INObject {
      */
     public var width: Int = 250 {
         didSet {
+            guard width >= 50 else {
+                width = oldValue
+                NSLog("INInfoWindow's height cannot be less than 50px. Height is set to 50px.")
+                return
+            }
+            
             let javaScriptString = String(format: ScriptTemplates.WidthTemplate, javaScriptVariableName, width)
             map.evaluate(javaScriptString: javaScriptString)
         }
