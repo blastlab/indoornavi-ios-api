@@ -6,24 +6,22 @@
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
-import UIKit
-
-/// Class representing a INPolyline, creates the INPolyline in webView, communicates with indoornavi frontend server and draws INPolyline.
+/// Class representing a `INPolyline`, communicates with indoornavi frontend server and draws `INPolyline`.
 public class INPolyline: INObject {
     
     fileprivate struct ScriptTemplates {
         static let VariableName = "poly%u"
         static let InitializationTemplate = "var %@ = new INPolyline(navi);"
-        static let PointTemplate = "%@.points(points);"
-        static let PlaceTemplate = "%@.draw();"
+        static let PointsTemplate = "%@.points(points);"
+        static let DrawTemplate = "%@.draw();"
         static let SetLineColorTemplate = "%@.setLineColor('%@')"
         static let PointsDeclaration = "var points = %@;"
     }
     
     /**
-     *  Initializes a new Polyline object inside given INMap object.
+     *  Initializes a new `INPolyline` object inside given INMap object.
      *
-     *  - Parameter withMap: An INMap object, in which Polyline is going to be created.
+     *  - Parameter withMap: An `INMap` object, in which `INPolyline` object is going to be created.
      */
     public override init(withMap map: INMap) {
         super.init(withMap: map)
@@ -36,46 +34,36 @@ public class INPolyline: INObject {
     /**
      *  Locates polyline at given coordinates. Coordinates needs to be given as real world dimensions that map is representing. Use of this method is indispensable.
      *
-     *  - Parameter points: Array of Point's that are describing polyline in real world dimensions. Coordinates are calculated to the map scale and then displayed.
+     *  - Parameter points: Array of `Point`'s that are describing polyline in real world dimensions. Coordinates are calculated to the map scale and then displayed.
      */
-    public func points(_ points: [INCoordinates]) {
-        let pointsString = CoordinatesHelper.coordinatesArrayString(fromCoordinatesArray: points)
+    public func points(_ points: [Point]) {
+        let pointsString = PointHelper.coordinatesArrayString(fromCoordinatesArray: points)
         map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
-        let javaScriptString = String(format: ScriptTemplates.PointTemplate, javaScriptVariableName)
+        let javaScriptString = String(format: ScriptTemplates.PointsTemplate, javaScriptVariableName)
         map.evaluate(javaScriptString: javaScriptString)
     }
     
     /**
      *  Place polyline on the map with all given settings.
-     *  There is necessary to use points() method before place() method to indicate where polyline should to be located.
+     *  There is necessary to use `points()` before `draw()` to indicate where polyline should to be located.
      *  Use of this method is indispensable to draw polyline with set configuration.
      */
     public func draw() {
-        let javaScriptString = String(format: ScriptTemplates.PlaceTemplate, javaScriptVariableName)
+        let javaScriptString = String(format: ScriptTemplates.DrawTemplate, javaScriptVariableName)
         map.evaluate(javaScriptString: javaScriptString)
     }
     
     /**
      *  Sets polyline lines and points color.
      *
-     *  - Parameter lineColor: Specifies line color.
+     *  - Parameters:
+     *      - red: The red value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
+     *      - green: The green value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
+     *      - blue: The blue value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
      */
-    public func set(lineColor color: UIColor) {
-        let stringColor = colorString(fromColor: color)
+    public func set(red: CGFloat, green: CGFloat, blue: CGFloat) {
+        let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
         let javaScriptString = String(format: ScriptTemplates.SetLineColorTemplate, javaScriptVariableName, stringColor)
         map.evaluate(javaScriptString: javaScriptString)
-    }
-    
-    private func colorString(fromColor color: UIColor) -> String {
-        if let colorComponents = color.cgColor.components {
-            let red = Int(colorComponents[0]*255)
-            let green = Int(colorComponents[1]*255)
-            let blue = Int(colorComponents[2]*255)
-            
-            let stringColor = String(format: "#%02X%02X%02X", red, green, blue)
-            return stringColor
-        } else {
-            return String(format: "#000000")
-        }
     }
  }

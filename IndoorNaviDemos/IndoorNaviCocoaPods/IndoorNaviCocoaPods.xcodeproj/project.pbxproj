@@ -12,10 +12,12 @@
 		7BD46790206CF4AE00B9F2AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BD4678E206CF4AE00B9F2AD /* Main.storyboard */; };
 		7BD46792206CF4AE00B9F2AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BD46791206CF4AE00B9F2AD /* Assets.xcassets */; };
 		7BD46795206CF4AE00B9F2AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BD46793206CF4AE00B9F2AD /* LaunchScreen.storyboard */; };
+		C4AD8397F893D80868B0CCD2 /* Pods_IndoorNaviCocoaPods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96205512593BB9B665E0C18A /* Pods_IndoorNaviCocoaPods.framework */; };
 		FBAEB3DD3C6CC13B8C6C7B58 /* Pods_IndoorNaviDemos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75222ADE415FD90680C170C5 /* Pods_IndoorNaviDemos.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D1781B6FE7B3D9826FA9D03 /* Pods-IndoorNaviCocoaPods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IndoorNaviCocoaPods.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IndoorNaviCocoaPods/Pods-IndoorNaviCocoaPods.debug.xcconfig"; sourceTree = "<group>"; };
 		328188FFFA2851297BB727DB /* Pods-IndoorNaviDemos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IndoorNaviDemos.release.xcconfig"; path = "Pods/Target Support Files/Pods-IndoorNaviDemos/Pods-IndoorNaviDemos.release.xcconfig"; sourceTree = "<group>"; };
 		44FB504A6BEEE64CCBC488A0 /* Pods-IndoorNaviDemos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IndoorNaviDemos.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IndoorNaviDemos/Pods-IndoorNaviDemos.debug.xcconfig"; sourceTree = "<group>"; };
 		75222ADE415FD90680C170C5 /* Pods_IndoorNaviDemos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IndoorNaviDemos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -26,6 +28,8 @@
 		7BD46791206CF4AE00B9F2AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7BD46794206CF4AE00B9F2AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7BD46796206CF4AE00B9F2AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		96205512593BB9B665E0C18A /* Pods_IndoorNaviCocoaPods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IndoorNaviCocoaPods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7A2FDD574358425EA388C00 /* Pods-IndoorNaviCocoaPods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IndoorNaviCocoaPods.release.xcconfig"; path = "Pods/Target Support Files/Pods-IndoorNaviCocoaPods/Pods-IndoorNaviCocoaPods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +38,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FBAEB3DD3C6CC13B8C6C7B58 /* Pods_IndoorNaviDemos.framework in Frameworks */,
+				C4AD8397F893D80868B0CCD2 /* Pods_IndoorNaviCocoaPods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				75222ADE415FD90680C170C5 /* Pods_IndoorNaviDemos.framework */,
+				96205512593BB9B665E0C18A /* Pods_IndoorNaviCocoaPods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -84,6 +90,8 @@
 			children = (
 				44FB504A6BEEE64CCBC488A0 /* Pods-IndoorNaviDemos.debug.xcconfig */,
 				328188FFFA2851297BB727DB /* Pods-IndoorNaviDemos.release.xcconfig */,
+				1D1781B6FE7B3D9826FA9D03 /* Pods-IndoorNaviCocoaPods.debug.xcconfig */,
+				A7A2FDD574358425EA388C00 /* Pods-IndoorNaviCocoaPods.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -165,8 +173,8 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-IndoorNaviDemos/Pods-IndoorNaviDemos-frameworks.sh",
-				"${PODS_ROOT}/../../IndoorNavi/IndoorNavi.framework",
+				"${SRCROOT}/Pods/Target Support Files/Pods-IndoorNaviCocoaPods/Pods-IndoorNaviCocoaPods-frameworks.sh",
+				"${PODS_ROOT}/../../../IndoorNavi/IndoorNavi.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -174,7 +182,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IndoorNaviDemos/Pods-IndoorNaviDemos-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IndoorNaviCocoaPods/Pods-IndoorNaviCocoaPods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		59E6633A55E0761738A867B5 /* [CP] Check Pods Manifest.lock */ = {
@@ -188,7 +196,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-IndoorNaviDemos-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-IndoorNaviCocoaPods-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -207,7 +215,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IndoorNaviDemos/Pods-IndoorNaviDemos-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IndoorNaviCocoaPods/Pods-IndoorNaviCocoaPods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -353,7 +361,7 @@
 		};
 		7BD4679A206CF4AE00B9F2AD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 44FB504A6BEEE64CCBC488A0 /* Pods-IndoorNaviDemos.debug.xcconfig */;
+			baseConfigurationReference = 1D1781B6FE7B3D9826FA9D03 /* Pods-IndoorNaviCocoaPods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -369,7 +377,7 @@
 		};
 		7BD4679B206CF4AE00B9F2AD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 328188FFFA2851297BB727DB /* Pods-IndoorNaviDemos.release.xcconfig */;
+			baseConfigurationReference = A7A2FDD574358425EA388C00 /* Pods-IndoorNaviCocoaPods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

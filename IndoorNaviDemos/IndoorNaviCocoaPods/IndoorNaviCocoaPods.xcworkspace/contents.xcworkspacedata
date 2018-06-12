@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../../IndoorNavi/IndoorNavi.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:IndoorNaviCocoaPods.xcodeproj">
    </FileRef>
    <FileRef

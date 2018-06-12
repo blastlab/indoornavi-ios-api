@@ -9,12 +9,13 @@
 import UIKit
 import WebKit
 
-/// Class representing an INMap
-public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
+/// Class representing an `INMap`, communicates with frontend server.
+public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     
     fileprivate struct ScriptTemplates {
         static let InitializationTemplate = "var navi = new INMap('%@','%@','map',{width:document.body.clientWidth,height:document.body.clientHeight});"
-        static let LoadMapTemplate = "navi.load(%d).then(() => webkit.messageHandlers.iOS.postMessage('%@'));"
+        static let LoadMapPromiseTemplate = "navi.load(%d).then(() => webkit.messageHandlers.PromisesController.postMessage('%@'));"
+        static let LoadMapTemplate = "navi.load(%d);"
     }
     
     fileprivate struct WebViewConfigurationScripts {
@@ -26,13 +27,19 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
         static let DisableCalloutScriptString = "document.documentElement.style.webkitTouchCallout='none';"
     }
     
-    fileprivate static let ControllerName = "iOS"
+    var promisesController = PromisesController()
+    var eventCallbacksController = EventCallbacksController()
+    var areaEventsCallbacksController = AreaEventsCallbacksController()
+    var coordinatesCallbacksController = CoordinatesCallbacksController()
     
     private var webView: WKWebView!
     
     private var indoorNaviFrame: CGRect!
     private var targetHost: String!
     private var apiKey: String!
+    
+    private var initializedInJavaScript = false
+    private var scriptsToEvaluateAfterInitialization = [String]()
     
     /**
      *  Loads map specified in function call.
@@ -41,20 +48,27 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
      *      - mapId: ID number of the map you want to load.
      *      - onCompletion: A block to invoke when the map is loaded.
      */
-    public func load(_ mapId: Int, onCompletion: (() -> Void)?) {
-        let uuid = UUID().uuidString
-        ClousureManager.clousuresToPerform[uuid] = onCompletion
-        let javaScriptString = String(format: ScriptTemplates.LoadMapTemplate, mapId, uuid)
+    public func load(_ mapId: Int, onCompletion: (() -> Void)? = nil) {
+        var javaScriptString = String()
+        
+        if onCompletion != nil {
+            let uuid = UUID().uuidString
+            promisesController.promises[uuid] = onCompletion
+            javaScriptString = String(format: ScriptTemplates.LoadMapPromiseTemplate, mapId, uuid)
+        } else {
+            javaScriptString = String(format: ScriptTemplates.LoadMapTemplate, mapId)
+        }
+        
         evaluate(javaScriptString: javaScriptString)
     }
     
     /**
-     *  Initializes a new INMap object with the provided parameters to communicate with INMap frontend server.
+     *  Initializes a new `INMap` object with the provided parameters to communicate with `INMap` frontend server.
      *
      *  - Parameters:
      *      - frame: Frame of the view containing map.
      *      - targetHost: Address to the INMap server.
-     *      - apiKey: The API key created on INMap server.
+     *      - apiKey: The API key created on the INMap server.
      */
     public init(frame: CGRect, targetHost: String, apiKey: String) {
         super.init(frame: frame)
@@ -74,6 +88,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
     
     private func initInJavaScript() {
         let javaScriptString = String(format: ScriptTemplates.InitializationTemplate, targetHost, apiKey)
+        initializedInJavaScript = true
         evaluate(javaScriptString: javaScriptString)
     }
     
@@ -106,23 +121,26 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
         controller.addUserScript(disableSelectionScript)
         controller.addUserScript(disableCalloutScript)
         
-        controller.add(self, name: INMap.ControllerName)
+        controller.add(promisesController, name: PromisesController.ControllerName)
+        controller.add(eventCallbacksController, name: EventCallbacksController.ControllerName)
+        controller.add(areaEventsCallbacksController, name: AreaEventsCallbacksController.ControllerName)
+        controller.add(coordinatesCallbacksController, name: CoordinatesCallbacksController.ControllerName)
         configuration.userContentController = controller
         
         return configuration
     }
     
-    // WKScriptMessageHandler
-    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) { // JS -> Swift
-        print("Received event \(message.body)")
-        if let uuid = message.body as? String {
-            ClousureManager.promiseResolved(withUUID: uuid)
+    private func evaluateSavedScripts() {
+        for script in scriptsToEvaluateAfterInitialization {
+            evaluate(javaScriptString: script)
         }
+        scriptsToEvaluateAfterInitialization.removeAll()
     }
     
     // WKNavigationDelegate
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         initInJavaScript()
+        evaluateSavedScripts()
     }
     
     internal func evaluate(javaScriptString string: String) {
@@ -133,8 +151,12 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate, WKScriptMessageH
     }
     
     internal func evaluate(javaScriptString string: String, completionHandler: @escaping (Any?, Error?) -> Void) {
-        print("Evaluating script: \(string)")
-        webView.evaluateJavaScript(string, completionHandler: completionHandler)
+        if initializedInJavaScript {
+            print("Evaluating script: \(string)")
+            webView.evaluateJavaScript(string, completionHandler: completionHandler)
+        } else {
+            scriptsToEvaluateAfterInitialization.append(string)
+        }
     }
     
     // Deinitialization

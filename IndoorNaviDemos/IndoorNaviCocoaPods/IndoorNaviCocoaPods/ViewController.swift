@@ -11,7 +11,7 @@ import IndoorNavi
 
 class ViewController: UIViewController {
     
-    var indoorNavi: IndoorNavi!
+    var indoorNavi: INMap!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         frame.origin.y = frame.origin.y + 20
         frame.size.height = frame.size.height - 100
         
-        indoorNavi = IndoorNavi(frame: frame, targetHost: "http://192.168.1.6:4200", apiKey: "TestAdmin")
+        indoorNavi = INMap(frame: frame, targetHost: "http://192.168.1.6:4200", apiKey: "TestAdmin")
         self.view.addSubview(indoorNavi)
         
     }

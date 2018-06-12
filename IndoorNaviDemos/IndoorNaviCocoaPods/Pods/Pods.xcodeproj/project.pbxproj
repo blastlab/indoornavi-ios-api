@@ -7,102 +7,84 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		15031F6D03B3C8B1C5DF079589FD8F59 /* Pods-IndoorNaviDemos-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9065B2CFA47EB80D249B75819684E9 /* Pods-IndoorNaviDemos-dummy.m */; };
-		51ACC9A45434CADE075F5B56915661A4 /* Pods-IndoorNaviDemos-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CFA29BBFCAE0052C58FA5A4804DF8B21 /* Pods-IndoorNaviDemos-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F7C7D285A9CF1E929FAE7BA8BBA74C28 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		0CCEF8A3B2B0411246D388371890BE2B /* Pods-IndoorNaviCocoaPods-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 137B985F4CFBE8596814F604ED75852E /* Pods-IndoorNaviCocoaPods-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		53805C1DC5F44E799A4BFF40720CC32E /* Pods-IndoorNaviCocoaPods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D095A23CCF2CB621187677F639ECB129 /* Pods-IndoorNaviCocoaPods-dummy.m */; };
+		6A15CD6470A4171FCD445B985B628A23 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0B4DF1BCED7D27F26AA377F18B2D478D /* Pods-IndoorNaviDemos.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-IndoorNaviDemos.modulemap"; sourceTree = "<group>"; };
-		2B9065B2CFA47EB80D249B75819684E9 /* Pods-IndoorNaviDemos-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-IndoorNaviDemos-dummy.m"; sourceTree = "<group>"; };
-		4A05307BF916AC58967AB6249AADD641 /* Pods-IndoorNaviDemos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-IndoorNaviDemos.debug.xcconfig"; sourceTree = "<group>"; };
+		137B985F4CFBE8596814F604ED75852E /* Pods-IndoorNaviCocoaPods-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-IndoorNaviCocoaPods-umbrella.h"; sourceTree = "<group>"; };
+		23D59F0309867B9F8385E1945733806B /* Pods-IndoorNaviCocoaPods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-IndoorNaviCocoaPods.release.xcconfig"; sourceTree = "<group>"; };
+		44D2DA03CBA2FF221210A3DB65DEF6CF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		617F0C8D15BF56FAD2F7B48EC75102EE /* IndoorNavi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IndoorNavi.framework; sourceTree = "<group>"; };
 		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		7373D51E3D410267C93EDF6A111638C8 /* Pods-IndoorNaviDemos-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-IndoorNaviDemos-acknowledgements.markdown"; sourceTree = "<group>"; };
-		7B736EAA4D1A08ED2125E203BCCF8141 /* Pods-IndoorNaviDemos-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-IndoorNaviDemos-frameworks.sh"; sourceTree = "<group>"; };
-		83341A33015916C738C07C47797CACDA /* Pods_IndoorNaviDemos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_IndoorNaviDemos.framework; path = "Pods-IndoorNaviDemos.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		974023E0649F2971E5DB3EA4CE4F4E9E /* Pods-IndoorNaviDemos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-IndoorNaviDemos.release.xcconfig"; sourceTree = "<group>"; };
-		AD69A112A13DAD918F7CF07B6DAF88FD /* Pods-IndoorNaviDemos-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-IndoorNaviDemos-acknowledgements.plist"; sourceTree = "<group>"; };
-		BFEF2E732ABC58FA92E2DAE3A71C0684 /* IndoorNavi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IndoorNavi.framework; sourceTree = "<group>"; };
-		CFA29BBFCAE0052C58FA5A4804DF8B21 /* Pods-IndoorNaviDemos-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-IndoorNaviDemos-umbrella.h"; sourceTree = "<group>"; };
-		DBE601F41BBDEDC919A5AE44531E64EB /* Pods-IndoorNaviDemos-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-IndoorNaviDemos-resources.sh"; sourceTree = "<group>"; };
-		E5E820C44665AF2E58CDC153866F0174 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EA82FBECAD6F3769F2E3F7CC1744C198 /* IndoorNavi.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = IndoorNavi.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9A0BF25E1EAD3EECF40567C25EBB8E23 /* Pods-IndoorNaviCocoaPods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-IndoorNaviCocoaPods.debug.xcconfig"; sourceTree = "<group>"; };
+		9C6531C8C09D64AFBBA83142A9E1AAB7 /* Pods-IndoorNaviCocoaPods-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-IndoorNaviCocoaPods-frameworks.sh"; sourceTree = "<group>"; };
+		9D07423CADD90F606E2AD17519DD9590 /* Pods_IndoorNaviCocoaPods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_IndoorNaviCocoaPods.framework; path = "Pods-IndoorNaviCocoaPods.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAB2E013FBD3ACA96FC5D3E50F215F26 /* Pods-IndoorNaviCocoaPods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-IndoorNaviCocoaPods-acknowledgements.plist"; sourceTree = "<group>"; };
+		C4E46FD35A08F012EA9C06B5A1F8D612 /* Pods-IndoorNaviCocoaPods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-IndoorNaviCocoaPods-resources.sh"; sourceTree = "<group>"; };
+		D095A23CCF2CB621187677F639ECB129 /* Pods-IndoorNaviCocoaPods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-IndoorNaviCocoaPods-dummy.m"; sourceTree = "<group>"; };
+		E889F14AC211856AA5EA42B73A1753F7 /* Pods-IndoorNaviCocoaPods.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-IndoorNaviCocoaPods.modulemap"; sourceTree = "<group>"; };
+		F308D05BC7B59EB40C261E8CE53286F2 /* Pods-IndoorNaviCocoaPods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-IndoorNaviCocoaPods-acknowledgements.markdown"; sourceTree = "<group>"; };
+		FB813EF7714DB4BD41CC88CF7A2444AE /* IndoorNavi.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = IndoorNavi.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3EDB09A121D154970A4BEEA702201E03 /* Frameworks */ = {
+		340D491378219D463ABCC622EF352C54 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7C7D285A9CF1E929FAE7BA8BBA74C28 /* Foundation.framework in Frameworks */,
+				6A15CD6470A4171FCD445B985B628A23 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		271FEA844B4691F9D3AD1E5A246FBDAD /* Development Pods */ = {
+		30A919ED2572D343A11B3BB1B5E2AB43 /* IndoorNavi */ = {
 			isa = PBXGroup;
 			children = (
-				73C1924D3EDB90024F353D3668C1E878 /* IndoorNavi */,
-			);
-			name = "Development Pods";
-			sourceTree = "<group>";
-		};
-		285C81493569151D931E3DFE5CA4A2D4 /* Pods-IndoorNaviDemos */ = {
-			isa = PBXGroup;
-			children = (
-				E5E820C44665AF2E58CDC153866F0174 /* Info.plist */,
-				0B4DF1BCED7D27F26AA377F18B2D478D /* Pods-IndoorNaviDemos.modulemap */,
-				7373D51E3D410267C93EDF6A111638C8 /* Pods-IndoorNaviDemos-acknowledgements.markdown */,
-				AD69A112A13DAD918F7CF07B6DAF88FD /* Pods-IndoorNaviDemos-acknowledgements.plist */,
-				2B9065B2CFA47EB80D249B75819684E9 /* Pods-IndoorNaviDemos-dummy.m */,
-				7B736EAA4D1A08ED2125E203BCCF8141 /* Pods-IndoorNaviDemos-frameworks.sh */,
-				DBE601F41BBDEDC919A5AE44531E64EB /* Pods-IndoorNaviDemos-resources.sh */,
-				CFA29BBFCAE0052C58FA5A4804DF8B21 /* Pods-IndoorNaviDemos-umbrella.h */,
-				4A05307BF916AC58967AB6249AADD641 /* Pods-IndoorNaviDemos.debug.xcconfig */,
-				974023E0649F2971E5DB3EA4CE4F4E9E /* Pods-IndoorNaviDemos.release.xcconfig */,
-			);
-			name = "Pods-IndoorNaviDemos";
-			path = "Target Support Files/Pods-IndoorNaviDemos";
-			sourceTree = "<group>";
-		};
-		5A4755D462B2B6EA1BD62A1B52B4E8B7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				83341A33015916C738C07C47797CACDA /* Pods_IndoorNaviDemos.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		6D1F12AC8EC150116CD92D995DCBEC19 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				EA82FBECAD6F3769F2E3F7CC1744C198 /* IndoorNavi.podspec */,
-			);
-			name = Pod;
-			sourceTree = "<group>";
-		};
-		73C1924D3EDB90024F353D3668C1E878 /* IndoorNavi */ = {
-			isa = PBXGroup;
-			children = (
-				C3A820317127592728FB1663F69C2700 /* Frameworks */,
-				6D1F12AC8EC150116CD92D995DCBEC19 /* Pod */,
+				3BD46DDB556B6FDADBBFD4E23EA55BBF /* Frameworks */,
+				F910DC2E43A02A97C8FFACC7D8329ED1 /* Pod */,
 			);
 			name = IndoorNavi;
-			path = ../../IndoorNavi;
+			path = ../../../IndoorNavi;
+			sourceTree = "<group>";
+		};
+		3BD46DDB556B6FDADBBFD4E23EA55BBF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				617F0C8D15BF56FAD2F7B48EC75102EE /* IndoorNavi.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				271FEA844B4691F9D3AD1E5A246FBDAD /* Development Pods */,
+				85207F5CD4969C6213976EA400455481 /* Development Pods */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				5A4755D462B2B6EA1BD62A1B52B4E8B7 /* Products */,
-				EFDA4C9CF2101908A37DF222CA7E07FB /* Targets Support Files */,
+				85F6DB7278DEC8377B761D15FB0A67EF /* Products */,
+				FFE4174BADE655CB7C14C6D87DC4830F /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		85207F5CD4969C6213976EA400455481 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				30A919ED2572D343A11B3BB1B5E2AB43 /* IndoorNavi */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		85F6DB7278DEC8377B761D15FB0A67EF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9D07423CADD90F606E2AD17519DD9590 /* Pods_IndoorNaviCocoaPods.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
@@ -113,12 +95,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C3A820317127592728FB1663F69C2700 /* Frameworks */ = {
+		C59E1B2A5587C187FE0C75845563B910 /* Pods-IndoorNaviCocoaPods */ = {
 			isa = PBXGroup;
 			children = (
-				BFEF2E732ABC58FA92E2DAE3A71C0684 /* IndoorNavi.framework */,
+				44D2DA03CBA2FF221210A3DB65DEF6CF /* Info.plist */,
+				E889F14AC211856AA5EA42B73A1753F7 /* Pods-IndoorNaviCocoaPods.modulemap */,
+				F308D05BC7B59EB40C261E8CE53286F2 /* Pods-IndoorNaviCocoaPods-acknowledgements.markdown */,
+				AAB2E013FBD3ACA96FC5D3E50F215F26 /* Pods-IndoorNaviCocoaPods-acknowledgements.plist */,
+				D095A23CCF2CB621187677F639ECB129 /* Pods-IndoorNaviCocoaPods-dummy.m */,
+				9C6531C8C09D64AFBBA83142A9E1AAB7 /* Pods-IndoorNaviCocoaPods-frameworks.sh */,
+				C4E46FD35A08F012EA9C06B5A1F8D612 /* Pods-IndoorNaviCocoaPods-resources.sh */,
+				137B985F4CFBE8596814F604ED75852E /* Pods-IndoorNaviCocoaPods-umbrella.h */,
+				9A0BF25E1EAD3EECF40567C25EBB8E23 /* Pods-IndoorNaviCocoaPods.debug.xcconfig */,
+				23D59F0309867B9F8385E1945733806B /* Pods-IndoorNaviCocoaPods.release.xcconfig */,
 			);
-			name = Frameworks;
+			name = "Pods-IndoorNaviCocoaPods";
+			path = "Target Support Files/Pods-IndoorNaviCocoaPods";
 			sourceTree = "<group>";
 		};
 		D35AF013A5F0BAD4F32504907A52519E /* iOS */ = {
@@ -129,10 +121,18 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		EFDA4C9CF2101908A37DF222CA7E07FB /* Targets Support Files */ = {
+		F910DC2E43A02A97C8FFACC7D8329ED1 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				285C81493569151D931E3DFE5CA4A2D4 /* Pods-IndoorNaviDemos */,
+				FB813EF7714DB4BD41CC88CF7A2444AE /* IndoorNavi.podspec */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		FFE4174BADE655CB7C14C6D87DC4830F /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				C59E1B2A5587C187FE0C75845563B910 /* Pods-IndoorNaviCocoaPods */,
 			);
 			name = "Targets Support Files";
 			sourceTree = "<group>";
@@ -140,32 +140,32 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		33FCA18BA3A7A20B99C9423E60D336F6 /* Headers */ = {
+		4F0B2402E6A8C11C9ED5A74D0E385873 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				51ACC9A45434CADE075F5B56915661A4 /* Pods-IndoorNaviDemos-umbrella.h in Headers */,
+				0CCEF8A3B2B0411246D388371890BE2B /* Pods-IndoorNaviCocoaPods-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		AEAF7A72D2A5B758996E6B049B2F5DF7 /* Pods-IndoorNaviDemos */ = {
+		23AFD05CF77AA9D8A25708DACAA1D62F /* Pods-IndoorNaviCocoaPods */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 252DCBBACD5893B1F2AC9D4DD2D30E10 /* Build configuration list for PBXNativeTarget "Pods-IndoorNaviDemos" */;
+			buildConfigurationList = 77F2251F522F98ADF7534DE530DA5B69 /* Build configuration list for PBXNativeTarget "Pods-IndoorNaviCocoaPods" */;
 			buildPhases = (
-				3A6F23ECEE75FE7267B338AA9CC898DB /* Sources */,
-				3EDB09A121D154970A4BEEA702201E03 /* Frameworks */,
-				33FCA18BA3A7A20B99C9423E60D336F6 /* Headers */,
+				037BFEC4D53D48460B81E5C6F00D65CF /* Sources */,
+				340D491378219D463ABCC622EF352C54 /* Frameworks */,
+				4F0B2402E6A8C11C9ED5A74D0E385873 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Pods-IndoorNaviDemos";
-			productName = "Pods-IndoorNaviDemos";
-			productReference = 83341A33015916C738C07C47797CACDA /* Pods_IndoorNaviDemos.framework */;
+			name = "Pods-IndoorNaviCocoaPods";
+			productName = "Pods-IndoorNaviCocoaPods";
+			productReference = 9D07423CADD90F606E2AD17519DD9590 /* Pods_IndoorNaviCocoaPods.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -185,61 +185,27 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 5A4755D462B2B6EA1BD62A1B52B4E8B7 /* Products */;
+			productRefGroup = 85F6DB7278DEC8377B761D15FB0A67EF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AEAF7A72D2A5B758996E6B049B2F5DF7 /* Pods-IndoorNaviDemos */,
+				23AFD05CF77AA9D8A25708DACAA1D62F /* Pods-IndoorNaviCocoaPods */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3A6F23ECEE75FE7267B338AA9CC898DB /* Sources */ = {
+		037BFEC4D53D48460B81E5C6F00D65CF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15031F6D03B3C8B1C5DF079589FD8F59 /* Pods-IndoorNaviDemos-dummy.m in Sources */,
+				53805C1DC5F44E799A4BFF40720CC32E /* Pods-IndoorNaviCocoaPods-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		015B1AB5B970B97560E57F826E6542E9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 974023E0649F2971E5DB3EA4CE4F4E9E /* Pods-IndoorNaviDemos.release.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-IndoorNaviDemos/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-IndoorNaviDemos/Pods-IndoorNaviDemos.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_IndoorNaviDemos;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		323A24856F1A4871A780301AF5C02A2A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -303,9 +269,9 @@
 			};
 			name = Debug;
 		};
-		AEA744F340A8B20CB256F22CDB818C97 /* Debug */ = {
+		76E34F18B983EBE978038467897992D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A05307BF916AC58967AB6249AADD641 /* Pods-IndoorNaviDemos.debug.xcconfig */;
+			baseConfigurationReference = 9A0BF25E1EAD3EECF40567C25EBB8E23 /* Pods-IndoorNaviCocoaPods.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -317,17 +283,17 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-IndoorNaviDemos/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-IndoorNaviCocoaPods/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-IndoorNaviDemos/Pods-IndoorNaviDemos.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-IndoorNaviCocoaPods/Pods-IndoorNaviCocoaPods.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_IndoorNaviDemos;
+				PRODUCT_NAME = Pods_IndoorNaviCocoaPods;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -394,23 +360,57 @@
 			};
 			name = Release;
 		};
+		EEDF09129BD53557564B8EB4359ABDEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23D59F0309867B9F8385E1945733806B /* Pods-IndoorNaviCocoaPods.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-IndoorNaviCocoaPods/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-IndoorNaviCocoaPods/Pods-IndoorNaviCocoaPods.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_IndoorNaviCocoaPods;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		252DCBBACD5893B1F2AC9D4DD2D30E10 /* Build configuration list for PBXNativeTarget "Pods-IndoorNaviDemos" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AEA744F340A8B20CB256F22CDB818C97 /* Debug */,
-				015B1AB5B970B97560E57F826E6542E9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				323A24856F1A4871A780301AF5C02A2A /* Debug */,
 				CA33F186435244FD0FD5B7325332656C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		77F2251F522F98ADF7534DE530DA5B69 /* Build configuration list for PBXNativeTarget "Pods-IndoorNaviCocoaPods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76E34F18B983EBE978038467897992D6 /* Debug */,
+				EEDF09129BD53557564B8EB4359ABDEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
