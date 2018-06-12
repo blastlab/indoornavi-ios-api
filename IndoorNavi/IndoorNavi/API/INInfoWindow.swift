@@ -50,12 +50,11 @@ public class INInfoWindow: INObject {
      *
      *  - Parameter withMap: An `INMap` object, in which `INArea` is going to be created.
      */
-    public override init(withMap map: INMap) {
-        super.init(withMap: map)
+    public init(withMap map: INMap) {
+        super.init(withMap: map, variableNameTemplate: ScriptTemplates.VariableName)
         
-        javaScriptVariableName = String(format: ScriptTemplates.VariableName, self.hash)
         let javaScriptString = String(format: ScriptTemplates.InitializationTemplate, javaScriptVariableName)
-        self.map.evaluate(javaScriptString:  javaScriptString)
+        self.map.evaluate(javaScriptString: javaScriptString)
     }
     
     /**
@@ -68,12 +67,15 @@ public class INInfoWindow: INObject {
         set {
             guard newValue >= 50 else {
                 NSLog("INInfoWindow's height cannot be less than 50px. Height is set to 50px.")
+                print("Private height = \(privateHeight)")
                 return
             }
             
             privateHeight = newValue
-            let javaScriptString = String(format: ScriptTemplates.HeightTemplate, self.javaScriptVariableName, self.height)
-            self.map.evaluate(javaScriptString: javaScriptString)
+            ready {
+                let javaScriptString = String(format: ScriptTemplates.HeightTemplate, self.javaScriptVariableName, self.height)
+                self.map.evaluate(javaScriptString: javaScriptString)
+            }
         }
     }
     
@@ -87,12 +89,15 @@ public class INInfoWindow: INObject {
         set {
             guard newValue >= 50 else {
                 NSLog("INInfoWindow's width cannot be less than 50px. Width is set to 50px.")
+                print("Private width = \(privateWidth)")
                 return
             }
             
             privateWidth = newValue
-            let javaScriptString = String(format: ScriptTemplates.WidthTemplate, self.javaScriptVariableName, self.width)
-            self.map.evaluate(javaScriptString: javaScriptString)
+            ready {
+                let javaScriptString = String(format: ScriptTemplates.WidthTemplate, self.javaScriptVariableName, self.privateWidth)
+                self.map.evaluate(javaScriptString: javaScriptString)
+            }
         }
     }
     
@@ -102,8 +107,10 @@ public class INInfoWindow: INObject {
      *  - Parameter object: An INObject object to append info window to.
      */
     public func open(object: INObject) {
-        let javaScriptString = String(format: ScriptTemplates.OpenTemplate, javaScriptVariableName, object.javaScriptVariableName)
-        map.evaluate(javaScriptString: javaScriptString)
+        ready {
+            let javaScriptString = String(format: ScriptTemplates.OpenTemplate, self.javaScriptVariableName, object.javaScriptVariableName)
+            self.map.evaluate(javaScriptString: javaScriptString)
+        }
     }
     
     /**
@@ -112,8 +119,10 @@ public class INInfoWindow: INObject {
      *  - Parameter string: Text or HTML template in string format that will be passed to info window as text.
      */
     public func setInnerHTML(string: String) {
-        let javaScriptString = String(format: ScriptTemplates.SetInnerHTMLTemplate, javaScriptVariableName, string)
-        map.evaluate(javaScriptString: javaScriptString)
+        ready {
+            let javaScriptString = String(format: ScriptTemplates.SetInnerHTMLTemplate, self.javaScriptVariableName, string)
+            self.map.evaluate(javaScriptString: javaScriptString)
+        }
     }
     
     /**
@@ -121,8 +130,10 @@ public class INInfoWindow: INObject {
      */
     public var position: Position = .top {
         didSet {
-            let javaScriptString = String(format: ScriptTemplates.SetPositionTemplate, javaScriptVariableName, position.rawValue)
-            map.evaluate(javaScriptString: javaScriptString)
+            ready {
+                let javaScriptString = String(format: ScriptTemplates.SetPositionTemplate, self.javaScriptVariableName, self.position.rawValue)
+                self.map.evaluate(javaScriptString: javaScriptString)
+            }
         }
     }
 }

@@ -17,37 +17,33 @@ public class INObject: NSObject {
         static let RemoveTemplate = "%@.remove();"
     }
     
-    var map: INMap!
     var javaScriptVariableName: String!
+    let map: INMap
+    
+    /**
+     *  ID of the object. Remains `nil` until it is fully initialized.
+     *
+     *  - Parameter callbackHandler: A block to invoke when the ID is available.
+     */
+    public var objectID: Int?
     
     /**
      *  Initializes a new `INObject` object inside given `INMap` object.
      *
      *  - Parameter withMap: An `INMap` object, in which `INObject` is going to be created.
      */
-    public init(withMap map: INMap) {
-        super.init()
+    public init(withMap map: INMap, variableNameTemplate: String) {
         self.map = map
+        super.init()
+        javaScriptVariableName = String(format: variableNameTemplate, hash)
+        ready {
+            self.getID { objectID in
+                self.objectID = objectID
+            }
+        }
     }
     
-    /**
-     *  Promise - that will resolve when connection to the frontend will be established, assures that instance of INMapObject has been created on the injected `INMap` class, this method should be executed before calling any other method on this object children.
-     *
-     *  - Parameter onCompletion: A block to invoke when connection to the frontend is established and the object is ready.
-     */
-    public func ready(readyClousure: @escaping () -> Void) {
-        let uuid = UUID().uuidString
-        map.promisesController.promises[uuid] = readyClousure
-        let javaScriptString = String(format: ScriptTemplates.ReadyTemplate, javaScriptVariableName, uuid)
-        map.evaluate(javaScriptString: javaScriptString)
-    }
-    
-    /**
-     *  Returns the ID of the object.
-     *
-     *  - Parameter callbackHandler: A block to invoke when the ID is available.
-     */
-    public func getID(callbackHandler: @escaping (Int?) -> Void) {
+    private func getID(callbackHandler: @escaping (Int?) -> Void) {
         let javaScriptString = String(format: ScriptTemplates.GetIDTemplate, javaScriptVariableName)
         map.evaluate(javaScriptString: javaScriptString) { response, error in
             
@@ -62,6 +58,22 @@ public class INObject: NSObject {
             } else {
                 callbackHandler(nil)
             }
+        }
+    }
+    
+    /**
+     *  Promise - that will resolve when connection to the frontend will be established, assures that instance of INMapObject has been created on the injected `INMap` class, this method should be executed before calling any other method on this object children.
+     *
+     *  - Parameter onCompletion: A block to invoke when connection to the frontend is established and the object is ready.
+     */
+    func ready(readyClousure: @escaping () -> Void) {
+        if objectID != nil {
+            readyClousure()
+        } else {
+            let uuid = UUID().uuidString
+            map.promisesController.promises[uuid] = readyClousure
+            let javaScriptString = String(format: ScriptTemplates.ReadyTemplate, javaScriptVariableName, uuid)
+            map.evaluate(javaScriptString: javaScriptString)
         }
     }
     

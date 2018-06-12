@@ -28,10 +28,9 @@ public class INMarker: INObject {
      *
      *  - Parameter withMap: An `INMap` object, in which `INMarker` object is going to be created.
      */
-    public override init(withMap map: INMap) {
-        super.init(withMap: map)
+    public init(withMap map: INMap) {
+        super.init(withMap: map, variableNameTemplate: ScriptTemplates.VariableName)
         
-        javaScriptVariableName = String(format: ScriptTemplates.VariableName, self.hash)
         let javaScriptString = String(format: ScriptTemplates.InitializationTemplate, javaScriptVariableName)
         self.map.evaluate(javaScriptString: javaScriptString)
     }
@@ -42,21 +41,25 @@ public class INMarker: INObject {
      *  - Parameter onClickCallback: A block to invoke when marker is tapped.
      */
     public func addEventListener(onClickCallback: @escaping () -> Void) {
-        callbackUUID = UUID().uuidString
-        map.eventCallbacksController.eventCallbacks[callbackUUID!] = onClickCallback
-        
-        let javaScriptString = String(format: ScriptTemplates.AddEventListenerTemplate, javaScriptVariableName, callbackUUID!)
-        map.evaluate(javaScriptString: javaScriptString)
+        ready {
+            self.callbackUUID = UUID().uuidString
+            self.map.eventCallbacksController.eventCallbacks[self.callbackUUID!] = onClickCallback
+            
+            let javaScriptString = String(format: ScriptTemplates.AddEventListenerTemplate, self.javaScriptVariableName, self.callbackUUID!)
+            self.map.evaluate(javaScriptString: javaScriptString)
+        }
     }
     
     /**
      *  Removes block invoked on tap if exists. Use of this method is optional.
      */
     public func removeEventListener() {
-        if let uuid = callbackUUID {
-            map.eventCallbacksController.removeEventCallback(forUUID: uuid)
-            let javaScriptString = String(format: ScriptTemplates.RemoveEventListenerTemplate, javaScriptVariableName)
-            map.evaluate(javaScriptString: javaScriptString)
+        ready {
+            if let uuid = self.callbackUUID {
+                self.map.eventCallbacksController.removeEventCallback(forUUID: uuid)
+                let javaScriptString = String(format: ScriptTemplates.RemoveEventListenerTemplate, self.javaScriptVariableName)
+                self.map.evaluate(javaScriptString: javaScriptString)
+            }
         }
     }
     
@@ -65,8 +68,10 @@ public class INMarker: INObject {
      *  Use of this method is indispensable to display marker with set configuration in the IndoorNavi Map.
      */
     public func draw() {
-        let javaScriptString = String(format: ScriptTemplates.PlaceTemplate, javaScriptVariableName)
-        map.evaluate(javaScriptString: javaScriptString)
+        ready {
+            let javaScriptString = String(format: ScriptTemplates.PlaceTemplate, self.javaScriptVariableName)
+            self.map.evaluate(javaScriptString: javaScriptString)
+        }
     }
     
     /**
@@ -75,9 +80,11 @@ public class INMarker: INObject {
      *  - Parameter point: Represents marker position in real world. Coordinates are calculated to the map scale and then displayed. Position will be clipped to the point in the bottom center of marker icon.
      */
     public func point(_ point: Point) {
-        let pointString = PointHelper.coordinatesString(fromCoordinates: point)
-        let javaScriptString = String(format: ScriptTemplates.PointTemplate, javaScriptVariableName, pointString)
-        map.evaluate(javaScriptString: javaScriptString)
+        ready {
+            let pointString = PointHelper.coordinatesString(fromCoordinates: point)
+            let javaScriptString = String(format: ScriptTemplates.PointTemplate, self.javaScriptVariableName, pointString)
+            self.map.evaluate(javaScriptString: javaScriptString)
+        }
     }
     
     /**
@@ -86,16 +93,20 @@ public class INMarker: INObject {
      *  - Parameter withText: `String` that will be used as a marker label.
      */
     public func setLabel(withText text: String) {
-        let javaScriptString = String(format: ScriptTemplates.SetLabelTemplate, javaScriptVariableName, text)
-        map.evaluate(javaScriptString: javaScriptString)
+        ready {
+            let javaScriptString = String(format: ScriptTemplates.SetLabelTemplate, self.javaScriptVariableName, text)
+            self.map.evaluate(javaScriptString: javaScriptString)
+        }
     }
     
     /**
      *  Removes marker label. To remove label it is indispensable to call `draw()` again.
      */
     public func removeLabel() {
-        let javaScriptString = String(format: ScriptTemplates.RemoveLabelTemplate, javaScriptVariableName)
-        map.evaluate(javaScriptString: javaScriptString)
+        ready {
+            let javaScriptString = String(format: ScriptTemplates.RemoveLabelTemplate, self.javaScriptVariableName)
+            self.map.evaluate(javaScriptString: javaScriptString)
+        }
     }
     
     /**
@@ -104,7 +115,9 @@ public class INMarker: INObject {
      *  - Parameter path: URL path to icon.
      */
     public func setIcon(withPath path: String) {
-        let javaScriptString = String(format: ScriptTemplates.SetIconTemplate, javaScriptVariableName, path)
-        map.evaluate(javaScriptString: javaScriptString)
+        ready {
+            let javaScriptString = String(format: ScriptTemplates.SetIconTemplate, self.javaScriptVariableName, path)
+            self.map.evaluate(javaScriptString: javaScriptString)
+        }
     }
 }
