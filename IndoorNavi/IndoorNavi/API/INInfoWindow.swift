@@ -42,6 +42,9 @@ public class INInfoWindow: INObject {
         case bottomLeft
     }
     
+    private var privateWidth = 250
+    private var privateHeight = 250
+    
     /**
      *  Initializes a new `INInfoWindow` object inside given `INMap` object.
      *
@@ -58,32 +61,38 @@ public class INInfoWindow: INObject {
     /**
      *  Height dimension of info window. Setting this value is optional. Default value is 250px, minimum value is 50px.
      */
-    public var height: Int = 250 {
-        didSet {
-            guard height >= 50 else {
-                height = oldValue
-                NSLog("Height of INInfoWindow must be greater than 50px")
+    public var height: Int {
+        get {
+            return privateHeight
+        }
+        set {
+            guard newValue >= 50 else {
+                NSLog("INInfoWindow's height cannot be less than 50px. Height is set to 50px.")
                 return
             }
             
-            let javaScriptString = String(format: ScriptTemplates.HeightTemplate, javaScriptVariableName, height)
-            map.evaluate(javaScriptString: javaScriptString)
+            privateHeight = newValue
+            let javaScriptString = String(format: ScriptTemplates.HeightTemplate, self.javaScriptVariableName, self.height)
+            self.map.evaluate(javaScriptString: javaScriptString)
         }
     }
     
     /**
      *  Width dimension of info window. Setting this value is optional. Default value is 250px, minimum value is 50px.
      */
-    public var width: Int = 250 {
-        didSet {
-            guard width >= 50 else {
-                width = oldValue
-                NSLog("INInfoWindow's height cannot be less than 50px. Height is set to 50px.")
+    public var width: Int {
+        get {
+            return privateWidth
+        }
+        set {
+            guard newValue >= 50 else {
+                NSLog("INInfoWindow's width cannot be less than 50px. Width is set to 50px.")
                 return
             }
             
-            let javaScriptString = String(format: ScriptTemplates.WidthTemplate, javaScriptVariableName, width)
-            map.evaluate(javaScriptString: javaScriptString)
+            privateWidth = newValue
+            let javaScriptString = String(format: ScriptTemplates.WidthTemplate, self.javaScriptVariableName, self.width)
+            self.map.evaluate(javaScriptString: javaScriptString)
         }
     }
     
