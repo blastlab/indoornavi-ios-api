@@ -17,7 +17,7 @@ public class INObject: NSObject {
         static let RemoveTemplate = "%@.remove();"
     }
     
-    var javaScriptVariableName: String!
+    private(set) var javaScriptVariableName: String!
     let map: INMap
     
     /**
@@ -25,7 +25,7 @@ public class INObject: NSObject {
      *
      *  - Parameter callbackHandler: A block to invoke when the ID is available.
      */
-    public var objectID: Int?
+    private(set) public var objectID: Int?
     
     /**
      *  Initializes a new `INObject` object inside given `INMap` object.

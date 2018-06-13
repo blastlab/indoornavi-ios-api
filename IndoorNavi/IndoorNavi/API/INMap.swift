@@ -34,9 +34,9 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     
     private var webView: WKWebView!
     
-    private var indoorNaviFrame: CGRect!
-    private var targetHost: String!
-    private var apiKey: String!
+    private var indoorNaviFrame: CGRect
+    private var targetHost: String
+    private var apiKey: String
     
     private var initializedInJavaScript = false
     private var scriptsToEvaluateAfterInitialization = [String]()
@@ -71,19 +71,19 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
      *      - apiKey: The API key created on the INMap server.
      */
     public init(frame: CGRect, targetHost: String, apiKey: String) {
-        super.init(frame: frame)
-        
         self.indoorNaviFrame = frame
         self.targetHost = targetHost
         self.apiKey = apiKey
+        
+        super.init(frame: frame)
         
         setupWebView(withFrame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
         
         loadHTML()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("This class does not support NSCoding")
     }
     
     private func initInJavaScript() {

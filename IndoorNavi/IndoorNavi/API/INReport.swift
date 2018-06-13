@@ -35,7 +35,7 @@ public class INReport: NSObject {
         self.targetHost = targetHost
         self.apiKey = apiKey
         super.init()
-        javaScriptVariableName = String(format: ScriptTemplates.VariableName, self.hash)
+        javaScriptVariableName = String(format: ScriptTemplates.VariableName, hash)
         
         let javaScriptString = String(format: ScriptTemplates.InitializationTemplate, javaScriptVariableName, targetHost, apiKey)
         map.evaluate(javaScriptString: javaScriptString)
