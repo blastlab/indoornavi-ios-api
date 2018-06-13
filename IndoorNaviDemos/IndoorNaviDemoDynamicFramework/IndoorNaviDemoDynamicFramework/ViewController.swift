@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     
     var map: INMap!
     var marker: INMarker!
+    var infoWindow: INInfoWindow!
     
     let points1: [Point] = [Point(x: 480, y: 480), Point(x: 1220, y: 480), Point(x: 1220, y: 1220), Point(x: 480, y: 1220), Point(x: 750, y: 750)]
     let points2: [Point] = [Point(x: 2000, y: 2000), Point(x: 2500, y: 2000), Point(x: 3000, y: 2000), Point(x: 3000, y: 1500), Point(x: 2500, y: 1500)]
@@ -32,6 +33,8 @@ class ViewController: UIViewController {
         self.view.addSubview(map)
         map.load(2) {
             print("Completed.")
+            self.infoWindow = INInfoWindow(withMap: self.map)
+            self.infoWindow.setInnerHTML(string: "<h2>Lorem ipsum dolor sit amet</h2>")
         }
     }
     
@@ -42,13 +45,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func drawInfoWindow(_ sender: Any) {
-        let infoWindow = INInfoWindow(withMap: map)
-        
-        infoWindow.setInnerHTML(string: "<h2>Lorem ipsum dolor sit amet</h2>")
         infoWindow.position = .top
-        infoWindow.height = 49
-        infoWindow.width = 5
-        infoWindow.open(object: self.marker)
+        infoWindow.height = Int(arc4random_uniform(220) + 30)
+        infoWindow.width = Int(arc4random_uniform(220) + 30)
+        infoWindow.open(object: marker)
     }
     
     @IBAction func drawPolyline1(_ sender: Any) {
@@ -107,6 +107,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction func getCoordinates(_ sender: Any) {
+        print("infoWindow id \(String(describing: infoWindow.objectID))")
+        infoWindow.getPoints() { points in
+            print("infoWindow points \(String(describing: points))")
+        }
+    }
+    
+    @IBAction func changeInfoWindowSize(_ sender: Any) {
         
     }
 }

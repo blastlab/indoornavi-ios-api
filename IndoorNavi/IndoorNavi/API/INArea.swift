@@ -26,9 +26,11 @@ public class INArea: INObject {
      */
     public init(withMap map: INMap) {
         super.init(withMap: map, variableNameTemplate: ScriptTemplates.VariableName)
-        
+    }
+    
+    override func initInJavaScript() {
         let javaScriptString = String(format: ScriptTemplates.InitializationTemplate, javaScriptVariableName)
-        self.map.evaluate(javaScriptString: javaScriptString)
+        map.evaluate(javaScriptString: javaScriptString)
     }
     
     /**

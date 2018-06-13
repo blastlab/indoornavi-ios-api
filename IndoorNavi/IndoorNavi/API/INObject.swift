@@ -36,27 +36,27 @@ public class INObject: NSObject {
         self.map = map
         super.init()
         javaScriptVariableName = String(format: variableNameTemplate, hash)
-        ready {
-            self.getID { objectID in
-                self.objectID = objectID
-            }
-        }
+        initInJavaScript()
+        getID()
     }
     
-    private func getID(callbackHandler: @escaping (Int?) -> Void) {
-        let javaScriptString = String(format: ScriptTemplates.GetIDTemplate, javaScriptVariableName)
-        map.evaluate(javaScriptString: javaScriptString) { response, error in
-            
-            guard error == nil, response != nil else {
-                print("Error: \(String(describing: error))")
-                callbackHandler(nil)
-                return
-            }
-            
-            if let idNumber = response! as? Int {
-                callbackHandler(idNumber)
-            } else {
-                callbackHandler(nil)
+    func initInJavaScript() {
+        fatalError("Function must be implemented in subclass.")
+    }
+    
+    private func getID() {
+        ready {
+            let javaScriptString = String(format: ScriptTemplates.GetIDTemplate, self.javaScriptVariableName)
+            self.map.evaluate(javaScriptString: javaScriptString) { response, error in
+                
+                guard error == nil, response != nil else {
+                    print("Error: \(String(describing: error))")
+                    return
+                }
+                
+                if let idNumber = response! as? Int {
+                    self.objectID = idNumber
+                }
             }
         }
     }
@@ -83,20 +83,22 @@ public class INObject: NSObject {
      *  - Parameter callbackHandler: A block to invoke when the array of points is available.
      */
     public func getPoints(callbackHandler: @escaping ([Point]?) -> Void) {
-        let javaScriptString = String(format: ScriptTemplates.GetPointsTemplate, javaScriptVariableName)
-        map.evaluate(javaScriptString: javaScriptString) { response, error in
-            print("Response: \(String(describing: response))")
-            print("Error: \(String(describing: error))")
-            
-            guard error == nil, response != nil else {
+        ready {
+            let javaScriptString = String(format: ScriptTemplates.GetPointsTemplate, self.javaScriptVariableName)
+            self.map.evaluate(javaScriptString: javaScriptString) { response, error in
+                print("Response: \(String(describing: response))")
                 print("Error: \(String(describing: error))")
-                callbackHandler(nil)
-                return
+                
+                guard error == nil, response != nil else {
+                    print("Error: \(String(describing: error))")
+                    callbackHandler(nil)
+                    return
+                }
+                
+                let points = PointHelper.coordinatesArray(fromJSONObject: response!)
+                print("Points: ",points)
+                callbackHandler(points)
             }
-            
-            let points = PointHelper.coordinatesArray(fromJSONObject: response!)
-            print("Points: ",points)
-            callbackHandler(points)
         }
     }
     
@@ -108,22 +110,24 @@ public class INObject: NSObject {
      *      - callbackHandler: A block to invoke when the boolean is available.
      */
     public func isWithin(coordinates: [Point], callbackHandler: @escaping (Bool) -> Void) {
-        let coordinatesString = PointHelper.coordinatesArrayString(fromCoordinatesArray: coordinates)
-        let javaScriptString = String(format: ScriptTemplates.IsWithinTemplate, javaScriptVariableName, coordinatesString)
-        map.evaluate(javaScriptString: javaScriptString) { response, error in
-            print("Response: \(String(describing: response))")
-            print("Error: \(String(describing: error))")
-            
-            guard error == nil, response != nil else {
+        ready {
+            let coordinatesString = PointHelper.coordinatesArrayString(fromCoordinatesArray: coordinates)
+            let javaScriptString = String(format: ScriptTemplates.IsWithinTemplate, self.javaScriptVariableName, coordinatesString)
+            self.map.evaluate(javaScriptString: javaScriptString) { response, error in
+                print("Response: \(String(describing: response))")
                 print("Error: \(String(describing: error))")
-                callbackHandler(false)
-                return
-            }
-            
-            if let isWithPoint = response! as? Bool {
-                callbackHandler(isWithPoint)
-            } else {
-                callbackHandler(false)
+                
+                guard error == nil, response != nil else {
+                    print("Error: \(String(describing: error))")
+                    callbackHandler(false)
+                    return
+                }
+                
+                if let isWithPoint = response! as? Bool {
+                    callbackHandler(isWithPoint)
+                } else {
+                    callbackHandler(false)
+                }
             }
         }
     }
@@ -132,7 +136,9 @@ public class INObject: NSObject {
      *  Removes object and destroys instance of the object in the frontend server, but do not destroys object class instance in your app.
      */
     public func remove() {
-        let javaScriptString = String(format: ScriptTemplates.RemoveTemplate, javaScriptVariableName)
-        map.evaluate(javaScriptString: javaScriptString)
+        ready {
+            let javaScriptString = String(format: ScriptTemplates.RemoveTemplate, self.javaScriptVariableName)
+            self.map.evaluate(javaScriptString: javaScriptString)
+        }
     }
 }
