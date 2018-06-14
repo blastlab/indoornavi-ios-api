@@ -113,7 +113,27 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func changeInfoWindowSize(_ sender: Any) {
+    @IBAction func drawPolies(_ sender: Any) {
         
+        var polylines = [INPolyline]()
+        for _ in 1...100 {
+            let polyline = INPolyline(withMap: map)
+            
+            var points = [Point]()
+            for _ in 1...10 {
+                points.append(Point(x: Int(arc4random_uniform(2000) + 5), y: Int(arc4random_uniform(2000) + 5)))
+            }
+            
+            let randomRed = CGFloat(arc4random()) / CGFloat(UInt32.max)
+            let randomGreen = CGFloat(arc4random()) / CGFloat(UInt32.max)
+            let randomBlue = CGFloat(arc4random()) / CGFloat(UInt32.max)
+            
+            polyline.points(points)
+            polyline.set(red: randomRed, green: randomGreen, blue: randomBlue)
+            polyline.draw()
+            polylines.append(polyline)
+            usleep(10000)
+        }
+        print("Koniec")
     }
 }

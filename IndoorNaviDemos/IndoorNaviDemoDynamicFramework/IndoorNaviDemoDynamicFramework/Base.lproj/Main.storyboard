@@ -89,13 +89,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LrI-fY-1iR">
-                                <rect key="frame" x="88.5" y="603" width="120" height="24"/>
+                                <rect key="frame" x="139.5" y="603" width="69" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <state key="normal" title="Change info widnow size">
+                                <state key="normal" title="Draw 100 poly">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="changeInfoWindowSize:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nTU-HQ-a44"/>
+                                    <action selector="drawPolies:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LQP-zc-lJ6"/>
                                 </connections>
                             </button>
                         </subviews>
