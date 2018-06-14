@@ -68,13 +68,13 @@ public class INInfoWindow: INObject {
             return privateHeight
         }
         set {
-            guard newValue >= 50 else {
+            if newValue >= 50 {
+                privateHeight = newValue
+            } else {
                 NSLog("INInfoWindow's height cannot be less than 50px. Height is set to 50px.")
-                print("Private height = \(privateHeight)")
-                return
+                privateHeight = 50
             }
             
-            privateHeight = newValue
             ready {
                 let javaScriptString = String(format: ScriptTemplates.HeightTemplate, self.javaScriptVariableName, self.height)
                 self.map.evaluate(javaScriptString: javaScriptString)
@@ -90,13 +90,13 @@ public class INInfoWindow: INObject {
             return privateWidth
         }
         set {
-            guard newValue >= 50 else {
+            if newValue >= 50 {
+                privateHeight = newValue
+            } else {
                 NSLog("INInfoWindow's width cannot be less than 50px. Width is set to 50px.")
-                print("Private width = \(privateWidth)")
-                return
+                privateHeight = 50
             }
             
-            privateWidth = newValue
             ready {
                 let javaScriptString = String(format: ScriptTemplates.WidthTemplate, self.javaScriptVariableName, self.privateWidth)
                 self.map.evaluate(javaScriptString: javaScriptString)
