@@ -24,11 +24,12 @@ public class INArea: INObject {
      *
      *  - Parameter withMap: An `INMap` object, in which `INArea` is going to be created.
      */
-    public init(withMap map: INMap) {
-        super.init(withMap: map, variableNameTemplate: ScriptTemplates.VariableName)
+    public override init(withMap map: INMap) {
+        super.init(withMap: map)
     }
     
     override func initInJavaScript() {
+        javaScriptVariableName = String(format: ScriptTemplates.VariableName, hash)
         let javaScriptString = String(format: ScriptTemplates.InitializationTemplate, javaScriptVariableName)
         map.evaluate(javaScriptString: javaScriptString)
     }

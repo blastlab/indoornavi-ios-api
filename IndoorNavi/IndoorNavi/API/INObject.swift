@@ -17,7 +17,7 @@ public class INObject: NSObject {
         static let RemoveTemplate = "%@.remove();"
     }
     
-    private(set) var javaScriptVariableName: String!
+    var javaScriptVariableName: String!
     let map: INMap
     
     /**
@@ -32,10 +32,9 @@ public class INObject: NSObject {
      *
      *  - Parameter withMap: An `INMap` object, in which `INObject` is going to be created.
      */
-    public init(withMap map: INMap, variableNameTemplate: String) {
+    init(withMap map: INMap) {
         self.map = map
         super.init()
-        javaScriptVariableName = String(format: variableNameTemplate, hash)
         initInJavaScript()
         getID()
     }
