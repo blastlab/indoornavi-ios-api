@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14111" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iyb-xa-ELL">
-                                <rect key="frame" x="8" y="638" width="66" height="21"/>
+                                <rect key="frame" x="8" y="638" width="65.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="7"/>
                                 <state key="normal" title="Draw Info Window">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -29,7 +29,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wEZ-6T-tQF">
-                                <rect key="frame" x="82" y="635" width="65" height="24"/>
+                                <rect key="frame" x="81.5" y="635" width="65.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <state key="normal" title="Draw poly 1">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -39,7 +39,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aiN-FQ-EYs">
-                                <rect key="frame" x="155" y="635" width="65.5" height="24"/>
+                                <rect key="frame" x="155" y="635" width="65" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <state key="normal" title="Draw poly 2">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -49,7 +49,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1At-V7-ePm">
-                                <rect key="frame" x="228.5" y="630" width="65" height="29"/>
+                                <rect key="frame" x="228" y="630" width="65.5" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Draw area">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -88,11 +88,22 @@
                                     <action selector="getCoordinates:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PFK-2m-ROf"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LrI-fY-1iR">
+                                <rect key="frame" x="139.5" y="603" width="69" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <state key="normal" title="Draw 100 poly">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="drawPolies:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LQP-zc-lJ6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.24502822760000001" green="0.47951000929999998" blue="0.99864953759999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Iyb-xa-ELL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="0AO-DA-xbc"/>
                             <constraint firstItem="aiN-FQ-EYs" firstAttribute="leading" secondItem="wEZ-6T-tQF" secondAttribute="trailing" constant="8" id="1kI-GK-W3o"/>
+                            <constraint firstItem="in8-Sd-0TG" firstAttribute="leading" secondItem="LrI-fY-1iR" secondAttribute="trailing" constant="8" id="30C-7d-185"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="6Fa-hJ-K80" secondAttribute="bottom" constant="8" id="C0X-hs-djM"/>
                             <constraint firstItem="6Fa-hJ-K80" firstAttribute="top" secondItem="5AZ-E6-MTD" secondAttribute="bottom" constant="8" id="CgS-ch-1BY"/>
                             <constraint firstItem="1At-V7-ePm" firstAttribute="width" secondItem="wEZ-6T-tQF" secondAttribute="width" id="EmW-aM-zST"/>
@@ -108,6 +119,7 @@
                             <constraint firstItem="5AZ-E6-MTD" firstAttribute="leading" secondItem="in8-Sd-0TG" secondAttribute="trailing" constant="8" id="jGH-dR-q2j"/>
                             <constraint firstItem="1At-V7-ePm" firstAttribute="top" secondItem="in8-Sd-0TG" secondAttribute="bottom" constant="8" id="kyo-Ki-071"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="aiN-FQ-EYs" secondAttribute="bottom" constant="8" id="nQs-GH-gMT"/>
+                            <constraint firstItem="wEZ-6T-tQF" firstAttribute="top" secondItem="LrI-fY-1iR" secondAttribute="bottom" constant="8" id="r1i-iY-UrO"/>
                             <constraint firstItem="6Fa-hJ-K80" firstAttribute="leading" secondItem="1At-V7-ePm" secondAttribute="trailing" constant="8" id="rW6-e3-SXJ"/>
                             <constraint firstItem="aiN-FQ-EYs" firstAttribute="width" secondItem="wEZ-6T-tQF" secondAttribute="width" id="uCk-Gt-suy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6Fa-hJ-K80" secondAttribute="trailing" constant="8" id="vGW-ro-eIj"/>

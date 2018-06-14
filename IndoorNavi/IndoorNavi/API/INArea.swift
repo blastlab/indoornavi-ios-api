@@ -26,10 +26,12 @@ public class INArea: INObject {
      */
     public override init(withMap map: INMap) {
         super.init(withMap: map)
-        
-        javaScriptVariableName = String(format: ScriptTemplates.VariableName, self.hash)
+    }
+    
+    override func initInJavaScript() {
+        javaScriptVariableName = String(format: ScriptTemplates.VariableName, hash)
         let javaScriptString = String(format: ScriptTemplates.InitializationTemplate, javaScriptVariableName)
-        self.map.evaluate(javaScriptString:  javaScriptString)
+        map.evaluate(javaScriptString: javaScriptString)
     }
     
     /**
@@ -37,8 +39,10 @@ public class INArea: INObject {
      *  Use of this method is indispensable to draw area with set configuration in the IndoorNavi Map.
      */
     public func draw() {
-        let javaScriptString = String(format: ScriptTemplates.DrawTemplate, javaScriptVariableName)
-        map.evaluate(javaScriptString: javaScriptString)
+        ready {
+            let javaScriptString = String(format: ScriptTemplates.DrawTemplate, self.javaScriptVariableName)
+            self.map.evaluate(javaScriptString: javaScriptString)
+        }
     }
     
     /**
@@ -47,10 +51,12 @@ public class INArea: INObject {
      *  - Parameter points: Array of Point's that are describing area in real world dimensions. Coordinates are calculated to the map scale and then displayed. For less than 3 points supplied to this method, Area isn't going to be drawn.
      */
     public func points(_ points: [Point]) {
-        let pointsString = PointHelper.coordinatesArrayString(fromCoordinatesArray: points)
-        map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
-        let javaScriptString = String(format: ScriptTemplates.PointsTemplate, javaScriptVariableName)
-        map.evaluate(javaScriptString: javaScriptString)
+        ready {
+            let pointsString = PointHelper.coordinatesArrayString(fromCoordinatesArray: points)
+            self.map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
+            let javaScriptString = String(format: ScriptTemplates.PointsTemplate, self.javaScriptVariableName)
+            self.map.evaluate(javaScriptString: javaScriptString)
+        }
     }
     
     /**
@@ -62,9 +68,11 @@ public class INArea: INObject {
      *      - blue: The blue value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
      */
     public func setFillColor(red: CGFloat, green: CGFloat, blue: CGFloat) {
-        let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
-        let javaScriptString = String(format: ScriptTemplates.SetFillColorTemplate, javaScriptVariableName, stringColor)
-        map.evaluate(javaScriptString: javaScriptString)
+        ready {
+            let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
+            let javaScriptString = String(format: ScriptTemplates.SetFillColorTemplate, self.javaScriptVariableName, stringColor)
+            self.map.evaluate(javaScriptString: javaScriptString)
+        }
     }
     
     /**
@@ -73,8 +81,10 @@ public class INArea: INObject {
      *  - Parameter opacity: Number between 1.0 and 0. Set it to 1.0 for no opacity, 0 for maximum opacity. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
      */
     public func setOpacity(_ opacity: CGFloat) {
-        let standarizedOpacity = ColorHelper.standarizedOpacity(fromValue: opacity)
-        let javaScriptString = String(format: ScriptTemplates.SetOpacityTemplate, javaScriptVariableName, standarizedOpacity)
-        map.evaluate(javaScriptString: javaScriptString)
+        ready {
+            let standarizedOpacity = ColorHelper.standarizedOpacity(fromValue: opacity)
+            let javaScriptString = String(format: ScriptTemplates.SetOpacityTemplate, self.javaScriptVariableName, standarizedOpacity)
+            self.map.evaluate(javaScriptString: javaScriptString)
+        }
     }
 }

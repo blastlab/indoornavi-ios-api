@@ -17,10 +17,10 @@ public class INReport: NSObject {
         static let GetCoordinatesTemplate = "%@.getCoordinates(%d, new Date(%lu), new Date(%lu)).then(res => webkit.messageHandlers.CoordinatesCallbacksController.postMessage(%@));"
     }
     
-    private var map: INMap!
+    private var map: INMap
     private var javaScriptVariableName: String!
-    private var targetHost: String!
-    private var apiKey: String!
+    private var targetHost: String
+    private var apiKey: String
     
     /**
      *  Initializes a new `INReport` object with the provided parameters.
@@ -31,12 +31,15 @@ public class INReport: NSObject {
      *      - apiKey: The API key created on the INMap server.
      */
     public init(map: INMap, targetHost: String, apiKey: String) {
-        super.init()
         self.map = map
         self.targetHost = targetHost
         self.apiKey = apiKey
-        javaScriptVariableName = String(format: ScriptTemplates.VariableName, self.hash)
-        
+        super.init()
+        javaScriptVariableName = String(format: ScriptTemplates.VariableName, hash)
+        initInJavaScript()
+    }
+    
+    private func initInJavaScript() {
         let javaScriptString = String(format: ScriptTemplates.InitializationTemplate, javaScriptVariableName, targetHost, apiKey)
         map.evaluate(javaScriptString: javaScriptString)
     }

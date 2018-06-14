@@ -25,10 +25,12 @@ public class INPolyline: INObject {
      */
     public override init(withMap map: INMap) {
         super.init(withMap: map)
-        
-        javaScriptVariableName = String(format: ScriptTemplates.VariableName, self.hash)
+    }
+    
+    override func initInJavaScript() {
+        javaScriptVariableName = String(format: ScriptTemplates.VariableName, hash)
         let javaScriptString = String(format: ScriptTemplates.InitializationTemplate, javaScriptVariableName)
-        self.map.evaluate(javaScriptString:  javaScriptString)
+        self.map.evaluate(javaScriptString: javaScriptString)
     }
     
     /**
@@ -37,10 +39,12 @@ public class INPolyline: INObject {
      *  - Parameter points: Array of `Point`'s that are describing polyline in real world dimensions. Coordinates are calculated to the map scale and then displayed.
      */
     public func points(_ points: [Point]) {
-        let pointsString = PointHelper.coordinatesArrayString(fromCoordinatesArray: points)
-        map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
-        let javaScriptString = String(format: ScriptTemplates.PointsTemplate, javaScriptVariableName)
-        map.evaluate(javaScriptString: javaScriptString)
+        ready {
+            let pointsString = PointHelper.coordinatesArrayString(fromCoordinatesArray: points)
+            self.map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
+            let javaScriptString = String(format: ScriptTemplates.PointsTemplate, self.javaScriptVariableName)
+            self.map.evaluate(javaScriptString: javaScriptString)
+        }
     }
     
     /**
@@ -49,8 +53,10 @@ public class INPolyline: INObject {
      *  Use of this method is indispensable to draw polyline with set configuration.
      */
     public func draw() {
-        let javaScriptString = String(format: ScriptTemplates.DrawTemplate, javaScriptVariableName)
-        map.evaluate(javaScriptString: javaScriptString)
+        ready {
+            let javaScriptString = String(format: ScriptTemplates.DrawTemplate, self.javaScriptVariableName)
+            self.map.evaluate(javaScriptString: javaScriptString)
+        }
     }
     
     /**
@@ -62,8 +68,10 @@ public class INPolyline: INObject {
      *      - blue: The blue value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
      */
     public func set(red: CGFloat, green: CGFloat, blue: CGFloat) {
-        let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
-        let javaScriptString = String(format: ScriptTemplates.SetLineColorTemplate, javaScriptVariableName, stringColor)
-        map.evaluate(javaScriptString: javaScriptString)
+        ready {
+            let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
+            let javaScriptString = String(format: ScriptTemplates.SetLineColorTemplate, self.javaScriptVariableName, stringColor)
+            self.map.evaluate(javaScriptString: javaScriptString)
+        }
     }
  }
