@@ -23,7 +23,7 @@ public class INPolyline: INObject {
      *
      *  - Parameter withMap: An `INMap` object, in which `INPolyline` object is going to be created.
      */
-    public override init(withMap map: INMap) {
+    @objc public override init(withMap map: INMap) {
         super.init(withMap: map)
     }
     
@@ -38,7 +38,7 @@ public class INPolyline: INObject {
      *
      *  - Parameter points: Array of `Point`'s that are describing polyline in real world dimensions. Coordinates are calculated to the map scale and then displayed.
      */
-    public func points(_ points: [Point]) {
+    public func set(points: [INPoint]) {
         ready {
             let pointsString = PointHelper.coordinatesArrayString(fromCoordinatesArray: points)
             self.map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
@@ -47,12 +47,18 @@ public class INPolyline: INObject {
         }
     }
     
+    @available(swift, obsoleted: 1.0)
+    @objc(setPointsArray:withArraySize:) public func set(pointsArray: UnsafePointer<INPoint>, withArraySize size:Int) {
+        let points = PointHelper.pointsArray(fromCArray: pointsArray, withSize: size)
+        set(points: points)
+    }
+    
     /**
      *  Place polyline on the map with all given settings.
      *  There is necessary to use `points()` before `draw()` to indicate where polyline should to be located.
      *  Use of this method is indispensable to draw polyline with set configuration.
      */
-    public func draw() {
+    @objc public func draw() {
         ready {
             let javaScriptString = String(format: ScriptTemplates.DrawTemplate, self.javaScriptVariableName)
             self.map.evaluate(javaScriptString: javaScriptString)
@@ -67,7 +73,7 @@ public class INPolyline: INObject {
      *      - green: The green value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
      *      - blue: The blue value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
      */
-    public func set(red: CGFloat, green: CGFloat, blue: CGFloat) {
+    @objc public func setColorWith(red: CGFloat, green: CGFloat, blue: CGFloat) {
         ready {
             let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
             let javaScriptString = String(format: ScriptTemplates.SetLineColorTemplate, self.javaScriptVariableName, stringColor)

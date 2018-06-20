@@ -30,4 +30,16 @@ class CoordinatesHelper: NSObject {
             return [Coordinates]()
         }
     }
+    
+    static func callbackHandlerTakingStructs(fromCallbackHandlerTakingObjects callbackHandlerTakingObjects: @escaping ([_ObjCCoordinates]) -> Void) -> ([Coordinates]) -> Void {
+        let callbackHandlerTakingStructs: ([Coordinates]) -> Void = { coordinatesArray in
+            let objCCoordinatesArray: [_ObjCCoordinates] = coordinatesArray.map { coordinates in
+                let objCCoordinates = _ObjCCoordinates(x: coordinates.x, y: coordinates.y, tagID: coordinates.tagID, date: coordinates.date)
+                return objCCoordinates
+            }
+            callbackHandlerTakingObjects(objCCoordinatesArray)
+        }
+        
+        return callbackHandlerTakingStructs
+    }
 }

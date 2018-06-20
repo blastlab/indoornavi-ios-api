@@ -27,6 +27,11 @@ public class INObject: NSObject {
      */
     private(set) public var objectID: Int?
     
+    @available(swift, obsoleted: 1.0)
+    @objc(objectID) public var _ObjCobjectID: NSNumber? {
+        return objectID as NSNumber?
+    }
+    
     /**
      *  Initializes a new `INObject` object inside given `INMap` object.
      *
@@ -81,7 +86,7 @@ public class INObject: NSObject {
      *
      *  - Parameter callbackHandler: A block to invoke when the array of points is available.
      */
-    public func getPoints(callbackHandler: @escaping ([Point]?) -> Void) {
+    public func getPoints(callbackHandler: @escaping ([INPoint]?) -> Void) {
         ready {
             let javaScriptString = String(format: ScriptTemplates.GetPointsTemplate, self.javaScriptVariableName)
             self.map.evaluate(javaScriptString: javaScriptString) { response, error in
@@ -101,6 +106,12 @@ public class INObject: NSObject {
         }
     }
     
+    @available(swift, obsoleted: 1.0)
+    @objc public func getPoints(callbackHandler: @escaping (_ pointsArray: UnsafePointer<INPoint>?,_ size:Int) -> Void) {
+        let callbackHandlerTakingArrayOfStructs = PointHelper.callbackHandlerTakingArray(fromCallbackHandlerTakingCArray: callbackHandler)
+        getPoints(callbackHandler: callbackHandlerTakingArrayOfStructs)
+    }
+    
     /**
      *  Checks if point of given coordinates is inside the object. Use of this method is optional.
      *
@@ -108,7 +119,7 @@ public class INObject: NSObject {
      *      - coordinates: Coordinates that are described in real world dimensions. Coordinates are calculated to the map scale.
      *      - callbackHandler: A block to invoke when the boolean is available.
      */
-    public func isWithin(coordinates: [Point], callbackHandler: @escaping (Bool) -> Void) {
+    public func isWithin(coordinates: [INPoint], callbackHandler: @escaping (Bool) -> Void) {
         ready {
             let coordinatesString = PointHelper.coordinatesArrayString(fromCoordinatesArray: coordinates)
             let javaScriptString = String(format: ScriptTemplates.IsWithinTemplate, self.javaScriptVariableName, coordinatesString)
@@ -131,10 +142,16 @@ public class INObject: NSObject {
         }
     }
     
+    @available(swift, obsoleted: 1.0)
+    @objc private func isWithin(coordinates: UnsafePointer<INPoint>, withSize size: Int, callbackHandler: @escaping (Bool) -> Void)  {
+        let coordinates = PointHelper.pointsArray(fromCArray: coordinates, withSize: size)
+        isWithin(coordinates: coordinates, callbackHandler: callbackHandler)
+    }
+    
     /**
      *  Removes object and destroys instance of the object in the frontend server, but do not destroys object class instance in your app.
      */
-    public func remove() {
+    @objc public func remove() {
         ready {
             let javaScriptString = String(format: ScriptTemplates.RemoveTemplate, self.javaScriptVariableName)
             self.map.evaluate(javaScriptString: javaScriptString)

@@ -28,7 +28,7 @@ public class INMarker: INObject {
      *
      *  - Parameter withMap: An `INMap` object, in which `INMarker` object is going to be created.
      */
-    public override init(withMap map: INMap) {
+    @objc public override init(withMap map: INMap) {
         super.init(withMap: map)
     }
     
@@ -43,7 +43,7 @@ public class INMarker: INObject {
      *
      *  - Parameter onClickCallback: A block to invoke when marker is tapped.
      */
-    public func addEventListener(onClickCallback: @escaping () -> Void) {
+    @objc public func addEventListener(onClickCallback: @escaping () -> Void) {
         ready {
             self.callbackUUID = UUID().uuidString
             self.map.eventCallbacksController.eventCallbacks[self.callbackUUID!] = onClickCallback
@@ -56,7 +56,7 @@ public class INMarker: INObject {
     /**
      *  Removes block invoked on tap if exists. Use of this method is optional.
      */
-    public func removeEventListener() {
+    @objc public func removeEventListener() {
         ready {
             if let uuid = self.callbackUUID {
                 self.map.eventCallbacksController.removeEventCallback(forUUID: uuid)
@@ -70,7 +70,7 @@ public class INMarker: INObject {
      *  Place market on the map with all given settings. There is necessary to use `point()` method before `draw()` to indicate the point where marker should to be located.
      *  Use of this method is indispensable to display marker with set configuration in the IndoorNavi Map.
      */
-    public func draw() {
+    @objc public func draw() {
         ready {
             let javaScriptString = String(format: ScriptTemplates.PlaceTemplate, self.javaScriptVariableName)
             self.map.evaluate(javaScriptString: javaScriptString)
@@ -82,7 +82,7 @@ public class INMarker: INObject {
      *
      *  - Parameter point: Represents marker position in real world. Coordinates are calculated to the map scale and then displayed. Position will be clipped to the point in the bottom center of marker icon.
      */
-    public func point(_ point: Point) {
+    @objc(setPoint:) public func set(point: INPoint) {
         ready {
             let pointString = PointHelper.coordinatesString(fromCoordinates: point)
             let javaScriptString = String(format: ScriptTemplates.PointTemplate, self.javaScriptVariableName, pointString)
@@ -95,7 +95,7 @@ public class INMarker: INObject {
      *
      *  - Parameter withText: `String` that will be used as a marker label.
      */
-    public func setLabel(withText text: String) {
+    @objc public func setLabel(withText text: String) {
         ready {
             let javaScriptString = String(format: ScriptTemplates.SetLabelTemplate, self.javaScriptVariableName, text)
             self.map.evaluate(javaScriptString: javaScriptString)
@@ -105,7 +105,7 @@ public class INMarker: INObject {
     /**
      *  Removes marker label. To remove label it is indispensable to call `draw()` again.
      */
-    public func removeLabel() {
+    @objc public func removeLabel() {
         ready {
             let javaScriptString = String(format: ScriptTemplates.RemoveLabelTemplate, self.javaScriptVariableName)
             self.map.evaluate(javaScriptString: javaScriptString)
@@ -117,7 +117,7 @@ public class INMarker: INObject {
      *
      *  - Parameter path: URL path to icon.
      */
-    public func setIcon(withPath path: String) {
+    @objc public func setIcon(withPath path: String) {
         ready {
             let javaScriptString = String(format: ScriptTemplates.SetIconTemplate, self.javaScriptVariableName, path)
             self.map.evaluate(javaScriptString: javaScriptString)

@@ -30,7 +30,7 @@ public class INReport: NSObject {
      *      - targetHost: Address to the INMap server.
      *      - apiKey: The API key created on the INMap server.
      */
-    public init(map: INMap, targetHost: String, apiKey: String) {
+    @objc public init(map: INMap, targetHost: String, apiKey: String) {
         self.map = map
         self.targetHost = targetHost
         self.apiKey = apiKey
@@ -61,6 +61,12 @@ public class INReport: NSObject {
         map.evaluate(javaScriptString: javaScriptString)
     }
     
+    @available(swift, obsoleted: 1.0)
+    @objc public func getAreaEvents(fromFloorWithID floorID: Int, from: Date, to: Date, callbackHandler: @escaping ([_ObjCAreaEvent]) -> Void) {
+        let callbackHandlerTakingStructs = AreaEventsHelper.callbackHandlerTakingStructs(fromCallbackHandlerTakingObjects: callbackHandler)
+        getAreaEvents(fromFloorWithID: floorID, from: from, to: to, callbackHandler: callbackHandlerTakingStructs)
+    }
+    
     /**
      *  Returns list of historical coordinates.
      *
@@ -76,5 +82,11 @@ public class INReport: NSObject {
         let message = String(format: ScriptTemplates.MessageTemplate, uuid)
         let javaScriptString = String(format: ScriptTemplates.GetCoordinatesTemplate, javaScriptVariableName, floorID, from.timeIntervalSince1970.miliseconds, to.timeIntervalSince1970.miliseconds, message)
         map.evaluate(javaScriptString: javaScriptString)
+    }
+    
+    @available(swift, obsoleted: 1.0)
+    @objc public func getCoordinates(fromFloorWithID floorID: Int, from: Date, to: Date, callbackHandler: @escaping ([_ObjCCoordinates]) -> Void) {
+        let callbackHandlerTakingStructs = CoordinatesHelper.callbackHandlerTakingStructs(fromCallbackHandlerTakingObjects: callbackHandler)
+        getCoordinates(fromFloorWithID: floorID, from: from, to: to, callbackHandler: callbackHandlerTakingStructs)
     }
 }

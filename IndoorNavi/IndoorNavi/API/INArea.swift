@@ -24,7 +24,7 @@ public class INArea: INObject {
      *
      *  - Parameter withMap: An `INMap` object, in which `INArea` is going to be created.
      */
-    public override init(withMap map: INMap) {
+    @objc public override init(withMap map: INMap) {
         super.init(withMap: map)
     }
     
@@ -38,7 +38,7 @@ public class INArea: INObject {
      *  Place area on the map with all given settings. There is necessary to use `points()` before `draw()` to indicate where area should to be located.
      *  Use of this method is indispensable to draw area with set configuration in the IndoorNavi Map.
      */
-    public func draw() {
+    @objc public func draw() {
         ready {
             let javaScriptString = String(format: ScriptTemplates.DrawTemplate, self.javaScriptVariableName)
             self.map.evaluate(javaScriptString: javaScriptString)
@@ -50,13 +50,23 @@ public class INArea: INObject {
      *
      *  - Parameter points: Array of Point's that are describing area in real world dimensions. Coordinates are calculated to the map scale and then displayed. For less than 3 points supplied to this method, Area isn't going to be drawn.
      */
-    public func points(_ points: [Point]) {
+    public func set(points: [INPoint]) {
         ready {
             let pointsString = PointHelper.coordinatesArrayString(fromCoordinatesArray: points)
             self.map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
             let javaScriptString = String(format: ScriptTemplates.PointsTemplate, self.javaScriptVariableName)
             self.map.evaluate(javaScriptString: javaScriptString)
         }
+    }
+    
+    @available(swift, obsoleted: 1.0)
+    @objc(setPointsArray:withArraySize:) public func set(pointsArray: UnsafePointer<INPoint>, withArraySize size:Int) {
+        var points = [INPoint]()
+        for i in 0..<size {
+            let pointer = pointsArray + i
+            points.append(pointer.pointee)
+        }
+        set(points: points)
     }
     
     /**
@@ -67,7 +77,7 @@ public class INArea: INObject {
      *      - green: The green value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
      *      - blue: The blue value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
      */
-    public func setFillColor(red: CGFloat, green: CGFloat, blue: CGFloat) {
+    @objc public func setFillColor(red: CGFloat, green: CGFloat, blue: CGFloat) {
         ready {
             let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
             let javaScriptString = String(format: ScriptTemplates.SetFillColorTemplate, self.javaScriptVariableName, stringColor)
@@ -80,7 +90,7 @@ public class INArea: INObject {
      *
      *  - Parameter opacity: Number between 1.0 and 0. Set it to 1.0 for no opacity, 0 for maximum opacity. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
      */
-    public func setOpacity(_ opacity: CGFloat) {
+    @objc public func setOpacity(_ opacity: CGFloat) {
         ready {
             let standarizedOpacity = ColorHelper.standarizedOpacity(fromValue: opacity)
             let javaScriptString = String(format: ScriptTemplates.SetOpacityTemplate, self.javaScriptVariableName, standarizedOpacity)
