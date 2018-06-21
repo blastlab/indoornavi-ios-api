@@ -30,11 +30,6 @@ NSString* const ApiKey = @"TestAdmin";
     [self initializePoints];
     [map setupConnectionWithTargetHost:FrontendTargetHost andApiKey:ApiKey];
     [self.view addSubview:map];
-    [map load:2 onCompletion:^{
-        self->infoWindow = [[INInfoWindow alloc] initWithMap:self->map];
-        [self->infoWindow setInnerHTMLWithString:@"<h2>Lorem ipsum dolor sit amet</h2>"];
-        NSLog(@"Completed");
-    }];
 }
 
 - (void)initializePoints {
@@ -101,7 +96,7 @@ NSString* const ApiKey = @"TestAdmin";
 - (IBAction)createReport:(id)sender {
     INReport* report = [[INReport alloc] initWithMap:map targetHost:BackendTargetHost apiKey:ApiKey];
     NSDate* from = [[NSDate alloc] initWithTimeIntervalSince1970:1428105600];
-    NSDate* to = [[NSDate alloc] initWithTimeIntervalSince1970:1428105600];
+    NSDate* to = [NSDate new];
     [report getAreaEventsFromFloorWithID:2 from:from to:to callbackHandler:^(NSArray<AreaEvent*>* areaEvents) {
         NSLog(@"Area events: %@",areaEvents);
     }];
@@ -139,8 +134,12 @@ NSString* const ApiKey = @"TestAdmin";
     }
 }
 
-- (IBAction)refresh:(id)sender {
-    [map setupConnectionWithTargetHost:FrontendTargetHost andApiKey:ApiKey];
+- (IBAction)load:(id)sender {
+    [map load:2 onCompletion:^{
+        self->infoWindow = [[INInfoWindow alloc] initWithMap:self->map];
+        [self->infoWindow setInnerHTMLWithString:@"<h2>Lorem ipsum dolor sit amet</h2>"];
+        NSLog(@"Completed");
+    }];
 }
 
 @end

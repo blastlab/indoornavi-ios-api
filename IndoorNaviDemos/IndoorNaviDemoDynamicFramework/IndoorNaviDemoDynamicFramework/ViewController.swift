@@ -27,11 +27,6 @@ class ViewController: UIViewController {
         
         map.setupConnection(withTargetHost: FrontendTargetHost, andApiKey: ApiKey)
         self.view.addSubview(map)
-        map.load(2) {
-            print("Completed.")
-            self.infoWindow = INInfoWindow(withMap: self.map)
-            self.infoWindow.setInnerHTML(string: "<h2>Lorem ipsum dolor sit amet</h2>")
-        }
     }
     
     func showAlert() {
@@ -133,7 +128,11 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func refresh(_ sender: Any) {
-        map.setupConnection(withTargetHost: FrontendTargetHost, andApiKey: ApiKey)
+    @IBAction func load(_ sender: Any) {
+        map.load(2) {
+            print("Completed.")
+            self.infoWindow = INInfoWindow(withMap: self.map)
+            self.infoWindow.setInnerHTML(string: "<h2>Lorem ipsum dolor sit amet</h2>")
+        }
     }
 }

@@ -108,12 +108,11 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ASx-NL-edZ">
                                 <rect key="frame" x="8" y="546" width="65.5" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="Refresh">
+                                <state key="normal" title="Load">
                                     <color key="titleColor" red="0.88235294119999996" green="0.1333333333" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="getCoordinates:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TF6-vg-qXz"/>
-                                    <action selector="refresh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6zw-eK-2Ie"/>
+                                    <action selector="load:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qhd-S5-FL9"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ij6-8d-Adf" customClass="INMap" customModule="IndoorNavi">
@@ -196,7 +195,6 @@
                                 </state>
                                 <connections>
                                     <action selector="drawInfoWindow:" destination="wR2-sL-pvx" eventType="touchUpInside" id="HHn-oF-KCC"/>
-                                    <action selector="drawInfoWindow:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jSj-ty-oB3"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VZQ-f4-Egg">
@@ -206,7 +204,6 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="drawPolyline1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dyB-Oi-UHE"/>
                                     <action selector="drawPolyline1:" destination="wR2-sL-pvx" eventType="touchUpInside" id="e0G-fO-lhq"/>
                                 </connections>
                             </button>
@@ -217,7 +214,6 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="drawPolyline2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hKE-8I-dhH"/>
                                     <action selector="drawPolyline2:" destination="wR2-sL-pvx" eventType="touchUpInside" id="y09-ht-ieT"/>
                                 </connections>
                             </button>
@@ -228,7 +224,6 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="drawArea:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NGg-RY-giR"/>
                                     <action selector="drawArea:" destination="wR2-sL-pvx" eventType="touchUpInside" id="ba1-5l-GRP"/>
                                 </connections>
                             </button>
@@ -240,7 +235,6 @@
                                 </state>
                                 <connections>
                                     <action selector="createReport:" destination="wR2-sL-pvx" eventType="touchUpInside" id="aRc-Bt-ude"/>
-                                    <action selector="createReport:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ez8-j7-RRp"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xge-5r-nWF">
@@ -250,7 +244,6 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="getCoordinates:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1qg-nh-trW"/>
                                     <action selector="getCoordinates:" destination="wR2-sL-pvx" eventType="touchUpInside" id="nZs-Xj-c8k"/>
                                 </connections>
                             </button>
@@ -262,7 +255,6 @@
                                 </state>
                                 <connections>
                                     <action selector="drawPolies:" destination="wR2-sL-pvx" eventType="touchUpInside" id="I9L-qP-oJ1"/>
-                                    <action selector="drawPolies:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kOM-ye-ytV"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4yF-KB-4RV">
@@ -275,12 +267,11 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dh8-Fm-Fz6">
                                 <rect key="frame" x="8" y="546" width="65.5" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="Refresh">
+                                <state key="normal" title="Load">
                                     <color key="titleColor" red="0.24502822760000001" green="0.47951000929999998" blue="0.99864953759999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="getCoordinates:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hal-79-NOZ"/>
-                                    <action selector="refresh:" destination="wR2-sL-pvx" eventType="touchUpInside" id="si3-ro-vfx"/>
+                                    <action selector="load:" destination="wR2-sL-pvx" eventType="touchUpInside" id="jfm-42-7rs"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dxk-v4-gjj" customClass="INMap" customModule="IndoorNavi">
@@ -294,7 +285,6 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="placeMarker:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cGQ-1K-uBc"/>
                                     <action selector="placeMarker:" destination="wR2-sL-pvx" eventType="touchUpInside" id="xWH-c0-YqV"/>
                                 </connections>
                             </button>
