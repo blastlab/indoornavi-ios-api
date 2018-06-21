@@ -98,7 +98,23 @@ NSString* const ApiKey = @"TestAdmin";
     NSDate* from = [[NSDate alloc] initWithTimeIntervalSince1970:1428105600];
     NSDate* to = [NSDate new];
     [report getAreaEventsFromFloorWithID:2 from:from to:to callbackHandler:^(NSArray<AreaEvent*>* areaEvents) {
-        NSLog(@"Area events: %@",areaEvents);
+        NSLog(@"Area events:");
+        for (AreaEvent* areaEvent in areaEvents) {
+            NSLog(@" - Tag ID: %ld", (long)areaEvent.tagID);
+            NSLog(@" - Area ID: %ld", (long)areaEvent.areaID);
+            NSLog(@" - Date: %@", areaEvent.date);
+            NSLog(@" - Name: %@", areaEvent.areaName);
+            NSLog(@" - Mode: %ld", (long)areaEvent.mode);
+        }
+    }];
+    [report getCoordinatesFromFloorWithID:2 from:from to:to callbackHandler:^(NSArray<Coordinates*>* coordinatesArray) {
+        NSLog(@"Coordinates:");
+        for (Coordinates* coordinates in coordinatesArray) {
+            NSLog(@" - X: %ld", (long)coordinates.x);
+            NSLog(@" - Y: %ld", (long)coordinates.y);
+            NSLog(@" - Tag ID: %ld", (long)coordinates.tagID);
+            NSLog(@" - Date: %@", coordinates.date);
+        }
     }];
 }
 

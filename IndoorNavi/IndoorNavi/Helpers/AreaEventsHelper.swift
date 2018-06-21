@@ -37,7 +37,7 @@ class AreaEventsHelper: NSObject {
         let callbackHandlerTakingStructs: ([AreaEvent]) -> Void = { areaEvents in
             let objCAreaEvents: [_ObjCAreaEvent] = areaEvents.map { areaEvent in
                 
-                let mode: _ObjCAreaEvent.Mode
+                let mode: _ObjCAreaEvent.AreaEventMode
                 switch areaEvent.mode {
                 case .onLeave:
                     mode = .onLeave

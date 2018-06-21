@@ -39,13 +39,13 @@ public struct Coordinates {
 @objc(Coordinates) final public class _ObjCCoordinates: NSObject {
     
     /// Vertical coordinate in centimiters
-    public var x: Int
+    @objc public var x: Int
     /// Horizontal coordinate in centimiters
-    public var y: Int
+    @objc public var y: Int
     /// Short ID of the tag.
-    public var tagID: Int
+    @objc public var tagID: Int
     /// Date of `Coordinates` registration.
-    public var date: Date
+    @objc public var date: Date
     
     /**
      *  Initializes `Coordinates` object.
@@ -56,7 +56,7 @@ public struct Coordinates {
      *      - tagID: Area's ID.
      *      - date: Area's name.
      */
-    public init(x: Int, y: Int, tagID: Int, date: Date) {
+    @objc public init(x: Int, y: Int, tagID: Int, date: Date) {
         self.x = x
         self.y = y
         self.tagID = tagID

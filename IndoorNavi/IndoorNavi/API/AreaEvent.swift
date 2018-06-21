@@ -54,15 +54,15 @@ public struct AreaEvent {
 @objc(AreaEvent) final public class _ObjCAreaEvent: NSObject {
     
     /// Short ID of the tag that entered/left INArea.
-    public var tagID: Int
+    @objc public var tagID: Int
     /// ID of the `INArea` where `AreaEvent` occured.
-    public var areaID: Int
+    @objc public var areaID: Int
     /// Date when `AreaEvent` occured.
-    public var date: Date
+    @objc public var date: Date
     /// Name of the `INArea` where `AreaEvent` occured.
-    public var areaName: String
+    @objc public var areaName: String
     /// Specifies `AreaEvent`'s `Mode`.
-    public var mode: Mode
+    @objc public var mode: AreaEventMode
     
     /**
      *  Mode of `AreaEvent`.
@@ -70,7 +70,7 @@ public struct AreaEvent {
      *  - onLeave: Event on leaving `INArea`.
      *  - onEnter: Event on entering `INArea`.
      */
-    public enum Mode {
+    @objc public enum AreaEventMode: Int {
         case onLeave
         case onEnter
     }
@@ -85,7 +85,7 @@ public struct AreaEvent {
      *      - areaName: Area's name.
      *      - mode: Specifies either it was entering or leaving the area.
      */
-    public init(tagID: Int, date: Date, areaID: Int, areaName: String, mode: Mode) {
+    @objc public init(tagID: Int, date: Date, areaID: Int, areaName: String, mode: AreaEventMode) {
         self.tagID = tagID
         self.date = date
         self.areaID = areaID
