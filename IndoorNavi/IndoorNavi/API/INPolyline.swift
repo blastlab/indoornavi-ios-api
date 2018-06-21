@@ -18,11 +18,9 @@ public class INPolyline: INObject {
         static let PointsDeclaration = "var points = %@;"
     }
     
-    /**
-     *  Initializes a new `INPolyline` object inside given INMap object.
-     *
-     *  - Parameter withMap: An `INMap` object, in which `INPolyline` object is going to be created.
-     */
+    /// Initializes a new `INPolyline` object inside given INMap object.
+    ///
+    /// - Parameter map: An `INMap` object, in which `INPolyline` object is going to be created.
     @objc public override init(withMap map: INMap) {
         super.init(withMap: map)
     }
@@ -33,11 +31,9 @@ public class INPolyline: INObject {
         self.map.evaluate(javaScriptString: javaScriptString)
     }
     
-    /**
-     *  Locates polyline at given coordinates. Coordinates needs to be given as real world dimensions that map is representing. Use of this method is indispensable.
-     *
-     *  - Parameter points: Array of `Point`'s that are describing polyline in real world dimensions. Coordinates are calculated to the map scale and then displayed.
-     */
+    /// Locates polyline at given coordinates. Coordinates needs to be given as real world dimensions that map is representing. Use of this method is indispensable.
+    ///
+    /// - Parameter points: Array of `Point`'s that are describing polyline in real world dimensions. Coordinates are calculated to the map scale and then displayed.
     public func set(points: [INPoint]) {
         ready {
             let pointsString = PointHelper.coordinatesArrayString(fromCoordinatesArray: points)
@@ -53,11 +49,9 @@ public class INPolyline: INObject {
         set(points: points)
     }
     
-    /**
-     *  Place polyline on the map with all given settings.
-     *  There is necessary to use `points()` before `draw()` to indicate where polyline should to be located.
-     *  Use of this method is indispensable to draw polyline with set configuration.
-     */
+    /// Place polyline on the map with all given settings.
+    /// There is necessary to use `points()` before `draw()` to indicate where polyline should to be located.
+    /// Use of this method is indispensable to draw polyline with set configuration.
     @objc public func draw() {
         ready {
             let javaScriptString = String(format: ScriptTemplates.DrawTemplate, self.javaScriptVariableName)
@@ -65,14 +59,12 @@ public class INPolyline: INObject {
         }
     }
     
-    /**
-     *  Sets polyline lines and points color.
-     *
-     *  - Parameters:
-     *      - red: The red value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
-     *      - green: The green value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
-     *      - blue: The blue value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
-     */
+    /// Sets polyline lines and points color.
+    ///
+    /// - Parameters:
+    ///   - red: The red value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
+    ///   - green: The green value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
+    ///   - blue: The blue value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
     @objc public func setColorWith(red: CGFloat, green: CGFloat, blue: CGFloat) {
         ready {
             let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)

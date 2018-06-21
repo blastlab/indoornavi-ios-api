@@ -20,27 +20,23 @@ public struct AreaEvent {
     /// Specifies `AreaEvent`'s `Mode`.
     public var mode: Mode
     
-    /**
-     *  Mode of `AreaEvent`.
-     *
-     *  - onLeave: Event on leaving `INArea`.
-     *  - onEnter: Event on entering `INArea`.
-     */
+    /// Mode of `AreaEvent`.
+    ///
+    /// - onLeave: Event on leaving `INArea`.
+    /// - onEnter: Event on entering `INArea`.
     public enum Mode: String {
         case onLeave = "ON_LEAVE"
         case onEnter = "ON_ENTER"
     }
     
-    /**
-     *  Initializes `AreaEvent` structure.
-     *
-     *  - Parameters:
-     *      - tagID: Short ID of the tag that entered or left given area.
-     *      - date: Specifies when tag appeared in given area.
-     *      - areaID: Area's ID.
-     *      - areaName: Area's name.
-     *      - mode: Specifies either it was entering or leaving the area.
-     */
+    /// Initializes `AreaEvent` structure.
+    ///
+    /// - Parameters:
+    ///   - tagID: Short ID of the tag that entered or left given area.
+    ///   - date: Specifies when tag appeared in given area.
+    ///   - areaID: Area's ID.
+    ///   - areaName: Area's name.
+    ///   - mode: Specifies either it was entering or leaving the area.
     public init(tagID: Int, date: Date, areaID: Int, areaName: String, mode: Mode) {
         self.tagID = tagID
         self.date = date
@@ -50,41 +46,19 @@ public struct AreaEvent {
     }
 }
 
-/// Class representing AreaEvent.
 @objc(AreaEvent) final public class _ObjCAreaEvent: NSObject {
     
-    /// Short ID of the tag that entered/left INArea.
     @objc public var tagID: Int
-    /// ID of the `INArea` where `AreaEvent` occured.
     @objc public var areaID: Int
-    /// Date when `AreaEvent` occured.
     @objc public var date: Date
-    /// Name of the `INArea` where `AreaEvent` occured.
     @objc public var areaName: String
-    /// Specifies `AreaEvent`'s `Mode`.
     @objc public var mode: AreaEventMode
     
-    /**
-     *  Mode of `AreaEvent`.
-     *
-     *  - onLeave: Event on leaving `INArea`.
-     *  - onEnter: Event on entering `INArea`.
-     */
     @objc public enum AreaEventMode: Int {
         case onLeave
         case onEnter
     }
     
-    /**
-     *  Initializes `AreaEvent` object.
-     *
-     *  - Parameters:
-     *      - tagID: Short ID of the tag that entered or left given area.
-     *      - date: Specifies when tag appeared in given area.
-     *      - areaID: Area's ID.
-     *      - areaName: Area's name.
-     *      - mode: Specifies either it was entering or leaving the area.
-     */
     @objc public init(tagID: Int, date: Date, areaID: Int, areaName: String, mode: AreaEventMode) {
         self.tagID = tagID
         self.date = date

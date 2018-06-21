@@ -19,18 +19,16 @@ public class INInfoWindow: INObject {
         static let SetPositionTemplate = "%@.setPosition(%i);"
     }
     
-    /**
-     *  Position regarding to related `INObject` object.
-     *
-     *  - top: Top side position in regard to related object.
-     *  - right: Right side position in regard to related object.
-     *  - bottom: Bottom side position in regard to related object.
-     *  - left: Left side position in regard to related object.
-     *  - topRight: Top-right side position in regard to related object.
-     *  - topLeft: Top-left side position in regard to related object.
-     *  - bottomRight: Bottom-right side position in regard to related object.
-     *  - bottomLeft: Bottom-left side position in regard to related object.
-     */
+     /// Position regarding to related `INObject` object.
+     ///
+     /// - top: Top side position in regard to related object.
+     /// - right: Right side position in regard to related object.
+     /// - bottom: Bottom side position in regard to related object.
+     /// - left: Left side position in regard to related object.
+     /// - topRight: Top-right side position in regard to related object.
+     /// - topLeft: Top-left side position in regard to related object.
+     /// - bottomRight: Bottom-right side position in regard to related object.
+     /// - bottomLeft: Bottom-left side position in regard to related object.
     @objc public enum Position: Int {
         case top
         case right
@@ -45,11 +43,9 @@ public class INInfoWindow: INObject {
     private var privateWidth = 250
     private var privateHeight = 250
     
-    /**
-     *  Initializes a new `INInfoWindow` object inside given `INMap` object.
-     *
-     *  - Parameter withMap: An `INMap` object, in which `INArea` is going to be created.
-     */
+    /// Initializes a new `INInfoWindow` object inside given `INMap` object.
+    ///
+    /// - Parameter map: An `INMap` object, in which `INArea` is going to be created.
     @objc public override init(withMap map: INMap) {
         super.init(withMap: map)
     }
@@ -60,9 +56,7 @@ public class INInfoWindow: INObject {
         map.evaluate(javaScriptString: javaScriptString)
     }
     
-    /**
-     *  Height dimension of info window. Setting this value is optional. Default value is 250px, minimum value is 50px.
-     */
+    /// Height dimension of info window. Setting this value is optional. Default value is 250px, minimum value is 50px.
     @objc public var height: Int {
         get {
             return privateHeight
@@ -82,9 +76,7 @@ public class INInfoWindow: INObject {
         }
     }
     
-    /**
-     *  Width dimension of info window. Setting this value is optional. Default value is 250px, minimum value is 50px.
-     */
+    /// Width dimension of info window. Setting this value is optional. Default value is 250px, minimum value is 50px.
     @objc public var width: Int {
         get {
             return privateWidth
@@ -104,11 +96,9 @@ public class INInfoWindow: INObject {
         }
     }
     
-    /**
-     *  Displays info window in iframe on given object.
-     *
-     *  - Parameter object: An INObject object to append info window to.
-     */
+    /// Displays info window in iframe on given object.
+    ///
+    /// - Parameter object: An INObject object to append info window to.
     @objc public func open(object: INObject) {
         ready {
             print("object.javaScriptVariableName = %@",object.javaScriptVariableName)
@@ -117,11 +107,9 @@ public class INInfoWindow: INObject {
         }
     }
     
-    /**
-     *  Sets info window content. To reset label to a new content call this method again passing new content as a string and call `draw()`.
-     *
-     *  - Parameter string: Text or HTML template in string format that will be passed to info window as text.
-     */
+    /// Sets info window content. To reset label to a new content call this method again passing new content as a string and call `draw()`.
+    ///
+    /// - Parameter string: Text or HTML template in string format that will be passed to info window as text.
     @objc public func setInnerHTML(string: String) {
         ready {
             let javaScriptString = String(format: ScriptTemplates.SetInnerHTMLTemplate, self.javaScriptVariableName, string)
@@ -129,9 +117,7 @@ public class INInfoWindow: INObject {
         }
     }
     
-    /**
-     *  Position of info window regarding to object that info window will be appended to. Default position for info window is `.top`.
-     */
+    /// Position of info window regarding to object that info window will be appended to. Default position for info window is `.top`.
     @objc public var position: Position = .top {
         didSet {
             ready {

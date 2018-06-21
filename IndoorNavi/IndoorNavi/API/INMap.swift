@@ -40,13 +40,11 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     private var initializedInJavaScript = false
     private var scriptsToEvaluateAfterInitialization = [String]()
     
-    /**
-     *  Loads map specified in function call.
-     *
-     *  - Parameters:
-     *      - mapId: ID number of the map you want to load.
-     *      - onCompletion: A block to invoke when the map is loaded.
-     */
+    /// Loads map specified in function call.
+    ///
+    /// - Parameters:
+    ///   - mapId: ID number of the map you want to load.
+    ///   - onCompletion: A block to invoke when the map is loaded.
     @objc public func load(_ mapId: Int, onCompletion: (() -> Void)? = nil) {
         var javaScriptString = String()
         
@@ -61,14 +59,12 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         evaluate(javaScriptString: javaScriptString)
     }
     
-    /**
-     *  Initializes a new `INMap` object with the provided parameters to communicate with `INMap` frontend server.
-     *
-     *  - Parameters:
-     *      - frame: Frame of the view containing map.
-     *      - targetHost: Address to the INMap server.
-     *      - apiKey: The API key created on the INMap server.
-     */
+    /// Initializes a new `INMap` object with the provided parameters to communicate with `INMap` frontend server.
+    ///
+    /// - Parameters:
+    ///   - frame: Frame of the view containing map.
+    ///   - targetHost: Address to the INMap server.
+    ///   - apiKey: The API key created on the INMap server.
     @objc public init(frame: CGRect, targetHost: String, apiKey: String) {
         self.targetHost = targetHost
         self.apiKey = apiKey
@@ -80,13 +76,11 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         loadHTML()
     }
     
-    /**
-     *  Setups communication with `INMap` frontend server.
-     *
-     *  - Parameters:
-     *      - targetHost: Address to the INMap server.
-     *      - apiKey: The API key created on the INMap server.
-     */
+    /// Setups communication with `INMap` frontend server.
+    ///
+    /// - Parameters:
+    ///   - targetHost: Address to the INMap server.
+    ///   - apiKey: The API key created on the INMap server.
     @objc public func setupConnection(withTargetHost targetHost: String, andApiKey apiKey: String) {
         self.targetHost = targetHost
         self.apiKey = apiKey

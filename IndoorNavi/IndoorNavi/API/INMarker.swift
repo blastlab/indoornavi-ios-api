@@ -23,11 +23,9 @@ public class INMarker: INObject {
     
     private var callbackUUID: String?
     
-    /**
-     *  Initializes a new `INMarker` object inside given `INMap` object.
-     *
-     *  - Parameter withMap: An `INMap` object, in which `INMarker` object is going to be created.
-     */
+    /// Initializes a new `INMarker` object inside given `INMap` object.
+    ///
+    /// - Parameter map: An `INMap` object, in which `INMarker` object is going to be created.
     @objc public override init(withMap map: INMap) {
         super.init(withMap: map)
     }
@@ -38,11 +36,9 @@ public class INMarker: INObject {
         map.evaluate(javaScriptString: javaScriptString)
     }
     
-    /**
-     *  Adds a block to be invoked when the marker is tapped.
-     *
-     *  - Parameter onClickCallback: A block to invoke when marker is tapped.
-     */
+    /// Adds a block to be invoked when the marker is tapped.
+    ///
+    /// - Parameter onClickCallback: A block to invoke when marker is tapped.
     @objc public func addEventListener(onClickCallback: @escaping () -> Void) {
         ready {
             self.callbackUUID = UUID().uuidString
@@ -53,9 +49,7 @@ public class INMarker: INObject {
         }
     }
     
-    /**
-     *  Removes block invoked on tap if exists. Use of this method is optional.
-     */
+    /// Removes block invoked on tap if exists. Use of this method is optional.
     @objc public func removeEventListener() {
         ready {
             if let uuid = self.callbackUUID {
@@ -66,10 +60,8 @@ public class INMarker: INObject {
         }
     }
     
-    /**
-     *  Place market on the map with all given settings. There is necessary to use `point()` method before `draw()` to indicate the point where marker should to be located.
-     *  Use of this method is indispensable to display marker with set configuration in the IndoorNavi Map.
-     */
+    /// Place market on the map with all given settings. There is necessary to use `point()` method before `draw()` to indicate the point where marker should to be located.
+    /// Use of this method is indispensable to display marker with set configuration in the IndoorNavi Map.
     @objc public func draw() {
         ready {
             let javaScriptString = String(format: ScriptTemplates.PlaceTemplate, self.javaScriptVariableName)
@@ -77,11 +69,9 @@ public class INMarker: INObject {
         }
     }
     
-    /**
-     *  Locates marker at given coordinates. Coordinates needs to be given as real world dimensions that map is representing. Use of this method is indispensable.
-     *
-     *  - Parameter point: Represents marker position in real world. Coordinates are calculated to the map scale and then displayed. Position will be clipped to the point in the bottom center of marker icon.
-     */
+     /// Locates marker at given coordinates. Coordinates needs to be given as real world dimensions that map is representing. Use of this method is indispensable.
+     ///
+     /// - Parameter point: Represents marker position in real world. Coordinates are calculated to the map scale and then displayed. Position will be clipped to the point in the bottom center of marker icon.
     @objc(setPoint:) public func set(point: INPoint) {
         ready {
             let pointString = PointHelper.coordinatesString(fromCoordinates: point)
@@ -90,11 +80,9 @@ public class INMarker: INObject {
         }
     }
     
-    /**
-     *  Sets marker label. Use of this method is optional. If no text is set, label won't be displayed. In order to change label's text, call this method again passing new label as a string and call `draw()`.
-     *
-     *  - Parameter withText: `String` that will be used as a marker label.
-     */
+    /// Sets marker label. Use of this method is optional. If no text is set, label won't be displayed. In order to change label's text, call this method again passing new label as a string and call `draw()`.
+    ///
+    /// - Parameter text: `String` that will be used as a marker label.
     @objc public func setLabel(withText text: String) {
         ready {
             let javaScriptString = String(format: ScriptTemplates.SetLabelTemplate, self.javaScriptVariableName, text)
@@ -102,9 +90,7 @@ public class INMarker: INObject {
         }
     }
     
-    /**
-     *  Removes marker label. To remove label it is indispensable to call `draw()` again.
-     */
+    /// Removes marker label. To remove label it is indispensable to call `draw()` again.
     @objc public func removeLabel() {
         ready {
             let javaScriptString = String(format: ScriptTemplates.RemoveLabelTemplate, self.javaScriptVariableName)
@@ -112,11 +98,9 @@ public class INMarker: INObject {
         }
     }
     
-    /**
-     *  Sets marker icon. To apply this method it's necessary to call `draw()` after. Use of this method is optional.
-     *
-     *  - Parameter path: URL path to icon.
-     */
+    /// Sets marker icon. To apply this method it's necessary to call `draw()` after. Use of this method is optional.
+    ///
+    /// - Parameter path: URL path to icon.
     @objc public func setIcon(withPath path: String) {
         ready {
             let javaScriptString = String(format: ScriptTemplates.SetIconTemplate, self.javaScriptVariableName, path)
