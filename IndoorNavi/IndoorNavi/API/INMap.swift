@@ -34,21 +34,18 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     
     private var webView: WKWebView!
     
-    private var indoorNaviFrame: CGRect
-    private var targetHost: String
-    private var apiKey: String
+    private var targetHost: String?
+    private var apiKey: String?
     
     private var initializedInJavaScript = false
     private var scriptsToEvaluateAfterInitialization = [String]()
     
-    /**
-     *  Loads map specified in function call.
-     *
-     *  - Parameters:
-     *      - mapId: ID number of the map you want to load.
-     *      - onCompletion: A block to invoke when the map is loaded.
-     */
-    public func load(_ mapId: Int, onCompletion: (() -> Void)? = nil) {
+    /// Loads map specified in function call.
+    ///
+    /// - Parameters:
+    ///   - mapId: ID number of the map you want to load.
+    ///   - onCompletion: A block to invoke when the map is loaded.
+    @objc public func load(_ mapId: Int, onCompletion: (() -> Void)? = nil) {
         var javaScriptString = String()
         
         if onCompletion != nil {
@@ -62,16 +59,13 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         evaluate(javaScriptString: javaScriptString)
     }
     
-    /**
-     *  Initializes a new `INMap` object with the provided parameters to communicate with `INMap` frontend server.
-     *
-     *  - Parameters:
-     *      - frame: Frame of the view containing map.
-     *      - targetHost: Address to the INMap server.
-     *      - apiKey: The API key created on the INMap server.
-     */
-    public init(frame: CGRect, targetHost: String, apiKey: String) {
-        self.indoorNaviFrame = frame
+    /// Initializes a new `INMap` object with the provided parameters to communicate with `INMap` frontend server.
+    ///
+    /// - Parameters:
+    ///   - frame: Frame of the view containing map.
+    ///   - targetHost: Address to the INMap server.
+    ///   - apiKey: The API key created on the INMap server.
+    @objc public init(frame: CGRect, targetHost: String, apiKey: String) {
         self.targetHost = targetHost
         self.apiKey = apiKey
         
@@ -82,14 +76,28 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         loadHTML()
     }
     
+    /// Setups communication with `INMap` frontend server.
+    ///
+    /// - Parameters:
+    ///   - targetHost: Address to the INMap server.
+    ///   - apiKey: The API key created on the INMap server.
+    @objc public func setupConnection(withTargetHost targetHost: String, andApiKey apiKey: String) {
+        self.targetHost = targetHost
+        self.apiKey = apiKey
+        loadHTML()
+    }
+    
     required init?(coder aDecoder: NSCoder) {
-        fatalError("This class does not support NSCoding")
+        super.init(coder: aDecoder)
+        setupWebView(withFrame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
     }
     
     private func initInJavaScript() {
-        let javaScriptString = String(format: ScriptTemplates.InitializationTemplate, targetHost, apiKey)
-        initializedInJavaScript = true
-        evaluate(javaScriptString: javaScriptString)
+        if let host = targetHost, let apiKey = apiKey {
+            let javaScriptString = String(format: ScriptTemplates.InitializationTemplate, host, apiKey)
+            initializedInJavaScript = true
+            evaluate(javaScriptString: javaScriptString)
+        }
     }
     
     // Setups

@@ -20,18 +20,17 @@ public class INObject: NSObject {
     var javaScriptVariableName: String!
     let map: INMap
     
-    /**
-     *  ID of the object. Remains `nil` until it is fully initialized.
-     *
-     *  - Parameter callbackHandler: A block to invoke when the ID is available.
-     */
+    /// ID of the object. Remains `nil` until it is fully initialized.
     private(set) public var objectID: Int?
     
-    /**
-     *  Initializes a new `INObject` object inside given `INMap` object.
-     *
-     *  - Parameter withMap: An `INMap` object, in which `INObject` is going to be created.
-     */
+    @available(swift, obsoleted: 1.0)
+    @objc(objectID) public var _ObjCobjectID: NSNumber? {
+        return objectID as NSNumber?
+    }
+    
+    /// Initializes a new `INObject` object inside given `INMap` object.
+    ///
+    /// - Parameter map: An `INMap` object, in which `INObject` is going to be created.
     init(withMap map: INMap) {
         self.map = map
         super.init()
@@ -60,11 +59,9 @@ public class INObject: NSObject {
         }
     }
     
-    /**
-     *  Promise - that will resolve when connection to the frontend will be established, assures that instance of INMapObject has been created on the injected `INMap` class, this method should be executed before calling any other method on this object children.
-     *
-     *  - Parameter onCompletion: A block to invoke when connection to the frontend is established and the object is ready.
-     */
+    ///  Promise - that will resolve when connection to the frontend will be established, assures that instance of INMapObject has been created on the injected `INMap` class, this method should be executed before calling any other method on this object children.
+    ///
+    /// - Parameter readyClousure: A block to invoke when connection to the frontend is established and the object is ready.
     func ready(readyClousure: @escaping () -> Void) {
         if objectID != nil {
             readyClousure()
@@ -76,12 +73,10 @@ public class INObject: NSObject {
         }
     }
     
-    /**
-     *  Returns the coordinates of the object.
-     *
-     *  - Parameter callbackHandler: A block to invoke when the array of points is available.
-     */
-    public func getPoints(callbackHandler: @escaping ([Point]?) -> Void) {
+    /// Returns the coordinates of the object.
+    ///
+    /// - Parameter callbackHandler: A block to invoke when the array of points is available.
+    public func getPoints(callbackHandler: @escaping ([INPoint]?) -> Void) {
         ready {
             let javaScriptString = String(format: ScriptTemplates.GetPointsTemplate, self.javaScriptVariableName)
             self.map.evaluate(javaScriptString: javaScriptString) { response, error in
@@ -101,14 +96,18 @@ public class INObject: NSObject {
         }
     }
     
-    /**
-     *  Checks if point of given coordinates is inside the object. Use of this method is optional.
-     *
-     *  - Parameters:
-     *      - coordinates: Coordinates that are described in real world dimensions. Coordinates are calculated to the map scale.
-     *      - callbackHandler: A block to invoke when the boolean is available.
-     */
-    public func isWithin(coordinates: [Point], callbackHandler: @escaping (Bool) -> Void) {
+    @available(swift, obsoleted: 1.0)
+    @objc public func getPoints(callbackHandler: @escaping (_ pointsArray: UnsafePointer<INPoint>?,_ size:Int) -> Void) {
+        let callbackHandlerTakingArrayOfStructs = PointHelper.callbackHandlerTakingArray(fromCallbackHandlerTakingCArray: callbackHandler)
+        getPoints(callbackHandler: callbackHandlerTakingArrayOfStructs)
+    }
+    
+    /// Checks if point of given coordinates is inside the object. Use of this method is optional.
+    ///
+    /// - Parameters:
+    ///   - coordinates: Coordinates that are described in real world dimensions. Coordinates are calculated to the map scale.
+    ///   - callbackHandler: A block to invoke when the boolean is available.
+    public func isWithin(coordinates: [INPoint], callbackHandler: @escaping (Bool) -> Void) {
         ready {
             let coordinatesString = PointHelper.coordinatesArrayString(fromCoordinatesArray: coordinates)
             let javaScriptString = String(format: ScriptTemplates.IsWithinTemplate, self.javaScriptVariableName, coordinatesString)
@@ -131,10 +130,14 @@ public class INObject: NSObject {
         }
     }
     
-    /**
-     *  Removes object and destroys instance of the object in the frontend server, but do not destroys object class instance in your app.
-     */
-    public func remove() {
+    @available(swift, obsoleted: 1.0)
+    @objc private func isWithin(coordinates: UnsafePointer<INPoint>, withSize size: Int, callbackHandler: @escaping (Bool) -> Void)  {
+        let coordinates = PointHelper.pointsArray(fromCArray: coordinates, withSize: size)
+        isWithin(coordinates: coordinates, callbackHandler: callbackHandler)
+    }
+    
+    /// Removes object and destroys instance of the object in the frontend server, but do not destroys object class instance in your app.
+    @objc public func remove() {
         ready {
             let javaScriptString = String(format: ScriptTemplates.RemoveTemplate, self.javaScriptVariableName)
             self.map.evaluate(javaScriptString: javaScriptString)

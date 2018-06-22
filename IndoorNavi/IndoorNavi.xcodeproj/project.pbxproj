@@ -13,7 +13,6 @@
 		7B5F039F20972F0900D112F6 /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5F039E20972F0900D112F6 /* ColorHelper.swift */; };
 		7B5F03A12097455B00D112F6 /* INMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5F03A02097455B00D112F6 /* INMarker.swift */; };
 		7B666AF020888FBF0031780A /* PointHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B666AEF20888FBF0031780A /* PointHelper.swift */; };
-		7B666AF2208892AC0031780A /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B666AF1208892AC0031780A /* Point.swift */; };
 		7B666AF42088D3A60031780A /* INObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B666AF32088D3A60031780A /* INObject.swift */; };
 		7B6948BB20863F1400E22BD9 /* INPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6948BA20863F1400E22BD9 /* INPolyline.swift */; };
 		7B714FB920A1D37200836BBD /* EventCallbacksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B714FB820A1D37200836BBD /* EventCallbacksController.swift */; };
@@ -24,6 +23,7 @@
 		7B7180C5207CB0F000EC3E34 /* indoorNavi.html in Resources */ = {isa = PBXBuildFile; fileRef = 7B7180AB207CAF1B00EC3E34 /* indoorNavi.html */; };
 		7B77E6E9207515010019D061 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B77E6E8207515010019D061 /* Paths.swift */; };
 		7B7FD56820936CE200AD409C /* INArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7FD56720936CE200AD409C /* INArea.swift */; };
+		7B901C3120D51AA100A1D216 /* INPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B901C2C20D519AF00A1D216 /* INPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B9ABA3320820B6A00A8849F /* WebViewScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */; };
 		7BB78B3C20A1CF5C0087BFEC /* PromisesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB78B3B20A1CF5C0087BFEC /* PromisesController.swift */; };
 		7BCB74B920BE70C7006386D1 /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB74B820BE70C7006386D1 /* TimeIntervalExtension.swift */; };
@@ -52,7 +52,6 @@
 		7B5F039E20972F0900D112F6 /* ColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelper.swift; sourceTree = "<group>"; };
 		7B5F03A02097455B00D112F6 /* INMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INMarker.swift; sourceTree = "<group>"; };
 		7B666AEF20888FBF0031780A /* PointHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHelper.swift; sourceTree = "<group>"; };
-		7B666AF1208892AC0031780A /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		7B666AF32088D3A60031780A /* INObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INObject.swift; sourceTree = "<group>"; };
 		7B6948BA20863F1400E22BD9 /* INPolyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INPolyline.swift; sourceTree = "<group>"; };
 		7B714FB820A1D37200836BBD /* EventCallbacksController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCallbacksController.swift; sourceTree = "<group>"; };
@@ -84,6 +83,7 @@
 		7B7180AB207CAF1B00EC3E34 /* indoorNavi.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = indoorNavi.html; sourceTree = "<group>"; };
 		7B77E6E8207515010019D061 /* Paths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paths.swift; sourceTree = "<group>"; };
 		7B7FD56720936CE200AD409C /* INArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INArea.swift; sourceTree = "<group>"; };
+		7B901C2C20D519AF00A1D216 /* INPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = INPoint.h; sourceTree = "<group>"; };
 		7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewScrollViewDelegate.swift; sourceTree = "<group>"; };
 		7BB78B3B20A1CF5C0087BFEC /* PromisesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromisesController.swift; sourceTree = "<group>"; };
 		7BCB74B820BE70C7006386D1 /* TimeIntervalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtension.swift; sourceTree = "<group>"; };
@@ -122,7 +122,6 @@
 			children = (
 				7BD4679C206CF59500B9F2AD /* INMap.swift */,
 				7B6948BA20863F1400E22BD9 /* INPolyline.swift */,
-				7B666AF1208892AC0031780A /* Point.swift */,
 				7B666AF32088D3A60031780A /* INObject.swift */,
 				7B7FD56720936CE200AD409C /* INArea.swift */,
 				7B5F03A02097455B00D112F6 /* INMarker.swift */,
@@ -130,6 +129,7 @@
 				7B46979020A095D200D6A22B /* INReport.swift */,
 				7B46979220A0A2B400D6A22B /* AreaEvent.swift */,
 				7BCB74BA20BE7B96006386D1 /* Coordinates.swift */,
+				7B901C2C20D519AF00A1D216 /* INPoint.h */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -316,6 +316,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B901C3120D51AA100A1D216 /* INPoint.h in Headers */,
 				7BD46775206CF34A00B9F2AD /* IndoorNavi.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -374,7 +375,7 @@
 				TargetAttributes = {
 					7BD46763206CF34A00B9F2AD = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 0940;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 					7BD4676C206CF34A00B9F2AD = {
@@ -494,7 +495,6 @@
 				7B714FBE20A1EEAF00836BBD /* AreaEventsHelper.swift in Sources */,
 				7B46979120A095D200D6A22B /* INReport.swift in Sources */,
 				7B77E6E9207515010019D061 /* Paths.swift in Sources */,
-				7B666AF2208892AC0031780A /* Point.swift in Sources */,
 				7B714FB920A1D37200836BBD /* EventCallbacksController.swift in Sources */,
 				7BCB74BD20BE7F05006386D1 /* CoordinatesHelper.swift in Sources */,
 				7B714FC020A1FCB500836BBD /* CoordinatesCallbacksController.swift in Sources */,

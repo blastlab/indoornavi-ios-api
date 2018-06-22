@@ -14,6 +14,7 @@
 		7B59DA2A207CC7100021C33D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B59DA28207CC7100021C33D /* LaunchScreen.storyboard */; };
 		7B59DA32207CC7710021C33D /* IndoorNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B59DA31207CC7710021C33D /* IndoorNavi.framework */; };
 		7B59DA33207CC7710021C33D /* IndoorNavi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B59DA31207CC7710021C33D /* IndoorNavi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7B73B97F20D2B23E00154507 /* ObjectiveCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B73B97E20D2B23E00154507 /* ObjectiveCViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,6 +40,9 @@
 		7B59DA29207CC7100021C33D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7B59DA2B207CC7100021C33D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B59DA31207CC7710021C33D /* IndoorNavi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = IndoorNavi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B73B97C20D2B23D00154507 /* IndoorNaviDemoDynamicFramework-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IndoorNaviDemoDynamicFramework-Bridging-Header.h"; sourceTree = "<group>"; };
+		7B73B97D20D2B23E00154507 /* ObjectiveCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectiveCViewController.h; sourceTree = "<group>"; };
+		7B73B97E20D2B23E00154507 /* ObjectiveCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectiveCViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,9 @@
 				7B59DA26207CC7100021C33D /* Assets.xcassets */,
 				7B59DA28207CC7100021C33D /* LaunchScreen.storyboard */,
 				7B59DA2B207CC7100021C33D /* Info.plist */,
+				7B73B97D20D2B23E00154507 /* ObjectiveCViewController.h */,
+				7B73B97E20D2B23E00154507 /* ObjectiveCViewController.m */,
+				7B73B97C20D2B23D00154507 /* IndoorNaviDemoDynamicFramework-Bridging-Header.h */,
 			);
 			path = IndoorNaviDemoDynamicFramework;
 			sourceTree = "<group>";
@@ -116,6 +123,7 @@
 				TargetAttributes = {
 					7B59DA1B207CC7090021C33D = {
 						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -157,6 +165,7 @@
 			files = (
 				7B59DA22207CC7090021C33D /* ViewController.swift in Sources */,
 				7B59DA20207CC7090021C33D /* AppDelegate.swift in Sources */,
+				7B73B97F20D2B23E00154507 /* ObjectiveCViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +309,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N825MANMLC;
 				INFOPLIST_FILE = IndoorNaviDemoDynamicFramework/Info.plist;
@@ -310,6 +320,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.blastlab.IndoorNaviDemoDynamicFramework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "IndoorNaviDemoDynamicFramework/IndoorNaviDemoDynamicFramework-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -319,6 +331,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N825MANMLC;
 				INFOPLIST_FILE = IndoorNaviDemoDynamicFramework/Info.plist;
@@ -329,6 +342,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.blastlab.IndoorNaviDemoDynamicFramework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "IndoorNaviDemoDynamicFramework/IndoorNaviDemoDynamicFramework-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -6,30 +6,41 @@
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
-import UIKit
-
 /// Structure representing Coordinates, registered on specific `date` for specific tag with `tagID`.
 public struct Coordinates {
     
-    /// Vertical coordinate in centimiters
+    /// The x-coordinate coordinate in centimiters
     public var x: Int
-    /// Horizontal coordinate in centimiters
+    /// The y-coordinate coordinate in centimiters
     public var y: Int
     /// Short ID of the tag.
     public var tagID: Int
     /// Date of `Coordinates` registration.
     public var date: Date
     
-    /**
-     *  Initializes `Coordinates` structure.
-     *
-     *  - Parameters:
-     *      - x: Short ID of the tag that entered or left given area.
-     *      - y: Specifies when tag appeared in given area.
-     *      - tagID: Area's ID.
-     *      - date: Area's name.
-     */
+    /// Initializes `Coordinates` structure.
+    ///
+    /// - Parameters:
+    ///   - x: The x-coordinate coordinate in centimiters
+    ///   - y: The y-coordinate coordinate in centimiters
+    ///   - tagID: Short ID of the tag.
+    ///   - date: Date of `Coordinates` registration.
     public init(x: Int, y: Int, tagID: Int, date: Date) {
+        self.x = x
+        self.y = y
+        self.tagID = tagID
+        self.date = date
+    }
+}
+
+@objc(Coordinates) final public class _ObjCCoordinates: NSObject {
+    
+    @objc public var x: Int
+    @objc public var y: Int
+    @objc public var tagID: Int
+    @objc public var date: Date
+    
+    @objc public init(x: Int, y: Int, tagID: Int, date: Date) {
         self.x = x
         self.y = y
         self.tagID = tagID
