@@ -87,7 +87,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         loadHTML()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupWebView(withFrame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
     }

@@ -25,11 +25,11 @@
 		7B7FD56820936CE200AD409C /* INArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7FD56720936CE200AD409C /* INArea.swift */; };
 		7B901C3120D51AA100A1D216 /* INPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B901C2C20D519AF00A1D216 /* INPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B9ABA3320820B6A00A8849F /* WebViewScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */; };
+		7B9BC33320DD134C00426E78 /* IndoorNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD46764206CF34A00B9F2AD /* IndoorNavi.framework */; };
 		7BB78B3C20A1CF5C0087BFEC /* PromisesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB78B3B20A1CF5C0087BFEC /* PromisesController.swift */; };
 		7BCB74B920BE70C7006386D1 /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB74B820BE70C7006386D1 /* TimeIntervalExtension.swift */; };
 		7BCB74BB20BE7B96006386D1 /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB74BA20BE7B96006386D1 /* Coordinates.swift */; };
 		7BCB74BD20BE7F05006386D1 /* CoordinatesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB74BC20BE7F05006386D1 /* CoordinatesHelper.swift */; };
-		7BD4676E206CF34A00B9F2AD /* IndoorNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD46764206CF34A00B9F2AD /* IndoorNavi.framework */; };
 		7BD46773206CF34A00B9F2AD /* IndoorNaviTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD46772206CF34A00B9F2AD /* IndoorNaviTests.swift */; };
 		7BD46775206CF34A00B9F2AD /* IndoorNavi.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BD46767206CF34A00B9F2AD /* IndoorNavi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7BD4679D206CF59500B9F2AD /* INMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD4679C206CF59500B9F2AD /* INMap.swift */; };
@@ -110,7 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BD4676E206CF34A00B9F2AD /* IndoorNavi.framework in Frameworks */,
+				7B9BC33320DD134C00426E78 /* IndoorNavi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,12 +346,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7BD4677B206CF34A00B9F2AD /* Build configuration list for PBXNativeTarget "IndoorNaviTests" */;
 			buildPhases = (
-				F940D1EFC4B41BC1059E9C46 /* [CP] Check Pods Manifest.lock */,
 				7BD46769206CF34A00B9F2AD /* Sources */,
 				7BD4676A206CF34A00B9F2AD /* Frameworks */,
 				7BD4676B206CF34A00B9F2AD /* Resources */,
-				38915DF8DE059FCC9A71BF01 /* [CP] Embed Pods Frameworks */,
-				A439F9E6687D512E499D36F3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -420,63 +417,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		38915DF8DE059FCC9A71BF01 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-IndoorNaviTests/Pods-IndoorNaviTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GCDWebServer/GCDWebServer.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GCDWebServer.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IndoorNaviTests/Pods-IndoorNaviTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A439F9E6687D512E499D36F3 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-IndoorNaviTests/Pods-IndoorNaviTests-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IndoorNaviTests/Pods-IndoorNaviTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F940D1EFC4B41BC1059E9C46 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-IndoorNaviTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7BD4675F206CF34A00B9F2AD /* Sources */ = {
