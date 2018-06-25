@@ -13,20 +13,9 @@ class PointHelperTests: XCTestCase {
     
     let points: [INPoint] = [INPoint(x: 1, y: 1), INPoint(x: 500, y: 1000), INPoint(x: 10000, y: 15000), INPoint(x: Int32.max, y: Int32.max), INPoint(x: 0, y: 0)]
     let point: INPoint = INPoint(x: 480, y: 480)
-    let cgPoint = CGPoint(x: 1, y: 2)
     let pointsString = "[{x: 1, y: 1},{x: 500, y: 1000},{x: 10000, y: 15000},{x: 2147483647, y: 2147483647},{x: 0, y: 0}]"
     let pointString = "{x: 480, y: 480}"
     let pointsJson: [[String: Any]] = [["x": 1, "y": 1],["x": 500, "y": 1000],["x": 10000, "y": 15000],["x": 2147483647, "y": 2147483647],["x": 0, "y": 0]]
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
     
     func testPointsArrayToString() {
         let pointsStringFromArray = PointHelper.coordinatesArrayString(fromCoordinatesArray: points)
@@ -56,11 +45,5 @@ class PointHelperTests: XCTestCase {
         let (pointer, size) = PointHelper.pointsCArray(fromArray: newPoints)
         let swiftArray = Array((UnsafeBufferPointer(start: pointer, count: size)))
         XCTAssertEqual(swiftArray, points)
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        XCTAssertEqual(cgPoint, cgPoint)
     }
 }

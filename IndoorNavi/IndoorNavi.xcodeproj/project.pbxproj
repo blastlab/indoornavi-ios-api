@@ -24,6 +24,7 @@
 		7B77E6E9207515010019D061 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B77E6E8207515010019D061 /* Paths.swift */; };
 		7B7FD56820936CE200AD409C /* INArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7FD56720936CE200AD409C /* INArea.swift */; };
 		7B8570BF20E0DBD400295D00 /* INPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8570BE20E0DBD400295D00 /* INPoint.swift */; };
+		7B8570C120E0E51600295D00 /* ColorHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8570C020E0E51600295D00 /* ColorHelperTests.swift */; };
 		7B901C3120D51AA100A1D216 /* INPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B901C2C20D519AF00A1D216 /* INPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B9ABA3320820B6A00A8849F /* WebViewScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */; };
 		7B9BC33320DD134C00426E78 /* IndoorNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD46764206CF34A00B9F2AD /* IndoorNavi.framework */; };
@@ -31,7 +32,7 @@
 		7BCB74B920BE70C7006386D1 /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB74B820BE70C7006386D1 /* TimeIntervalExtension.swift */; };
 		7BCB74BB20BE7B96006386D1 /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB74BA20BE7B96006386D1 /* Coordinates.swift */; };
 		7BCB74BD20BE7F05006386D1 /* CoordinatesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB74BC20BE7F05006386D1 /* CoordinatesHelper.swift */; };
-		7BD46773206CF34A00B9F2AD /* IndoorNaviTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD46772206CF34A00B9F2AD /* IndoorNaviTests.swift */; };
+		7BD46773206CF34A00B9F2AD /* PointHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD46772206CF34A00B9F2AD /* PointHelperTests.swift */; };
 		7BD46775206CF34A00B9F2AD /* IndoorNavi.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BD46767206CF34A00B9F2AD /* IndoorNavi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7BD4679D206CF59500B9F2AD /* INMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD4679C206CF59500B9F2AD /* INMap.swift */; };
 /* End PBXBuildFile section */
@@ -85,6 +86,7 @@
 		7B77E6E8207515010019D061 /* Paths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paths.swift; sourceTree = "<group>"; };
 		7B7FD56720936CE200AD409C /* INArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INArea.swift; sourceTree = "<group>"; };
 		7B8570BE20E0DBD400295D00 /* INPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INPoint.swift; sourceTree = "<group>"; };
+		7B8570C020E0E51600295D00 /* ColorHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelperTests.swift; sourceTree = "<group>"; };
 		7B901C2C20D519AF00A1D216 /* INPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = INPoint.h; sourceTree = "<group>"; };
 		7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewScrollViewDelegate.swift; sourceTree = "<group>"; };
 		7BB78B3B20A1CF5C0087BFEC /* PromisesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromisesController.swift; sourceTree = "<group>"; };
@@ -95,7 +97,7 @@
 		7BD46767206CF34A00B9F2AD /* IndoorNavi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IndoorNavi.h; sourceTree = "<group>"; };
 		7BD46768206CF34A00B9F2AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BD4676D206CF34A00B9F2AD /* IndoorNaviTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IndoorNaviTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7BD46772206CF34A00B9F2AD /* IndoorNaviTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndoorNaviTests.swift; sourceTree = "<group>"; };
+		7BD46772206CF34A00B9F2AD /* PointHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHelperTests.swift; sourceTree = "<group>"; };
 		7BD46774206CF34A00B9F2AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BD4679C206CF59500B9F2AD /* INMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INMap.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -306,7 +308,8 @@
 		7BD46771206CF34A00B9F2AD /* IndoorNaviTests */ = {
 			isa = PBXGroup;
 			children = (
-				7BD46772206CF34A00B9F2AD /* IndoorNaviTests.swift */,
+				7BD46772206CF34A00B9F2AD /* PointHelperTests.swift */,
+				7B8570C020E0E51600295D00 /* ColorHelperTests.swift */,
 				7BD46774206CF34A00B9F2AD /* Info.plist */,
 			);
 			path = IndoorNaviTests;
@@ -454,7 +457,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BD46773206CF34A00B9F2AD /* IndoorNaviTests.swift in Sources */,
+				7BD46773206CF34A00B9F2AD /* PointHelperTests.swift in Sources */,
+				7B8570C120E0E51600295D00 /* ColorHelperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
