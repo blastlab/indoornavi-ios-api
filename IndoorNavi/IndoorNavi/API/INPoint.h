@@ -1,5 +1,5 @@
 //
-//  ObjCINPoint.h
+//  INPoint.h
 //  IndoorNavi
 //
 //  Created by Michał Pastwa on 16.06.2018.
@@ -33,4 +33,17 @@ INPoint
 INPointMake(int x, int y)
 {
     struct INPoint p; p.x = x; p.y = y; return p;
+}
+
+/**
+ *  @brief Returns whether two points are equal.
+ *
+ *  @param point1 The first point to examine.
+ *  @param point2 The second point to examine.
+ *
+ *  @return YES if the two specified points are the same; otherwise, NO.
+ */
+bool INPointEqualToPoint(INPoint point1, INPoint point2)
+{
+    return point1.x == point2.x && point1.y == point2.y;
 }

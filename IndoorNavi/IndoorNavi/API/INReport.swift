@@ -58,7 +58,7 @@ public class INReport: NSObject {
     }
     
     @available(swift, obsoleted: 1.0)
-    @objc public func getAreaEvents(fromFloorWithID floorID: Int, from: Date, to: Date, callbackHandler: @escaping ([_ObjCAreaEvent]) -> Void) {
+    @objc public func getAreaEvents(fromFloorWithID floorID: Int, from: Date, to: Date, callbackHandler: @escaping ([ObjCAreaEvent]) -> Void) {
         let callbackHandlerTakingStructs = AreaEventsHelper.callbackHandlerTakingStructs(fromCallbackHandlerTakingObjects: callbackHandler)
         getAreaEvents(fromFloorWithID: floorID, from: from, to: to, callbackHandler: callbackHandlerTakingStructs)
     }
@@ -79,7 +79,7 @@ public class INReport: NSObject {
     }
     
     @available(swift, obsoleted: 1.0)
-    @objc public func getCoordinates(fromFloorWithID floorID: Int, from: Date, to: Date, callbackHandler: @escaping ([_ObjCCoordinates]) -> Void) {
+    @objc public func getCoordinates(fromFloorWithID floorID: Int, from: Date, to: Date, callbackHandler: @escaping ([ObjCCoordinates]) -> Void) {
         let callbackHandlerTakingStructs = CoordinatesHelper.callbackHandlerTakingStructs(fromCallbackHandlerTakingObjects: callbackHandler)
         getCoordinates(fromFloorWithID: floorID, from: from, to: to, callbackHandler: callbackHandlerTakingStructs)
     }

@@ -46,7 +46,7 @@ public struct AreaEvent {
     }
 }
 
-@objc(AreaEvent) final public class _ObjCAreaEvent: NSObject {
+@objc(AreaEvent) final public class ObjCAreaEvent: NSObject {
     
     @objc public var tagID: Int
     @objc public var areaID: Int

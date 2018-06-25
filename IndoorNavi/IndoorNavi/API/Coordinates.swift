@@ -33,7 +33,7 @@ public struct Coordinates {
     }
 }
 
-@objc(Coordinates) final public class _ObjCCoordinates: NSObject {
+@objc(Coordinates) final public class ObjCCoordinates: NSObject {
     
     @objc public var x: Int
     @objc public var y: Int

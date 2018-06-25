@@ -12,7 +12,12 @@ import XCTest
 class PointHelperTests: XCTestCase {
     
     let points: [INPoint] = [INPoint(x: 1, y: 1), INPoint(x: 500, y: 1000), INPoint(x: 10000, y: 15000), INPoint(x: Int32.max, y: Int32.max), INPoint(x: 0, y: 0)]
-    //pointsString    String    "[{x: 480, y: 480},{x: 1220, y: 480},{x: 1220, y: 1220},{x: 480, y: 1220},{x: 750, y: 750}]"
+    let point: INPoint = INPoint(x: 480, y: 480)
+    let cgPoint = CGPoint(x: 1, y: 2)
+    let pointsString = "[{x: 1, y: 1},{x: 500, y: 1000},{x: 10000, y: 15000},{x: 2147483647, y: 2147483647},{x: 0, y: 0}]"
+    let pointString = "{x: 480, y: 480}"
+    let pointsJson: [[String: Any]] = [["x": 1, "y": 1],["x": 500, "y": 1000],["x": 10000, "y": 15000],["x": 2147483647, "y": 2147483647],["x": 0, "y": 0]]
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -25,11 +30,37 @@ class PointHelperTests: XCTestCase {
     
     func testPointsArrayToString() {
         let pointsStringFromArray = PointHelper.coordinatesArrayString(fromCoordinatesArray: points)
-        XCTAssertEqual(pointsStringFromArray, "[{x: 1, y: 1},{x: 500, y: 1000},{x: 10000, y: 15000},{x: 2147483647, y: 2147483647},{x: 0, y: 0}]")
+        XCTAssertEqual(pointsStringFromArray, pointsString)
+    }
+    
+    func testPointsStringToArray() {
+        let pointsArrayFromString = PointHelper.coordinatesArray(fromJSONObject: pointsJson)
+        XCTAssertEqual(pointsArrayFromString, points)
+    }
+    
+    func testPointToString() {
+        let pointString = PointHelper.coordinatesString(fromCoordinates: point)
+        XCTAssertEqual(pointString, pointString)
+    }
+    
+    func testCArrayToSwiftArray() {
+        let newPoints = points
+        let pointer = UnsafePointer<INPoint>(newPoints)
+        let size = newPoints.count
+        let swiftArray = PointHelper.pointsArray(fromCArray: pointer, withSize: size)
+        XCTAssertEqual(swiftArray, points)
+    }
+    
+    func testSwiftArrayToCArray() {
+        let newPoints = points
+        let (pointer, size) = PointHelper.pointsCArray(fromArray: newPoints)
+        let swiftArray = Array((UnsafeBufferPointer(start: pointer, count: size)))
+        XCTAssertEqual(swiftArray, points)
     }
     
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        XCTAssertEqual(cgPoint, cgPoint)
     }
 }

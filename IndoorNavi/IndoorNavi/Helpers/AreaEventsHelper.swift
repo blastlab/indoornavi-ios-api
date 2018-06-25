@@ -33,11 +33,11 @@ class AreaEventsHelper: NSObject {
         }
     }
     
-    static func callbackHandlerTakingStructs(fromCallbackHandlerTakingObjects callbackHandlerTakingObjects: @escaping ([_ObjCAreaEvent]) -> Void) -> ([AreaEvent]) -> Void {
+    static func callbackHandlerTakingStructs(fromCallbackHandlerTakingObjects callbackHandlerTakingObjects: @escaping ([ObjCAreaEvent]) -> Void) -> ([AreaEvent]) -> Void {
         let callbackHandlerTakingStructs: ([AreaEvent]) -> Void = { areaEvents in
-            let objCAreaEvents: [_ObjCAreaEvent] = areaEvents.map { areaEvent in
+            let objCAreaEvents: [ObjCAreaEvent] = areaEvents.map { areaEvent in
                 
-                let mode: _ObjCAreaEvent.AreaEventMode
+                let mode: ObjCAreaEvent.AreaEventMode
                 switch areaEvent.mode {
                 case .onLeave:
                     mode = .onLeave
@@ -45,7 +45,7 @@ class AreaEventsHelper: NSObject {
                     mode = .onEnter
                 }
                 
-                let objCAreaEvent = _ObjCAreaEvent(tagID: areaEvent.tagID, date: areaEvent.date, areaID: areaEvent.areaID, areaName: areaEvent.areaName, mode: mode)
+                let objCAreaEvent = ObjCAreaEvent(tagID: areaEvent.tagID, date: areaEvent.date, areaID: areaEvent.areaID, areaName: areaEvent.areaName, mode: mode)
                 return objCAreaEvent
             }
             callbackHandlerTakingObjects(objCAreaEvents)
