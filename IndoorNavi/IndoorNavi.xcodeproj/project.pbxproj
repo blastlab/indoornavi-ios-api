@@ -25,6 +25,7 @@
 		7B7FD56820936CE200AD409C /* INArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7FD56720936CE200AD409C /* INArea.swift */; };
 		7B8570BF20E0DBD400295D00 /* INPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8570BE20E0DBD400295D00 /* INPoint.swift */; };
 		7B8570C120E0E51600295D00 /* ColorHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8570C020E0E51600295D00 /* ColorHelperTests.swift */; };
+		7B8570C320E0F0AA00295D00 /* AreaEventsHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8570C220E0F0AA00295D00 /* AreaEventsHelperTests.swift */; };
 		7B901C3120D51AA100A1D216 /* INPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B901C2C20D519AF00A1D216 /* INPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B9ABA3320820B6A00A8849F /* WebViewScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */; };
 		7B9BC33320DD134C00426E78 /* IndoorNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD46764206CF34A00B9F2AD /* IndoorNavi.framework */; };
@@ -87,6 +88,7 @@
 		7B7FD56720936CE200AD409C /* INArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INArea.swift; sourceTree = "<group>"; };
 		7B8570BE20E0DBD400295D00 /* INPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INPoint.swift; sourceTree = "<group>"; };
 		7B8570C020E0E51600295D00 /* ColorHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelperTests.swift; sourceTree = "<group>"; };
+		7B8570C220E0F0AA00295D00 /* AreaEventsHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaEventsHelperTests.swift; sourceTree = "<group>"; };
 		7B901C2C20D519AF00A1D216 /* INPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = INPoint.h; sourceTree = "<group>"; };
 		7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewScrollViewDelegate.swift; sourceTree = "<group>"; };
 		7BB78B3B20A1CF5C0087BFEC /* PromisesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromisesController.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 			children = (
 				7BD46772206CF34A00B9F2AD /* PointHelperTests.swift */,
 				7B8570C020E0E51600295D00 /* ColorHelperTests.swift */,
+				7B8570C220E0F0AA00295D00 /* AreaEventsHelperTests.swift */,
 				7BD46774206CF34A00B9F2AD /* Info.plist */,
 			);
 			path = IndoorNaviTests;
@@ -457,6 +460,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B8570C320E0F0AA00295D00 /* AreaEventsHelperTests.swift in Sources */,
 				7BD46773206CF34A00B9F2AD /* PointHelperTests.swift in Sources */,
 				7B8570C120E0E51600295D00 /* ColorHelperTests.swift in Sources */,
 			);
