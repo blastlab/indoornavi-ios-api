@@ -33,6 +33,25 @@ public struct Coordinates {
     }
 }
 
+extension Coordinates : Equatable {
+    
+    /// Returns a Boolean value indicating whether two values are equal.
+    ///
+    /// Equality is the inverse of inequality. For any values `a` and `b`,
+    /// `a == b` implies that `a != b` is `false`.
+    ///
+    /// - Parameters:
+    ///   - lhs: A value to compare.
+    ///   - rhs: Another value to compare.
+    public static func == (lhs: Coordinates, rhs: Coordinates) -> Bool {
+        let equalX = lhs.x == rhs.x
+        let equalY = lhs.y == rhs.y
+        let equalTagID = lhs.tagID == rhs.tagID
+        let equalDate = lhs.date == rhs.date
+        return equalX && equalY && equalTagID && equalDate
+    }
+}
+
 @objc(Coordinates) final public class ObjCCoordinates: NSObject {
     
     @objc public var x: Int

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B2F3EB420E527E9006D98B4 /* CoordinatesHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2F3EB320E527E9006D98B4 /* CoordinatesHelperTests.swift */; };
 		7B46979120A095D200D6A22B /* INReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B46979020A095D200D6A22B /* INReport.swift */; };
 		7B46979320A0A2B400D6A22B /* AreaEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B46979220A0A2B400D6A22B /* AreaEvent.swift */; };
 		7B560E9D2099C2B60055F42E /* INInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B560E9C2099C2B60055F42E /* INInfoWindow.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B2F3EB320E527E9006D98B4 /* CoordinatesHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesHelperTests.swift; sourceTree = "<group>"; };
 		7B46979020A095D200D6A22B /* INReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INReport.swift; sourceTree = "<group>"; };
 		7B46979220A0A2B400D6A22B /* AreaEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaEvent.swift; sourceTree = "<group>"; };
 		7B560E9C2099C2B60055F42E /* INInfoWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INInfoWindow.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				7BD46772206CF34A00B9F2AD /* PointHelperTests.swift */,
 				7B8570C020E0E51600295D00 /* ColorHelperTests.swift */,
 				7B8570C220E0F0AA00295D00 /* AreaEventsHelperTests.swift */,
+				7B2F3EB320E527E9006D98B4 /* CoordinatesHelperTests.swift */,
 				7BD46774206CF34A00B9F2AD /* Info.plist */,
 			);
 			path = IndoorNaviTests;
@@ -461,6 +464,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B8570C320E0F0AA00295D00 /* AreaEventsHelperTests.swift in Sources */,
+				7B2F3EB420E527E9006D98B4 /* CoordinatesHelperTests.swift in Sources */,
 				7BD46773206CF34A00B9F2AD /* PointHelperTests.swift in Sources */,
 				7B8570C120E0E51600295D00 /* ColorHelperTests.swift in Sources */,
 			);

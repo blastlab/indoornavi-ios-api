@@ -46,6 +46,26 @@ public struct AreaEvent {
     }
 }
 
+extension AreaEvent : Equatable {
+    
+    /// Returns a Boolean value indicating whether two values are equal.
+    ///
+    /// Equality is the inverse of inequality. For any values `a` and `b`,
+    /// `a == b` implies that `a != b` is `false`.
+    ///
+    /// - Parameters:
+    ///   - lhs: A value to compare.
+    ///   - rhs: Another value to compare.
+    public static func == (lhs: AreaEvent, rhs: AreaEvent) -> Bool {
+        let equalTagID = lhs.tagID == rhs.tagID
+        let equalAreaID = lhs.areaID == rhs.areaID
+        let equalDate = lhs.date == rhs.date
+        let equalAreaName = lhs.areaName == rhs.areaName
+        let equalMode = lhs.mode == rhs.mode
+        return equalTagID && equalAreaID && equalDate && equalAreaName && equalDate && equalAreaName && equalMode
+    }
+}
+
 @objc(AreaEvent) final public class ObjCAreaEvent: NSObject {
     
     @objc public var tagID: Int
