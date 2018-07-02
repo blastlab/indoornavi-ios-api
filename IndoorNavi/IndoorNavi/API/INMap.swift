@@ -113,8 +113,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     }
     
     private func loadHTML() {
-        let baseURL = URL(fileURLWithPath: Bundle.main.bundlePath, isDirectory: true)
-        webView.loadFileURL(Paths.indoorNaviHtmlURL, allowingReadAccessTo: baseURL)
+        webView.loadFileURL(Paths.indoorNaviHtmlURL, allowingReadAccessTo: Bundle(for: INMap.self).bundleURL)
     }
     
     private var configuration: WKWebViewConfiguration {
