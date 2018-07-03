@@ -28,14 +28,6 @@ class INReportTests: XCTestCase {
         report = nil
     }
     
-    func testMapInit() {
-        XCTAssertNotNil(map)
-    }
-    
-    func testReportInit() {
-        XCTAssertNotNil(report)
-    }
-    
     func testGetAreaEvents() {
         let getAreaEventsResponsePromise = expectation(description: "getAreaEvents response arrived")
         

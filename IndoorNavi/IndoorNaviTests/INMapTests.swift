@@ -23,10 +23,6 @@ class INMapTests: XCTestCase {
     override func tearDown() {
         map = nil
     }
-
-    func testMapInit() {
-        XCTAssertNotNil(map)
-    }
     
     func testMapLoad() {
         let loadMapPromise = expectation(description: "Map with ID 2 loaded.")
