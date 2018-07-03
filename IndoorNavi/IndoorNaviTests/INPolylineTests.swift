@@ -15,7 +15,6 @@ class INPolylineTests: XCTestCase {
     let ApiKey = "TestAdmin"
     
     var map: INMap!
-    let points: [INPoint] = [INPoint(x: 480, y: 480), INPoint(x: 1220, y: 480), INPoint(x: 1220, y: 1220), INPoint(x: 480, y: 1220), INPoint(x: 750, y: 750)]
     
     override func setUp() {
         map = INMap(frame: CGRect.zero, targetHost: FrontendTargetHost, apiKey: ApiKey)
@@ -31,15 +30,15 @@ class INPolylineTests: XCTestCase {
     
     func testPolylineInit() {
         let loadMapPromise = expectation(description: "Map loaded.")
-        let polylineInitPromise = expectation(description: "Area initialized")
+        let polylineInitPromise = expectation(description: "Polyline initialized")
         
         map.load(2) {
             loadMapPromise.fulfill()
             let polyline = INPolyline(withMap: self.map)
+            let points: [INPoint] = [INPoint(x: 480, y: 480), INPoint(x: 1220, y: 480), INPoint(x: 1220, y: 1220), INPoint(x: 480, y: 1220), INPoint(x: 750, y: 750)]
             
-            polyline.set(points: self.points)
+            polyline.set(points: points)
             polyline.setColorWith(red: 1.0, green: 0.5, blue: 0.5)
-            polyline.draw()
             
             Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
                 XCTAssertNotNil(polyline.objectID)

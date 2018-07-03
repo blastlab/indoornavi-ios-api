@@ -43,6 +43,8 @@
 		7BEFEBF120EB738D00A55FCC /* INAreaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEFEBF020EB738D00A55FCC /* INAreaTests.swift */; };
 		7BEFEBF520EBA4E000A55FCC /* INMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEFEBF420EBA4E000A55FCC /* INMapTests.swift */; };
 		7BEFEBF720EBA54900A55FCC /* INMarkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEFEBF620EBA54900A55FCC /* INMarkerTests.swift */; };
+		7BEFEBF920EBA84900A55FCC /* INInfoWindowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEFEBF820EBA84900A55FCC /* INInfoWindowTests.swift */; };
+		7BEFEBFB20EBB7B200A55FCC /* INReportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEFEBFA20EBB7B200A55FCC /* INReportTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +116,8 @@
 		7BEFEBF020EB738D00A55FCC /* INAreaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INAreaTests.swift; sourceTree = "<group>"; };
 		7BEFEBF420EBA4E000A55FCC /* INMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INMapTests.swift; sourceTree = "<group>"; };
 		7BEFEBF620EBA54900A55FCC /* INMarkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INMarkerTests.swift; sourceTree = "<group>"; };
+		7BEFEBF820EBA84900A55FCC /* INInfoWindowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INInfoWindowTests.swift; sourceTree = "<group>"; };
+		7BEFEBFA20EBB7B200A55FCC /* INReportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INReportTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,6 +334,8 @@
 				7BEFEBF020EB738D00A55FCC /* INAreaTests.swift */,
 				7BEFEBF420EBA4E000A55FCC /* INMapTests.swift */,
 				7BEFEBF620EBA54900A55FCC /* INMarkerTests.swift */,
+				7BEFEBF820EBA84900A55FCC /* INInfoWindowTests.swift */,
+				7BEFEBFA20EBB7B200A55FCC /* INReportTests.swift */,
 				7BD46774206CF34A00B9F2AD /* Info.plist */,
 			);
 			path = IndoorNaviTests;
@@ -479,12 +485,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BEFEBFB20EBB7B200A55FCC /* INReportTests.swift in Sources */,
 				7BEFEBEF20EB5B2B00A55FCC /* INPolylineTests.swift in Sources */,
 				7B8570C320E0F0AA00295D00 /* AreaEventsHelperTests.swift in Sources */,
 				7BEFEBF720EBA54900A55FCC /* INMarkerTests.swift in Sources */,
 				7BEFEBF520EBA4E000A55FCC /* INMapTests.swift in Sources */,
 				7B2F3EB420E527E9006D98B4 /* CoordinatesHelperTests.swift in Sources */,
 				7BD46773206CF34A00B9F2AD /* PointHelperTests.swift in Sources */,
+				7BEFEBF920EBA84900A55FCC /* INInfoWindowTests.swift in Sources */,
 				7BEFEBF120EB738D00A55FCC /* INAreaTests.swift in Sources */,
 				7B8570C120E0E51600295D00 /* ColorHelperTests.swift in Sources */,
 			);

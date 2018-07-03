@@ -1,5 +1,5 @@
 //
-//  INAreaTests.swift
+//  INInforWindowTests.swift
 //  IndoorNaviTests
 //
 //  Created by Michał Pastwa on 03.07.2018.
@@ -9,8 +9,8 @@
 import XCTest
 @testable import IndoorNavi
 
-class INAreaTests: XCTestCase {
-    
+class INInfoWindowTests: XCTestCase {
+
     let FrontendTargetHost = "http://172.16.170.53:4200"
     let ApiKey = "TestAdmin"
     
@@ -23,34 +23,34 @@ class INAreaTests: XCTestCase {
     override func tearDown() {
         map = nil
     }
-    
+
     func testMapInit() {
         XCTAssertNotNil(map)
     }
     
-    func testAreaInit() {
+    func testInfoWindowInit() {
         let loadMapPromise = expectation(description: "Map loaded.")
-        let areaInitPromise = expectation(description: "Area initialized")
+        let infoWindowInitPromise = expectation(description: "InfoWindow initialized")
         
         map.load(2) {
             loadMapPromise.fulfill()
-            let area = INArea(withMap: self.map)
-            let points: [INPoint] = [INPoint(x: 480, y: 480), INPoint(x: 1220, y: 480), INPoint(x: 1220, y: 1220), INPoint(x: 480, y: 1220), INPoint(x: 750, y: 750)]
+            let infoWindow = INInfoWindow(withMap: self.map)
             
-            area.set(points: points)
-            area.setFillColor(red: 0.8, green: 0.4, blue: 0.2)
-            area.setOpacity(0.5)
+            infoWindow.setInnerHTML(string: "<h2>Lorem ipsum dolor sit amet</h2>")
+            infoWindow.position = .top
+            infoWindow.height = 300
+            infoWindow.width = 400
             
             Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
-                XCTAssertNotNil(area.objectID)
-                areaInitPromise.fulfill()
+                XCTAssertNotNil(infoWindow.objectID)
+                infoWindowInitPromise.fulfill()
             })
             
-            area.getPoints { points in
+            infoWindow.getPoints { points in
                 XCTAssertNotNil(points)
             }
             
-            area.isWithin(coordinates: [INPoint(x: 200, y: 400)]) { isWithin in
+            infoWindow.isWithin(coordinates: [INPoint(x: 200, y: 400)]) { isWithin in
                 XCTAssertNotNil(isWithin)
             }
         }
