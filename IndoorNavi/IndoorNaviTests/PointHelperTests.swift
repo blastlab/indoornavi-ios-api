@@ -11,8 +11,8 @@ import XCTest
 
 class PointHelperTests: XCTestCase {
     
-    let points: [INPoint] = [INPoint(x: 1, y: 1), INPoint(x: 500, y: 1000), INPoint(x: 10000, y: 15000), INPoint(x: Int32.max, y: Int32.max), INPoint(x: 0, y: 0)]
-    let point: INPoint = INPoint(x: 480, y: 480)
+    let points = [INPoint(x: 1, y: 1), INPoint(x: 500, y: 1000), INPoint(x: 10000, y: 15000), INPoint(x: Int32.max, y: Int32.max), INPoint(x: 0, y: 0)]
+    let point = INPoint(x: 480, y: 480)
     let pointsString = "[{x: 1, y: 1},{x: 500, y: 1000},{x: 10000, y: 15000},{x: 2147483647, y: 2147483647},{x: 0, y: 0}]"
     let pointString = "{x: 480, y: 480}"
     let pointsJson: [[String: Any]] = [["x": 1, "y": 1],["x": 500, "y": 1000],["x": 10000, "y": 15000],["x": 2147483647, "y": 2147483647],["x": 0, "y": 0]]

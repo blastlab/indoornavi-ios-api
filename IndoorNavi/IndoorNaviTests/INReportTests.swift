@@ -37,13 +37,11 @@ class INReportTests: XCTestCase {
     }
     
     func testGetAreaEvents() {
-        let loadMapPromise = expectation(description: "Map loaded.")
-        let getAreaEventsResponse = expectation(description: "getAreaEvents response arrived")
+        let getAreaEventsResponsePromise = expectation(description: "getAreaEvents response arrived")
         
         map.load(2) {
-            loadMapPromise.fulfill()
             self.report.getAreaEvents(fromFloorWithID: 2, from: Date(timeIntervalSince1970: 1428105600), to: Date()) { areaEvents in
-                getAreaEventsResponse.fulfill()
+                getAreaEventsResponsePromise.fulfill()
             }
         }
         
@@ -51,13 +49,11 @@ class INReportTests: XCTestCase {
     }
     
     func testGetCoordinates() {
-        let loadMapPromise = expectation(description: "Map loaded.")
-        let getCoordinatesResponse = expectation(description: "getCoordinates response arrived")
+        let getCoordinatesResponsePromise = expectation(description: "getCoordinates response arrived")
         
         map.load(2) {
-            loadMapPromise.fulfill()
             self.report.getCoordinates(fromFloorWithID: 2, from: Date(timeIntervalSince1970: 1428105600), to: Date()) { coordinates in
-                getCoordinatesResponse.fulfill()
+                getCoordinatesResponsePromise.fulfill()
             }
         }
         

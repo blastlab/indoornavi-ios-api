@@ -10,11 +10,11 @@ import XCTest
 @testable import IndoorNavi
 
 class ColorHelperTests: XCTestCase {
-    
-    let (red, green, blue): (CGFloat, CGFloat, CGFloat) = (0.5, 0.8, 0.2)
-    let colorString = "rgb(127,204,51)"
 
     func testColorStringFromComponents() {
+        let (red, green, blue): (CGFloat, CGFloat, CGFloat) = (0.5, 0.8, 0.2)
+        let colorString = "rgb(127,204,51)"
+        
         let colorStringFromComponents = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
         XCTAssertEqual(colorStringFromComponents, colorString)
     }

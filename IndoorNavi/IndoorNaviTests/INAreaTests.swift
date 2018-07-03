@@ -24,18 +24,12 @@ class INAreaTests: XCTestCase {
         map = nil
     }
     
-    func testMapInit() {
-        XCTAssertNotNil(map)
-    }
-    
     func testAreaInit() {
-        let loadMapPromise = expectation(description: "Map loaded.")
         let areaInitPromise = expectation(description: "Area initialized")
         
         map.load(2) {
-            loadMapPromise.fulfill()
             let area = INArea(withMap: self.map)
-            let points: [INPoint] = [INPoint(x: 480, y: 480), INPoint(x: 1220, y: 480), INPoint(x: 1220, y: 1220), INPoint(x: 480, y: 1220), INPoint(x: 750, y: 750)]
+            let points = [INPoint(x: 480, y: 480), INPoint(x: 1220, y: 480), INPoint(x: 1220, y: 1220), INPoint(x: 480, y: 1220), INPoint(x: 750, y: 750)]
             
             area.set(points: points)
             area.setFillColor(red: 0.8, green: 0.4, blue: 0.2)

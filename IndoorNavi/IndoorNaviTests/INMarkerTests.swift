@@ -24,16 +24,10 @@ class INMarkerTests: XCTestCase {
         map = nil
     }
     
-    func testMapInit() {
-        XCTAssertNotNil(map)
-    }
-    
     func testMarkerInit() {
-        let loadMapPromise = expectation(description: "Map loaded.")
         let markerInitPromise = expectation(description: "Marker initialized")
         
         map.load(2) {
-            loadMapPromise.fulfill()
             let marker = INMarker(withMap: self.map)
             
             marker.set(point: INPoint(x: 480, y: 480))

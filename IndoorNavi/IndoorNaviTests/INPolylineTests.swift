@@ -24,18 +24,12 @@ class INPolylineTests: XCTestCase {
         map = nil
     }
     
-    func testMapInit() {
-        XCTAssertNotNil(map)
-    }
-    
     func testPolylineInit() {
-        let loadMapPromise = expectation(description: "Map loaded.")
         let polylineInitPromise = expectation(description: "Polyline initialized")
         
         map.load(2) {
-            loadMapPromise.fulfill()
             let polyline = INPolyline(withMap: self.map)
-            let points: [INPoint] = [INPoint(x: 480, y: 480), INPoint(x: 1220, y: 480), INPoint(x: 1220, y: 1220), INPoint(x: 480, y: 1220), INPoint(x: 750, y: 750)]
+            let points = [INPoint(x: 480, y: 480), INPoint(x: 1220, y: 480), INPoint(x: 1220, y: 1220), INPoint(x: 480, y: 1220), INPoint(x: 750, y: 750)]
             
             polyline.set(points: points)
             polyline.setColorWith(red: 1.0, green: 0.5, blue: 0.5)

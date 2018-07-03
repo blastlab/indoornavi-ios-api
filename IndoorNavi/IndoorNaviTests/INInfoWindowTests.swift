@@ -23,17 +23,11 @@ class INInfoWindowTests: XCTestCase {
     override func tearDown() {
         map = nil
     }
-
-    func testMapInit() {
-        XCTAssertNotNil(map)
-    }
     
     func testInfoWindowInit() {
-        let loadMapPromise = expectation(description: "Map loaded.")
         let infoWindowInitPromise = expectation(description: "InfoWindow initialized")
         
         map.load(2) {
-            loadMapPromise.fulfill()
             let infoWindow = INInfoWindow(withMap: self.map)
             
             infoWindow.setInnerHTML(string: "<h2>Lorem ipsum dolor sit amet</h2>")
