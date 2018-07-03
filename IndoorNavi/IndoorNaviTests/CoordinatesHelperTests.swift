@@ -18,5 +18,4 @@ class CoordinatesHelperTests: XCTestCase {
         let coordinatesArray = CoordinatesHelper.coordinatesArray(fromJSONObject: coordinatesDictionary)
         XCTAssertEqual(coordinatesArray, coordinates)
     }
-
 }

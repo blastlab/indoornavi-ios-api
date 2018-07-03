@@ -41,6 +41,7 @@
 		7BEFEBEC20EA660900A55FCC /* indoorNavi.html in Resources */ = {isa = PBXBuildFile; fileRef = 7B7180AB207CAF1B00EC3E34 /* indoorNavi.html */; };
 		7BEFEBED20EA660F00A55FCC /* indoorNavi.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B718096207CAF1B00EC3E34 /* indoorNavi.js */; };
 		7BEFEBEF20EB5B2B00A55FCC /* INPolylineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEFEBEE20EB5B2B00A55FCC /* INPolylineTests.swift */; };
+		7BEFEBF120EB738D00A55FCC /* INAreaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEFEBF020EB738D00A55FCC /* INAreaTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,7 @@
 		7BD46774206CF34A00B9F2AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BD4679C206CF59500B9F2AD /* INMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INMap.swift; sourceTree = "<group>"; };
 		7BEFEBEE20EB5B2B00A55FCC /* INPolylineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INPolylineTests.swift; sourceTree = "<group>"; };
+		7BEFEBF020EB738D00A55FCC /* INAreaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INAreaTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,6 +326,7 @@
 				7B2F3EB320E527E9006D98B4 /* CoordinatesHelperTests.swift */,
 				7B1863DF20EA10BE00500A19 /* INMapTests.swift */,
 				7BEFEBEE20EB5B2B00A55FCC /* INPolylineTests.swift */,
+				7BEFEBF020EB738D00A55FCC /* INAreaTests.swift */,
 				7BD46774206CF34A00B9F2AD /* Info.plist */,
 			);
 			path = IndoorNaviTests;
@@ -478,6 +481,7 @@
 				7B2F3EB420E527E9006D98B4 /* CoordinatesHelperTests.swift in Sources */,
 				7B1863E020EA10BE00500A19 /* INMapTests.swift in Sources */,
 				7BD46773206CF34A00B9F2AD /* PointHelperTests.swift in Sources */,
+				7BEFEBF120EB738D00A55FCC /* INAreaTests.swift in Sources */,
 				7B8570C120E0E51600295D00 /* ColorHelperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

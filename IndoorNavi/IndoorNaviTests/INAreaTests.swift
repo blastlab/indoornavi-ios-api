@@ -1,5 +1,5 @@
 //
-//  INPolylineTests.swift
+//  INAreaTests.swift
 //  IndoorNaviTests
 //
 //  Created by Michał Pastwa on 03.07.2018.
@@ -9,8 +9,8 @@
 import XCTest
 @testable import IndoorNavi
 
-class INPolylineTests: XCTestCase {
-
+class INAreaTests: XCTestCase {
+    
     let FrontendTargetHost = "http://172.16.170.53:4200"
     let ApiKey = "TestAdmin"
     
@@ -29,28 +29,29 @@ class INPolylineTests: XCTestCase {
         XCTAssertNotNil(map)
     }
     
-    func testPolylineInit() {
+    func testAreaInit() {
         let loadMapPromise = expectation(description: "Map loaded.")
         let areaInitPromise = expectation(description: "Area initialized")
         
         map.load(2) {
             loadMapPromise.fulfill()
-            let polyline = INPolyline(withMap: self.map)
+            let area = INArea(withMap: self.map)
             
-            polyline.set(points: self.points)
-            polyline.setColorWith(red: 1.0, green: 0.5, blue: 0.5)
-            polyline.draw()
+            area.set(points: self.points)
+            area.setFillColor(red: 0.8, green: 0.4, blue: 0.2)
+            area.setOpacity(0.5)
+            area.draw()
             
             Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
-                XCTAssertNotNil(polyline.objectID)
+                XCTAssertNotNil(area.objectID)
                 areaInitPromise.fulfill()
             })
             
-            polyline.getPoints { points in
+            area.getPoints { points in
                 XCTAssertNotNil(points)
             }
             
-            polyline.isWithin(coordinates: [INPoint(x: 200, y: 400)]) { isWithin in
+            area.isWithin(coordinates: [INPoint(x: 200, y: 400)]) { isWithin in
                 XCTAssertNotNil(isWithin)
             }
         }

@@ -35,7 +35,6 @@ class INMapTests: XCTestCase {
             loadMapPromise.fulfill()
         }
         
-        wait(for: [loadMapPromise], timeout: 5)
+        waitForExpectations(timeout: 10)
     }
-
 }
