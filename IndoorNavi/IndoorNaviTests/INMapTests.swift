@@ -24,10 +24,13 @@ class INMapTests: XCTestCase {
         map = nil
     }
 
+    func testMapInit() {
+        XCTAssertNotNil(map)
+    }
+    
     func testMapLoad() {
         let loadMapPromise = expectation(description: "Map with ID 2 loaded.")
         
-        XCTAssertNotNil(map)
         map.load(2) {
             loadMapPromise.fulfill()
         }
