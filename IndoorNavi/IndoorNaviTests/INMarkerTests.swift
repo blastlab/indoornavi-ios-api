@@ -1,5 +1,5 @@
 //
-//  INPolylineTests.swift
+//  INMarker.swift
 //  IndoorNaviTests
 //
 //  Created by Michał Pastwa on 03.07.2018.
@@ -9,13 +9,13 @@
 import XCTest
 @testable import IndoorNavi
 
-class INPolylineTests: XCTestCase {
-
+class INMarkerTests: XCTestCase {
+    
     let FrontendTargetHost = "http://172.16.170.53:4200"
     let ApiKey = "TestAdmin"
     
     var map: INMap!
-    let points: [INPoint] = [INPoint(x: 480, y: 480), INPoint(x: 1220, y: 480), INPoint(x: 1220, y: 1220), INPoint(x: 480, y: 1220), INPoint(x: 750, y: 750)]
+    let points: INPoint = INPoint(x: 480, y: 480)
     
     override func setUp() {
         map = INMap(frame: CGRect.zero, targetHost: FrontendTargetHost, apiKey: ApiKey)
@@ -29,28 +29,30 @@ class INPolylineTests: XCTestCase {
         XCTAssertNotNil(map)
     }
     
-    func testPolylineInit() {
+    func testMarkerInit() {
         let loadMapPromise = expectation(description: "Map loaded.")
-        let polylineInitPromise = expectation(description: "Area initialized")
+        let markerInitPromise = expectation(description: "Area initialized")
         
         map.load(2) {
             loadMapPromise.fulfill()
-            let polyline = INPolyline(withMap: self.map)
+            let marker = INMarker(withMap: self.map)
             
-            polyline.set(points: self.points)
-            polyline.setColorWith(red: 1.0, green: 0.5, blue: 0.5)
-            polyline.draw()
+            marker.set(point: INPoint(x: 600, y: 600))
+            marker.setIcon(withPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png")
+            marker.setLabel(withText: "Tekst ABCD")
+            marker.addEventListener {}
+            marker.draw()
             
             Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
-                XCTAssertNotNil(polyline.objectID)
-                polylineInitPromise.fulfill()
+                XCTAssertNotNil(marker.objectID)
+                markerInitPromise.fulfill()
             })
             
-            polyline.getPoints { points in
+            marker.getPoints { points in
                 XCTAssertNotNil(points)
             }
             
-            polyline.isWithin(coordinates: [INPoint(x: 200, y: 400)]) { isWithin in
+            marker.isWithin(coordinates: [INPoint(x: 200, y: 400)]) { isWithin in
                 XCTAssertNotNil(isWithin)
             }
         }
