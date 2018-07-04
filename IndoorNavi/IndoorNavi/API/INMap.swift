@@ -87,7 +87,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         loadHTML()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupWebView(withFrame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
     }
@@ -113,8 +113,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     }
     
     private func loadHTML() {
-        let baseURL = URL(fileURLWithPath: Bundle.main.bundlePath, isDirectory: true)
-        webView.loadFileURL(Paths.indoorNaviHtmlURL, allowingReadAccessTo: baseURL)
+        webView.loadFileURL(Paths.indoorNaviHtmlURL, allowingReadAccessTo: Bundle(for: INMap.self).bundleURL)
     }
     
     private var configuration: WKWebViewConfiguration {

@@ -107,7 +107,7 @@ public class INObject: NSObject {
     /// - Parameters:
     ///   - coordinates: Coordinates that are described in real world dimensions. Coordinates are calculated to the map scale.
     ///   - callbackHandler: A block to invoke when the boolean is available.
-    public func isWithin(coordinates: [INPoint], callbackHandler: @escaping (Bool) -> Void) {
+    public func isWithin(coordinates: [INPoint], callbackHandler: @escaping (Bool?) -> Void) {
         ready {
             let coordinatesString = PointHelper.coordinatesArrayString(fromCoordinatesArray: coordinates)
             let javaScriptString = String(format: ScriptTemplates.IsWithinTemplate, self.javaScriptVariableName, coordinatesString)
@@ -117,23 +117,32 @@ public class INObject: NSObject {
                 
                 guard error == nil, response != nil else {
                     print("Error: \(String(describing: error))")
-                    callbackHandler(false)
+                    callbackHandler(nil)
                     return
                 }
                 
                 if let isWithPoint = response! as? Bool {
                     callbackHandler(isWithPoint)
                 } else {
-                    callbackHandler(false)
+                    callbackHandler(nil)
                 }
             }
         }
     }
     
     @available(swift, obsoleted: 1.0)
-    @objc private func isWithin(coordinates: UnsafePointer<INPoint>, withSize size: Int, callbackHandler: @escaping (Bool) -> Void)  {
+    @objc public func isWithin(coordinates: UnsafePointer<INPoint>, withSize size: Int, callbackHandler: @escaping (Bool) -> Void)  {
         let coordinates = PointHelper.pointsArray(fromCArray: coordinates, withSize: size)
-        isWithin(coordinates: coordinates, callbackHandler: callbackHandler)
+        
+        let callback: (Bool?) -> Void = { isWithin in
+            if let isWithin = isWithin {
+                callbackHandler(isWithin)
+            } else {
+                callbackHandler(false)
+            }
+        }
+        
+        isWithin(coordinates: coordinates, callbackHandler: callback)
     }
     
     /// Removes object and destroys instance of the object in the frontend server, but do not destroys object class instance in your app.

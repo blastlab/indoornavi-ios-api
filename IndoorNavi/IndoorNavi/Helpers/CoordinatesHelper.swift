@@ -31,10 +31,10 @@ class CoordinatesHelper: NSObject {
         }
     }
     
-    static func callbackHandlerTakingStructs(fromCallbackHandlerTakingObjects callbackHandlerTakingObjects: @escaping ([_ObjCCoordinates]) -> Void) -> ([Coordinates]) -> Void {
+    static func callbackHandlerTakingStructs(fromCallbackHandlerTakingObjects callbackHandlerTakingObjects: @escaping ([ObjCCoordinates]) -> Void) -> ([Coordinates]) -> Void {
         let callbackHandlerTakingStructs: ([Coordinates]) -> Void = { coordinatesArray in
-            let objCCoordinatesArray: [_ObjCCoordinates] = coordinatesArray.map { coordinates in
-                let objCCoordinates = _ObjCCoordinates(x: coordinates.x, y: coordinates.y, tagID: coordinates.tagID, date: coordinates.date)
+            let objCCoordinatesArray: [ObjCCoordinates] = coordinatesArray.map { coordinates in
+                let objCCoordinates = ObjCCoordinates(x: coordinates.x, y: coordinates.y, tagID: coordinates.tagID, date: coordinates.date)
                 return objCCoordinates
             }
             callbackHandlerTakingObjects(objCCoordinatesArray)
