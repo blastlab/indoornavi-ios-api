@@ -9,9 +9,9 @@
 /// Structure representing Coordinates, registered on specific `date` for specific tag with `tagID`.
 public struct Coordinates {
     
-    /// The x-coordinate coordinate in centimiters
+    /// The x-coordinate in centimiters
     public var x: Int
-    /// The y-coordinate coordinate in centimiters
+    /// The y-coordinate in centimiters
     public var y: Int
     /// Short ID of the tag.
     public var tagID: Int
@@ -21,8 +21,8 @@ public struct Coordinates {
     /// Initializes `Coordinates` structure.
     ///
     /// - Parameters:
-    ///   - x: The x-coordinate coordinate in centimiters
-    ///   - y: The y-coordinate coordinate in centimiters
+    ///   - x: The x-coordinate in centimiters
+    ///   - y: The y-coordinate in centimiters
     ///   - tagID: Short ID of the tag.
     ///   - date: Date of `Coordinates` registration.
     public init(x: Int, y: Int, tagID: Int, date: Date) {
