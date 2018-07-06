@@ -7,7 +7,7 @@
 //
 
 /// Structure representing Coordinates, registered on specific `date` for specific tag with `tagID`.
-public struct Coordinates {
+public struct Coordinates: Equatable {
     
     /// The x-coordinate in centimiters
     public var x: Int
@@ -30,25 +30,6 @@ public struct Coordinates {
         self.y = y
         self.tagID = tagID
         self.date = date
-    }
-}
-
-extension Coordinates : Equatable {
-    
-    /// Returns a Boolean value indicating whether two values are equal.
-    ///
-    /// Equality is the inverse of inequality. For any values `a` and `b`,
-    /// `a == b` implies that `a != b` is `false`.
-    ///
-    /// - Parameters:
-    ///   - lhs: A value to compare.
-    ///   - rhs: Another value to compare.
-    public static func == (lhs: Coordinates, rhs: Coordinates) -> Bool {
-        let equalX = lhs.x == rhs.x
-        let equalY = lhs.y == rhs.y
-        let equalTagID = lhs.tagID == rhs.tagID
-        let equalDate = lhs.date == rhs.date
-        return equalX && equalY && equalTagID && equalDate
     }
 }
 

@@ -37,11 +37,6 @@
                BlueprintName = "IndoorNaviTests"
                ReferencedContainer = "container:IndoorNavi.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "INMarker">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

@@ -45,7 +45,7 @@ class INInfoWindowTests: XCTestCase {
             }
             
             infoWindow.isWithin(coordinates: [INPoint(x: 200, y: 400)]) { isWithin in
-                XCTAssertNotNil(isWithin)
+                XCTAssertNil(isWithin)
             }
         }
         

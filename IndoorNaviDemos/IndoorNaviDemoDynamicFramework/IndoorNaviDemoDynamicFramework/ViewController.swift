@@ -39,7 +39,7 @@ class ViewController: UIViewController {
         infoWindow.position = .top
         infoWindow.height = Int(arc4random_uniform(220) + 30)
         infoWindow.width = Int(arc4random_uniform(220) + 30)
-        infoWindow.open(object: marker)
+        marker.add(infoWindow: infoWindow)
     }
     
     @IBAction func drawPolyline1(_ sender: Any) {
