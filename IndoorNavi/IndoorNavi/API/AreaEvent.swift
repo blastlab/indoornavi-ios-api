@@ -7,7 +7,7 @@
 //
 
 /// Structure representing AreaEvent.
-public struct AreaEvent {
+public struct AreaEvent: Equatable {
     
     /// Short ID of the tag that entered/left INArea.
     public var tagID: Int
@@ -43,26 +43,6 @@ public struct AreaEvent {
         self.areaID = areaID
         self.areaName = areaName
         self.mode = mode
-    }
-}
-
-extension AreaEvent : Equatable {
-    
-    /// Returns a Boolean value indicating whether two values are equal.
-    ///
-    /// Equality is the inverse of inequality. For any values `a` and `b`,
-    /// `a == b` implies that `a != b` is `false`.
-    ///
-    /// - Parameters:
-    ///   - lhs: A value to compare.
-    ///   - rhs: Another value to compare.
-    public static func == (lhs: AreaEvent, rhs: AreaEvent) -> Bool {
-        let equalTagID = lhs.tagID == rhs.tagID
-        let equalAreaID = lhs.areaID == rhs.areaID
-        let equalDate = lhs.date == rhs.date
-        let equalAreaName = lhs.areaName == rhs.areaName
-        let equalMode = lhs.mode == rhs.mode
-        return equalTagID && equalAreaID && equalDate && equalAreaName && equalDate && equalAreaName && equalMode
     }
 }
 
