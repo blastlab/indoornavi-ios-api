@@ -14,7 +14,6 @@ public class INInfoWindow: INObject {
         static let InitializationTemplate = "var %@ = new INInfoWindow(navi);"
         static let HeightTemplate = "%@.height(%i);"
         static let WidthTemplate = "%@.width(%i);"
-        static let OpenTemplate = "%@.open(%@);"
         static let SetInnerHTMLTemplate = "%@.setInnerHTML('%@');"
         static let SetPositionTemplate = "%@.setPosition(%i);"
     }
@@ -93,17 +92,6 @@ public class INInfoWindow: INObject {
                 let javaScriptString = String(format: ScriptTemplates.WidthTemplate, self.javaScriptVariableName, self.privateWidth)
                 self.map.evaluate(javaScriptString: javaScriptString)
             }
-        }
-    }
-    
-    /// Displays info window in iframe on given object.
-    ///
-    /// - Parameter object: An INObject object to append info window to.
-    @objc public func open(object: INObject) {
-        ready {
-            print("object.javaScriptVariableName = %@",object.javaScriptVariableName)
-            let javaScriptString = String(format: ScriptTemplates.OpenTemplate, self.javaScriptVariableName, object.javaScriptVariableName)
-            self.map.evaluate(javaScriptString: javaScriptString)
         }
     }
     

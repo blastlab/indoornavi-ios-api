@@ -18,6 +18,7 @@ public class INMarker: INObject {
         static let PointTemplate = "%@.point(%@);"
         static let SetLabelTemplate = "%@.setLabel('%@');"
         static let RemoveLabelTemplate = "%@.removeLabel();"
+        static let OpenTemplate = "%@.open(%@);"
         static let SetIconTemplate = "%@.setIcon('%@');"
     }
     
@@ -94,6 +95,16 @@ public class INMarker: INObject {
     @objc public func removeLabel() {
         ready {
             let javaScriptString = String(format: ScriptTemplates.RemoveLabelTemplate, self.javaScriptVariableName)
+            self.map.evaluate(javaScriptString: javaScriptString)
+        }
+    }
+    
+    /// Displays `INInfoWindow` on marker.
+    ///
+    /// - Parameter infoWindow: An `INInfoWindow` object.
+    @objc(addInfoWindow:) public func add(infoWindow: INInfoWindow) {
+        ready {
+            let javaScriptString = String(format: ScriptTemplates.OpenTemplate, infoWindow.javaScriptVariableName, self.javaScriptVariableName)
             self.map.evaluate(javaScriptString: javaScriptString)
         }
     }
