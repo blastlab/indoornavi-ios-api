@@ -56,7 +56,7 @@ NSString* const ApiKey = @"TestAdmin";
 - (IBAction)drawInfoWindow:(id)sender {
     infoWindow.height = arc4random_uniform(220) + 30;
     infoWindow.width = arc4random_uniform(220) + 30;
-    [marker addInfoWindow:infoWindow]
+    [marker addInfoWindow:infoWindow];
 }
 
 - (IBAction)drawPolyline1:(id)sender {
