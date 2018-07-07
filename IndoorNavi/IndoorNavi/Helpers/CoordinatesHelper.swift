@@ -8,7 +8,7 @@
 
 class CoordinatesHelper: NSObject {
     
-    static func coordinatesArray(fromJSONObject jsonObject: Any) -> [Coordinates] {
+    static func coordinatesArray(fromJSONObject jsonObject: Any?) -> [Coordinates] {
         if let dictionaries = jsonObject as? [[String: Any]] {
             
             let coordinatesArray = dictionaries.compactMap { element -> Coordinates? in

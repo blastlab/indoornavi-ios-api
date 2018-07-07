@@ -18,17 +18,17 @@ class PointHelperTests: XCTestCase {
     let pointsJson: [[String: Any]] = [["x": 1, "y": 1],["x": 500, "y": 1000],["x": 10000, "y": 15000],["x": 2147483647, "y": 2147483647],["x": 0, "y": 0]]
     
     func testPointsArrayToString() {
-        let pointsStringFromArray = PointHelper.coordinatesArrayString(fromCoordinatesArray: points)
+        let pointsStringFromArray = PointHelper.pointsString(fromCoordinatesArray: points)
         XCTAssertEqual(pointsStringFromArray, pointsString)
     }
     
     func testPointsStringToArray() {
-        let pointsArrayFromString = PointHelper.coordinatesArray(fromJSONObject: pointsJson)
+        let pointsArrayFromString = PointHelper.points(fromJSONObject: pointsJson)
         XCTAssertEqual(pointsArrayFromString, points)
     }
     
     func testPointToString() {
-        let pointString = PointHelper.coordinatesString(fromCoordinates: point)
+        let pointString = PointHelper.pointString(fromCoordinates: point)
         XCTAssertEqual(pointString, pointString)
     }
     

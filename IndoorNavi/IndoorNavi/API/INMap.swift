@@ -16,6 +16,9 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         static let InitializationTemplate = "var navi = new INMap('%@','%@','map',{width:document.body.clientWidth,height:document.body.clientHeight});"
         static let LoadMapPromiseTemplate = "navi.load(%d).then(() => webkit.messageHandlers.PromisesController.postMessage('%@'));"
         static let LoadMapTemplate = "navi.load(%d);"
+        static let MessageTemplate = "{uuid: '%@', response: res}"
+        static let AddLongClickListener = "navi.addMapLongClickListener(res => webkit.messageHandlers.LongClickEventCallbacksController.postMessage(%@));"
+        static let Parameters = "navi.parameters;"
     }
     
     fileprivate struct WebViewConfigurationScripts {
@@ -31,6 +34,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     var eventCallbacksController = EventCallbacksController()
     var areaEventsCallbacksController = AreaEventsCallbacksController()
     var coordinatesCallbacksController = CoordinatesCallbacksController()
+    var longClickEventCallbacksController = LongClickEventCallbacksController()
     
     private var webView: WKWebView!
     
@@ -39,6 +43,15 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     
     private var initializedInJavaScript = false
     private var scriptsToEvaluateAfterInitialization = [String]()
+    private var scriptsToEvaluateAfterScaleLoad = [String]()
+    
+    public var scale: Scale? {
+        didSet {
+            if scale != nil {
+                evaluateScriptsAfterScaleLoad()
+            }
+        }
+    }
     
     /// Loads map specified in function call.
     ///
@@ -47,14 +60,14 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     ///   - onCompletion: A block to invoke when the map is loaded.
     @objc public func load(_ mapId: Int, onCompletion: (() -> Void)? = nil) {
         var javaScriptString = String()
-        
-        if onCompletion != nil {
-            let uuid = UUID().uuidString
-            promisesController.promises[uuid] = onCompletion
-            javaScriptString = String(format: ScriptTemplates.LoadMapPromiseTemplate, mapId, uuid)
-        } else {
-            javaScriptString = String(format: ScriptTemplates.LoadMapTemplate, mapId)
+        let callback = {
+            self.getDimensions()
+            onCompletion?()
         }
+        
+        let uuid = UUID().uuidString
+        promisesController.promises[uuid] = callback
+        javaScriptString = String(format: ScriptTemplates.LoadMapPromiseTemplate, mapId, uuid)
         
         evaluate(javaScriptString: javaScriptString)
     }
@@ -87,6 +100,14 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         loadHTML()
     }
     
+    @objc public func addLongClickListener(onLongClickCallback: @escaping (INPoint) -> Void) {
+        let uuid = UUID().uuidString
+        longClickEventCallbacksController.longClickEventCallbacks[uuid] = onLongClickCallback
+        let message = String(format: ScriptTemplates.MessageTemplate, uuid)
+        let javaScriptString = String(format: ScriptTemplates.AddLongClickListener, message)
+        evaluate(javaScriptString: javaScriptString)
+    }
+    
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupWebView(withFrame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
@@ -97,6 +118,20 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
             let javaScriptString = String(format: ScriptTemplates.InitializationTemplate, host, apiKey)
             initializedInJavaScript = true
             evaluate(javaScriptString: javaScriptString)
+        }
+    }
+    
+    private func getDimensions() {
+        evaluate(javaScriptString: ScriptTemplates.Parameters) { response, error in
+            
+            guard error == nil, response != nil else {
+                print("Error: \(String(describing: error))")
+                return
+            }
+            
+            if let scale = Scale(fromJSONObject: response!) {
+                self.scale = scale
+            }
         }
     }
     
@@ -132,22 +167,30 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         controller.add(eventCallbacksController, name: EventCallbacksController.ControllerName)
         controller.add(areaEventsCallbacksController, name: AreaEventsCallbacksController.ControllerName)
         controller.add(coordinatesCallbacksController, name: CoordinatesCallbacksController.ControllerName)
+        controller.add(longClickEventCallbacksController, name: LongClickEventCallbacksController.ControllerName)
         configuration.userContentController = controller
         
         return configuration
     }
     
-    private func evaluateSavedScripts() {
+    private func evaluateScriptsAfterInitialization() {
         for script in scriptsToEvaluateAfterInitialization {
             evaluate(javaScriptString: script)
         }
         scriptsToEvaluateAfterInitialization.removeAll()
     }
     
+    private func evaluateScriptsAfterScaleLoad() {
+        for script in scriptsToEvaluateAfterScaleLoad {
+            evaluate(javaScriptString: script)
+        }
+        scriptsToEvaluateAfterScaleLoad.removeAll()
+    }
+    
     // WKNavigationDelegate
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         initInJavaScript()
-        evaluateSavedScripts()
+        evaluateScriptsAfterInitialization()
     }
     
     internal func evaluate(javaScriptString string: String) {

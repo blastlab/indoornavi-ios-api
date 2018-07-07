@@ -8,7 +8,7 @@
 
 class AreaEventsHelper: NSObject {
     
-    static func areaEvents(fromJSONObject jsonObject: Any) -> [AreaEvent] {
+    static func areaEvents(fromJSONObject jsonObject: Any?) -> [AreaEvent] {
         if let dictionaries = jsonObject as? [[String: Any]] {
             
             let areaEvents = dictionaries.compactMap { element -> AreaEvent? in
