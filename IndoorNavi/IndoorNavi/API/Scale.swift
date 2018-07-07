@@ -6,8 +6,8 @@
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
-/// Class representing a Scale.
-public class Scale {
+/// Structure representing a Scale.
+public struct Scale: Equatable {
     
     /// Scale unit.
     public var measure: Measure
@@ -54,7 +54,7 @@ public class Scale {
         return Double(realDistance) / scaleInPixels
     }
     
-    convenience init?(fromJSONObject jsonObject: Any) {
+    init?(fromJSONObject jsonObject: Any) {
         if let dictionary = jsonObject as? [String: Any], let scaleDictionary = dictionary["scale"] as? [String: Any] {
             let measureString = scaleDictionary["measure"] as? String
             let measure = measureString != nil ? Scale.Measure(rawValue: measureString!) : nil
@@ -69,5 +69,48 @@ public class Scale {
         }
         
         return nil
+    }
+}
+
+@objc(Scale) final public class ObjCScale: NSObject {
+    
+    @objc public var measure: Measure
+    @objc public var realDistance: Int
+    @objc public var start: INPoint
+    @objc public var stop: INPoint
+    
+    @objc public enum Measure: Int {
+        case centimeters
+        case meters
+    }
+    
+    @objc public init(measure: Measure, realDistance: Int, start: INPoint, stop: INPoint) {
+        self.measure = measure
+        self.realDistance = realDistance
+        self.start = start
+        self.stop = stop
+    }
+    
+    @objc public var scaleInPixels: Double {
+        let dx = Double(start.x - stop.x)
+        let dy = Double(start.y - stop.y)
+        
+        return (dx*dx + dy*dy).squareRoot()
+    }
+    
+    @objc public var centimetresPerPixel: Double {
+        return Double(realDistance) / scaleInPixels
+    }
+    
+    convenience init(fromScale scale: Scale) {
+        let measure: Measure
+        
+        switch scale.measure {
+        case .centimeters:
+            measure = .centimeters
+        case .meters:
+            measure = .meters
+        }
+        self.init(measure: measure, realDistance: scale.realDistance, start: scale.start, stop: scale.stop)
     }
 }

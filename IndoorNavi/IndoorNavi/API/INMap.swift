@@ -45,11 +45,20 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     private var scriptsToEvaluateAfterInitialization = [String]()
     private var scriptsToEvaluateAfterScaleLoad = [String]()
     
-    public var scale: Scale? {
+    private(set) public var scale: Scale? {
         didSet {
             if scale != nil {
                 evaluateScriptsAfterScaleLoad()
             }
+        }
+    }
+    
+    @available(swift, obsoleted: 1.0)
+    @objc(scale) public var objCScale: ObjCScale? {
+        if let scale = scale {
+            return ObjCScale(fromScale: scale)
+        } else {
+            return nil
         }
     }
     
@@ -108,7 +117,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         evaluate(javaScriptString: javaScriptString)
     }
     
-    public required init?(coder aDecoder: NSCoder) {
+    @objc public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupWebView(withFrame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
     }
