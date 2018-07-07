@@ -19,6 +19,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         static let MessageTemplate = "{uuid: '%@', response: res}"
         static let AddLongClickListener = "navi.addMapLongClickListener(res => webkit.messageHandlers.LongClickEventCallbacksController.postMessage(%@));"
         static let Parameters = "navi.parameters;"
+        static let ToggleTagVisibility = "navi.toggleTagVisibility(%d);"
     }
     
     fileprivate struct WebViewConfigurationScripts {
@@ -81,6 +82,8 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         evaluate(javaScriptString: javaScriptString)
     }
     
+    
+    
     /// Initializes a new `INMap` object with the provided parameters to communicate with `INMap` frontend server.
     ///
     /// - Parameters:
@@ -114,7 +117,12 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         longClickEventCallbacksController.longClickEventCallbacks[uuid] = onLongClickCallback
         let message = String(format: ScriptTemplates.MessageTemplate, uuid)
         let javaScriptString = String(format: ScriptTemplates.AddLongClickListener, message)
-        evaluate(javaScriptString: javaScriptString)
+        evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
+    }
+    
+    @objc public func toggleTagVisibility(withID id: Int) {
+        let javaScriptString = String(format: ScriptTemplates.ToggleTagVisibility, id)
+        evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
     }
     
     @objc public required init?(coder aDecoder: NSCoder) {
@@ -215,6 +223,14 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
             webView.evaluateJavaScript(string, completionHandler: completionHandler)
         } else {
             scriptsToEvaluateAfterInitialization.append(string)
+        }
+    }
+    
+    private func evaluateWhenScaleLoaded(javaScriptString string: String) {
+        if scale != nil {
+            evaluate(javaScriptString: string)
+        } else {
+            scriptsToEvaluateAfterScaleLoad.append(string)
         }
     }
     

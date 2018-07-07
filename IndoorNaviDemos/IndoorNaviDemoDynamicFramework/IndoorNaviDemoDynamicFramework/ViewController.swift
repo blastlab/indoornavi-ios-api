@@ -134,5 +134,14 @@ class ViewController: UIViewController {
             self.infoWindow = INInfoWindow(withMap: self.map)
             self.infoWindow.setInnerHTML(string: "<h2>Lorem ipsum dolor sit amet</h2>")
         }
+        
+        map.addLongClickListener { point in
+            let marker = INMarker(withMap: self.map)
+            let pointWithRealCoordinates = MapHelper.realCoordinates(fromPixel: point, scale: self.map.scale!)
+            marker.set(point: pointWithRealCoordinates)
+            marker.draw()
+        }
+        
+        map.toggleTagVisibility(withID: 10999)
     }
 }

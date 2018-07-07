@@ -17,12 +17,12 @@ class LongClickEventCallbacksController: NSObject, WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         print("Received long click event callback with body: \(message.body)")
         if let dictionary = message.body as? [String: Any], let uuid = dictionary["uuid"] as? String, let response = dictionary["response"] {
-                receivedMessage(withUUID: uuid, andJSONObject: response)
+            receivedMessage(withUUID: uuid, andJSONObject: response)
         }
     }
     
     private func receivedMessage(withUUID uuid: String, andJSONObject jsonObject: Any) {
-        if let longClickEventCallback = longClickEventCallbacks[uuid], let point = PointHelper.point(fromJSONObject: jsonObject) {
+        if let longClickEventCallback = longClickEventCallbacks[uuid], let dictionary = jsonObject as? [String: Any], let point = PointHelper.point(fromJSONObject: dictionary["position"]) {
             longClickEventCallback(point)
         }
     }
