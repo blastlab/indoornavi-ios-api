@@ -54,6 +54,7 @@ NSString* const ApiKey = @"TestAdmin";
 }
 
 - (IBAction)drawInfoWindow:(id)sender {
+    [self placeMarker:sender];
     infoWindow.height = arc4random_uniform(220) + 30;
     infoWindow.width = arc4random_uniform(220) + 30;
     [marker addInfoWindow:infoWindow];
@@ -156,6 +157,16 @@ NSString* const ApiKey = @"TestAdmin";
         [self->infoWindow setInnerHTMLWithString:@"<h2>Lorem ipsum dolor sit amet</h2>"];
         NSLog(@"Completed");
     }];
+    
+    [map addLongClickListenerOnLongClickCallback:^(INPoint point){
+        INMarker* marker = [[INMarker alloc] initWithMap:self->map];
+        [marker setIconWithPath:@"https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png"];
+        INPoint pointWithRealCoordinates = [MapHelper realCoordinatesFromPixel:point scale:self->map.scale];
+        [marker setPoint:pointWithRealCoordinates];
+        [marker draw];
+    }];
+    
+    [map toggleTagVisibilityWithID:10999];
 }
 
 @end

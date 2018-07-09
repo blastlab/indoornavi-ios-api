@@ -36,6 +36,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func drawInfoWindow(_ sender: Any) {
+        placeMarker(sender)
         infoWindow.position = .top
         infoWindow.height = Int(arc4random_uniform(220) + 30)
         infoWindow.width = Int(arc4random_uniform(220) + 30)
@@ -137,6 +138,7 @@ class ViewController: UIViewController {
         
         map.addLongClickListener { point in
             let marker = INMarker(withMap: self.map)
+            marker.setIcon(withPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png")
             let pointWithRealCoordinates = MapHelper.realCoordinates(fromPixel: point, scale: self.map.scale!)
             marker.set(point: pointWithRealCoordinates)
             marker.draw()
