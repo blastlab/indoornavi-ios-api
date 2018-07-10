@@ -17,10 +17,8 @@ class AreaEventsCallbacksController: NSObject, WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         print("Received area events callback with body: \(message.body)")
         
-        if let dictionary = message.body as? [String: Any] {
-            if let uuid = dictionary["uuid"] as? String, let response = dictionary["response"] {
-                receivedMessage(withUUID: uuid, andJSONObject: response)
-            }
+        if let dictionary = message.body as? [String: Any], let uuid = dictionary["uuid"] as? String, let response = dictionary["response"] {
+            receivedMessage(withUUID: uuid, andJSONObject: response)
         }
     }
     
@@ -28,6 +26,7 @@ class AreaEventsCallbacksController: NSObject, WKScriptMessageHandler {
         if let areaEventCallback = areaEventCallbacks[uuid] {
             let areaEvents = AreaEventsHelper.areaEvents(fromJSONObject: jsonObject)
             areaEventCallback(areaEvents)
+            areaEventCallbacks.removeValue(forKey: uuid)
         }
     }
 }

@@ -45,6 +45,10 @@
 		7BEFEBF720EBA54900A55FCC /* INMarkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEFEBF620EBA54900A55FCC /* INMarkerTests.swift */; };
 		7BEFEBF920EBA84900A55FCC /* INInfoWindowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEFEBF820EBA84900A55FCC /* INInfoWindowTests.swift */; };
 		7BEFEBFB20EBB7B200A55FCC /* INReportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEFEBFA20EBB7B200A55FCC /* INReportTests.swift */; };
+		7BEFEBFD20ED23C900A55FCC /* Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEFEBFC20ED23C900A55FCC /* Scale.swift */; };
+		7BEFEBFF20ED32BC00A55FCC /* MapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEFEBFE20ED32BC00A55FCC /* MapHelper.swift */; };
+		7BEFEC0120EFA3EE00A55FCC /* LongClickEventCallbacksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEFEC0020EFA3EE00A55FCC /* LongClickEventCallbacksController.swift */; };
+		7BEFEC0520F34CC900A55FCC /* MapHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEFEC0420F34CC900A55FCC /* MapHelperTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +122,10 @@
 		7BEFEBF620EBA54900A55FCC /* INMarkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INMarkerTests.swift; sourceTree = "<group>"; };
 		7BEFEBF820EBA84900A55FCC /* INInfoWindowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INInfoWindowTests.swift; sourceTree = "<group>"; };
 		7BEFEBFA20EBB7B200A55FCC /* INReportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INReportTests.swift; sourceTree = "<group>"; };
+		7BEFEBFC20ED23C900A55FCC /* Scale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scale.swift; sourceTree = "<group>"; };
+		7BEFEBFE20ED32BC00A55FCC /* MapHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHelper.swift; sourceTree = "<group>"; };
+		7BEFEC0020EFA3EE00A55FCC /* LongClickEventCallbacksController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongClickEventCallbacksController.swift; sourceTree = "<group>"; };
+		7BEFEC0420F34CC900A55FCC /* MapHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHelperTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +161,7 @@
 				7BCB74BA20BE7B96006386D1 /* Coordinates.swift */,
 				7B901C2C20D519AF00A1D216 /* INPoint.h */,
 				7B8570BE20E0DBD400295D00 /* INPoint.swift */,
+				7BEFEBFC20ED23C900A55FCC /* Scale.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -174,6 +183,7 @@
 				7B714FBD20A1EEAF00836BBD /* AreaEventsHelper.swift */,
 				7BCB74B820BE70C7006386D1 /* TimeIntervalExtension.swift */,
 				7BCB74BC20BE7F05006386D1 /* CoordinatesHelper.swift */,
+				7BEFEBFE20ED32BC00A55FCC /* MapHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -286,6 +296,7 @@
 				7B714FB820A1D37200836BBD /* EventCallbacksController.swift */,
 				7B714FBA20A1D47800836BBD /* AreaEventsCallbacksController.swift */,
 				7B714FBF20A1FCB500836BBD /* CoordinatesCallbacksController.swift */,
+				7BEFEC0020EFA3EE00A55FCC /* LongClickEventCallbacksController.swift */,
 			);
 			path = HandlerControllers;
 			sourceTree = "<group>";
@@ -326,19 +337,36 @@
 		7BD46771206CF34A00B9F2AD /* IndoorNaviTests */ = {
 			isa = PBXGroup;
 			children = (
+				7BEFEC0220F34C8F00A55FCC /* HelpersTests */,
+				7BEFEC0320F34C9F00A55FCC /* APITests */,
+				7BD46774206CF34A00B9F2AD /* Info.plist */,
+			);
+			path = IndoorNaviTests;
+			sourceTree = "<group>";
+		};
+		7BEFEC0220F34C8F00A55FCC /* HelpersTests */ = {
+			isa = PBXGroup;
+			children = (
 				7BD46772206CF34A00B9F2AD /* PointHelperTests.swift */,
 				7B8570C020E0E51600295D00 /* ColorHelperTests.swift */,
 				7B8570C220E0F0AA00295D00 /* AreaEventsHelperTests.swift */,
 				7B2F3EB320E527E9006D98B4 /* CoordinatesHelperTests.swift */,
+				7BEFEC0420F34CC900A55FCC /* MapHelperTests.swift */,
+			);
+			path = HelpersTests;
+			sourceTree = "<group>";
+		};
+		7BEFEC0320F34C9F00A55FCC /* APITests */ = {
+			isa = PBXGroup;
+			children = (
 				7BEFEBEE20EB5B2B00A55FCC /* INPolylineTests.swift */,
 				7BEFEBF020EB738D00A55FCC /* INAreaTests.swift */,
 				7BEFEBF420EBA4E000A55FCC /* INMapTests.swift */,
 				7BEFEBF620EBA54900A55FCC /* INMarkerTests.swift */,
 				7BEFEBF820EBA84900A55FCC /* INInfoWindowTests.swift */,
 				7BEFEBFA20EBB7B200A55FCC /* INReportTests.swift */,
-				7BD46774206CF34A00B9F2AD /* Info.plist */,
 			);
-			path = IndoorNaviTests;
+			path = APITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -463,6 +491,7 @@
 				7BB78B3C20A1CF5C0087BFEC /* PromisesController.swift in Sources */,
 				7BCB74B920BE70C7006386D1 /* TimeIntervalExtension.swift in Sources */,
 				7B46979320A0A2B400D6A22B /* AreaEvent.swift in Sources */,
+				7BEFEC0120EFA3EE00A55FCC /* LongClickEventCallbacksController.swift in Sources */,
 				7B714FBB20A1D47800836BBD /* AreaEventsCallbacksController.swift in Sources */,
 				7B7FD56820936CE200AD409C /* INArea.swift in Sources */,
 				7B8570BF20E0DBD400295D00 /* INPoint.swift in Sources */,
@@ -473,8 +502,10 @@
 				7B714FB920A1D37200836BBD /* EventCallbacksController.swift in Sources */,
 				7BCB74BD20BE7F05006386D1 /* CoordinatesHelper.swift in Sources */,
 				7B714FC020A1FCB500836BBD /* CoordinatesCallbacksController.swift in Sources */,
+				7BEFEBFF20ED32BC00A55FCC /* MapHelper.swift in Sources */,
 				7B6948BB20863F1400E22BD9 /* INPolyline.swift in Sources */,
 				7B666AF020888FBF0031780A /* PointHelper.swift in Sources */,
+				7BEFEBFD20ED23C900A55FCC /* Scale.swift in Sources */,
 				7BD4679D206CF59500B9F2AD /* INMap.swift in Sources */,
 				7B666AF42088D3A60031780A /* INObject.swift in Sources */,
 				7BCB74BB20BE7B96006386D1 /* Coordinates.swift in Sources */,
@@ -486,6 +517,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BEFEBFB20EBB7B200A55FCC /* INReportTests.swift in Sources */,
+				7BEFEC0520F34CC900A55FCC /* MapHelperTests.swift in Sources */,
 				7BEFEBEF20EB5B2B00A55FCC /* INPolylineTests.swift in Sources */,
 				7B8570C320E0F0AA00295D00 /* AreaEventsHelperTests.swift in Sources */,
 				7BEFEBF720EBA54900A55FCC /* INMarkerTests.swift in Sources */,

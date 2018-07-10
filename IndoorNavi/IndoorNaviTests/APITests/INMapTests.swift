@@ -26,9 +26,15 @@ class INMapTests: XCTestCase {
     
     func testMapLoad() {
         let loadMapPromise = expectation(description: "Map with ID 2 loaded.")
+        let scaleExpectation = expectation(description: "Scale downloaded.")
         
         map.load(2) {
             loadMapPromise.fulfill()
+            
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
+                XCTAssertNotNil(self.map.scale)
+                scaleExpectation.fulfill()
+            })
         }
         
         waitForExpectations(timeout: 10)

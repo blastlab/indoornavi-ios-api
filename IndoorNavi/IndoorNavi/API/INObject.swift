@@ -89,7 +89,7 @@ public class INObject: NSObject {
                     return
                 }
                 
-                let points = PointHelper.coordinatesArray(fromJSONObject: response!)
+                let points = PointHelper.points(fromJSONObject: response!)
                 print("Points: ",points)
                 callbackHandler(points)
             }
@@ -109,7 +109,7 @@ public class INObject: NSObject {
     ///   - callbackHandler: A block to invoke when the boolean is available.
     public func isWithin(coordinates: [INPoint], callbackHandler: @escaping (Bool?) -> Void) {
         ready {
-            let coordinatesString = PointHelper.coordinatesArrayString(fromCoordinatesArray: coordinates)
+            let coordinatesString = PointHelper.pointsString(fromCoordinatesArray: coordinates)
             let javaScriptString = String(format: ScriptTemplates.IsWithinTemplate, self.javaScriptVariableName, coordinatesString)
             self.map.evaluate(javaScriptString: javaScriptString) { response, error in
                 print("Response: \(String(describing: response))")

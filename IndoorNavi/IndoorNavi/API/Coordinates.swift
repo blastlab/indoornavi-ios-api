@@ -31,6 +31,22 @@ public struct Coordinates: Equatable {
         self.tagID = tagID
         self.date = date
     }
+    
+    init?(fromJSONObject jsonObject: Any?) {
+        if let dictionary = jsonObject as? [String: Any] {
+            let x = dictionary["x"] as? Int
+            let y = dictionary["y"] as? Int
+            let tagID = dictionary["tagId"] as? Int
+            let date = dictionary["date"] as? Date
+            
+            if let x = x, let y = y, let tagID = tagID, let date = date {
+                self.init(x: x, y: y, tagID: tagID, date: date)
+                return
+            }
+        }
+        
+        return nil
+    }
 }
 
 @objc(Coordinates) final public class ObjCCoordinates: NSObject {

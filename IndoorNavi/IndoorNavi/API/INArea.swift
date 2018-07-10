@@ -46,7 +46,7 @@ public class INArea: INObject {
     /// - Parameter points: Array of Point's that are describing area in real world dimensions. Coordinates are calculated to the map scale and then displayed. For less than 3 points supplied to this method, Area isn't going to be drawn.
     public func set(points: [INPoint]) {
         ready {
-            let pointsString = PointHelper.coordinatesArrayString(fromCoordinatesArray: points)
+            let pointsString = PointHelper.pointsString(fromCoordinatesArray: points)
             self.map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
             let javaScriptString = String(format: ScriptTemplates.PointsTemplate, self.javaScriptVariableName)
             self.map.evaluate(javaScriptString: javaScriptString)

@@ -28,6 +28,7 @@ class CoordinatesCallbacksController: NSObject, WKScriptMessageHandler {
         if let coordinatesCallback = coordinatesCallbacks[uuid] {
             let coordinatesArray = CoordinatesHelper.coordinatesArray(fromJSONObject: jsonObject)
             coordinatesCallback(coordinatesArray)
+            coordinatesCallbacks.removeValue(forKey: uuid)
         }
     }
 }
