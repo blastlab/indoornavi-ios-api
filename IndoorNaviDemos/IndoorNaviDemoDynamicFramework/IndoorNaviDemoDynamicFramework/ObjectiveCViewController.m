@@ -158,7 +158,7 @@ NSString* const ApiKey = @"TestAdmin";
         NSLog(@"Completed");
     }];
     
-    [map addLongClickListenerOnLongClickCallback:^(INPoint point){
+    [map addLongClickListener:^(INPoint point){
         INMarker* marker = [[INMarker alloc] initWithMap:self->map];
         [marker setIconWithPath:@"https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png"];
         INPoint pointWithRealCoordinates = [MapHelper realCoordinatesFromPixel:point scale:self->map.scale];
