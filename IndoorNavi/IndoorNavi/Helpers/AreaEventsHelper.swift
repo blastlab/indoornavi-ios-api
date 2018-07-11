@@ -22,19 +22,18 @@ class AreaEventsHelper: NSObject {
         }
     }
     
+    static func callbackHandlerTakingStruct(fromCallbackHandlerTakingObject callbackHandlerTakingObject: @escaping (ObjCAreaEvent) -> Void) -> (AreaEvent) -> Void {
+        let callbackHandlerTakingStruct: (AreaEvent) -> Void = { areaEvent in
+            let objCAreaEvent = ObjCAreaEvent(fromAreaEvent: areaEvent)
+            callbackHandlerTakingObject(objCAreaEvent)
+        }
+        return callbackHandlerTakingStruct
+    }
+    
     static func callbackHandlerTakingStructs(fromCallbackHandlerTakingObjects callbackHandlerTakingObjects: @escaping ([ObjCAreaEvent]) -> Void) -> ([AreaEvent]) -> Void {
         let callbackHandlerTakingStructs: ([AreaEvent]) -> Void = { areaEvents in
             let objCAreaEvents: [ObjCAreaEvent] = areaEvents.map { areaEvent in
-                
-                let mode: ObjCAreaEvent.AreaEventMode
-                switch areaEvent.mode {
-                case .onLeave:
-                    mode = .onLeave
-                case .onEnter:
-                    mode = .onEnter
-                }
-                
-                let objCAreaEvent = ObjCAreaEvent(tagID: areaEvent.tagID, date: areaEvent.date, areaID: areaEvent.areaID, areaName: areaEvent.areaName, mode: mode)
+                let objCAreaEvent = ObjCAreaEvent(fromAreaEvent: areaEvent)
                 return objCAreaEvent
             }
             callbackHandlerTakingObjects(objCAreaEvents)

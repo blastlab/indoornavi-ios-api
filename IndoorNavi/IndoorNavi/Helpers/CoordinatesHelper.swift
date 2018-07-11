@@ -22,10 +22,19 @@ class CoordinatesHelper: NSObject {
         }
     }
     
+    static func callbackHandlerTakingStruct(fromCallbackHandlerTakingObject callbackHandlerTakingObjects: @escaping (ObjCCoordinates) -> Void) -> (Coordinates) -> Void {
+        let callbackHandlerTakingStructs: (Coordinates) -> Void = { coordinates in
+            let objCCoordinates = ObjCCoordinates(fromCoordinates: coordinates)
+            callbackHandlerTakingObjects(objCCoordinates)
+        }
+        
+        return callbackHandlerTakingStructs
+    }
+    
     static func callbackHandlerTakingStructs(fromCallbackHandlerTakingObjects callbackHandlerTakingObjects: @escaping ([ObjCCoordinates]) -> Void) -> ([Coordinates]) -> Void {
         let callbackHandlerTakingStructs: ([Coordinates]) -> Void = { coordinatesArray in
             let objCCoordinatesArray: [ObjCCoordinates] = coordinatesArray.map { coordinates in
-                let objCCoordinates = ObjCCoordinates(x: coordinates.x, y: coordinates.y, tagID: coordinates.tagID, date: coordinates.date)
+                let objCCoordinates = ObjCCoordinates(fromCoordinates: coordinates)
                 return objCCoordinates
             }
             callbackHandlerTakingObjects(objCCoordinatesArray)

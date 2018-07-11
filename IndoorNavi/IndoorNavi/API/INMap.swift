@@ -20,6 +20,8 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         static let AddLongClickListener = "navi.addMapLongClickListener(res => webkit.messageHandlers.LongClickEventCallbacksController.postMessage(%@));"
         static let Parameters = "navi.parameters;"
         static let ToggleTagVisibility = "navi.toggleTagVisibility(%d);"
+        static let AddAreaEventListener = "navi.addEventListener(Event.LISTENER.AREA, res => webkit.messageHandlers.AreaEventListenerCallbacksController.postMessage(%@));"
+        static let AddCoordinatesEventListener = "navi.addEventListener(Event.LISTENER.COORDINATES, res => webkit.messageHandlers.CoordinatesEventListenerCallbacksController.postMessage(%@));"
     }
     
     fileprivate struct WebViewConfigurationScripts {
@@ -36,6 +38,8 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     var areaEventsCallbacksController = AreaEventsCallbacksController()
     var coordinatesCallbacksController = CoordinatesCallbacksController()
     var longClickEventCallbacksController = LongClickEventCallbacksController()
+    var areaEventListenerCallbacksController = AreaEventListenerCallbacksController()
+    var coordinatesEventListenerCallbacksController = CoordinatesEventListenerCallbacksController()
     
     private var webView: WKWebView!
     
@@ -112,12 +116,40 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         loadHTML()
     }
     
-    @objc public func addLongClickListener(onLongClickCallback: @escaping (INPoint) -> Void) {
+    @objc(addLongClickListener:) public func addLongClickListener(withCallback onLongClickCallback: @escaping (INPoint) -> Void) {
         let uuid = UUID().uuidString
         longClickEventCallbacksController.longClickEventCallbacks[uuid] = onLongClickCallback
         let message = String(format: ScriptTemplates.MessageTemplate, uuid)
         let javaScriptString = String(format: ScriptTemplates.AddLongClickListener, message)
         evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
+    }
+    
+    public func addAreaEventListener(withCallback areaEventCallback: @escaping (AreaEvent) -> Void) {
+        let uuid = UUID().uuidString
+        areaEventListenerCallbacksController.areaEventListenerCallbacks[uuid] = areaEventCallback
+        let message = String(format: ScriptTemplates.MessageTemplate, uuid)
+        let javaScriptString = String(format: ScriptTemplates.AddAreaEventListener, message)
+        evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
+    }
+    
+    @available(swift, obsoleted: 1.0)
+    @objc(addAreaEventListener:) public func addAreaEventListener(withCallback areaEventCallback: @escaping (ObjCAreaEvent) -> Void) {
+        let callbackTakingStructs = AreaEventsHelper.callbackHandlerTakingStruct(fromCallbackHandlerTakingObject: areaEventCallback)
+        addAreaEventListener(withCallback: callbackTakingStructs)
+    }
+    
+    public func addCoordinatesEventListener(withCallback coordinatesListenerEventCallback: @escaping (Coordinates) -> Void) {
+        let uuid = UUID().uuidString
+        coordinatesEventListenerCallbacksController.coordinatesListenerCallbacks[uuid] = coordinatesListenerEventCallback
+        let message = String(format: ScriptTemplates.MessageTemplate, uuid)
+        let javaScriptString = String(format: ScriptTemplates.AddAreaEventListener, message)
+        evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
+    }
+    
+    @available(swift, obsoleted: 1.0)
+    @objc(addCoordinatesEventListener:) public func addCoordinatesEventListener(withCallback coordinatesListenerEventCallback: @escaping (ObjCCoordinates) -> Void) {
+        let callbackTakingStructs = CoordinatesHelper.callbackHandlerTakingStruct(fromCallbackHandlerTakingObject: coordinatesListenerEventCallback)
+        addCoordinatesEventListener(withCallback: callbackTakingStructs)
     }
     
     @objc public func toggleTagVisibility(withID id: Int) {
@@ -185,6 +217,8 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         controller.add(areaEventsCallbacksController, name: AreaEventsCallbacksController.ControllerName)
         controller.add(coordinatesCallbacksController, name: CoordinatesCallbacksController.ControllerName)
         controller.add(longClickEventCallbacksController, name: LongClickEventCallbacksController.ControllerName)
+        controller.add(areaEventListenerCallbacksController, name: AreaEventListenerCallbacksController.ControllerName)
+        controller.add(coordinatesEventListenerCallbacksController, name: CoordinatesEventListenerCallbacksController.ControllerName)
         configuration.userContentController = controller
         
         return configuration
