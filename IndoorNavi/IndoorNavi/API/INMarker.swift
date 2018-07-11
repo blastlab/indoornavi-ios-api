@@ -37,7 +37,7 @@ public class INMarker: INObject {
         map.evaluate(javaScriptString: javaScriptString)
     }
     
-    /// Adds a block to be invoked when the marker is tapped.
+    /// Adds a block to invoke when the marker is tapped.
     ///
     /// - Parameter onClickCallback: A block to invoke when marker is tapped.
     @objc public func addEventListener(onClickCallback: @escaping () -> Void) {
