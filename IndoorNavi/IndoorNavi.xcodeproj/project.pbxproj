@@ -10,6 +10,8 @@
 		7B2F3EB420E527E9006D98B4 /* CoordinatesHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2F3EB320E527E9006D98B4 /* CoordinatesHelperTests.swift */; };
 		7B46979120A095D200D6A22B /* INReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B46979020A095D200D6A22B /* INReport.swift */; };
 		7B46979320A0A2B400D6A22B /* AreaEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B46979220A0A2B400D6A22B /* AreaEvent.swift */; };
+		7B4D689A20F5DD6A00D491A2 /* AreaEventListenerCallbacksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4D689920F5DD6A00D491A2 /* AreaEventListenerCallbacksController.swift */; };
+		7B4D689C20F5EFB900D491A2 /* CoordinatesListenerCallbacksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4D689B20F5EFB900D491A2 /* CoordinatesListenerCallbacksController.swift */; };
 		7B560E9D2099C2B60055F42E /* INInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B560E9C2099C2B60055F42E /* INInfoWindow.swift */; };
 		7B5F039F20972F0900D112F6 /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5F039E20972F0900D112F6 /* ColorHelper.swift */; };
 		7B5F03A12097455B00D112F6 /* INMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5F03A02097455B00D112F6 /* INMarker.swift */; };
@@ -65,6 +67,8 @@
 		7B2F3EB320E527E9006D98B4 /* CoordinatesHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesHelperTests.swift; sourceTree = "<group>"; };
 		7B46979020A095D200D6A22B /* INReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INReport.swift; sourceTree = "<group>"; };
 		7B46979220A0A2B400D6A22B /* AreaEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaEvent.swift; sourceTree = "<group>"; };
+		7B4D689920F5DD6A00D491A2 /* AreaEventListenerCallbacksController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaEventListenerCallbacksController.swift; sourceTree = "<group>"; };
+		7B4D689B20F5EFB900D491A2 /* CoordinatesListenerCallbacksController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesListenerCallbacksController.swift; sourceTree = "<group>"; };
 		7B560E9C2099C2B60055F42E /* INInfoWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INInfoWindow.swift; sourceTree = "<group>"; };
 		7B5F039E20972F0900D112F6 /* ColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelper.swift; sourceTree = "<group>"; };
 		7B5F03A02097455B00D112F6 /* INMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INMarker.swift; sourceTree = "<group>"; };
@@ -297,6 +301,8 @@
 				7B714FBA20A1D47800836BBD /* AreaEventsCallbacksController.swift */,
 				7B714FBF20A1FCB500836BBD /* CoordinatesCallbacksController.swift */,
 				7BEFEC0020EFA3EE00A55FCC /* LongClickEventCallbacksController.swift */,
+				7B4D689920F5DD6A00D491A2 /* AreaEventListenerCallbacksController.swift */,
+				7B4D689B20F5EFB900D491A2 /* CoordinatesListenerCallbacksController.swift */,
 			);
 			path = HandlerControllers;
 			sourceTree = "<group>";
@@ -497,6 +503,7 @@
 				7B8570BF20E0DBD400295D00 /* INPoint.swift in Sources */,
 				7B5F03A12097455B00D112F6 /* INMarker.swift in Sources */,
 				7B714FBE20A1EEAF00836BBD /* AreaEventsHelper.swift in Sources */,
+				7B4D689A20F5DD6A00D491A2 /* AreaEventListenerCallbacksController.swift in Sources */,
 				7B46979120A095D200D6A22B /* INReport.swift in Sources */,
 				7B77E6E9207515010019D061 /* Paths.swift in Sources */,
 				7B714FB920A1D37200836BBD /* EventCallbacksController.swift in Sources */,
@@ -504,6 +511,7 @@
 				7B714FC020A1FCB500836BBD /* CoordinatesCallbacksController.swift in Sources */,
 				7BEFEBFF20ED32BC00A55FCC /* MapHelper.swift in Sources */,
 				7B6948BB20863F1400E22BD9 /* INPolyline.swift in Sources */,
+				7B4D689C20F5EFB900D491A2 /* CoordinatesListenerCallbacksController.swift in Sources */,
 				7B666AF020888FBF0031780A /* PointHelper.swift in Sources */,
 				7BEFEBFD20ED23C900A55FCC /* Scale.swift in Sources */,
 				7BD4679D206CF59500B9F2AD /* INMap.swift in Sources */,

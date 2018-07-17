@@ -47,6 +47,10 @@ public struct Coordinates: Equatable {
         
         return nil
     }
+    
+    init(fromObjCCoordinates objCCoordinates: ObjCCoordinates) {
+        self.init(x: objCCoordinates.x, y: objCCoordinates.y, tagID: objCCoordinates.tagID, date: objCCoordinates.date)
+    }
 }
 
 @objc(Coordinates) final public class ObjCCoordinates: NSObject {
@@ -61,5 +65,9 @@ public struct Coordinates: Equatable {
         self.y = y
         self.tagID = tagID
         self.date = date
+    }
+    
+    convenience init(fromCoordinates coordinates: Coordinates) {
+        self.init(x: coordinates.x, y: coordinates.y, tagID: coordinates.tagID, date: coordinates.date)
     }
 }

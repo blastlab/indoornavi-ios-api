@@ -20,6 +20,8 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         static let AddLongClickListener = "navi.addMapLongClickListener(res => webkit.messageHandlers.LongClickEventCallbacksController.postMessage(%@));"
         static let Parameters = "navi.parameters;"
         static let ToggleTagVisibility = "navi.toggleTagVisibility(%d);"
+        static let AddAreaEventListener = "navi.addEventListener(Event.LISTENER.AREA, res => webkit.messageHandlers.AreaEventListenerCallbacksController.postMessage(%@));"
+        static let AddCoordinatesEventListener = "navi.addEventListener(Event.LISTENER.COORDINATES, res => webkit.messageHandlers.CoordinatesEventListenerCallbacksController.postMessage(%@));"
     }
     
     fileprivate struct WebViewConfigurationScripts {
@@ -36,6 +38,8 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     var areaEventsCallbacksController = AreaEventsCallbacksController()
     var coordinatesCallbacksController = CoordinatesCallbacksController()
     var longClickEventCallbacksController = LongClickEventCallbacksController()
+    var areaEventListenerCallbacksController = AreaEventListenerCallbacksController()
+    var coordinatesEventListenerCallbacksController = CoordinatesEventListenerCallbacksController()
     
     private var webView: WKWebView!
     
@@ -46,6 +50,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     private var scriptsToEvaluateAfterInitialization = [String]()
     private var scriptsToEvaluateAfterScaleLoad = [String]()
     
+    /// `Scale` object representing scale of the map
     private(set) public var scale: Scale? {
         didSet {
             if scale != nil {
@@ -112,7 +117,10 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         loadHTML()
     }
     
-    @objc public func addLongClickListener(onLongClickCallback: @escaping (INPoint) -> Void) {
+    /// Adds a block to invoke when the long click event occurs.
+    ///
+    /// - Parameter onLongClickCallback: A block to invoke when long click event occurs.
+    @objc(addLongClickListener:) public func addLongClickListener(withCallback onLongClickCallback: @escaping (INPoint) -> Void) {
         let uuid = UUID().uuidString
         longClickEventCallbacksController.longClickEventCallbacks[uuid] = onLongClickCallback
         let message = String(format: ScriptTemplates.MessageTemplate, uuid)
@@ -120,8 +128,45 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
     }
     
-    @objc public func toggleTagVisibility(withID id: Int) {
-        let javaScriptString = String(format: ScriptTemplates.ToggleTagVisibility, id)
+    /// Adds a block to invoke when area event occurs.
+    ///
+    /// - Parameter areaEventCallback: A block to invoke when area event occurs.
+    public func addAreaEventListener(withCallback areaEventCallback: @escaping (AreaEvent) -> Void) {
+        let uuid = UUID().uuidString
+        areaEventListenerCallbacksController.areaEventListenerCallbacks[uuid] = areaEventCallback
+        let message = String(format: ScriptTemplates.MessageTemplate, uuid)
+        let javaScriptString = String(format: ScriptTemplates.AddAreaEventListener, message)
+        evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
+    }
+    
+    @available(swift, obsoleted: 1.0)
+    @objc(addAreaEventListener:) public func addAreaEventListener(withCallback areaEventCallback: @escaping (ObjCAreaEvent) -> Void) {
+        let callbackTakingStructs = AreaEventsHelper.callbackHandlerTakingStruct(fromCallbackHandlerTakingObject: areaEventCallback)
+        addAreaEventListener(withCallback: callbackTakingStructs)
+    }
+    
+    /// Adds a block to invoke when coordinates event occurs.
+    ///
+    /// - Parameter coordinatesListenerEventCallback: A block to invoke when coordinates event occurs.
+    public func addCoordinatesEventListener(withCallback coordinatesListenerEventCallback: @escaping (Coordinates) -> Void) {
+        let uuid = UUID().uuidString
+        coordinatesEventListenerCallbacksController.coordinatesListenerCallbacks[uuid] = coordinatesListenerEventCallback
+        let message = String(format: ScriptTemplates.MessageTemplate, uuid)
+        let javaScriptString = String(format: ScriptTemplates.AddAreaEventListener, message)
+        evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
+    }
+    
+    @available(swift, obsoleted: 1.0)
+    @objc(addCoordinatesEventListener:) public func addCoordinatesEventListener(withCallback coordinatesListenerEventCallback: @escaping (ObjCCoordinates) -> Void) {
+        let callbackTakingStructs = CoordinatesHelper.callbackHandlerTakingStruct(fromCallbackHandlerTakingObject: coordinatesListenerEventCallback)
+        addCoordinatesEventListener(withCallback: callbackTakingStructs)
+    }
+    
+    /// Toggles tag visibility specified by ID number.
+    ///
+    /// - Parameter ID: ID number of the specified tag.
+    @objc public func toggleTagVisibility(withID ID: Int) {
+        let javaScriptString = String(format: ScriptTemplates.ToggleTagVisibility, ID)
         evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
     }
     
@@ -185,6 +230,8 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         controller.add(areaEventsCallbacksController, name: AreaEventsCallbacksController.ControllerName)
         controller.add(coordinatesCallbacksController, name: CoordinatesCallbacksController.ControllerName)
         controller.add(longClickEventCallbacksController, name: LongClickEventCallbacksController.ControllerName)
+        controller.add(areaEventListenerCallbacksController, name: AreaEventListenerCallbacksController.ControllerName)
+        controller.add(coordinatesEventListenerCallbacksController, name: CoordinatesEventListenerCallbacksController.ControllerName)
         configuration.userContentController = controller
         
         return configuration

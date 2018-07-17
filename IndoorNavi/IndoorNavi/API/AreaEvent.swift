@@ -62,6 +62,18 @@ public struct AreaEvent: Equatable {
         
         return nil
     }
+    
+    init(fromObjCAreaEvent objCAreaEvent: ObjCAreaEvent) {
+        let mode: Mode
+        switch objCAreaEvent.mode {
+        case .onLeave:
+            mode = .onLeave
+        case .onEnter:
+            mode = .onEnter
+        }
+        
+        self.init(tagID: objCAreaEvent.tagID, date: objCAreaEvent.date, areaID: objCAreaEvent.areaID, areaName: objCAreaEvent.areaName, mode: mode)
+    }
 }
 
 @objc(AreaEvent) final public class ObjCAreaEvent: NSObject {
@@ -83,5 +95,17 @@ public struct AreaEvent: Equatable {
         self.areaID = areaID
         self.areaName = areaName
         self.mode = mode
+    }
+    
+    convenience init(fromAreaEvent areaEvent: AreaEvent) {
+        let mode: AreaEventMode
+        switch areaEvent.mode {
+        case .onLeave:
+            mode = .onLeave
+        case .onEnter:
+            mode = .onEnter
+        }
+        
+        self.init(tagID: areaEvent.tagID, date: areaEvent.date, areaID: areaEvent.areaID, areaName: areaEvent.areaName, mode: mode)
     }
 }
