@@ -20,9 +20,30 @@ public class INPolyline: INObject {
     
     /// Initializes a new `INPolyline` object inside given INMap object.
     ///
-    /// - Parameter map: An `INMap` object, in which `INPolyline` object is going to be created.
-    @objc public override init(withMap map: INMap) {
-        super.init(withMap: map)
+    /// - Parameters:
+    ///   - map: An `INMap` object, in which `INPolyline` object is going to be created.
+    ///   - points: Array of `Point`'s that are describing polyline in real world dimensions. Coordinates are calculated to the map scale and then displayed.
+    ///   - color: Polyline's lines and points color.
+    public convenience init(withMap map: INMap, points: [INPoint]? = nil, color: UIColor? = nil) {
+        self.init(withMap: map)
+        if let points = points {
+            set(points: points)
+        }
+        if let color = color {
+            set(color: color)
+        }
+    }
+    
+    @available(swift, obsoleted: 1.0)
+    @objc public convenience init(withMap map: INMap, pointsArray: UnsafePointer<INPoint>, withArraySize size:Int) {
+        let points = PointHelper.pointsArray(fromCArray: pointsArray, withSize: size)
+        self.init(withMap: map, points: points)
+    }
+    
+    @available(swift, obsoleted: 1.0)
+    @objc public convenience init(withMap map: INMap, pointsArray: UnsafePointer<INPoint>, withArraySize size:Int, color: UIColor) {
+        let points = PointHelper.pointsArray(fromCArray: pointsArray, withSize: size)
+        self.init(withMap: map, points: points, color: color)
     }
     
     override func initInJavaScript() {
@@ -59,17 +80,23 @@ public class INPolyline: INObject {
         }
     }
     
-    /// Sets polyline lines and points color.
+    /// Sets lines and points color. `INPolyline` cannot be opaque, so color's opacity parameter is omitted.
     ///
-    /// - Parameters:
-    ///   - red: The red value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
-    ///   - green: The green value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
-    ///   - blue: The blue value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
-    @objc public func setColorWith(red: CGFloat, green: CGFloat, blue: CGFloat) {
-        ready {
-            let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
-            let javaScriptString = String(format: ScriptTemplates.SetLineColorTemplate, self.javaScriptVariableName, stringColor)
-            self.map.evaluate(javaScriptString: javaScriptString)
+    /// - Parameter color: Polyline's color.
+    public func set(color: UIColor) {
+        setColorInJavaScript(color: color)
+    }
+    
+    private func setColorInJavaScript(color: UIColor) {
+        if let colorComponents = color.cgColor.components {
+            let red = colorComponents[0]
+            let green = colorComponents[1]
+            let blue = colorComponents[2]
+            ready {
+                let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
+                let javaScriptString = String(format: ScriptTemplates.SetLineColorTemplate, self.javaScriptVariableName, stringColor)
+                self.map.evaluate(javaScriptString: javaScriptString)
+            }
         }
     }
- }
+}

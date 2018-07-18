@@ -63,14 +63,12 @@ NSString* const ApiKey = @"TestAdmin";
 - (IBAction)drawPolyline1:(id)sender {
     INPolyline* polyline = [[INPolyline alloc] initWithMap:map];
     [polyline setPointsArray:points1 withArraySize:10];
-    [polyline setColorWithRed:1.0 green:0.5 blue:0.5];
+    polyline.color = UIColor.brownColor;
     [polyline draw];
 }
 
 - (IBAction)drawPolyline2:(id)sender {
-    INPolyline* polyline = [[INPolyline alloc] initWithMap:map];
-    [polyline setPointsArray:points2 withArraySize:10];
-    [polyline setColorWithRed:0.8 green:0.4 blue:0.2];
+    INPolyline* polyline = [[INPolyline alloc] initWithMap:map pointsArray:points2 withArraySize:10 color:UIColor.greenColor];
     [polyline draw];
 }
 
@@ -144,7 +142,7 @@ NSString* const ApiKey = @"TestAdmin";
         CGFloat randomBlue = (CGFloat)arc4random() / (CGFloat)UINT32_MAX;
         
         [polyline setPointsArray:points withArraySize:10];
-        [polyline setColorWithRed:randomRed green:randomGreen blue:randomBlue];
+        polyline.color = [UIColor colorWithRed:randomRed green:randomGreen blue:randomBlue alpha:1.0];
         [polyline draw];
         [polylines addObject:polyline];
         usleep(10000);

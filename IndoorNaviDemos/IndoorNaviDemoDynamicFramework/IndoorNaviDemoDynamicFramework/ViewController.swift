@@ -44,35 +44,31 @@ class ViewController: UIViewController {
     }
     
     @IBAction func drawPolyline1(_ sender: Any) {
-        let polyline1 = INPolyline(withMap: map)
+        let polyline = INPolyline(withMap: map)
         
-        polyline1.set(points: points1)
-        polyline1.setColorWith(red: 1.0, green: 0.5, blue: 0.5)
-        polyline1.draw()
+        polyline.set(points: points1)
+        polyline.color = .green
+        polyline.draw()
 
-        print("Polyline 1 ID: %d", polyline1.objectID != nil ? polyline1.objectID! : 0)
+        print("Polyline 1 ID: %d", polyline.objectID != nil ? polyline.objectID! : 0)
 
-        polyline1.getPoints { coordinates in
+        polyline.getPoints { coordinates in
             print("Coordinates: \(String(describing: coordinates != nil ? coordinates : nil))")
         }
     }
     
     @IBAction func drawPolyline2(_ sender: Any) {
-        let polyline2 = INPolyline(withMap: map)
-
-        polyline2.set(points: points2)
-        polyline2.setColorWith(red: 0.5, green: 1.0, blue: 0.5)
-        polyline2.draw()
-
-        print("Polyline 2 ID: %d", polyline2.objectID != nil ? polyline2.objectID! : 0)
+        let polyline = INPolyline(withMap: map, points: points2, color: .brown)
+        polyline.draw()
+        print("Polyline 2 ID: %d", polyline.objectID != nil ? polyline.objectID! : 0)
     }
     
     @IBAction func drawArea(_ sender: Any) {
         let area = INArea(withMap: map)
         
         area.set(points: points1)
-        area.setFillColor(red: 0.8, green: 0.4, blue: 0.2)
-        area.setOpacity(0.5)
+//        area.setFillColor(red: 0.8, green: 0.4, blue: 0.2)
+//        area.setOpacity(0.5)
         area.draw()
     }
     
@@ -121,7 +117,7 @@ class ViewController: UIViewController {
             let randomBlue = CGFloat(arc4random()) / CGFloat(UInt32.max)
             
             polyline.set(points: points)
-            polyline.setColorWith(red: randomRed, green: randomGreen, blue: randomBlue)
+            polyline.color = UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
             polyline.draw()
             polylines.append(polyline)
             usleep(10000)
