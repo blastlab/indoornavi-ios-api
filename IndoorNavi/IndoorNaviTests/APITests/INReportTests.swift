@@ -11,8 +11,8 @@ import XCTest
 
 class INReportTests: XCTestCase {
 
-    let FrontendTargetHost = "http://172.16.170.53:4200"
-    let BackendTargetHost = "http://172.16.170.53:90"
+    let FrontendTargetHost = "http://172.16.170.18:4200"
+    let BackendTargetHost = "http://172.16.170.18:90"
     let ApiKey = "TestAdmin"
     
     var map: INMap!
