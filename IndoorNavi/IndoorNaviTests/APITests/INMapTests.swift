@@ -37,6 +37,6 @@ class INMapTests: XCTestCase {
             })
         }
         
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: 15)
     }
 }

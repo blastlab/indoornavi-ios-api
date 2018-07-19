@@ -32,7 +32,7 @@ class INPolylineTests: XCTestCase {
             let points = [INPoint(x: 480, y: 480), INPoint(x: 1220, y: 480), INPoint(x: 1220, y: 1220), INPoint(x: 480, y: 1220), INPoint(x: 750, y: 750)]
             
             polyline.set(points: points)
-            polyline.setColorWith(red: 1.0, green: 0.5, blue: 0.5)
+            polyline.color = UIColor(red: 1.0, green: 0.5, blue: 0.5, alpha: 1)
             
             Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
                 XCTAssertNotNil(polyline.objectID)
@@ -48,6 +48,6 @@ class INPolylineTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: 15)
     }
 }

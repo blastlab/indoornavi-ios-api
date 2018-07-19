@@ -45,7 +45,6 @@ class ViewController: UIViewController {
     
     @IBAction func drawPolyline1(_ sender: Any) {
         let polyline = INPolyline(withMap: map)
-        
         polyline.set(points: points1)
         polyline.color = .green
         polyline.draw()
@@ -67,8 +66,7 @@ class ViewController: UIViewController {
         let area = INArea(withMap: map)
         
         area.set(points: points1)
-//        area.setFillColor(red: 0.8, green: 0.4, blue: 0.2)
-//        area.setOpacity(0.5)
+        area.color = UIColor(red: 0.8, green: 0.4, blue: 0.2, alpha: 0.5)
         area.draw()
     }
     

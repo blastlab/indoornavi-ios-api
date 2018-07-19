@@ -30,8 +30,10 @@ public class INPolyline: INObject {
             set(points: points)
         }
         if let color = color {
-            set(color: color)
+            self.color = color
+            setColorInJavaScript()
         }
+        draw()
     }
     
     @available(swift, obsoleted: 1.0)
@@ -80,14 +82,14 @@ public class INPolyline: INObject {
         }
     }
     
-    /// Sets lines and points color. `INPolyline` cannot be opaque, so color's opacity parameter is omitted.
-    ///
-    /// - Parameter color: Polyline's color.
-    public func set(color: UIColor) {
-        setColorInJavaScript(color: color)
+    /// `INPolyline`'s color. To apply this it's necessary to call `draw()` after. It cannot be opaque, so color's opacity parameter is omitted. Default value is `.black`.
+    @objc public var color: UIColor = .black {
+        didSet {
+            setColorInJavaScript()
+        }
     }
     
-    private func setColorInJavaScript(color: UIColor) {
+    private func setColorInJavaScript() {
         if let colorComponents = color.cgColor.components {
             let red = colorComponents[0]
             let green = colorComponents[1]

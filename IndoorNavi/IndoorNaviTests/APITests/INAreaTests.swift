@@ -32,8 +32,7 @@ class INAreaTests: XCTestCase {
             let points = [INPoint(x: 480, y: 480), INPoint(x: 1220, y: 480), INPoint(x: 1220, y: 1220), INPoint(x: 480, y: 1220), INPoint(x: 750, y: 750)]
             
             area.set(points: points)
-            area.setFillColor(red: 0.8, green: 0.4, blue: 0.2)
-            area.setOpacity(0.5)
+            area.color = UIColor(red: 0.8, green: 0.4, blue: 0.2, alpha: 0.5)
             
             Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
                 XCTAssertNotNil(area.objectID)

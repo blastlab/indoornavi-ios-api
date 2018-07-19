@@ -75,8 +75,7 @@ NSString* const ApiKey = @"TestAdmin";
 - (IBAction)drawArea:(id)sender {
     INArea* area = [[INArea alloc] initWithMap:map];
     [area setPointsArray:points1 withArraySize:10];
-    [area setFillColorWithRed:0.8 green:0.4 blue:0.2];
-    [area setOpacity:0.5];
+    area.color = [UIColor colorWithRed:0.8 green:.4 blue:0.2 alpha:0.5];
     [area draw];
 }
 

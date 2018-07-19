@@ -49,6 +49,6 @@ class INInfoWindowTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: 15)
     }
 }

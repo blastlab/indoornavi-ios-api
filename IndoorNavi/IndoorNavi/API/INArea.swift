@@ -31,8 +31,10 @@ public class INArea: INObject {
             set(points: points)
         }
         if let color = color {
-            applyColorInJavaScript(color: color)
+            self.color = color
+            applyColorInJavaScript()
         }
+        draw()
     }
     
     @available(swift, obsoleted: 1.0)
@@ -84,14 +86,16 @@ public class INArea: INObject {
         set(points: points)
     }
     
-    /// Fills Area whith given color and opacity. To apply this it's necessary to call `draw()` after. Use of this method is optional.
+    /// `INArea`'s fill color and opacity. To apply this it's necessary to call `draw()` after. Default value is `.black`.
     ///
     /// - Parameter color: Area's fill color and opacity.
-    @objc(setColor:) public func set(color: UIColor) {
-        applyColorInJavaScript(color: color)
+    @objc public var color: UIColor = .black {
+        didSet {
+            applyColorInJavaScript()
+        }
     }
     
-    private func applyColorInJavaScript(color: UIColor) {
+    private func applyColorInJavaScript() {
         if let colorComponents = color.cgColor.components {
             let red = colorComponents[0]
             let green = colorComponents[1]
@@ -117,29 +121,4 @@ public class INArea: INObject {
             self.map.evaluate(javaScriptString: javaScriptString)
         }
     }
-    
-    /// Fills Area whit given color. To apply this it's necessary to call `draw()` after. Use of this method is optional.
-    ///
-    /// - Parameters:
-    ///   - red: The red value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
-    ///   - green: The green value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
-    ///   - blue: The blue value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
-//    @objc public func setFillColor(red: CGFloat, green: CGFloat, blue: CGFloat) {
-//        ready {
-//            let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
-//            let javaScriptString = String(format: ScriptTemplates.SetFillColorTemplate, self.javaScriptVariableName, stringColor)
-//            self.map.evaluate(javaScriptString: javaScriptString)
-//        }
-//    }
-    
-    /// Sets Area opacity. To apply this it's necessary to call `draw()` after. Use of this method is optional.
-    ///
-    /// - Parameter opacity: Number between 1.0 and 0. Set it to 1.0 for no opacity, 0 for maximum opacity. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
-//    @objc public func setOpacity(_ opacity: CGFloat) {
-//        ready {
-//            let standarizedOpacity = ColorHelper.standarizedOpacity(fromValue: opacity)
-//            let javaScriptString = String(format: ScriptTemplates.SetOpacityTemplate, self.javaScriptVariableName, standarizedOpacity)
-//            self.map.evaluate(javaScriptString: javaScriptString)
-//        }
-//    }
 }

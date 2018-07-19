@@ -37,7 +37,7 @@ class INReportTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: 15)
     }
     
     func testGetCoordinates() {
@@ -49,6 +49,6 @@ class INReportTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: 15)
     }
 }
