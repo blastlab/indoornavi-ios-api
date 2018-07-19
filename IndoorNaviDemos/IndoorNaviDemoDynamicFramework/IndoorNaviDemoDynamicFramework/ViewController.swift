@@ -37,9 +37,7 @@ class ViewController: UIViewController {
     
     @IBAction func drawInfoWindow(_ sender: Any) {
         placeMarker(sender)
-        infoWindow.position = .top
-        infoWindow.height = Int(arc4random_uniform(220) + 30)
-        infoWindow.width = Int(arc4random_uniform(220) + 30)
+        infoWindow = INInfoWindow(withMap: map, width: Int(arc4random_uniform(220) + 30), height: Int(arc4random_uniform(220) + 30), position: .top)
         marker.add(infoWindow: infoWindow)
     }
     
@@ -63,19 +61,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func drawArea(_ sender: Any) {
-        let area = INArea(withMap: map)
-        
-        area.set(points: points1)
-        area.color = UIColor(red: 0.8, green: 0.4, blue: 0.2, alpha: 0.5)
+        let area = INArea(withMap: map, points: points1, color: UIColor(red: 0.8, green: 0.4, blue: 0.2, alpha: 0.5))
         area.draw()
     }
     
     @IBAction func placeMarker(_ sender: Any) {
-        marker = INMarker(withMap: map)
-        
-        marker.set(point: INPoint(x: 600, y: 600))
-        marker.setIcon(withPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png")
-        marker.setLabel(withText: "Tekst ABCD")
+        marker = INMarker(withMap: map, point: INPoint(x: 600, y: 600), iconPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png", labelText: "Tekst ABCD")
         marker.addEventListener {
             self.showAlert()
         }

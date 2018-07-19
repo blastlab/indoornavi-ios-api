@@ -61,9 +61,8 @@ NSString* const ApiKey = @"TestAdmin";
 }
 
 - (IBAction)drawPolyline1:(id)sender {
-    INPolyline* polyline = [[INPolyline alloc] initWithMap:map];
+    INPolyline* polyline = [[INPolyline alloc] initWithMap:map pointsArray:points1 withArraySize:10 color:UIColor.brownColor];
     [polyline setPointsArray:points1 withArraySize:10];
-    polyline.color = UIColor.brownColor;
     [polyline draw];
 }
 
@@ -73,17 +72,12 @@ NSString* const ApiKey = @"TestAdmin";
 }
 
 - (IBAction)drawArea:(id)sender {
-    INArea* area = [[INArea alloc] initWithMap:map];
-    [area setPointsArray:points1 withArraySize:10];
-    area.color = [UIColor colorWithRed:0.8 green:.4 blue:0.2 alpha:0.5];
+    INArea* area = [[INArea alloc] initWithMap:map pointsArray:points1 withArraySize:10 color:[UIColor colorWithRed:0.8 green:.4 blue:0.2 alpha:0.5]];
     [area draw];
 }
 
 - (IBAction)placeMarker:(id)sender {
-    marker = [[INMarker alloc] initWithMap:map];
-    [marker setPoint:INPointMake(600, 600)];
-    [marker setIconWithPath:@"https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png"];
-    [marker setLabelWithText:@"Tekst ABCD"];
+    marker = [[INMarker alloc] initWithMap:map point:INPointMake(600, 600) iconPath:@"https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png" labelText:@"Tekst ABCD"];
     __weak ObjectiveCViewController *weakSelf = self;
     [marker addEventListenerOnClickCallback:^{
         [weakSelf showAlert];
