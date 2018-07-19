@@ -9,8 +9,8 @@
 #import "ObjectiveCViewController.h"
 @import IndoorNavi;
 
-NSString* const FrontendTargetHost = @"http://172.16.170.53:4200";
-NSString* const BackendTargetHost = @"http://172.16.170.53:90";
+NSString* const FrontendTargetHost = @"http://172.16.170.18:4200";
+NSString* const BackendTargetHost = @"http://172.16.170.18:90";
 NSString* const ApiKey = @"TestAdmin";
 
 @interface ObjectiveCViewController ()

@@ -132,7 +132,7 @@ public class INMarker: INObject {
     ///
     /// - Parameter infoWindow: An `INInfoWindow` object.
     @objc(addInfoWindow:) public func add(infoWindow: INInfoWindow) {
-        ready {
+        infoWindow.ready {
             let javaScriptString = String(format: ScriptTemplates.OpenTemplate, infoWindow.javaScriptVariableName, self.javaScriptVariableName)
             self.map.evaluate(javaScriptString: javaScriptString)
         }

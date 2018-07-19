@@ -11,8 +11,8 @@ import IndoorNavi
 
 class ViewController: UIViewController {
     
-    let FrontendTargetHost = "http://172.16.170.53:4200"
-    let BackendTargetHost = "http://172.16.170.53:90"
+    let FrontendTargetHost = "http://172.16.170.18:4200"
+    let BackendTargetHost = "http://172.16.170.18:90"
     let ApiKey = "TestAdmin"
     
     @IBOutlet weak var map: INMap!
@@ -37,7 +37,9 @@ class ViewController: UIViewController {
     
     @IBAction func drawInfoWindow(_ sender: Any) {
         placeMarker(sender)
-        infoWindow = INInfoWindow(withMap: map, width: Int(arc4random_uniform(220) + 30), height: Int(arc4random_uniform(220) + 30), position: .top)
+        infoWindow.position = .top
+        infoWindow.height = Int(arc4random_uniform(220) + 30)
+        infoWindow.width = Int(arc4random_uniform(220) + 30)
         marker.add(infoWindow: infoWindow)
     }
     
