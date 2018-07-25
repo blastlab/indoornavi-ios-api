@@ -44,9 +44,41 @@ public class INInfoWindow: INObject {
     
     /// Initializes a new `INInfoWindow` object inside given `INMap` object.
     ///
-    /// - Parameter map: An `INMap` object, in which `INArea` is going to be created.
-    @objc public override init(withMap map: INMap) {
-        super.init(withMap: map)
+    /// - Parameters:
+    ///   - map: An `INMap` object, in which `INArea` is going to be created.
+    ///   - width: Width dimension of info window. Setting this value is optional. Default value is 250px, minimum value is 50px.
+    ///   - height: Height dimension of info window. Setting this value is optional. Default value is 250px, minimum value is 50px.
+    ///   - position: Position of info window regarding to object that info window will be appended to. Default position for info window is `.top`.
+    ///   - innerHTML: Text or HTML template in string format that will be passed to info window as text.
+    public convenience init(withMap map: INMap, width: Int? = nil, height: Int? = nil, position: Position? = nil, innerHTML: String? = nil) {
+        self.init(withMap: map)
+        if let width = width {
+            self.width = width
+        }
+        if let height = height {
+            self.height = height
+        }
+        if let position = position {
+            self.position = position
+        }
+        if let innerHTML = innerHTML {
+            setInnerHTML(string: innerHTML)
+        }
+    }
+    
+    @available(swift, obsoleted: 1.0)
+    @objc public convenience init(withMap map: INMap, width: Int, height: Int) {
+        self.init(withMap: map, width: width, height: height)
+    }
+    
+    @available(swift, obsoleted: 1.0)
+    @objc public convenience init(withMap map: INMap, width: Int, height: Int, position: Position) {
+        self.init(withMap: map, width: width, height: height, position: position)
+    }
+    
+    @available(swift, obsoleted: 1.0)
+    @objc public convenience init(withMap map: INMap, width: Int, height: Int, position: Position, innerHTML: String) {
+        self.init(withMap: map, width: width, height: height, position: position, innerHTML: innerHTML)
     }
     
     override func initInJavaScript() {

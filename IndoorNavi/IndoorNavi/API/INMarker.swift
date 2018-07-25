@@ -26,9 +26,38 @@ public class INMarker: INObject {
     
     /// Initializes a new `INMarker` object inside given `INMap` object.
     ///
-    /// - Parameter map: An `INMap` object, in which `INMarker` object is going to be created.
-    @objc public override init(withMap map: INMap) {
-        super.init(withMap: map)
+    /// - Parameters:
+    ///   - map: An `INMap` object, in which `INMarker` object is going to be created.
+    ///   - point:  Represents marker position in real world. Coordinates are calculated to the map scale and then displayed. Position will be clipped to the point in the bottom center of marker icon.
+    ///   - iconPath: URL path to icon.
+    ///   - labelText: `String` that will be used as a marker label.
+    public convenience init(withMap map: INMap, point: INPoint? = nil, iconPath: String? = nil, labelText: String? = nil) {
+        self.init(withMap: map)
+        if let point = point {
+            set(point: point)
+        }
+        if let iconPath = iconPath {
+            setIcon(withPath: iconPath)
+        }
+        if let labelText = labelText {
+            setLabel(withText: labelText)
+        }
+        draw()
+    }
+    
+    @available(swift, obsoleted: 1.0)
+    @objc public convenience init(withMap map: INMap, point: INPoint) {
+        self.init(withMap: map, point: point)
+    }
+    
+    @available(swift, obsoleted: 1.0)
+    @objc public convenience init(withMap map: INMap, point: INPoint, iconPath: String) {
+        self.init(withMap: map, point: point, iconPath: iconPath)
+    }
+    
+    @available(swift, obsoleted: 1.0)
+    @objc public convenience init(withMap map: INMap, point: INPoint, iconPath: String, labelText: String) {
+        self.init(withMap: map, point: point, iconPath: iconPath, labelText: labelText)
     }
     
     override func initInJavaScript() {
@@ -103,7 +132,7 @@ public class INMarker: INObject {
     ///
     /// - Parameter infoWindow: An `INInfoWindow` object.
     @objc(addInfoWindow:) public func add(infoWindow: INInfoWindow) {
-        ready {
+        infoWindow.ready {
             let javaScriptString = String(format: ScriptTemplates.OpenTemplate, infoWindow.javaScriptVariableName, self.javaScriptVariableName)
             self.map.evaluate(javaScriptString: javaScriptString)
         }

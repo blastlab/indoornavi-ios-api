@@ -31,7 +31,7 @@ public class INObject: NSObject {
     /// Initializes a new `INObject` object inside given `INMap` object.
     ///
     /// - Parameter map: An `INMap` object, in which `INObject` is going to be created.
-    init(withMap map: INMap) {
+    @objc public init(withMap map: INMap) {
         self.map = map
         super.init()
         initInJavaScript()

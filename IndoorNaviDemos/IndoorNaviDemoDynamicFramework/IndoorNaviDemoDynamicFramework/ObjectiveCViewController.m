@@ -9,8 +9,8 @@
 #import "ObjectiveCViewController.h"
 @import IndoorNavi;
 
-NSString* const FrontendTargetHost = @"http://172.16.170.53:4200";
-NSString* const BackendTargetHost = @"http://172.16.170.53:90";
+NSString* const FrontendTargetHost = @"http://172.16.170.18:4200";
+NSString* const BackendTargetHost = @"http://172.16.170.18:90";
 NSString* const ApiKey = @"TestAdmin";
 
 @interface ObjectiveCViewController ()
@@ -61,32 +61,23 @@ NSString* const ApiKey = @"TestAdmin";
 }
 
 - (IBAction)drawPolyline1:(id)sender {
-    INPolyline* polyline = [[INPolyline alloc] initWithMap:map];
+    INPolyline* polyline = [[INPolyline alloc] initWithMap:map pointsArray:points1 withArraySize:10 color:UIColor.brownColor];
     [polyline setPointsArray:points1 withArraySize:10];
-    [polyline setColorWithRed:1.0 green:0.5 blue:0.5];
     [polyline draw];
 }
 
 - (IBAction)drawPolyline2:(id)sender {
-    INPolyline* polyline = [[INPolyline alloc] initWithMap:map];
-    [polyline setPointsArray:points2 withArraySize:10];
-    [polyline setColorWithRed:0.8 green:0.4 blue:0.2];
+    INPolyline* polyline = [[INPolyline alloc] initWithMap:map pointsArray:points2 withArraySize:10 color:UIColor.greenColor];
     [polyline draw];
 }
 
 - (IBAction)drawArea:(id)sender {
-    INArea* area = [[INArea alloc] initWithMap:map];
-    [area setPointsArray:points1 withArraySize:10];
-    [area setFillColorWithRed:0.8 green:0.4 blue:0.2];
-    [area setOpacity:0.5];
+    INArea* area = [[INArea alloc] initWithMap:map pointsArray:points1 withArraySize:10 color:[UIColor colorWithRed:0.8 green:.4 blue:0.2 alpha:0.5]];
     [area draw];
 }
 
 - (IBAction)placeMarker:(id)sender {
-    marker = [[INMarker alloc] initWithMap:map];
-    [marker setPoint:INPointMake(600, 600)];
-    [marker setIconWithPath:@"https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png"];
-    [marker setLabelWithText:@"Tekst ABCD"];
+    marker = [[INMarker alloc] initWithMap:map point:INPointMake(600, 600) iconPath:@"https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png" labelText:@"Tekst ABCD"];
     __weak ObjectiveCViewController *weakSelf = self;
     [marker addEventListenerOnClickCallback:^{
         [weakSelf showAlert];
@@ -144,7 +135,7 @@ NSString* const ApiKey = @"TestAdmin";
         CGFloat randomBlue = (CGFloat)arc4random() / (CGFloat)UINT32_MAX;
         
         [polyline setPointsArray:points withArraySize:10];
-        [polyline setColorWithRed:randomRed green:randomGreen blue:randomBlue];
+        polyline.color = [UIColor colorWithRed:randomRed green:randomGreen blue:randomBlue alpha:1.0];
         [polyline draw];
         [polylines addObject:polyline];
         usleep(10000);

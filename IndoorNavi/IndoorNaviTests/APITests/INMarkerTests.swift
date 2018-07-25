@@ -11,7 +11,7 @@ import XCTest
 
 class INMarkerTests: XCTestCase {
     
-    let FrontendTargetHost = "http://172.16.170.53:4200"
+    let FrontendTargetHost = "http://172.16.170.18:4200"
     let ApiKey = "TestAdmin"
     
     var map: INMap!
@@ -49,6 +49,6 @@ class INMarkerTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: 15)
     }
 }

@@ -21,9 +21,32 @@ public class INArea: INObject {
     
     /// Initializes a new `INArea` object inside given `INMap` object.
     ///
-    /// - Parameter map: An `INMap` object, in which `INArea` is going to be created.
-    @objc public override init(withMap map: INMap) {
-        super.init(withMap: map)
+    /// - Parameters:
+    ///   - map:  An `INMap` object, in which `INArea` is going to be created.
+    ///   - points: Array of Point's that are describing area in real world dimensions. Coordinates are calculated to the map scale and then displayed. For less than 3 points supplied to this method, Area isn't going to be drawn.
+    ///   - color: Area's fill color and opacity.
+    public convenience init(withMap map: INMap, points: [INPoint]? = nil, color: UIColor? = nil) {
+        self.init(withMap: map)
+        if let points = points {
+            set(points: points)
+        }
+        if let color = color {
+            self.color = color
+            applyColorInJavaScript()
+        }
+        draw()
+    }
+    
+    @available(swift, obsoleted: 1.0)
+    @objc public convenience init(withMap map: INMap, pointsArray: UnsafePointer<INPoint>, withArraySize size:Int) {
+        let points = PointHelper.pointsArray(fromCArray: pointsArray, withSize: size)
+        self.init(withMap: map, points: points)
+    }
+    
+    @available(swift, obsoleted: 1.0)
+    @objc public convenience init(withMap map: INMap, pointsArray: UnsafePointer<INPoint>, withArraySize size:Int, color: UIColor) {
+        let points = PointHelper.pointsArray(fromCArray: pointsArray, withSize: size)
+        self.init(withMap: map, points: points, color: color)
     }
     
     override func initInJavaScript() {
@@ -63,13 +86,27 @@ public class INArea: INObject {
         set(points: points)
     }
     
-    /// Fills Area whit given color. To apply this it's necessary to call `draw()` after. Use of this method is optional.
+    /// `INArea`'s fill color and opacity. To apply this it's necessary to call `draw()` after. Default value is `.black`.
     ///
-    /// - Parameters:
-    ///   - red: The red value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
-    ///   - green: The green value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
-    ///   - blue: The blue value of the color. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
-    @objc public func setFillColor(red: CGFloat, green: CGFloat, blue: CGFloat) {
+    /// - Parameter color: Area's fill color and opacity.
+    @objc public var color: UIColor = .black {
+        didSet {
+            applyColorInJavaScript()
+        }
+    }
+    
+    private func applyColorInJavaScript() {
+        if let colorComponents = color.cgColor.components {
+            let red = colorComponents[0]
+            let green = colorComponents[1]
+            let blue = colorComponents[2]
+            let opacity = colorComponents[3]
+            setColorInJavaScript(withRed: red, green: green, blue: blue)
+            setOpacityInJavaScript(opacity: opacity)
+        }
+    }
+    
+    private func setColorInJavaScript(withRed red: CGFloat, green: CGFloat, blue: CGFloat) {
         ready {
             let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
             let javaScriptString = String(format: ScriptTemplates.SetFillColorTemplate, self.javaScriptVariableName, stringColor)
@@ -77,10 +114,7 @@ public class INArea: INObject {
         }
     }
     
-    /// Sets Area opacity. To apply this it's necessary to call `draw()` after. Use of this method is optional.
-    ///
-    /// - Parameter opacity: Number between 1.0 and 0. Set it to 1.0 for no opacity, 0 for maximum opacity. Values below 0.0 are interpreted as 0.0, and values above 1.0 are interpreted as 1.0.
-    @objc public func setOpacity(_ opacity: CGFloat) {
+    private func setOpacityInJavaScript(opacity: CGFloat) {
         ready {
             let standarizedOpacity = ColorHelper.standarizedOpacity(fromValue: opacity)
             let javaScriptString = String(format: ScriptTemplates.SetOpacityTemplate, self.javaScriptVariableName, standarizedOpacity)
