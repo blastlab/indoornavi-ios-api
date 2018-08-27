@@ -17,13 +17,6 @@
 		7B5F03A12097455B00D112F6 /* INMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5F03A02097455B00D112F6 /* INMarker.swift */; };
 		7B666AF020888FBF0031780A /* PointHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B666AEF20888FBF0031780A /* PointHelper.swift */; };
 		7B666AF42088D3A60031780A /* INObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B666AF32088D3A60031780A /* INObject.swift */; };
-		7B684AEB20FF259000659C3C /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 7B68395720FF257D00659C3C /* Makefile */; };
-		7B684C6220FF259200659C3C /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 7B683B3F20FF257E00659C3C /* Makefile */; };
-		7B684C8020FF259300659C3C /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 7B683B6120FF257E00659C3C /* Makefile */; };
-		7B684CD220FF259300659C3C /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 7B683BC520FF257F00659C3C /* Makefile */; };
-		7B684CEA20FF259400659C3C /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 7B683BE120FF257F00659C3C /* Makefile */; };
-		7B6851EF20FF25A000659C3C /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 7B68415020FF258300659C3C /* Makefile */; };
-		7B6855DD20FF25AD00659C3C /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 7B68455D20FF258700659C3C /* Makefile */; };
 		7B6856C220FF25F200659C3C /* indoorNavi.html in Resources */ = {isa = PBXBuildFile; fileRef = 7B7180AB207CAF1B00EC3E34 /* indoorNavi.html */; };
 		7B6856C320FF260600659C3C /* indoorNavi.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B68465C20FF258800659C3C /* indoorNavi.js */; };
 		7B6948BB20863F1400E22BD9 /* INPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6948BA20863F1400E22BD9 /* INPolyline.swift */; };
@@ -31,6 +24,7 @@
 		7B714FBB20A1D47800836BBD /* AreaEventsCallbacksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B714FBA20A1D47800836BBD /* AreaEventsCallbacksController.swift */; };
 		7B714FBE20A1EEAF00836BBD /* AreaEventsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B714FBD20A1EEAF00836BBD /* AreaEventsHelper.swift */; };
 		7B714FC020A1FCB500836BBD /* CoordinatesCallbacksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B714FBF20A1FCB500836BBD /* CoordinatesCallbacksController.swift */; };
+		7B75CD6C2133CF70002598AB /* INCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B75CD6B2133CF70002598AB /* INCircle.swift */; };
 		7B77E6E9207515010019D061 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B77E6E8207515010019D061 /* Paths.swift */; };
 		7B7FD56820936CE200AD409C /* INArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7FD56720936CE200AD409C /* INArea.swift */; };
 		7B8570BF20E0DBD400295D00 /* INPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8570BE20E0DBD400295D00 /* INPoint.swift */; };
@@ -4253,6 +4247,7 @@
 		7B714FBD20A1EEAF00836BBD /* AreaEventsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaEventsHelper.swift; sourceTree = "<group>"; };
 		7B714FBF20A1FCB500836BBD /* CoordinatesCallbacksController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesCallbacksController.swift; sourceTree = "<group>"; };
 		7B7180AB207CAF1B00EC3E34 /* indoorNavi.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = indoorNavi.html; sourceTree = "<group>"; };
+		7B75CD6B2133CF70002598AB /* INCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INCircle.swift; sourceTree = "<group>"; };
 		7B77E6E8207515010019D061 /* Paths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paths.swift; sourceTree = "<group>"; };
 		7B7FD56720936CE200AD409C /* INArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INArea.swift; sourceTree = "<group>"; };
 		7B8570BE20E0DBD400295D00 /* INPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INPoint.swift; sourceTree = "<group>"; };
@@ -4317,6 +4312,7 @@
 				7B901C2C20D519AF00A1D216 /* INPoint.h */,
 				7B8570BE20E0DBD400295D00 /* INPoint.swift */,
 				7BEFEBFC20ED23C900A55FCC /* Scale.swift */,
+				7B75CD6B2133CF70002598AB /* INCircle.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -11650,14 +11646,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B684CD220FF259300659C3C /* Makefile in Sources */,
 				7B560E9D2099C2B60055F42E /* INInfoWindow.swift in Sources */,
 				7B9ABA3320820B6A00A8849F /* WebViewScrollViewDelegate.swift in Sources */,
-				7B6855DD20FF25AD00659C3C /* Makefile in Sources */,
+				7B75CD6C2133CF70002598AB /* INCircle.swift in Sources */,
 				7B5F039F20972F0900D112F6 /* ColorHelper.swift in Sources */,
 				7BB78B3C20A1CF5C0087BFEC /* PromisesController.swift in Sources */,
 				7BCB74B920BE70C7006386D1 /* TimeIntervalExtension.swift in Sources */,
-				7B6851EF20FF25A000659C3C /* Makefile in Sources */,
 				7B46979320A0A2B400D6A22B /* AreaEvent.swift in Sources */,
 				7BEFEC0120EFA3EE00A55FCC /* LongClickEventCallbacksController.swift in Sources */,
 				7B714FBB20A1D47800836BBD /* AreaEventsCallbacksController.swift in Sources */,
@@ -11671,7 +11665,6 @@
 				7B714FB920A1D37200836BBD /* EventCallbacksController.swift in Sources */,
 				7BCB74BD20BE7F05006386D1 /* CoordinatesHelper.swift in Sources */,
 				7B714FC020A1FCB500836BBD /* CoordinatesCallbacksController.swift in Sources */,
-				7B684AEB20FF259000659C3C /* Makefile in Sources */,
 				7BEFEBFF20ED32BC00A55FCC /* MapHelper.swift in Sources */,
 				7B6948BB20863F1400E22BD9 /* INPolyline.swift in Sources */,
 				7B4D689C20F5EFB900D491A2 /* CoordinatesListenerCallbacksController.swift in Sources */,
@@ -11679,10 +11672,7 @@
 				7BEFEBFD20ED23C900A55FCC /* Scale.swift in Sources */,
 				7BD4679D206CF59500B9F2AD /* INMap.swift in Sources */,
 				7B666AF42088D3A60031780A /* INObject.swift in Sources */,
-				7B684C6220FF259200659C3C /* Makefile in Sources */,
-				7B684CEA20FF259400659C3C /* Makefile in Sources */,
 				7BCB74BB20BE7B96006386D1 /* Coordinates.swift in Sources */,
-				7B684C8020FF259300659C3C /* Makefile in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

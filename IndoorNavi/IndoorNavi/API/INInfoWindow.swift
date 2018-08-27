@@ -100,8 +100,8 @@ public class INInfoWindow: INObject {
                 privateHeight = 50
             }
             
+            let javaScriptString = String(format: ScriptTemplates.HeightTemplate, javaScriptVariableName, height)
             ready {
-                let javaScriptString = String(format: ScriptTemplates.HeightTemplate, self.javaScriptVariableName, self.height)
                 self.map.evaluate(javaScriptString: javaScriptString)
             }
         }
@@ -120,8 +120,8 @@ public class INInfoWindow: INObject {
                 privateHeight = 50
             }
             
+            let javaScriptString = String(format: ScriptTemplates.WidthTemplate, javaScriptVariableName, privateWidth)
             ready {
-                let javaScriptString = String(format: ScriptTemplates.WidthTemplate, self.javaScriptVariableName, self.privateWidth)
                 self.map.evaluate(javaScriptString: javaScriptString)
             }
         }
@@ -131,8 +131,8 @@ public class INInfoWindow: INObject {
     ///
     /// - Parameter string: Text or HTML template in string format that will be passed to info window as text.
     @objc public func setInnerHTML(string: String) {
+        let javaScriptString = String(format: ScriptTemplates.SetInnerHTMLTemplate, javaScriptVariableName, string)
         ready {
-            let javaScriptString = String(format: ScriptTemplates.SetInnerHTMLTemplate, self.javaScriptVariableName, string)
             self.map.evaluate(javaScriptString: javaScriptString)
         }
     }
@@ -140,8 +140,8 @@ public class INInfoWindow: INObject {
     /// Position of info window regarding to object that info window will be appended to. Default position for info window is `.top`.
     @objc public var position: Position = .top {
         didSet {
+            let javaScriptString = String(format: ScriptTemplates.SetPositionTemplate, javaScriptVariableName, position.rawValue)
             ready {
-                let javaScriptString = String(format: ScriptTemplates.SetPositionTemplate, self.javaScriptVariableName, self.position.rawValue)
                 self.map.evaluate(javaScriptString: javaScriptString)
             }
         }

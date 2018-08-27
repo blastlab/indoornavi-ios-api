@@ -11,8 +11,8 @@ import IndoorNavi
 
 class ViewController: UIViewController {
     
-    let FrontendTargetHost = "http://172.16.170.18:4200"
-    let BackendTargetHost = "http://172.16.170.18:90"
+    let FrontendTargetHost = "http://172.16.170.40:4200"
+    let BackendTargetHost = "http://172.16.170.40:90"
     let ApiKey = "TestAdmin"
     
     @IBOutlet weak var map: INMap!
@@ -72,7 +72,6 @@ class ViewController: UIViewController {
         marker.addEventListener {
             self.showAlert()
         }
-        marker.draw()
     }
     @IBAction func createReport(_ sender: Any) {
         let report = INReport(map: map, targetHost: BackendTargetHost, apiKey: ApiKey)
@@ -114,6 +113,12 @@ class ViewController: UIViewController {
             usleep(10000)
             
         }
+    }
+    
+    @IBAction func drawCircle(_ sender: Any) {
+        let color = UIColor(red: 0.8, green: 0.8, blue: 0.2, alpha: 0.8)
+        let circle = INCircle(withMap: map, position: INPoint(x: 700, y: 700), color: color)
+        circle.draw()
     }
     
     @IBAction func load(_ sender: Any) {

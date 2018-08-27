@@ -6,7 +6,7 @@
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
-/// Class representing an `INMarker`, creates the `INMarker` object in iframe that communicates with frontend server and places a marker.
+/// Class representing an `INMarker`, creates the `INMarker` object in iframe that communicates with frontend server and places a Marker.
 public class INMarker: INObject {
     
     fileprivate struct ScriptTemplates {
@@ -70,21 +70,20 @@ public class INMarker: INObject {
     ///
     /// - Parameter onClickCallback: A block to invoke when marker is tapped.
     @objc public func addEventListener(onClickCallback: @escaping () -> Void) {
+        callbackUUID = UUID().uuidString
+        map.eventCallbacksController.eventCallbacks[self.callbackUUID!] = onClickCallback
+        let javaScriptString = String(format: ScriptTemplates.AddEventListenerTemplate, javaScriptVariableName, callbackUUID!)
         ready {
-            self.callbackUUID = UUID().uuidString
-            self.map.eventCallbacksController.eventCallbacks[self.callbackUUID!] = onClickCallback
-            
-            let javaScriptString = String(format: ScriptTemplates.AddEventListenerTemplate, self.javaScriptVariableName, self.callbackUUID!)
             self.map.evaluate(javaScriptString: javaScriptString)
         }
     }
     
     /// Removes block invoked on tap if exists. Use of this method is optional.
     @objc public func removeEventListener() {
-        ready {
-            if let uuid = self.callbackUUID {
-                self.map.eventCallbacksController.removeEventCallback(forUUID: uuid)
-                let javaScriptString = String(format: ScriptTemplates.RemoveEventListenerTemplate, self.javaScriptVariableName)
+        if let uuid = self.callbackUUID {
+            self.map.eventCallbacksController.removeEventCallback(forUUID: uuid)
+            let javaScriptString = String(format: ScriptTemplates.RemoveEventListenerTemplate, javaScriptVariableName)
+            ready {
                 self.map.evaluate(javaScriptString: javaScriptString)
             }
         }
@@ -93,19 +92,19 @@ public class INMarker: INObject {
     /// Place market on the map with all given settings. There is necessary to use `point()` method before `draw()` to indicate the point where marker should to be located.
     /// Use of this method is indispensable to display marker with set configuration in the IndoorNavi Map.
     @objc public func draw() {
+        let javaScriptString = String(format: ScriptTemplates.PlaceTemplate, javaScriptVariableName)
         ready {
-            let javaScriptString = String(format: ScriptTemplates.PlaceTemplate, self.javaScriptVariableName)
             self.map.evaluate(javaScriptString: javaScriptString)
         }
     }
     
-     /// Locates marker at given coordinates. Coordinates needs to be given as real world dimensions that map is representing. Use of this method is indispensable.
-     ///
-     /// - Parameter point: Represents marker position in real world. Coordinates are calculated to the map scale and then displayed. Position will be clipped to the point in the bottom center of marker icon.
+    /// Locates marker at given coordinates. Coordinates needs to be given as real world dimensions that map is representing. Use of this method is indispensable.
+    ///
+    /// - Parameter point: Represents position of the marker in real world. Coordinates are calculated to the map scale and then displayed. Position will be clipped to the point in the bottom center of marker icon.
     @objc(setPoint:) public func set(point: INPoint) {
+        let pointString = PointHelper.pointString(fromCoordinates: point)
+        let javaScriptString = String(format: ScriptTemplates.PointTemplate, javaScriptVariableName, pointString)
         ready {
-            let pointString = PointHelper.pointString(fromCoordinates: point)
-            let javaScriptString = String(format: ScriptTemplates.PointTemplate, self.javaScriptVariableName, pointString)
             self.map.evaluate(javaScriptString: javaScriptString)
         }
     }
@@ -114,16 +113,16 @@ public class INMarker: INObject {
     ///
     /// - Parameter text: `String` that will be used as a marker label.
     @objc public func setLabel(withText text: String) {
+        let javaScriptString = String(format: ScriptTemplates.SetLabelTemplate, javaScriptVariableName, text)
         ready {
-            let javaScriptString = String(format: ScriptTemplates.SetLabelTemplate, self.javaScriptVariableName, text)
             self.map.evaluate(javaScriptString: javaScriptString)
         }
     }
     
     /// Removes marker label. To remove label it is indispensable to call `draw()` again.
     @objc public func removeLabel() {
+        let javaScriptString = String(format: ScriptTemplates.RemoveLabelTemplate, javaScriptVariableName)
         ready {
-            let javaScriptString = String(format: ScriptTemplates.RemoveLabelTemplate, self.javaScriptVariableName)
             self.map.evaluate(javaScriptString: javaScriptString)
         }
     }
@@ -132,8 +131,8 @@ public class INMarker: INObject {
     ///
     /// - Parameter infoWindow: An `INInfoWindow` object.
     @objc(addInfoWindow:) public func add(infoWindow: INInfoWindow) {
+        let javaScriptString = String(format: ScriptTemplates.OpenTemplate, infoWindow.javaScriptVariableName, javaScriptVariableName)
         infoWindow.ready {
-            let javaScriptString = String(format: ScriptTemplates.OpenTemplate, infoWindow.javaScriptVariableName, self.javaScriptVariableName)
             self.map.evaluate(javaScriptString: javaScriptString)
         }
     }
@@ -142,8 +141,8 @@ public class INMarker: INObject {
     ///
     /// - Parameter path: URL path to icon.
     @objc public func setIcon(withPath path: String) {
+        let javaScriptString = String(format: ScriptTemplates.SetIconTemplate, javaScriptVariableName, path)
         ready {
-            let javaScriptString = String(format: ScriptTemplates.SetIconTemplate, self.javaScriptVariableName, path)
             self.map.evaluate(javaScriptString: javaScriptString)
         }
     }

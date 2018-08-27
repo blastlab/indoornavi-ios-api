@@ -43,8 +43,8 @@ public class INObject: NSObject {
     }
     
     private func getID() {
+        let javaScriptString = String(format: ScriptTemplates.GetIDTemplate, javaScriptVariableName)
         ready {
-            let javaScriptString = String(format: ScriptTemplates.GetIDTemplate, self.javaScriptVariableName)
             self.map.evaluate(javaScriptString: javaScriptString) { response, error in
                 
                 guard error == nil, response != nil else {
@@ -77,8 +77,8 @@ public class INObject: NSObject {
     ///
     /// - Parameter callbackHandler: A block to invoke when the array of points is available.
     public func getPoints(callbackHandler: @escaping ([INPoint]?) -> Void) {
+        let javaScriptString = String(format: ScriptTemplates.GetPointsTemplate, javaScriptVariableName)
         ready {
-            let javaScriptString = String(format: ScriptTemplates.GetPointsTemplate, self.javaScriptVariableName)
             self.map.evaluate(javaScriptString: javaScriptString) { response, error in
                 print("Response: \(String(describing: response))")
                 print("Error: \(String(describing: error))")
@@ -108,9 +108,9 @@ public class INObject: NSObject {
     ///   - coordinates: Coordinates that are described in real world dimensions. Coordinates are calculated to the map scale.
     ///   - callbackHandler: A block to invoke when the boolean is available.
     public func isWithin(coordinates: [INPoint], callbackHandler: @escaping (Bool?) -> Void) {
+        let coordinatesString = PointHelper.pointsString(fromCoordinatesArray: coordinates)
+        let javaScriptString = String(format: ScriptTemplates.IsWithinTemplate, javaScriptVariableName, coordinatesString)
         ready {
-            let coordinatesString = PointHelper.pointsString(fromCoordinatesArray: coordinates)
-            let javaScriptString = String(format: ScriptTemplates.IsWithinTemplate, self.javaScriptVariableName, coordinatesString)
             self.map.evaluate(javaScriptString: javaScriptString) { response, error in
                 print("Response: \(String(describing: response))")
                 print("Error: \(String(describing: error))")
@@ -147,8 +147,8 @@ public class INObject: NSObject {
     
     /// Removes object and destroys instance of the object in the frontend server, but do not destroys object class instance in your app.
     @objc public func remove() {
+        let javaScriptString = String(format: ScriptTemplates.RemoveTemplate, javaScriptVariableName)
         ready {
-            let javaScriptString = String(format: ScriptTemplates.RemoveTemplate, self.javaScriptVariableName)
             self.map.evaluate(javaScriptString: javaScriptString)
         }
     }

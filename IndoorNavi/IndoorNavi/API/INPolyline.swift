@@ -6,7 +6,7 @@
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
-/// Class representing a `INPolyline`, communicates with indoornavi frontend server and draws `INPolyline`.
+/// Class representing an `INPolyline`, communicates with indoornavi frontend server and draws Polyline.
 public class INPolyline: INObject {
     
     fileprivate struct ScriptTemplates {
@@ -58,10 +58,10 @@ public class INPolyline: INObject {
     ///
     /// - Parameter points: Array of `Point`'s that are describing polyline in real world dimensions. Coordinates are calculated to the map scale and then displayed.
     public func set(points: [INPoint]) {
+        let pointsString = PointHelper.pointsString(fromCoordinatesArray: points)
+        let javaScriptString = String(format: ScriptTemplates.PointsTemplate, self.javaScriptVariableName)
         ready {
-            let pointsString = PointHelper.pointsString(fromCoordinatesArray: points)
             self.map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
-            let javaScriptString = String(format: ScriptTemplates.PointsTemplate, self.javaScriptVariableName)
             self.map.evaluate(javaScriptString: javaScriptString)
         }
     }
@@ -76,8 +76,8 @@ public class INPolyline: INObject {
     /// There is necessary to use `points()` before `draw()` to indicate where polyline should to be located.
     /// Use of this method is indispensable to draw polyline with set configuration.
     @objc public func draw() {
+        let javaScriptString = String(format: ScriptTemplates.DrawTemplate, javaScriptVariableName)
         ready {
-            let javaScriptString = String(format: ScriptTemplates.DrawTemplate, self.javaScriptVariableName)
             self.map.evaluate(javaScriptString: javaScriptString)
         }
     }
@@ -90,13 +90,10 @@ public class INPolyline: INObject {
     }
     
     private func setColorInJavaScript() {
-        if let colorComponents = color.cgColor.components {
-            let red = colorComponents[0]
-            let green = colorComponents[1]
-            let blue = colorComponents[2]
+        if let (red, green, blue, _) = ColorHelper.colorComponents(fromColor: color) {
+            let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
+            let javaScriptString = String(format: ScriptTemplates.SetLineColorTemplate, javaScriptVariableName, stringColor)
             ready {
-                let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
-                let javaScriptString = String(format: ScriptTemplates.SetLineColorTemplate, self.javaScriptVariableName, stringColor)
                 self.map.evaluate(javaScriptString: javaScriptString)
             }
         }

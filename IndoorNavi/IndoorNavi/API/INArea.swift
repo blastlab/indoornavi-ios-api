@@ -6,7 +6,7 @@
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
-/// Class representing an `INArea`, communicates with frontend server and draws area.
+/// Class representing an `INArea`, communicates with frontend server and draws Area.
 public class INArea: INObject {
     
     fileprivate struct ScriptTemplates {
@@ -55,11 +55,11 @@ public class INArea: INObject {
         map.evaluate(javaScriptString: javaScriptString)
     }
     
-    /// Place area on the map with all given settings. There is necessary to use `points()` before `draw()` to indicate where area should to be located.
+    /// Place Area on the map with all given settings. There is necessary to use `points()` before `draw()` to indicate where area should to be located.
     /// Use of this method is indispensable to draw area with set configuration in the IndoorNavi Map.
     @objc public func draw() {
+        let javaScriptString = String(format: ScriptTemplates.DrawTemplate, javaScriptVariableName)
         ready {
-            let javaScriptString = String(format: ScriptTemplates.DrawTemplate, self.javaScriptVariableName)
             self.map.evaluate(javaScriptString: javaScriptString)
         }
     }
@@ -68,10 +68,10 @@ public class INArea: INObject {
     ///
     /// - Parameter points: Array of Point's that are describing area in real world dimensions. Coordinates are calculated to the map scale and then displayed. For less than 3 points supplied to this method, Area isn't going to be drawn.
     public func set(points: [INPoint]) {
+        let pointsString = PointHelper.pointsString(fromCoordinatesArray: points)
+        let javaScriptString = String(format: ScriptTemplates.PointsTemplate, javaScriptVariableName)
         ready {
-            let pointsString = PointHelper.pointsString(fromCoordinatesArray: points)
             self.map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
-            let javaScriptString = String(format: ScriptTemplates.PointsTemplate, self.javaScriptVariableName)
             self.map.evaluate(javaScriptString: javaScriptString)
         }
     }
@@ -87,8 +87,6 @@ public class INArea: INObject {
     }
     
     /// `INArea`'s fill color and opacity. To apply this it's necessary to call `draw()` after. Default value is `.black`.
-    ///
-    /// - Parameter color: Area's fill color and opacity.
     @objc public var color: UIColor = .black {
         didSet {
             applyColorInJavaScript()
@@ -96,28 +94,24 @@ public class INArea: INObject {
     }
     
     private func applyColorInJavaScript() {
-        if let colorComponents = color.cgColor.components {
-            let red = colorComponents[0]
-            let green = colorComponents[1]
-            let blue = colorComponents[2]
-            let opacity = colorComponents[3]
+        if let (red, green, blue, opacity) = ColorHelper.colorComponents(fromColor: color) {
             setColorInJavaScript(withRed: red, green: green, blue: blue)
             setOpacityInJavaScript(opacity: opacity)
         }
     }
     
     private func setColorInJavaScript(withRed red: CGFloat, green: CGFloat, blue: CGFloat) {
+        let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
+        let javaScriptString = String(format: ScriptTemplates.SetFillColorTemplate, javaScriptVariableName, stringColor)
         ready {
-            let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
-            let javaScriptString = String(format: ScriptTemplates.SetFillColorTemplate, self.javaScriptVariableName, stringColor)
             self.map.evaluate(javaScriptString: javaScriptString)
         }
     }
     
     private func setOpacityInJavaScript(opacity: CGFloat) {
+        let standarizedOpacity = ColorHelper.standarizedOpacity(fromValue: opacity)
+        let javaScriptString = String(format: ScriptTemplates.SetOpacityTemplate, javaScriptVariableName, standarizedOpacity)
         ready {
-            let standarizedOpacity = ColorHelper.standarizedOpacity(fromValue: opacity)
-            let javaScriptString = String(format: ScriptTemplates.SetOpacityTemplate, self.javaScriptVariableName, standarizedOpacity)
             self.map.evaluate(javaScriptString: javaScriptString)
         }
     }
