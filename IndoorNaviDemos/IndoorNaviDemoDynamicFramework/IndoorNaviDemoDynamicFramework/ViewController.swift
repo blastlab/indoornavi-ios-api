@@ -50,10 +50,6 @@ class ViewController: UIViewController {
         polyline.draw()
 
         print("Polyline 1 ID: %d", polyline.objectID != nil ? polyline.objectID! : 0)
-
-        polyline.getPoints { coordinates in
-            print("Coordinates: \(String(describing: coordinates != nil ? coordinates : nil))")
-        }
     }
     
     @IBAction func drawPolyline2(_ sender: Any) {
@@ -86,9 +82,6 @@ class ViewController: UIViewController {
     
     @IBAction func getCoordinates(_ sender: Any) {
         print("infoWindow id \(String(describing: infoWindow.objectID))")
-        infoWindow.getPoints() { points in
-            print("infoWindow points \(String(describing: points))")
-        }
     }
     
     @IBAction func drawPolies(_ sender: Any) {

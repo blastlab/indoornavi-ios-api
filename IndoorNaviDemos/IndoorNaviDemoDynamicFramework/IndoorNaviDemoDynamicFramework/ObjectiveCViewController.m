@@ -112,12 +112,6 @@ NSString* const ApiKey = @"TestAdmin";
 
 - (IBAction)getCoordinates:(id)sender {
     NSLog(@"InfoWindow id: %@",infoWindow.objectID);
-    [infoWindow getPointsWithCallbackHandler:^(const INPoint points[], NSInteger size) {
-        NSLog(@"InfoWindow's coordinates:");
-        for (int i = 0; i < size; i++) {
-            NSLog(@"Coordinate: (%d,%d)", points[i].x, points[i].y);
-        }
-    }];
 }
 
 - (IBAction)drawPolies:(id)sender {
