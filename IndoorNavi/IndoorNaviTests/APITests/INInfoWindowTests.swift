@@ -11,7 +11,7 @@ import XCTest
 
 class INInfoWindowTests: XCTestCase {
 
-    let FrontendTargetHost = "http://172.16.170.18:4200"
+    let FrontendTargetHost = "http://172.16.170.6:4200"
     let ApiKey = "TestAdmin"
     
     var map: INMap!
@@ -30,7 +30,7 @@ class INInfoWindowTests: XCTestCase {
         map.load(2) {
             let infoWindow = INInfoWindow(withMap: self.map)
             
-            infoWindow.setInnerHTML(string: "<h2>Lorem ipsum dolor sit amet</h2>")
+            infoWindow.content = "<h2>Lorem ipsum dolor sit amet</h2>"
             infoWindow.position = .top
             infoWindow.height = 300
             infoWindow.width = 400
@@ -39,14 +39,6 @@ class INInfoWindowTests: XCTestCase {
                 XCTAssertNotNil(infoWindow.objectID)
                 infoWindowInitPromise.fulfill()
             })
-            
-            infoWindow.getPoints { points in
-                XCTAssertNotNil(points)
-            }
-            
-            infoWindow.isWithin(coordinates: [INPoint(x: 200, y: 400)]) { isWithin in
-                XCTAssertNil(isWithin)
-            }
         }
         
         waitForExpectations(timeout: 15)

@@ -21,4 +21,9 @@ extension INPoint : Equatable {
     public static func == (lhs: INPoint, rhs: INPoint) -> Bool {
         return lhs.x == rhs.x && lhs.y == rhs.y
     }
+    
+    /// The point with location (0,0).
+    public static var zero: INPoint {
+        return INPoint(x: 0, y: 0)
+    }
 }

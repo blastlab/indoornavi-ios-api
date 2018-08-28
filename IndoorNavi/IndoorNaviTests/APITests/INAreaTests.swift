@@ -11,7 +11,7 @@ import XCTest
 
 class INAreaTests: XCTestCase {
     
-    let FrontendTargetHost = "http://172.16.170.18:4200"
+    let FrontendTargetHost = "http://172.16.170.6:4200"
     let ApiKey = "TestAdmin"
     
     var map: INMap!
@@ -31,17 +31,13 @@ class INAreaTests: XCTestCase {
             let area = INArea(withMap: self.map)
             let points = [INPoint(x: 480, y: 480), INPoint(x: 1220, y: 480), INPoint(x: 1220, y: 1220), INPoint(x: 480, y: 1220), INPoint(x: 750, y: 750)]
             
-            area.set(points: points)
+            area.points = points
             area.color = UIColor(red: 0.8, green: 0.4, blue: 0.2, alpha: 0.5)
             
             Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
                 XCTAssertNotNil(area.objectID)
                 areaInitPromise.fulfill()
             })
-            
-            area.getPoints { points in
-                XCTAssertNotNil(points)
-            }
             
             area.isWithin(coordinates: [INPoint(x: 200, y: 400)]) { isWithin in
                 XCTAssertNotNil(isWithin)

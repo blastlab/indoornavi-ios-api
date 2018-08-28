@@ -11,8 +11,8 @@ import IndoorNavi
 
 class ViewController: UIViewController {
     
-    let FrontendTargetHost = "http://172.16.170.18:4200"
-    let BackendTargetHost = "http://172.16.170.18:90"
+    let FrontendTargetHost = "http://172.16.170.6:4200"
+    let BackendTargetHost = "http://172.16.170.6:90"
     let ApiKey = "TestAdmin"
     
     @IBOutlet weak var map: INMap!
@@ -37,23 +37,17 @@ class ViewController: UIViewController {
     
     @IBAction func drawInfoWindow(_ sender: Any) {
         placeMarker(sender)
-        infoWindow.position = .top
-        infoWindow.height = Int(arc4random_uniform(220) + 30)
-        infoWindow.width = Int(arc4random_uniform(220) + 30)
+        infoWindow = INInfoWindow(withMap: self.map, width: Int(arc4random_uniform(220) + 30), height: Int(arc4random_uniform(220) + 30), position: .bottomLeft, content: "<h2>Lorem ipsum dolor sit amet</h2>")
         marker.add(infoWindow: infoWindow)
     }
     
     @IBAction func drawPolyline1(_ sender: Any) {
         let polyline = INPolyline(withMap: map)
-        polyline.set(points: points1)
+        polyline.points = points1
         polyline.color = .green
         polyline.draw()
 
         print("Polyline 1 ID: %d", polyline.objectID != nil ? polyline.objectID! : 0)
-
-        polyline.getPoints { coordinates in
-            print("Coordinates: \(String(describing: coordinates != nil ? coordinates : nil))")
-        }
     }
     
     @IBAction func drawPolyline2(_ sender: Any) {
@@ -68,11 +62,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func placeMarker(_ sender: Any) {
-        marker = INMarker(withMap: map, point: INPoint(x: 600, y: 600), iconPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png", labelText: "Tekst ABCD")
+        marker = INMarker(withMap: map, position: INPoint(x: 600, y: 600), iconPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png", label: "Tekst ABCD")
         marker.addEventListener {
             self.showAlert()
         }
-        marker.draw()
     }
     @IBAction func createReport(_ sender: Any) {
         let report = INReport(map: map, targetHost: BackendTargetHost, apiKey: ApiKey)
@@ -87,9 +80,6 @@ class ViewController: UIViewController {
     
     @IBAction func getCoordinates(_ sender: Any) {
         print("infoWindow id \(String(describing: infoWindow.objectID))")
-        infoWindow.getPoints() { points in
-            print("infoWindow points \(String(describing: points))")
-        }
     }
     
     @IBAction func drawPolies(_ sender: Any) {
@@ -107,7 +97,7 @@ class ViewController: UIViewController {
             let randomGreen = CGFloat(arc4random()) / CGFloat(UInt32.max)
             let randomBlue = CGFloat(arc4random()) / CGFloat(UInt32.max)
             
-            polyline.set(points: points)
+            polyline.points = points
             polyline.color = UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
             polyline.draw()
             polylines.append(polyline)
@@ -116,18 +106,24 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func drawCircle(_ sender: Any) {
+        let color = UIColor.red
+        let circle = INCircle(withMap: map, position: INPoint(x: 700, y: 700), color: color)
+        circle.radius = 10
+        circle.border = INCircle.Border(width: 5, color: .blue)
+        circle.draw()
+    }
+    
     @IBAction func load(_ sender: Any) {
         map.load(2) {
             print("Completed.")
-            self.infoWindow = INInfoWindow(withMap: self.map)
-            self.infoWindow.setInnerHTML(string: "<h2>Lorem ipsum dolor sit amet</h2>")
         }
         
         map.addLongClickListener { point in
             let marker = INMarker(withMap: self.map)
             marker.setIcon(withPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png")
             let pointWithRealCoordinates = MapHelper.realCoordinates(fromPixel: point, scale: self.map.scale!)
-            marker.set(point: pointWithRealCoordinates)
+            marker.position = pointWithRealCoordinates
             marker.draw()
         }
         

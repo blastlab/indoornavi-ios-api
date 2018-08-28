@@ -9,8 +9,8 @@
 #import "ObjectiveCViewController.h"
 @import IndoorNavi;
 
-NSString* const FrontendTargetHost = @"http://172.16.170.18:4200";
-NSString* const BackendTargetHost = @"http://172.16.170.18:90";
+NSString* const FrontendTargetHost = @"http://172.16.170.6:4200";
+NSString* const BackendTargetHost = @"http://172.16.170.6:90";
 NSString* const ApiKey = @"TestAdmin";
 
 @interface ObjectiveCViewController ()
@@ -77,7 +77,7 @@ NSString* const ApiKey = @"TestAdmin";
 }
 
 - (IBAction)placeMarker:(id)sender {
-    marker = [[INMarker alloc] initWithMap:map point:INPointMake(600, 600) iconPath:@"https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png" labelText:@"Tekst ABCD"];
+    marker = [[INMarker alloc] initWithMap:map position:INPointMake(600, 600) iconPath:@"https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png" label:@"Tekst ABCD"];
     __weak ObjectiveCViewController *weakSelf = self;
     [marker addEventListenerOnClickCallback:^{
         [weakSelf showAlert];
@@ -112,12 +112,6 @@ NSString* const ApiKey = @"TestAdmin";
 
 - (IBAction)getCoordinates:(id)sender {
     NSLog(@"InfoWindow id: %@",infoWindow.objectID);
-    [infoWindow getPointsWithCallbackHandler:^(const INPoint points[], NSInteger size) {
-        NSLog(@"InfoWindow's coordinates:");
-        for (int i = 0; i < size; i++) {
-            NSLog(@"Coordinate: (%d,%d)", points[i].x, points[i].y);
-        }
-    }];
 }
 
 - (IBAction)drawPolies:(id)sender {
@@ -145,7 +139,7 @@ NSString* const ApiKey = @"TestAdmin";
 - (IBAction)load:(id)sender {
     [map load:2 onCompletion:^{
         self->infoWindow = [[INInfoWindow alloc] initWithMap:self->map];
-        [self->infoWindow setInnerHTMLWithString:@"<h2>Lorem ipsum dolor sit amet</h2>"];
+        [self->infoWindow setContent:@"<h2>Lorem ipsum dolor sit amet</h2>"];
         NSLog(@"Completed");
     }];
     
@@ -153,7 +147,7 @@ NSString* const ApiKey = @"TestAdmin";
         INMarker* marker = [[INMarker alloc] initWithMap:self->map];
         [marker setIconWithPath:@"https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png"];
         INPoint pointWithRealCoordinates = [MapHelper realCoordinatesFromPixel:point scale:self->map.scale];
-        [marker setPoint:pointWithRealCoordinates];
+        [marker setPosition:pointWithRealCoordinates];
         [marker draw];
     }];
     
