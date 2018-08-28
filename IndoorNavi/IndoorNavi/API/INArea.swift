@@ -12,9 +12,9 @@ public class INArea: INObject {
     fileprivate struct ScriptTemplates {
         static let VariableName = "area%u"
         static let Initialization = "var %@ = new INArea(navi);"
-        static let Points = "%@.points(points);"
+        static let SetPoints = "%@.setPoints(points);"
         static let Draw = "%@.draw();"
-        static let SetFillColor = "%@.setFillColor('%@')"
+        static let SetFillColor = "%@.setColor('%@')"
         static let SetOpacity = "%@.setOpacity('%f')"
         static let PointsDeclaration = "var points = %@;"
         static let Remove = "%@.remove()"
@@ -28,9 +28,7 @@ public class INArea: INObject {
     ///   - color: Area's fill color and opacity.
     public convenience init(withMap map: INMap, points: [INPoint]? = nil, color: UIColor? = nil) {
         self.init(withMap: map)
-        if let points = points {
-            set(points: points)
-        }
+        self.points = points ?? [INPoint]()
         if let color = color {
             self.color = color
             applyColorInJavaScript()
@@ -65,26 +63,21 @@ public class INArea: INObject {
         }
     }
     
-    /// Locates area at given coordinates. Coordinates needs to be given as real world dimensions that map is representing. Use of this method is indispensable.
-    ///
-    /// - Parameter points: Array of Point's that are describing area in real world dimensions. Coordinates are calculated to the map scale and then displayed. For less than 3 points supplied to this method, Area isn't going to be drawn.
-    public func set(points: [INPoint]) {
-        let pointsString = PointHelper.pointsString(fromCoordinatesArray: points)
-        let javaScriptString = String(format: ScriptTemplates.Points, self.javaScriptVariableName)
-        ready {
-            self.map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
-            self.map.evaluate(javaScriptString: javaScriptString)
+    /// Array of Point's that is describing area in real world dimensions. Coordinates needs to be given as real world dimensions that map is representing. For less than 3 points supplied to this method, Area isn't going to be drawn. Use of this method is indispensable.
+    public var points = [INPoint]() {
+        didSet {
+            let pointsString = PointHelper.pointsString(fromCoordinatesArray: points)
+            let javaScriptString = String(format: ScriptTemplates.SetPoints, self.javaScriptVariableName)
+            ready {
+                self.map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
+                self.map.evaluate(javaScriptString: javaScriptString)
+            }
         }
     }
     
     @available(swift, obsoleted: 1.0)
     @objc(setPointsArray:withArraySize:) public func set(pointsArray: UnsafePointer<INPoint>, withArraySize size:Int) {
-        var points = [INPoint]()
-        for i in 0..<size {
-            let pointer = pointsArray + i
-            points.append(pointer.pointee)
-        }
-        set(points: points)
+        self.points = PointHelper.pointsArray(fromCArray: pointsArray, withSize: size)
     }
     
     /// `INArea`'s fill color and opacity. To apply this it's necessary to call `draw()` after. Default value is `.black`.

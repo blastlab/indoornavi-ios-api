@@ -11,8 +11,8 @@ import IndoorNavi
 
 class ViewController: UIViewController {
     
-    let FrontendTargetHost = "http://172.16.170.40:4200"
-    let BackendTargetHost = "http://172.16.170.40:90"
+    let FrontendTargetHost = "http://172.16.170.6:4200"
+    let BackendTargetHost = "http://172.16.170.6:90"
     let ApiKey = "TestAdmin"
     
     @IBOutlet weak var map: INMap!
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
     
     @IBAction func drawPolyline1(_ sender: Any) {
         let polyline = INPolyline(withMap: map)
-        polyline.set(points: points1)
+        polyline.points = points1
         polyline.color = .green
         polyline.draw()
 
@@ -106,7 +106,7 @@ class ViewController: UIViewController {
             let randomGreen = CGFloat(arc4random()) / CGFloat(UInt32.max)
             let randomBlue = CGFloat(arc4random()) / CGFloat(UInt32.max)
             
-            polyline.set(points: points)
+            polyline.points = points
             polyline.color = UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
             polyline.draw()
             polylines.append(polyline)
@@ -116,8 +116,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func drawCircle(_ sender: Any) {
-        let color = UIColor(red: 0.8, green: 0.8, blue: 0.2, alpha: 0.8)
+        let color = UIColor.red
         let circle = INCircle(withMap: map, position: INPoint(x: 700, y: 700), color: color)
+        circle.radius = 10
+        circle.border = INCircle.Border(width: 5, color: .blue)
         circle.draw()
     }
     
@@ -125,14 +127,14 @@ class ViewController: UIViewController {
         map.load(2) {
             print("Completed.")
             self.infoWindow = INInfoWindow(withMap: self.map)
-            self.infoWindow.setInnerHTML(string: "<h2>Lorem ipsum dolor sit amet</h2>")
+            self.infoWindow.content = "<h2>Lorem ipsum dolor sit amet</h2>"
         }
         
         map.addLongClickListener { point in
             let marker = INMarker(withMap: self.map)
             marker.setIcon(withPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png")
             let pointWithRealCoordinates = MapHelper.realCoordinates(fromPixel: point, scale: self.map.scale!)
-            marker.set(point: pointWithRealCoordinates)
+            marker.position = pointWithRealCoordinates
             marker.draw()
         }
         

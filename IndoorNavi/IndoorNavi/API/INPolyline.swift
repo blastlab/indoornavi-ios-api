@@ -26,9 +26,7 @@ public class INPolyline: INObject {
     ///   - color: Polyline's lines and points color.
     public convenience init(withMap map: INMap, points: [INPoint]? = nil, color: UIColor? = nil) {
         self.init(withMap: map)
-        if let points = points {
-            set(points: points)
-        }
+        self.points = points ?? [INPoint]()
         if let color = color {
             self.color = color
             setColorInJavaScript()
@@ -57,19 +55,20 @@ public class INPolyline: INObject {
     /// Locates polyline at given coordinates. Coordinates needs to be given as real world dimensions that map is representing. Use of this method is indispensable.
     ///
     /// - Parameter points: Array of `Point`'s that are describing polyline in real world dimensions. Coordinates are calculated to the map scale and then displayed.
-    public func set(points: [INPoint]) {
-        let pointsString = PointHelper.pointsString(fromCoordinatesArray: points)
-        let javaScriptString = String(format: ScriptTemplates.SetPoints, self.javaScriptVariableName)
-        ready {
-            self.map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
-            self.map.evaluate(javaScriptString: javaScriptString)
+    public var points = [INPoint]() {
+        didSet {
+            let pointsString = PointHelper.pointsString(fromCoordinatesArray: points)
+            let javaScriptString = String(format: ScriptTemplates.SetPoints, self.javaScriptVariableName)
+            ready {
+                self.map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
+                self.map.evaluate(javaScriptString: javaScriptString)
+            }
         }
     }
     
     @available(swift, obsoleted: 1.0)
     @objc(setPointsArray:withArraySize:) public func set(pointsArray: UnsafePointer<INPoint>, withArraySize size:Int) {
-        let points = PointHelper.pointsArray(fromCArray: pointsArray, withSize: size)
-        set(points: points)
+        points = PointHelper.pointsArray(fromCArray: pointsArray, withSize: size)
     }
     
     /// Place polyline on the map with all given settings.

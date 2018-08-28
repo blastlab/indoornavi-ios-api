@@ -22,8 +22,13 @@ public class INCircle: INObject {
     }
     
     public struct Border {
-        var width: Int
-        var color: UIColor
+        public var width: Int
+        public var color: UIColor
+        
+        public init(width: Int, color: UIColor) {
+            self.width = width
+            self.color = color
+        }
     }
     
     /// Initializes a new `INCircle` object inside given `INMap` object.
@@ -60,7 +65,7 @@ public class INCircle: INObject {
         map.evaluate(javaScriptString: javaScriptString)
     }
     
-    /// Place Circle on the map with all given settings. 'position' should be set before `draw()` to indicate where Circle should to be located.
+    /// Places Circle on the map with all given settings. 'position' should be set before `draw()` to indicate where Circle should to be located.
     /// Use of this method is indispensable to draw Circle with set configuration in the IndoorNavi Map.
     @objc public func draw() {
         let javaScriptString = String(format: ScriptTemplates.DrawTemplate, javaScriptVariableName)
@@ -72,7 +77,7 @@ public class INCircle: INObject {
     /// Locates Circle at given coordinates. Coordinates needs to be given as real world dimensions that map is representing. Use of this method is indispensable.
     /// Coordinates needs to be given as real world dimensions that map is representing. Use of this method is indispensable.
     ///
-    /// - Parameter point: Represents position of the Circle in real world. Coordinates are calculated to the map scale and then displayed. Position will be clipped to the point in the bottom center of marker icon.
+    /// - Parameter position: Represents position of the Circle in real world. Coordinates are calculated to the map scale and then displayed. Position will be clipped to the point in the bottom center of marker icon.
     @objc(setPoint:) public func set(position: INPoint) {
         let positionString = PointHelper.pointString(fromCoordinates: position)
         let javaScriptString = String(format: ScriptTemplates.SetPosition, javaScriptVariableName, positionString)
@@ -82,7 +87,7 @@ public class INCircle: INObject {
     }
     
     /// Represents position of the Circle in real world. Coordinates needs to be given as real world dimensions that map is representing. To apply this it's necessary to call `draw()` after. Default value is `INPoint.zero`.
-    @objc var position: INPoint = INPoint.zero {
+    @objc public var position: INPoint = INPoint.zero {
         didSet {
             let positionString = PointHelper.pointString(fromCoordinates: position)
             let javaScriptString = String(format: ScriptTemplates.SetPosition, javaScriptVariableName, positionString)
@@ -93,7 +98,7 @@ public class INCircle: INObject {
     }
     
     /// Radius of the Circle. To apply this it's necessary to call `draw()` after. Default value is `5`.
-    @objc var radius: Int = 5 {
+    @objc public var radius: Int = 5 {
         didSet {
             let javaScriptString = String(format: ScriptTemplates.SetRadius, javaScriptVariableName, radius)
             ready {
@@ -116,7 +121,7 @@ public class INCircle: INObject {
     }
     
     @available(swift, obsoleted: 1.0)
-    @objc var borderWidth: Int {
+    @objc public var borderWidth: Int {
         set {
             border.width = newValue
         }
@@ -126,7 +131,7 @@ public class INCircle: INObject {
     }
     
     @available(swift, obsoleted: 1.0)
-    @objc var borderColor: UIColor {
+    @objc public var borderColor: UIColor {
         set {
             border.color = newValue
         }
@@ -136,8 +141,6 @@ public class INCircle: INObject {
     }
     
     /// `INCircles`'s color and opacity. To apply this it's necessary to call `draw()` after. Default value is `.black`.
-    ///
-    /// - Parameter color: Circles's color and opacity.
     @objc public var color: UIColor = .black {
         didSet {
             applyColorInJavaScript()

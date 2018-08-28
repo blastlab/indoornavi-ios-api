@@ -52,18 +52,10 @@ public class INInfoWindow: INObject {
     ///   - innerHTML: Text or HTML template in string format that will be passed to info window as text.
     public convenience init(withMap map: INMap, width: Int? = nil, height: Int? = nil, position: Position? = nil, content: String? = nil) {
         self.init(withMap: map)
-        if let width = width {
-            self.width = width
-        }
-        if let height = height {
-            self.height = height
-        }
-        if let position = position {
-            self.position = position
-        }
-        if let content = content {
-            setContent(string: content)
-        }
+        self.width = width ?? 250
+        self.height = height ?? 250
+        self.position = position ?? .top
+        self.content = content
     }
     
     @available(swift, obsoleted: 1.0)
@@ -127,13 +119,14 @@ public class INInfoWindow: INObject {
         }
     }
     
-    /// Sets info window content. To reset label to a new content call this method again passing new content as a string and call `draw()`.
-    ///
-    /// - Parameter string: Text or HTML template in string format that will be passed to info window as text.
-    @objc public func setContent(string: String) {
-        let javaScriptString = String(format: ScriptTemplates.SetContent, self.javaScriptVariableName, string)
-        ready {
-            self.map.evaluate(javaScriptString: javaScriptString)
+    /// Text or HTML template in string format that is displayed in InfoWindow. To reset label to a new content set this property to a new value and call `draw()`.
+    @objc public var content: String? {
+        didSet {
+            let contentString = content ?? ""
+            let javaScriptString = String(format: ScriptTemplates.SetContent, self.javaScriptVariableName, contentString)
+            ready {
+                self.map.evaluate(javaScriptString: javaScriptString)
+            }
         }
     }
     

@@ -33,15 +33,11 @@ public class INMarker: INObject {
     ///   - labelText: `String` that will be used as a marker label.
     public convenience init(withMap map: INMap, point: INPoint? = nil, iconPath: String? = nil, labelText: String? = nil) {
         self.init(withMap: map)
-        if let point = point {
-            set(point: point)
-        }
         if let iconPath = iconPath {
             setIcon(withPath: iconPath)
         }
-        if let labelText = labelText {
-            setLabel(withText: labelText)
-        }
+        position = point ?? .zero
+        label = labelText
         draw()
     }
     
@@ -98,29 +94,34 @@ public class INMarker: INObject {
         }
     }
     
-    /// Locates marker at given coordinates. Coordinates needs to be given as real world dimensions that map is representing. Use of this method is indispensable.
-    ///
-    /// - Parameter point: Represents position of the marker in real world. Coordinates are calculated to the map scale and then displayed. Position will be clipped to the point in the bottom center of marker icon.
-    @objc(setPoint:) public func set(point: INPoint) {
-        let pointString = PointHelper.pointString(fromCoordinates: point)
-        let javaScriptString = String(format: ScriptTemplates.SetPosition, self.javaScriptVariableName, pointString)
-        ready {
-            self.map.evaluate(javaScriptString: javaScriptString)
+    /// Represents position of the marker in real world. Coordinates needs to be given as real world dimensions that map is representing. Position will be clipped to the point in the bottom center of marker icon. Use of this method is indispensable. Default value is `.zero`.
+    @objc public var position: INPoint = INPoint.zero {
+        didSet {
+            let pointString = PointHelper.pointString(fromCoordinates: position)
+            let javaScriptString = String(format: ScriptTemplates.SetPosition, self.javaScriptVariableName, pointString)
+            ready {
+                self.map.evaluate(javaScriptString: javaScriptString)
+            }
         }
     }
     
-    /// Sets marker label. Use of this method is optional. If no text is set, label won't be displayed. In order to change label's text, call this method again passing new label as a string and call `draw()`.
-    ///
-    /// - Parameter text: `String` that will be used as a marker label.
-    @objc public func setLabel(withText text: String) {
-        let javaScriptString = String(format: ScriptTemplates.SetLabel, self.javaScriptVariableName, text)
-        ready {
-            self.map.evaluate(javaScriptString: javaScriptString)
+    /// `String` used as a marker label. If no text is set or value is `nil`, label won't be displayed. In order to change label's text, set new value and call `draw()`.
+    @objc public var label: String? {
+        didSet {
+            if let label = label {
+                let javaScriptString = String(format: ScriptTemplates.SetLabel, self.javaScriptVariableName, label)
+                ready {
+                    self.map.evaluate(javaScriptString: javaScriptString)
+                }
+            } else {
+                removeLabel()
+            }
         }
     }
     
-    /// Removes marker label. To remove label it is indispensable to call `draw()` again.
+    /// Removes marker `label` and sets its to `nil`. To remove label it is indispensable to call `draw()` again.
     @objc public func removeLabel() {
+        label = nil
         let javaScriptString = String(format: ScriptTemplates.RemoveLabel, self.javaScriptVariableName)
         ready {
             self.map.evaluate(javaScriptString: javaScriptString)
