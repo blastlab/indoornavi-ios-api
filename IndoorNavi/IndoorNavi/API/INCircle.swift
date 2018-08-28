@@ -18,7 +18,7 @@ public class INCircle: INObject {
         static let SetColor = "%@.setColor('%@');"
         static let SetOpacity = "%@.setOpacity(%f);"
         static let SetBorder = "%@.setBorder(%@);"
-        static let Border = "{width: %d, color: %@}"
+        static let Border = "new Border(%d, '%@')"
     }
     
     public struct Border {

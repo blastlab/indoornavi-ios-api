@@ -29,7 +29,10 @@ public class INArea: INObject {
     ///   - color: Area's fill color and opacity.
     public convenience init(withMap map: INMap, points: [INPoint]? = nil, color: UIColor? = nil) {
         self.init(withMap: map)
-        self.points = points ?? [INPoint]()
+        if let points = points {
+            self.points = points
+            setPointsInJavaScript()
+        }
         if let color = color {
             self.color = color
             applyColorInJavaScript()
@@ -67,12 +70,16 @@ public class INArea: INObject {
     /// Array of Point's that is describing area in real world dimensions. Coordinates needs to be given as real world dimensions that map is representing. For less than 3 points supplied to this method, Area isn't going to be drawn. Use of this method is indispensable.
     public var points = [INPoint]() {
         didSet {
-            let pointsString = PointHelper.pointsString(fromCoordinatesArray: points)
-            let javaScriptString = String(format: ScriptTemplates.SetPoints, self.javaScriptVariableName)
-            ready {
-                self.map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
-                self.map.evaluate(javaScriptString: javaScriptString)
-            }
+            setPointsInJavaScript()
+        }
+    }
+    
+    private func setPointsInJavaScript() {
+        let pointsString = PointHelper.pointsString(fromCoordinatesArray: points)
+        let javaScriptString = String(format: ScriptTemplates.SetPoints, self.javaScriptVariableName)
+        ready {
+            self.map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
+            self.map.evaluate(javaScriptString: javaScriptString)
         }
     }
     

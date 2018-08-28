@@ -31,29 +31,35 @@ public class INMarker: INObject {
     ///   - point:  Represents marker position in real world. Coordinates are calculated to the map scale and then displayed. Position will be clipped to the point in the bottom center of marker icon.
     ///   - iconPath: URL path to icon.
     ///   - labelText: `String` that will be used as a marker label.
-    public convenience init(withMap map: INMap, point: INPoint? = nil, iconPath: String? = nil, labelText: String? = nil) {
+    public convenience init(withMap map: INMap, position: INPoint? = nil, iconPath: String? = nil, label: String? = nil) {
         self.init(withMap: map)
         if let iconPath = iconPath {
             setIcon(withPath: iconPath)
         }
-        position = point ?? .zero
-        label = labelText
+        if let position = position {
+            self.position = position
+            setPositionInJavaScript()
+        }
+        if let label = label {
+            self.label = label
+            setLabelInJavaScript()
+        }
         draw()
     }
     
     @available(swift, obsoleted: 1.0)
-    @objc public convenience init(withMap map: INMap, point: INPoint) {
-        self.init(withMap: map, point: point)
+    @objc public convenience init(withMap map: INMap, position: INPoint) {
+        self.init(withMap: map, position: position)
     }
     
     @available(swift, obsoleted: 1.0)
-    @objc public convenience init(withMap map: INMap, point: INPoint, iconPath: String) {
-        self.init(withMap: map, point: point, iconPath: iconPath)
+    @objc public convenience init(withMap map: INMap, position: INPoint, iconPath: String) {
+        self.init(withMap: map, position: position, iconPath: iconPath)
     }
     
     @available(swift, obsoleted: 1.0)
-    @objc public convenience init(withMap map: INMap, point: INPoint, iconPath: String, labelText: String) {
-        self.init(withMap: map, point: point, iconPath: iconPath, labelText: labelText)
+    @objc public convenience init(withMap map: INMap, position: INPoint, iconPath: String, label: String) {
+        self.init(withMap: map, position: position, iconPath: iconPath, label: label)
     }
     
     override func initInJavaScript() {
@@ -97,25 +103,33 @@ public class INMarker: INObject {
     /// Represents position of the marker in real world. Coordinates needs to be given as real world dimensions that map is representing. Position will be clipped to the point in the bottom center of marker icon. Use of this method is indispensable. Default value is `.zero`.
     @objc public var position: INPoint = INPoint.zero {
         didSet {
-            let pointString = PointHelper.pointString(fromCoordinates: position)
-            let javaScriptString = String(format: ScriptTemplates.SetPosition, self.javaScriptVariableName, pointString)
-            ready {
-                self.map.evaluate(javaScriptString: javaScriptString)
-            }
+            setPositionInJavaScript()
+        }
+    }
+    
+    private func setPositionInJavaScript() {
+        let pointString = PointHelper.pointString(fromCoordinates: position)
+        let javaScriptString = String(format: ScriptTemplates.SetPosition, self.javaScriptVariableName, pointString)
+        ready {
+            self.map.evaluate(javaScriptString: javaScriptString)
         }
     }
     
     /// `String` used as a marker label. If no text is set or value is `nil`, label won't be displayed. In order to change label's text, set new value and call `draw()`.
     @objc public var label: String? {
         didSet {
-            if let label = label {
-                let javaScriptString = String(format: ScriptTemplates.SetLabel, self.javaScriptVariableName, label)
-                ready {
-                    self.map.evaluate(javaScriptString: javaScriptString)
-                }
-            } else {
-                removeLabel()
+            setLabelInJavaScript()
+        }
+    }
+    
+    private func setLabelInJavaScript() {
+        if let label = label {
+            let javaScriptString = String(format: ScriptTemplates.SetLabel, self.javaScriptVariableName, label)
+            ready {
+                self.map.evaluate(javaScriptString: javaScriptString)
             }
+        } else {
+            removeLabel()
         }
     }
     
@@ -133,8 +147,10 @@ public class INMarker: INObject {
     /// - Parameter infoWindow: An `INInfoWindow` object.
     @objc(addInfoWindow:) public func add(infoWindow: INInfoWindow) {
         let javaScriptString = String(format: ScriptTemplates.Open, infoWindow.javaScriptVariableName, self.javaScriptVariableName)
-        infoWindow.ready {
-            self.map.evaluate(javaScriptString: javaScriptString)
+        ready {
+            infoWindow.ready {
+                self.map.evaluate(javaScriptString: javaScriptString)
+            }
         }
     }
     

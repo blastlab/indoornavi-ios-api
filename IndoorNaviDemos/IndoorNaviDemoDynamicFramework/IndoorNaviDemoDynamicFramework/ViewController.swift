@@ -37,9 +37,7 @@ class ViewController: UIViewController {
     
     @IBAction func drawInfoWindow(_ sender: Any) {
         placeMarker(sender)
-        infoWindow.position = .top
-        infoWindow.height = Int(arc4random_uniform(220) + 30)
-        infoWindow.width = Int(arc4random_uniform(220) + 30)
+        infoWindow = INInfoWindow(withMap: self.map, width: Int(arc4random_uniform(220) + 30), height: Int(arc4random_uniform(220) + 30), position: .bottomLeft, content: "<h2>Lorem ipsum dolor sit amet</h2>")
         marker.add(infoWindow: infoWindow)
     }
     
@@ -64,7 +62,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func placeMarker(_ sender: Any) {
-        marker = INMarker(withMap: map, point: INPoint(x: 600, y: 600), iconPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png", labelText: "Tekst ABCD")
+        marker = INMarker(withMap: map, position: INPoint(x: 600, y: 600), iconPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png", label: "Tekst ABCD")
         marker.addEventListener {
             self.showAlert()
         }
@@ -119,8 +117,6 @@ class ViewController: UIViewController {
     @IBAction func load(_ sender: Any) {
         map.load(2) {
             print("Completed.")
-            self.infoWindow = INInfoWindow(withMap: self.map)
-            self.infoWindow.content = "<h2>Lorem ipsum dolor sit amet</h2>"
         }
         
         map.addLongClickListener { point in

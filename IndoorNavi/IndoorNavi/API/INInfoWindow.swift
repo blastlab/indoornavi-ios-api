@@ -54,8 +54,14 @@ public class INInfoWindow: INObject {
         self.init(withMap: map)
         self.width = width ?? 250
         self.height = height ?? 250
-        self.position = position ?? .top
-        self.content = content
+        if let position = position {
+            self.position = position
+            setPositionInJavaScript()
+        }
+        if let content = content {
+            self.content = content
+            setContentInJavaScript()
+        }
     }
     
     @available(swift, obsoleted: 1.0)
@@ -122,21 +128,29 @@ public class INInfoWindow: INObject {
     /// Text or HTML template in string format that is displayed in InfoWindow. To reset label to a new content set this property to a new value and call `draw()`.
     @objc public var content: String? {
         didSet {
-            let contentString = content ?? ""
-            let javaScriptString = String(format: ScriptTemplates.SetContent, self.javaScriptVariableName, contentString)
-            ready {
-                self.map.evaluate(javaScriptString: javaScriptString)
-            }
+            setContentInJavaScript()
+        }
+    }
+    
+    private func setContentInJavaScript() {
+        let contentString = content ?? ""
+        let javaScriptString = String(format: ScriptTemplates.SetContent, self.javaScriptVariableName, contentString)
+        ready {
+            self.map.evaluate(javaScriptString: javaScriptString)
         }
     }
     
     /// Position of info window regarding to object that info window will be appended to. Default position for info window is `.top`.
     @objc public var position: Position = .top {
         didSet {
-            let javaScriptString = String(format: ScriptTemplates.SetPosition, self.javaScriptVariableName, self.position.rawValue)
-            ready {
-                self.map.evaluate(javaScriptString: javaScriptString)
-            }
+            setPositionInJavaScript()
+        }
+    }
+    
+    private func setPositionInJavaScript() {
+        let javaScriptString = String(format: ScriptTemplates.SetPosition, self.javaScriptVariableName, self.position.rawValue)
+        ready {
+            self.map.evaluate(javaScriptString: javaScriptString)
         }
     }
 }

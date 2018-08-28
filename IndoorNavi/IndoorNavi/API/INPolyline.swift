@@ -26,7 +26,10 @@ public class INPolyline: INObject {
     ///   - color: Polyline's lines and points color.
     public convenience init(withMap map: INMap, points: [INPoint]? = nil, color: UIColor? = nil) {
         self.init(withMap: map)
-        self.points = points ?? [INPoint]()
+        if let points = points {
+            self.points = points
+            setPointsInJavaScript()
+        }
         if let color = color {
             self.color = color
             setColorInJavaScript()
@@ -57,12 +60,16 @@ public class INPolyline: INObject {
     /// - Parameter points: Array of `Point`'s that are describing polyline in real world dimensions. Coordinates are calculated to the map scale and then displayed.
     public var points = [INPoint]() {
         didSet {
-            let pointsString = PointHelper.pointsString(fromCoordinatesArray: points)
-            let javaScriptString = String(format: ScriptTemplates.SetPoints, self.javaScriptVariableName)
-            ready {
-                self.map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
-                self.map.evaluate(javaScriptString: javaScriptString)
-            }
+            setPointsInJavaScript()
+        }
+    }
+    
+    private func setPointsInJavaScript() {
+        let pointsString = PointHelper.pointsString(fromCoordinatesArray: points)
+        let javaScriptString = String(format: ScriptTemplates.SetPoints, self.javaScriptVariableName)
+        ready {
+            self.map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
+            self.map.evaluate(javaScriptString: javaScriptString)
         }
     }
     

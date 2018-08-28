@@ -77,7 +77,7 @@ NSString* const ApiKey = @"TestAdmin";
 }
 
 - (IBAction)placeMarker:(id)sender {
-    marker = [[INMarker alloc] initWithMap:map point:INPointMake(600, 600) iconPath:@"https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png" labelText:@"Tekst ABCD"];
+    marker = [[INMarker alloc] initWithMap:map position:INPointMake(600, 600) iconPath:@"https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png" label:@"Tekst ABCD"];
     __weak ObjectiveCViewController *weakSelf = self;
     [marker addEventListenerOnClickCallback:^{
         [weakSelf showAlert];
