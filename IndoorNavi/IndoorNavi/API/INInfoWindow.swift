@@ -11,11 +11,11 @@ public class INInfoWindow: INObject {
     
     fileprivate struct ScriptTemplates {
         static let VariableName = "infoWindow%u"
-        static let InitializationTemplate = "var %@ = new INInfoWindow(navi);"
-        static let HeightTemplate = "%@.height(%i);"
-        static let WidthTemplate = "%@.width(%i);"
-        static let SetInnerHTMLTemplate = "%@.setInnerHTML('%@');"
-        static let SetPositionTemplate = "%@.setPosition(%i);"
+        static let Initialization = "var %@ = new INInfoWindow(navi);"
+        static let SetHeight = "%@.setHeight(%i);"
+        static let SetWidth = "%@.setWidth(%i);"
+        static let SetContent = "%@.setContent('%@');"
+        static let SetPosition = "%@.setPositionAt(%i);"
     }
     
      /// Position regarding to related `INObject` object.
@@ -50,7 +50,7 @@ public class INInfoWindow: INObject {
     ///   - height: Height dimension of info window. Setting this value is optional. Default value is 250px, minimum value is 50px.
     ///   - position: Position of info window regarding to object that info window will be appended to. Default position for info window is `.top`.
     ///   - innerHTML: Text or HTML template in string format that will be passed to info window as text.
-    public convenience init(withMap map: INMap, width: Int? = nil, height: Int? = nil, position: Position? = nil, innerHTML: String? = nil) {
+    public convenience init(withMap map: INMap, width: Int? = nil, height: Int? = nil, position: Position? = nil, content: String? = nil) {
         self.init(withMap: map)
         if let width = width {
             self.width = width
@@ -61,8 +61,8 @@ public class INInfoWindow: INObject {
         if let position = position {
             self.position = position
         }
-        if let innerHTML = innerHTML {
-            setInnerHTML(string: innerHTML)
+        if let content = content {
+            setContent(string: content)
         }
     }
     
@@ -77,13 +77,13 @@ public class INInfoWindow: INObject {
     }
     
     @available(swift, obsoleted: 1.0)
-    @objc public convenience init(withMap map: INMap, width: Int, height: Int, position: Position, innerHTML: String) {
-        self.init(withMap: map, width: width, height: height, position: position, innerHTML: innerHTML)
+    @objc public convenience init(withMap map: INMap, width: Int, height: Int, position: Position, content: String) {
+        self.init(withMap: map, width: width, height: height, position: position, content: content)
     }
     
     override func initInJavaScript() {
         javaScriptVariableName = String(format: ScriptTemplates.VariableName, hash)
-        let javaScriptString = String(format: ScriptTemplates.InitializationTemplate, javaScriptVariableName)
+        let javaScriptString = String(format: ScriptTemplates.Initialization, javaScriptVariableName)
         map.evaluate(javaScriptString: javaScriptString)
     }
     
@@ -100,7 +100,7 @@ public class INInfoWindow: INObject {
                 privateHeight = 50
             }
             
-            let javaScriptString = String(format: ScriptTemplates.HeightTemplate, javaScriptVariableName, height)
+            let javaScriptString = String(format: ScriptTemplates.SetHeight, self.javaScriptVariableName, self.height)
             ready {
                 self.map.evaluate(javaScriptString: javaScriptString)
             }
@@ -120,7 +120,7 @@ public class INInfoWindow: INObject {
                 privateHeight = 50
             }
             
-            let javaScriptString = String(format: ScriptTemplates.WidthTemplate, javaScriptVariableName, privateWidth)
+            let javaScriptString = String(format: ScriptTemplates.SetWidth, self.javaScriptVariableName, self.privateWidth)
             ready {
                 self.map.evaluate(javaScriptString: javaScriptString)
             }
@@ -130,8 +130,8 @@ public class INInfoWindow: INObject {
     /// Sets info window content. To reset label to a new content call this method again passing new content as a string and call `draw()`.
     ///
     /// - Parameter string: Text or HTML template in string format that will be passed to info window as text.
-    @objc public func setInnerHTML(string: String) {
-        let javaScriptString = String(format: ScriptTemplates.SetInnerHTMLTemplate, javaScriptVariableName, string)
+    @objc public func setContent(string: String) {
+        let javaScriptString = String(format: ScriptTemplates.SetContent, self.javaScriptVariableName, string)
         ready {
             self.map.evaluate(javaScriptString: javaScriptString)
         }
@@ -140,7 +140,7 @@ public class INInfoWindow: INObject {
     /// Position of info window regarding to object that info window will be appended to. Default position for info window is `.top`.
     @objc public var position: Position = .top {
         didSet {
-            let javaScriptString = String(format: ScriptTemplates.SetPositionTemplate, javaScriptVariableName, position.rawValue)
+            let javaScriptString = String(format: ScriptTemplates.SetPosition, self.javaScriptVariableName, self.position.rawValue)
             ready {
                 self.map.evaluate(javaScriptString: javaScriptString)
             }

@@ -13,10 +13,10 @@ import WebKit
 public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     
     fileprivate struct ScriptTemplates {
-        static let InitializationTemplate = "var navi = new INMap('%@','%@','map',{width:document.body.clientWidth,height:document.body.clientHeight});"
-        static let LoadMapPromiseTemplate = "navi.load(%d).then(() => webkit.messageHandlers.PromisesController.postMessage('%@'));"
-        static let LoadMapTemplate = "navi.load(%d);"
-        static let MessageTemplate = "{uuid: '%@', response: res}"
+        static let Initialization = "var navi = new INMap('%@','%@','map',{width:document.body.clientWidth,height:document.body.clientHeight});"
+        static let LoadMapPromise = "navi.load(%d).then(() => webkit.messageHandlers.PromisesController.postMessage('%@'));"
+        static let LoadMap = "navi.load(%d);"
+        static let Message = "{uuid: '%@', response: res}"
         static let AddLongClickListener = "navi.addMapLongClickListener(res => webkit.messageHandlers.LongClickEventCallbacksController.postMessage(%@));"
         static let Parameters = "navi.parameters;"
         static let ToggleTagVisibility = "navi.toggleTagVisibility(%d);"
@@ -82,7 +82,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         
         let uuid = UUID().uuidString
         promisesController.promises[uuid] = callback
-        javaScriptString = String(format: ScriptTemplates.LoadMapPromiseTemplate, mapId, uuid)
+        javaScriptString = String(format: ScriptTemplates.LoadMapPromise, mapId, uuid)
         
         evaluate(javaScriptString: javaScriptString)
     }
@@ -123,7 +123,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     @objc(addLongClickListener:) public func addLongClickListener(withCallback onLongClickCallback: @escaping (INPoint) -> Void) {
         let uuid = UUID().uuidString
         longClickEventCallbacksController.longClickEventCallbacks[uuid] = onLongClickCallback
-        let message = String(format: ScriptTemplates.MessageTemplate, uuid)
+        let message = String(format: ScriptTemplates.Message, uuid)
         let javaScriptString = String(format: ScriptTemplates.AddLongClickListener, message)
         evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
     }
@@ -134,7 +134,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     public func addAreaEventListener(withCallback areaEventCallback: @escaping (AreaEvent) -> Void) {
         let uuid = UUID().uuidString
         areaEventListenerCallbacksController.areaEventListenerCallbacks[uuid] = areaEventCallback
-        let message = String(format: ScriptTemplates.MessageTemplate, uuid)
+        let message = String(format: ScriptTemplates.Message, uuid)
         let javaScriptString = String(format: ScriptTemplates.AddAreaEventListener, message)
         evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
     }
@@ -151,7 +151,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     public func addCoordinatesEventListener(withCallback coordinatesListenerEventCallback: @escaping (Coordinates) -> Void) {
         let uuid = UUID().uuidString
         coordinatesEventListenerCallbacksController.coordinatesListenerCallbacks[uuid] = coordinatesListenerEventCallback
-        let message = String(format: ScriptTemplates.MessageTemplate, uuid)
+        let message = String(format: ScriptTemplates.Message, uuid)
         let javaScriptString = String(format: ScriptTemplates.AddAreaEventListener, message)
         evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
     }
@@ -177,7 +177,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     
     private func initInJavaScript() {
         if let host = targetHost, let apiKey = apiKey {
-            let javaScriptString = String(format: ScriptTemplates.InitializationTemplate, host, apiKey)
+            let javaScriptString = String(format: ScriptTemplates.Initialization, host, apiKey)
             initializedInJavaScript = true
             evaluate(javaScriptString: javaScriptString)
         }

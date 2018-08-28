@@ -11,15 +11,15 @@ public class INMarker: INObject {
     
     fileprivate struct ScriptTemplates {
         static let VariableName = "marker%u"
-        static let InitializationTemplate = "var %@ = new INMarker(navi);"
-        static let AddEventListenerTemplate = "%@.addEventListener(Event.MOUSE.CLICK, () => webkit.messageHandlers.EventCallbacksController.postMessage('%@'));"
-        static let RemoveEventListenerTemplate = "%@.removeEventListener(Event.MOUSE.CLICK);"
-        static let PlaceTemplate = "%@.draw();"
-        static let PointTemplate = "%@.point(%@);"
-        static let SetLabelTemplate = "%@.setLabel('%@');"
-        static let RemoveLabelTemplate = "%@.removeLabel();"
-        static let OpenTemplate = "%@.open(%@);"
-        static let SetIconTemplate = "%@.setIcon('%@');"
+        static let Initialization = "var %@ = new INMarker(navi);"
+        static let AddEventListener = "%@.addEventListener(Event.MOUSE.CLICK, () => webkit.messageHandlers.EventCallbacksController.postMessage('%@'));"
+        static let RemoveEventListener = "%@.removeEventListener(Event.MOUSE.CLICK);"
+        static let Place = "%@.draw();"
+        static let SetPosition = "%@.setPosition(%@);"
+        static let SetLabel = "%@.setLabel('%@');"
+        static let RemoveLabel = "%@.removeLabel();"
+        static let Open = "%@.open(%@);"
+        static let SetIcon = "%@.setIcon('%@');"
     }
     
     private var callbackUUID: String?
@@ -62,7 +62,7 @@ public class INMarker: INObject {
     
     override func initInJavaScript() {
         javaScriptVariableName = String(format: ScriptTemplates.VariableName, hash)
-        let javaScriptString = String(format: ScriptTemplates.InitializationTemplate, javaScriptVariableName)
+        let javaScriptString = String(format: ScriptTemplates.Initialization, javaScriptVariableName)
         map.evaluate(javaScriptString: javaScriptString)
     }
     
@@ -70,9 +70,9 @@ public class INMarker: INObject {
     ///
     /// - Parameter onClickCallback: A block to invoke when marker is tapped.
     @objc public func addEventListener(onClickCallback: @escaping () -> Void) {
-        callbackUUID = UUID().uuidString
-        map.eventCallbacksController.eventCallbacks[self.callbackUUID!] = onClickCallback
-        let javaScriptString = String(format: ScriptTemplates.AddEventListenerTemplate, javaScriptVariableName, callbackUUID!)
+        self.callbackUUID = UUID().uuidString
+        self.map.eventCallbacksController.eventCallbacks[self.callbackUUID!] = onClickCallback
+        let javaScriptString = String(format: ScriptTemplates.AddEventListener, self.javaScriptVariableName, self.callbackUUID!)
         ready {
             self.map.evaluate(javaScriptString: javaScriptString)
         }
@@ -82,7 +82,7 @@ public class INMarker: INObject {
     @objc public func removeEventListener() {
         if let uuid = self.callbackUUID {
             self.map.eventCallbacksController.removeEventCallback(forUUID: uuid)
-            let javaScriptString = String(format: ScriptTemplates.RemoveEventListenerTemplate, javaScriptVariableName)
+            let javaScriptString = String(format: ScriptTemplates.RemoveEventListener, self.javaScriptVariableName)
             ready {
                 self.map.evaluate(javaScriptString: javaScriptString)
             }
@@ -92,7 +92,7 @@ public class INMarker: INObject {
     /// Place market on the map with all given settings. There is necessary to use `point()` method before `draw()` to indicate the point where marker should to be located.
     /// Use of this method is indispensable to display marker with set configuration in the IndoorNavi Map.
     @objc public func draw() {
-        let javaScriptString = String(format: ScriptTemplates.PlaceTemplate, javaScriptVariableName)
+        let javaScriptString = String(format: ScriptTemplates.Place, self.javaScriptVariableName)
         ready {
             self.map.evaluate(javaScriptString: javaScriptString)
         }
@@ -103,7 +103,7 @@ public class INMarker: INObject {
     /// - Parameter point: Represents position of the marker in real world. Coordinates are calculated to the map scale and then displayed. Position will be clipped to the point in the bottom center of marker icon.
     @objc(setPoint:) public func set(point: INPoint) {
         let pointString = PointHelper.pointString(fromCoordinates: point)
-        let javaScriptString = String(format: ScriptTemplates.PointTemplate, javaScriptVariableName, pointString)
+        let javaScriptString = String(format: ScriptTemplates.SetPosition, self.javaScriptVariableName, pointString)
         ready {
             self.map.evaluate(javaScriptString: javaScriptString)
         }
@@ -113,7 +113,7 @@ public class INMarker: INObject {
     ///
     /// - Parameter text: `String` that will be used as a marker label.
     @objc public func setLabel(withText text: String) {
-        let javaScriptString = String(format: ScriptTemplates.SetLabelTemplate, javaScriptVariableName, text)
+        let javaScriptString = String(format: ScriptTemplates.SetLabel, self.javaScriptVariableName, text)
         ready {
             self.map.evaluate(javaScriptString: javaScriptString)
         }
@@ -121,7 +121,7 @@ public class INMarker: INObject {
     
     /// Removes marker label. To remove label it is indispensable to call `draw()` again.
     @objc public func removeLabel() {
-        let javaScriptString = String(format: ScriptTemplates.RemoveLabelTemplate, javaScriptVariableName)
+        let javaScriptString = String(format: ScriptTemplates.RemoveLabel, self.javaScriptVariableName)
         ready {
             self.map.evaluate(javaScriptString: javaScriptString)
         }
@@ -131,7 +131,7 @@ public class INMarker: INObject {
     ///
     /// - Parameter infoWindow: An `INInfoWindow` object.
     @objc(addInfoWindow:) public func add(infoWindow: INInfoWindow) {
-        let javaScriptString = String(format: ScriptTemplates.OpenTemplate, infoWindow.javaScriptVariableName, javaScriptVariableName)
+        let javaScriptString = String(format: ScriptTemplates.Open, infoWindow.javaScriptVariableName, self.javaScriptVariableName)
         infoWindow.ready {
             self.map.evaluate(javaScriptString: javaScriptString)
         }
@@ -141,7 +141,7 @@ public class INMarker: INObject {
     ///
     /// - Parameter path: URL path to icon.
     @objc public func setIcon(withPath path: String) {
-        let javaScriptString = String(format: ScriptTemplates.SetIconTemplate, javaScriptVariableName, path)
+        let javaScriptString = String(format: ScriptTemplates.SetIcon, self.javaScriptVariableName, path)
         ready {
             self.map.evaluate(javaScriptString: javaScriptString)
         }

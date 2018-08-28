@@ -10,11 +10,11 @@
 public class INObject: NSObject {
     
     fileprivate struct ScriptTemplates {
-        static let ReadyTemplate = "%@.ready().then(() => webkit.messageHandlers.PromisesController.postMessage('%@'));"
-        static let GetIDTemplate = "%@.getID();"
-        static let GetPointsTemplate = "%@.getPoints();"
-        static let IsWithinTemplate = "%@.isWithin(%@);"
-        static let RemoveTemplate = "%@.remove();"
+        static let Ready = "%@.ready().then(() => webkit.messageHandlers.PromisesController.postMessage('%@'));"
+        static let GetID = "%@.getID();"
+        static let GetPoints = "%@.getPoints();"
+        static let IsWithin = "%@.isWithin(%@);"
+        static let Remove = "%@.remove();"
     }
     
     var javaScriptVariableName: String!
@@ -43,7 +43,7 @@ public class INObject: NSObject {
     }
     
     private func getID() {
-        let javaScriptString = String(format: ScriptTemplates.GetIDTemplate, javaScriptVariableName)
+        let javaScriptString = String(format: ScriptTemplates.GetID, self.javaScriptVariableName)
         ready {
             self.map.evaluate(javaScriptString: javaScriptString) { response, error in
                 
@@ -68,7 +68,7 @@ public class INObject: NSObject {
         } else {
             let uuid = UUID().uuidString
             map.promisesController.promises[uuid] = readyClousure
-            let javaScriptString = String(format: ScriptTemplates.ReadyTemplate, javaScriptVariableName, uuid)
+            let javaScriptString = String(format: ScriptTemplates.Ready, javaScriptVariableName, uuid)
             map.evaluate(javaScriptString: javaScriptString)
         }
     }
@@ -77,7 +77,7 @@ public class INObject: NSObject {
     ///
     /// - Parameter callbackHandler: A block to invoke when the array of points is available.
     public func getPoints(callbackHandler: @escaping ([INPoint]?) -> Void) {
-        let javaScriptString = String(format: ScriptTemplates.GetPointsTemplate, javaScriptVariableName)
+        let javaScriptString = String(format: ScriptTemplates.GetPoints, self.javaScriptVariableName)
         ready {
             self.map.evaluate(javaScriptString: javaScriptString) { response, error in
                 print("Response: \(String(describing: response))")
@@ -109,7 +109,7 @@ public class INObject: NSObject {
     ///   - callbackHandler: A block to invoke when the boolean is available.
     public func isWithin(coordinates: [INPoint], callbackHandler: @escaping (Bool?) -> Void) {
         let coordinatesString = PointHelper.pointsString(fromCoordinatesArray: coordinates)
-        let javaScriptString = String(format: ScriptTemplates.IsWithinTemplate, javaScriptVariableName, coordinatesString)
+        let javaScriptString = String(format: ScriptTemplates.IsWithin, self.javaScriptVariableName, coordinatesString)
         ready {
             self.map.evaluate(javaScriptString: javaScriptString) { response, error in
                 print("Response: \(String(describing: response))")
@@ -147,7 +147,7 @@ public class INObject: NSObject {
     
     /// Removes object and destroys instance of the object in the frontend server, but do not destroys object class instance in your app.
     @objc public func remove() {
-        let javaScriptString = String(format: ScriptTemplates.RemoveTemplate, javaScriptVariableName)
+        let javaScriptString = String(format: ScriptTemplates.Remove, self.javaScriptVariableName)
         ready {
             self.map.evaluate(javaScriptString: javaScriptString)
         }

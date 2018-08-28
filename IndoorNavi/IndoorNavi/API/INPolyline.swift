@@ -11,10 +11,10 @@ public class INPolyline: INObject {
     
     fileprivate struct ScriptTemplates {
         static let VariableName = "poly%u"
-        static let InitializationTemplate = "var %@ = new INPolyline(navi);"
-        static let PointsTemplate = "%@.points(points);"
-        static let DrawTemplate = "%@.draw();"
-        static let SetLineColorTemplate = "%@.setLineColor('%@')"
+        static let Initialization = "var %@ = new INPolyline(navi);"
+        static let SetPoints = "%@.setPoints(points);"
+        static let Draw = "%@.draw();"
+        static let SetLineColor = "%@.setLineColor('%@')"
         static let PointsDeclaration = "var points = %@;"
     }
     
@@ -50,7 +50,7 @@ public class INPolyline: INObject {
     
     override func initInJavaScript() {
         javaScriptVariableName = String(format: ScriptTemplates.VariableName, hash)
-        let javaScriptString = String(format: ScriptTemplates.InitializationTemplate, javaScriptVariableName)
+        let javaScriptString = String(format: ScriptTemplates.Initialization, javaScriptVariableName)
         self.map.evaluate(javaScriptString: javaScriptString)
     }
     
@@ -59,7 +59,7 @@ public class INPolyline: INObject {
     /// - Parameter points: Array of `Point`'s that are describing polyline in real world dimensions. Coordinates are calculated to the map scale and then displayed.
     public func set(points: [INPoint]) {
         let pointsString = PointHelper.pointsString(fromCoordinatesArray: points)
-        let javaScriptString = String(format: ScriptTemplates.PointsTemplate, self.javaScriptVariableName)
+        let javaScriptString = String(format: ScriptTemplates.SetPoints, self.javaScriptVariableName)
         ready {
             self.map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
             self.map.evaluate(javaScriptString: javaScriptString)
@@ -76,7 +76,7 @@ public class INPolyline: INObject {
     /// There is necessary to use `points()` before `draw()` to indicate where polyline should to be located.
     /// Use of this method is indispensable to draw polyline with set configuration.
     @objc public func draw() {
-        let javaScriptString = String(format: ScriptTemplates.DrawTemplate, javaScriptVariableName)
+        let javaScriptString = String(format: ScriptTemplates.Draw, self.javaScriptVariableName)
         ready {
             self.map.evaluate(javaScriptString: javaScriptString)
         }
@@ -92,7 +92,7 @@ public class INPolyline: INObject {
     private func setColorInJavaScript() {
         if let (red, green, blue, _) = ColorHelper.colorComponents(fromColor: color) {
             let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
-            let javaScriptString = String(format: ScriptTemplates.SetLineColorTemplate, javaScriptVariableName, stringColor)
+            let javaScriptString = String(format: ScriptTemplates.SetLineColor, self.javaScriptVariableName, stringColor)
             ready {
                 self.map.evaluate(javaScriptString: javaScriptString)
             }
