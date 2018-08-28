@@ -11,7 +11,7 @@ import XCTest
 
 class INMarkerTests: XCTestCase {
     
-    let FrontendTargetHost = "http://172.16.170.18:4200"
+    let FrontendTargetHost = "http://172.16.170.6:4200"
     let ApiKey = "TestAdmin"
     
     var map: INMap!
@@ -30,23 +30,15 @@ class INMarkerTests: XCTestCase {
         map.load(2) {
             let marker = INMarker(withMap: self.map)
             
-            marker.set(point: INPoint(x: 480, y: 480))
+            marker.position = INPoint(x: 480, y: 480)
             marker.setIcon(withPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png")
-            marker.setLabel(withText: "Tekst ABCD")
+            marker.label = "Tekst ABCD"
             marker.addEventListener {}
             
             Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
                 XCTAssertNotNil(marker.objectID)
                 markerInitPromise.fulfill()
             })
-            
-            marker.getPoints { points in
-                XCTAssertNotNil(points)
-            }
-            
-            marker.isWithin(coordinates: [INPoint(x: 200, y: 400)]) { isWithin in
-                XCTAssertNotNil(isWithin)
-            }
         }
         
         waitForExpectations(timeout: 15)

@@ -18,6 +18,7 @@ public class INArea: INObject {
         static let SetOpacity = "%@.setOpacity('%f')"
         static let PointsDeclaration = "var points = %@;"
         static let Remove = "%@.remove()"
+        static let IsWithin = "%@.isWithin(%@);"
     }
     
     /// Initializes a new `INArea` object inside given `INMap` object.
@@ -85,6 +86,49 @@ public class INArea: INObject {
         didSet {
             applyColorInJavaScript()
         }
+    }
+    
+    /// Checks if point of given coordinates is inside area. Use of this method is optional.
+    ///
+    /// - Parameters:
+    ///   - coordinates: Coordinates that are described in real world dimensions. Coordinates are calculated to the map scale.
+    ///   - callbackHandler: A block to invoke when the boolean is available.
+    public func isWithin(coordinates: [INPoint], callbackHandler: @escaping (Bool?) -> Void) {
+        let coordinatesString = PointHelper.pointsString(fromCoordinatesArray: coordinates)
+        let javaScriptString = String(format: ScriptTemplates.IsWithin, self.javaScriptVariableName, coordinatesString)
+        ready {
+            self.map.evaluate(javaScriptString: javaScriptString) { response, error in
+                print("Response: \(String(describing: response))")
+                print("Error: \(String(describing: error))")
+                
+                guard error == nil, response != nil else {
+                    print("Error: \(String(describing: error))")
+                    callbackHandler(nil)
+                    return
+                }
+                
+                if let isWithPoint = response! as? Bool {
+                    callbackHandler(isWithPoint)
+                } else {
+                    callbackHandler(nil)
+                }
+            }
+        }
+    }
+    
+    @available(swift, obsoleted: 1.0)
+    @objc public func isWithin(coordinates: UnsafePointer<INPoint>, withSize size: Int, callbackHandler: @escaping (Bool) -> Void)  {
+        let coordinates = PointHelper.pointsArray(fromCArray: coordinates, withSize: size)
+        
+        let callback: (Bool?) -> Void = { isWithin in
+            if let isWithin = isWithin {
+                callbackHandler(isWithin)
+            } else {
+                callbackHandler(false)
+            }
+        }
+        
+        isWithin(coordinates: coordinates, callbackHandler: callback)
     }
     
     private func applyColorInJavaScript() {

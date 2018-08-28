@@ -1,15 +1,15 @@
 //
-//  INPolylineTests.swift
+//  INCircleTests.swift
 //  IndoorNaviTests
 //
-//  Created by Michał Pastwa on 03.07.2018.
+//  Created by Michał Pastwa on 28.08.2018.
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
 import XCTest
 @testable import IndoorNavi
 
-class INPolylineTests: XCTestCase {
+class INCircleTests: XCTestCase {
 
     let FrontendTargetHost = "http://172.16.170.6:4200"
     let ApiKey = "TestAdmin"
@@ -24,19 +24,20 @@ class INPolylineTests: XCTestCase {
         map = nil
     }
     
-    func testPolylineInit() {
-        let polylineInitPromise = expectation(description: "Polyline initialized")
+    func testCircleInit() {
+        let circleInitPromise = expectation(description: "Marker initialized")
         
         map.load(2) {
-            let polyline = INPolyline(withMap: self.map)
-            let points = [INPoint(x: 480, y: 480), INPoint(x: 1220, y: 480), INPoint(x: 1220, y: 1220), INPoint(x: 480, y: 1220), INPoint(x: 750, y: 750)]
+            let circle = INCircle(withMap: self.map)
             
-            polyline.points = points
-            polyline.color = UIColor(red: 1.0, green: 0.5, blue: 0.5, alpha: 1)
+            circle.position = INPoint(x: 480, y: 480)
+            circle.color = .blue
+            circle.border = INCircle.Border(width: 5, color: .red)
+            circle.radius = 4
             
             Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
-                XCTAssertNotNil(polyline.objectID)
-                polylineInitPromise.fulfill()
+                XCTAssertNotNil(circle.objectID)
+                circleInitPromise.fulfill()
             })
         }
         

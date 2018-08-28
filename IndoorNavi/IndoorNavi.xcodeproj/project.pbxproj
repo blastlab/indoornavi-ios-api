@@ -33,6 +33,7 @@
 		7B901C3120D51AA100A1D216 /* INPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B901C2C20D519AF00A1D216 /* INPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B9ABA3320820B6A00A8849F /* WebViewScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */; };
 		7B9BC33320DD134C00426E78 /* IndoorNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD46764206CF34A00B9F2AD /* IndoorNavi.framework */; };
+		7BB6161121355E17003DD41C /* INCircleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB6161021355E17003DD41C /* INCircleTests.swift */; };
 		7BB78B3C20A1CF5C0087BFEC /* PromisesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB78B3B20A1CF5C0087BFEC /* PromisesController.swift */; };
 		7BCB74B920BE70C7006386D1 /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB74B820BE70C7006386D1 /* TimeIntervalExtension.swift */; };
 		7BCB74BB20BE7B96006386D1 /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB74BA20BE7B96006386D1 /* Coordinates.swift */; };
@@ -4255,6 +4256,7 @@
 		7B8570C220E0F0AA00295D00 /* AreaEventsHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaEventsHelperTests.swift; sourceTree = "<group>"; };
 		7B901C2C20D519AF00A1D216 /* INPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = INPoint.h; sourceTree = "<group>"; };
 		7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewScrollViewDelegate.swift; sourceTree = "<group>"; };
+		7BB6161021355E17003DD41C /* INCircleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INCircleTests.swift; sourceTree = "<group>"; };
 		7BB78B3B20A1CF5C0087BFEC /* PromisesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromisesController.swift; sourceTree = "<group>"; };
 		7BCB74B820BE70C7006386D1 /* TimeIntervalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtension.swift; sourceTree = "<group>"; };
 		7BCB74BA20BE7B96006386D1 /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
@@ -11527,6 +11529,7 @@
 				7BEFEBF620EBA54900A55FCC /* INMarkerTests.swift */,
 				7BEFEBF820EBA84900A55FCC /* INInfoWindowTests.swift */,
 				7BEFEBFA20EBB7B200A55FCC /* INReportTests.swift */,
+				7BB6161021355E17003DD41C /* INCircleTests.swift */,
 			);
 			path = APITests;
 			sourceTree = "<group>";
@@ -11682,6 +11685,7 @@
 			files = (
 				7BEFEBFB20EBB7B200A55FCC /* INReportTests.swift in Sources */,
 				7BEFEC0520F34CC900A55FCC /* MapHelperTests.swift in Sources */,
+				7BB6161121355E17003DD41C /* INCircleTests.swift in Sources */,
 				7BEFEBEF20EB5B2B00A55FCC /* INPolylineTests.swift in Sources */,
 				7B8570C320E0F0AA00295D00 /* AreaEventsHelperTests.swift in Sources */,
 				7BEFEBF720EBA54900A55FCC /* INMarkerTests.swift in Sources */,
