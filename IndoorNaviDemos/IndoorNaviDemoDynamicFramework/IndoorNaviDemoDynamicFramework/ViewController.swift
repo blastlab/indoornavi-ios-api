@@ -12,7 +12,7 @@ import IndoorNavi
 class ViewController: UIViewController {
     
     let FrontendTargetHost = "http://172.16.170.6:4200"
-    let BackendTargetHost = "http://172.16.170.6:90"
+    let BackendTargetHost = "http://192.168.1.51:90"//"http://172.16.170.6:90"
     let ApiKey = "TestAdmin"
     
     @IBOutlet weak var map: INMap!
@@ -50,10 +50,11 @@ class ViewController: UIViewController {
         print("Polyline 1 ID: %d", polyline.objectID != nil ? polyline.objectID! : 0)
     }
     
-    @IBAction func drawPolyline2(_ sender: Any) {
-        let polyline = INPolyline(withMap: map, points: points2, color: .brown)
-        polyline.draw()
-        print("Polyline 2 ID: %d", polyline.objectID != nil ? polyline.objectID! : 0)
+    @IBAction func registerPhone(_ sender: Any) {
+        let connection = Connection(targetHost: BackendTargetHost, apiKey: ApiKey)
+        connection.registerDevice(withUserData: "ABCD") { id, error in
+            print("ID: \(id != nil ? String(describing: id!) : "nil")")
+        }
     }
     
     @IBAction func drawArea(_ sender: Any) {

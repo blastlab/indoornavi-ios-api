@@ -41,11 +41,11 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aiN-FQ-EYs">
                                 <rect key="frame" x="133" y="483" width="54" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="Poly 2">
+                                <state key="normal" title="Register">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="drawPolyline2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="10i-Qe-Lop"/>
+                                    <action selector="registerPhone:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XRO-Wl-sPH"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1At-V7-ePm">
