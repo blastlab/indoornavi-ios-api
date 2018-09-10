@@ -11,6 +11,7 @@ public class Connection {
     
     fileprivate struct WebRoutes {
         static let Auth = "/auth"
+        static let Coordinates = "/coordinates"
         static let RestPhones = "/rest/v1/phones"
     }
     
@@ -34,25 +35,71 @@ public class Connection {
     ///   - Parameter id: ID of the device in database.
     ///   - Parameter error: An error object that in dicates why the request failed, or nil if the request was successful.
     public func registerDevice(withUserData userData: String, completionHandler: @escaping ((_ id: Int?, _ error: Error?) -> Void)) {
-        let request = getRegisterDeviceRequest(withUserData: userData)
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            
-            guard let data = data, error == nil else {
-                completionHandler(nil, error)
-                return
-            }
-            
-            if let jsonDictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any], let id = jsonDictionary?["id"] as? Int {
-                completionHandler(id, nil)
-            }
-        }.resume()
+        if let request = getRegisterDeviceRequest(withUserData: userData) {
+            URLSession.shared.dataTask(with: request) { (data, response, error) in
+                
+                guard let data = data, error == nil else {
+                    completionHandler(nil, error)
+                    return
+                }
+                
+                if let jsonDictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any], let id = jsonDictionary?["id"] as? Int {
+                    completionHandler(id, nil)
+                }
+            }.resume()
+        }
     }
     
-    private func getRegisterDeviceRequest(withUserData userData: String) -> URLRequest {
+    public func send(_ coordinates: [CGPoint], date: Date, floorID: Int, deviceID: Int, completionHandler: ((_ error: Error?) -> Void)? = nil) {
+        if let request = getCoordinatesRequest(withCoordinates: coordinates, date: date, floorID: floorID, devieID: deviceID) {
+            URLSession.shared.dataTask(with: request) { (data, response, error) in
+                
+                guard error == nil else {
+                    completionHandler?(error)
+                    return
+                }
+                
+                completionHandler?(nil)
+            }.resume()
+        }
+    }
+    
+    private func getRegisterDeviceRequest(withUserData userData: String) -> URLRequest? {
         let url = URL(string: targetHost + WebRoutes.Auth)!
         let parameterDictionary = ["userData" : userData]
-        let httpBody = try! JSONSerialization.data(withJSONObject: parameterDictionary, options: [])
+        if let httpBody = try? JSONSerialization.data(withJSONObject: parameterDictionary, options: []) {
+            let request = getRequest(withURL: url, andHTTPBody: httpBody)
+            return request
+        }
         
+        return nil
+    }
+    
+    private func getCoordinatesRequest(withCoordinates coordinates: [CGPoint], date: Date, floorID: Int, devieID: Int) -> URLRequest? {
+        let url = URL(string: targetHost + WebRoutes.Coordinates)!
+        var coordinatesDictionaryArray = [[String: Any]]()
+
+        for coordinate in coordinates {
+            coordinatesDictionaryArray.append(["floorId": String(floorID), "point": PointHelper.pointDictionary(fromPoint: coordinate), "date": dateString(fromDate: date), "phoneId": String(devieID)])
+        }
+        
+        if let httpBody = try? JSONSerialization.data(withJSONObject: coordinatesDictionaryArray, options: []) {
+            let request = getRequest(withURL: url, andHTTPBody: httpBody)
+            return request
+        }
+        
+        return nil
+    }
+    
+    private func dateString(fromDate date: Date) -> String {
+        let RFC3339DateFormatter = DateFormatter()
+        RFC3339DateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        RFC3339DateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        let dateString = RFC3339DateFormatter.string(from: date)
+        return dateString
+    }
+    
+    private func getRequest(withURL url: URL, andHTTPBody httpBody: Data) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("Application/json", forHTTPHeaderField: "Accept")
