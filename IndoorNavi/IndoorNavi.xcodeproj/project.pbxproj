@@ -21,7 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		7B10D8AF2140161800638C06 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10D8AE2140161800638C06 /* Connection.swift */; };
+		7B10D8AF2140161800638C06 /* DeviceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10D8AE2140161800638C06 /* DeviceDataManager.swift */; };
 		7B2F3EB420E527E9006D98B4 /* CoordinatesHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2F3EB320E527E9006D98B4 /* CoordinatesHelperTests.swift */; };
 		7B46979120A095D200D6A22B /* INReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B46979020A095D200D6A22B /* INReport.swift */; };
 		7B46979320A0A2B400D6A22B /* AreaEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B46979220A0A2B400D6A22B /* AreaEvent.swift */; };
@@ -80,7 +80,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7B10D8AE2140161800638C06 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
+		7B10D8AE2140161800638C06 /* DeviceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDataManager.swift; sourceTree = "<group>"; };
 		7B2F3EB320E527E9006D98B4 /* CoordinatesHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesHelperTests.swift; sourceTree = "<group>"; };
 		7B46979020A095D200D6A22B /* INReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INReport.swift; sourceTree = "<group>"; };
 		7B46979220A0A2B400D6A22B /* AreaEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaEvent.swift; sourceTree = "<group>"; };
@@ -4318,6 +4318,7 @@
 		7B560E9B2099C2510055F42E /* API */ = {
 			isa = PBXGroup;
 			children = (
+				7B10D8AE2140161800638C06 /* DeviceDataManager.swift */,
 				7BD4679C206CF59500B9F2AD /* INMap.swift */,
 				7B6948BA20863F1400E22BD9 /* INPolyline.swift */,
 				7B666AF32088D3A60031780A /* INObject.swift */,
@@ -11510,7 +11511,6 @@
 				7B714FBC20A1EE7800836BBD /* Helpers */,
 				7B77E6E8207515010019D061 /* Paths.swift */,
 				7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */,
-				7B10D8AE2140161800638C06 /* Connection.swift */,
 			);
 			path = IndoorNavi;
 			sourceTree = "<group>";
@@ -11690,7 +11690,7 @@
 				7B560E9D2099C2B60055F42E /* INInfoWindow.swift in Sources */,
 				7B9ABA3320820B6A00A8849F /* WebViewScrollViewDelegate.swift in Sources */,
 				7B75CD6C2133CF70002598AB /* INCircle.swift in Sources */,
-				7B10D8AF2140161800638C06 /* Connection.swift in Sources */,
+				7B10D8AF2140161800638C06 /* DeviceDataManager.swift in Sources */,
 				7B5F039F20972F0900D112F6 /* ColorHelper.swift in Sources */,
 				7BB78B3C20A1CF5C0087BFEC /* PromisesController.swift in Sources */,
 				7BCB74B920BE70C7006386D1 /* TimeIntervalExtension.swift in Sources */,

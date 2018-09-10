@@ -1,5 +1,5 @@
 //
-//  Connection.swift
+//  DeviceDataManager.swift
 //  IndoorNavi
 //
 //  Created by Michał Pastwa on 05.09.2018.
@@ -7,7 +7,7 @@
 //
 
 /// A Connection class is responsible for communication with backend server.
-public class Connection {
+public class DeviceDataManager {
     
     fileprivate struct WebRoutes {
         static let Auth = "/auth"
@@ -31,7 +31,7 @@ public class Connection {
     /// Registers device on the backend server with a `userData`. If successful, ID of the device is returned in response.
     ///
     ///   - Parameter userData: User data describing the device.
-    ///   - Parameter completionHandler: The completion handler to call when the load request is complete. This completion handler takes the following parameters:
+    ///   - Parameter completionHandler: The completion handler to call when the request is complete. This completion handler takes the following parameters:
     ///   - Parameter id: ID of the device in database.
     ///   - Parameter error: An error object that in dicates why the request failed, or nil if the request was successful.
     public func registerDevice(withUserData userData: String, completionHandler: @escaping ((_ id: Int?, _ error: Error?) -> Void)) {
@@ -50,6 +50,15 @@ public class Connection {
         }
     }
     
+    /// Sends `coordinates` registered by the device specified with `deviceID` with specific `date`, on map with ID specified by `floorID`.
+    ///
+    /// - Parameters:
+    ///   - coordinates: Array of points representing position of the device.
+    ///   - date: Time when position data was gathered.
+    ///   - floorID: ID of the current map.
+    ///   - deviceID: ID of the device in database, returned after registration.
+    ///   - completionHandler: The `Optional` completion handler to call when the request is complete. This completion handler takes the following parameters:
+    ///   - error: An error object that in dicates why the request failed, or nil if the request was successful.
     public func send(_ coordinates: [CGPoint], date: Date, floorID: Int, deviceID: Int, completionHandler: ((_ error: Error?) -> Void)? = nil) {
         if let request = getCoordinatesRequest(withCoordinates: coordinates, date: date, floorID: floorID, devieID: deviceID) {
             URLSession.shared.dataTask(with: request) { (data, response, error) in
