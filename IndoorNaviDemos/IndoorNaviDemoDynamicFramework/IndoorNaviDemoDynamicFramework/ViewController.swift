@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     var marker: INMarker!
     var infoWindow: INInfoWindow!
     var deviceID: Int?
-    let connection = Connection(targetHost: BackendTargetHost, apiKey: ApiKey)
+    let deviceDataManager = DeviceDataManager(targetHost: BackendTargetHost, apiKey: ApiKey)
     
     let points1: [INPoint] = [INPoint(x: 480, y: 480), INPoint(x: 1220, y: 480), INPoint(x: 1220, y: 1220), INPoint(x: 480, y: 1220), INPoint(x: 750, y: 750)]
     let points2: [INPoint] = [INPoint(x: 2000, y: 2000), INPoint(x: 2500, y: 2000), INPoint(x: 3000, y: 2000), INPoint(x: 3000, y: 1500), INPoint(x: 2500, y: 1500)]
@@ -53,7 +53,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func registerPhone(_ sender: Any) {
-        connection.registerDevice(withUserData: "ABCD") { id, error in
+        deviceDataManager.registerDevice(withUserData: "ABCD") { id, error in
             self.deviceID = id
             print("ID: \(id != nil ? String(describing: id!) : "nil")")
         }
@@ -87,7 +87,7 @@ class ViewController: UIViewController {
     
     @IBAction func sendCoordinates(_ sender: Any) {
         if let deviceID = deviceID {
-            connection.send([CGPoint(x: 500, y: 500)], date: Date(), floorID: 2, deviceID: deviceID) { error in
+            deviceDataManager.send([CGPoint(x: 500, y: 500)], date: Date(), floorID: 2, deviceID: deviceID) { error in
                 print("Error: \(String(describing: error?.localizedDescription))")
             }
         }
