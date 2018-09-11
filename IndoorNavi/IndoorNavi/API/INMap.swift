@@ -257,14 +257,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         evaluateScriptsAfterInitialization()
     }
     
-    internal func evaluate(javaScriptString string: String) {
-        evaluate(javaScriptString: string) { response, error in
-            print("Error: \(String(describing: error?.localizedDescription))")
-            print("Response: \(String(describing: response))")
-        }
-    }
-    
-    internal func evaluate(javaScriptString string: String, completionHandler: @escaping (Any?, Error?) -> Void) {
+    internal func evaluate(javaScriptString string: String, completionHandler: ((Any?, Error?) -> Void)? = nil ) {
         if initializedInJavaScript {
             print("Evaluating script: \(string)")
             webView.evaluateJavaScript(string, completionHandler: completionHandler)

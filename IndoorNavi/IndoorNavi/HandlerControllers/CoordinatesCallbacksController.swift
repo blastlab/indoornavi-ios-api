@@ -15,8 +15,6 @@ class CoordinatesCallbacksController: NSObject, WKScriptMessageHandler {
     var coordinatesCallbacks = [String: ([Coordinates]) -> Void]()
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print("Received coordinates callback with body: \(message.body)")
-        
         if let dictionary = message.body as? [String: Any] {
             if let uuid = dictionary["uuid"] as? String, let response = dictionary["response"] {
                 receivedMessage(withUUID: uuid, andJSONObject: response)
