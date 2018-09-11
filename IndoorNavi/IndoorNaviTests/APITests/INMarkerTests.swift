@@ -11,13 +11,10 @@ import XCTest
 
 class INMarkerTests: XCTestCase {
     
-    let FrontendTargetHost = "http://172.16.170.6:4200"
-    let ApiKey = "TestAdmin"
-    
     var map: INMap!
     
     override func setUp() {
-        map = INMap(frame: CGRect.zero, targetHost: FrontendTargetHost, apiKey: ApiKey)
+        map = INMap(frame: CGRect.zero, targetHost: Constants.FrontendTargetHost, apiKey: Constants.ApiKey)
     }
     
     override func tearDown() {
@@ -27,7 +24,7 @@ class INMarkerTests: XCTestCase {
     func testMarkerInit() {
         let markerInitPromise = expectation(description: "Marker initialized")
         
-        map.load(2) {
+        map.load(Constants.FloorID) {
             let marker = INMarker(withMap: self.map)
             
             marker.position = INPoint(x: 480, y: 480)
