@@ -259,7 +259,6 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     
     internal func evaluate(javaScriptString string: String, completionHandler: ((Any?, Error?) -> Void)? = nil ) {
         if initializedInJavaScript {
-            print("Evaluating script: \(string)")
             webView.evaluateJavaScript(string, completionHandler: completionHandler)
         } else {
             scriptsToEvaluateAfterInitialization.append(string)
