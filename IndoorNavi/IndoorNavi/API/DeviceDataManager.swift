@@ -6,7 +6,7 @@
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
-/// A Connection class is responsible for communication with backend server.
+/// A DeviceDataManager class is responsible for communication with backend server.
 public class DeviceDataManager {
     
     fileprivate struct WebRoutes {
@@ -18,7 +18,7 @@ public class DeviceDataManager {
     private var targetHost: String
     private var apiKey: String
     
-    /// Initializes a new `Connection` object with the provided parameters to communicate with backend server.
+    /// Initializes a new `DeviceDataManager` object with the provided parameters to communicate with backend server.
     ///
     /// - Parameters:
     ///   - targetHost: Address to the backend server.
@@ -101,10 +101,10 @@ public class DeviceDataManager {
     }
     
     private func dateString(fromDate date: Date) -> String {
-        let RFC3339DateFormatter = DateFormatter()
-        RFC3339DateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        RFC3339DateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-        let dateString = RFC3339DateFormatter.string(from: date)
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        let dateString = dateFormatter.string(from: date)
         return dateString
     }
     
