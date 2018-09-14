@@ -10,7 +10,8 @@ import UIKit
 import CoreLocation
 
 let ReceiverHeight = 1.2
-let n = 2.1
+let n = 2.0
+let maxStep = 2.0
 
 struct INBeacon {
     var beacon: CLBeacon
@@ -46,7 +47,12 @@ public protocol BLELocationManagerDelegate {
 public class BLELocationManager: NSObject {
     
     public var delegate: BLELocationManagerDelegate?
+    public var maxStepEnabled = false
+    public var useCLBeaconAccuracy = false
+    
     private var beaconManager: BeaconManager
+    private var lastPosition: INLocation?
+    private var lastPositions = [INLocation]()
     
     public init(beaconUUID: UUID, configurations: [INBeaconConfiguration], delegate: BLELocationManagerDelegate? = nil) {
         beaconManager = BeaconManager(configurations: configurations, beaconUUID: beaconUUID)
@@ -170,6 +176,10 @@ public class BLELocationManager: NSObject {
     }
     
     private func distance(fromBeacon beacon: INBeacon) -> Double {
+        if useCLBeaconAccuracy {
+            return beacon.beacon.accuracy
+        }
+        
         let rssi = Double(beacon.beacon.rssi)
         let oneMeterRSSI = Double(beacon.configuration.txPower)
         let distance = pow(10.0, (oneMeterRSSI - rssi) / (10.0 * n) )
@@ -202,10 +212,56 @@ public class BLELocationManager: NSObject {
     }
 }
 
+extension BLELocationManager {
+    
+    func getPositionMaxStep(withBeacons beacons: [INBeacon]) -> INLocation? {
+        let position = getCurrentLocation(withBeacons: beacons)
+        
+        guard lastPosition != nil else {
+            if let position = position {
+                lastPositions.append(position)
+            }
+            
+            if lastPositions.count == 5 {
+                let x = lastPositions.map({ $0.x }).reduce(0, +) / Double(lastPositions.count)
+                let y = lastPositions.map({ $0.y }).reduce(0, +) / Double(lastPositions.count)
+                lastPosition = INLocation(x: x, y: y)
+                lastPositions.removeAll()
+            }
+            
+            return nil
+        }
+        
+        let newPosition: INLocation?
+        if let last = lastPosition, let position = position, getDistance(between: position, and: last) > maxStep {
+            newPosition = getPoint(nearLastPosition: last, inDirectionOfPoint: position)
+        } else {
+            newPosition = position
+        }
+        lastPosition = newPosition
+        
+        return newPosition
+    }
+    
+    private func getPoint(nearLastPosition position: INLocation, inDirectionOfPoint point: INLocation) -> INLocation {
+        let d = getDistance(between: position, and: point)
+        let dx = Double(point.x - position.x)
+        let dy = Double(point.y - position.y)
+        
+        let sin = dy/d
+        let cos = dx/d
+        
+        let x = Double(position.x) + cos*maxStep
+        let y = Double(position.y) + sin*maxStep
+        
+        return INLocation(x: x, y: y)
+    }
+}
+
 extension BLELocationManager: BeaconManagerDelegate {
     
     func didRange(beacons: [INBeacon]) {
-        if let location = getCurrentLocation(withBeacons: beacons) {
+        if let location = maxStepEnabled ? getPositionMaxStep(withBeacons: beacons) : getCurrentLocation(withBeacons: beacons) {
             delegate?.bleLocationManager(self, didUpdateLocation: location)
         }
     }

@@ -24,6 +24,7 @@ class ViewController: UIViewController {
     let points2: [INPoint] = [INPoint(x: 2000, y: 2000), INPoint(x: 2500, y: 2000), INPoint(x: 3000, y: 2000), INPoint(x: 3000, y: 1500), INPoint(x: 2500, y: 1500)]
     
     var circle: INCircle!
+    var bleLocationManager: BLELocationManager!
     
     var mapLoaded = false
     
@@ -33,10 +34,6 @@ class ViewController: UIViewController {
         map.setupConnection(withTargetHost: FrontendTargetHost, andApiKey: ApiKey)
         self.view.addSubview(map)
         
-//        let configurations = [INBeaconConfiguration(x: 7.49, y: 7.35, z: 1.80, txPower: -61, major: 52865, minor: 195),
-//                              INBeaconConfiguration(x: 0.74, y: 0.30, z: 1.80, txPower: -61, major: 51855, minor: 195),
-//                              INBeaconConfiguration(x: 12.60, y: 0.05, z: 1.80, txPower: -61, major: 33413, minor: 195),
-//                              INBeaconConfiguration(x: 11.20, y: 7.45, z: 1.80, txPower: -61, major: 54694, minor: 195)]
         let configurations = [INBeaconConfiguration(x: 24.45, y: 1.97, z: 3, txPower: -69, major: 65012, minor: 187),
                               INBeaconConfiguration(x: 29.91, y: 1.94, z: 3, txPower: -69, major: 65018, minor: 187),
                               INBeaconConfiguration(x: 24.6, y: 8.69, z: 3, txPower: -69, major: 65016, minor: 187),
@@ -56,8 +53,9 @@ class ViewController: UIViewController {
                               INBeaconConfiguration(x: 1.26, y: 22.88, z: 3, txPower: -69, major: 65006, minor: 187),
                               INBeaconConfiguration(x: 7, y: 23.22, z: 3, txPower: -69, major: 65009, minor: 187)]
         
-        let manager = BLELocationManager(beaconUUID: UUID(uuidString: BeaconUUID)!, configurations: configurations, delegate: self)
-        manager.startUpdatingLocation()
+        bleLocationManager = BLELocationManager(beaconUUID: UUID(uuidString: BeaconUUID)!, configurations: configurations, delegate: self)
+        bleLocationManager.useCLBeaconAccuracy = true
+        bleLocationManager.startUpdatingLocation()
     }
     
     func showAlert() {
