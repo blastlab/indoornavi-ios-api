@@ -19,7 +19,6 @@ class EventCallbacksController: NSObject, WKScriptMessageHandler {
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print("Received event with body: \(message.body)")
         if let uuid = message.body as? String {
             receivedMessage(withUUID: uuid)
         }

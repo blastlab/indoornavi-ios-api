@@ -105,8 +105,6 @@ public class INArea: INObject {
         let javaScriptString = String(format: ScriptTemplates.IsWithin, self.javaScriptVariableName, coordinatesString)
         ready {
             self.map.evaluate(javaScriptString: javaScriptString) { response, error in
-                print("Response: \(String(describing: response))")
-                print("Error: \(String(describing: error))")
                 
                 guard error == nil, response != nil else {
                     print("Error: \(String(describing: error))")

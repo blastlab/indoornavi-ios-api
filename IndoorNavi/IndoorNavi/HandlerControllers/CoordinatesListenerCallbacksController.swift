@@ -15,8 +15,6 @@ class CoordinatesEventListenerCallbacksController: NSObject, WKScriptMessageHand
     var coordinatesListenerCallbacks = [String: (Coordinates) -> Void]()
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print("Received area events callback with body: \(message.body)")
-        
         if let dictionary = message.body as? [String: Any], let uuid = dictionary["uuid"] as? String, let response = dictionary["response"] {
             receivedMessage(withUUID: uuid, andJSONObject: response)
         }

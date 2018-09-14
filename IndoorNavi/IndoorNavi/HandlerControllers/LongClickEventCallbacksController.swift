@@ -15,7 +15,6 @@ class LongClickEventCallbacksController: NSObject, WKScriptMessageHandler {
     var longClickEventCallbacks = [String: (INPoint) -> Void]()
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print("Received long click event callback with body: \(message.body)")
         if let dictionary = message.body as? [String: Any], let uuid = dictionary["uuid"] as? String, let response = dictionary["response"] {
             receivedMessage(withUUID: uuid, andJSONObject: response)
         }

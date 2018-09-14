@@ -15,7 +15,6 @@ class PromisesController: NSObject, WKScriptMessageHandler {
     var promises = [String: () -> Void]()
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print("Received promise event with body: \(message.body)")
         if let uuid = message.body as? String {
             receivedMessage(withUUID: uuid)
         }
