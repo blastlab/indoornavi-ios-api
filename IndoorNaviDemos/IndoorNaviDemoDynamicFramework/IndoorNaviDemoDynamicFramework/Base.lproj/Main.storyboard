@@ -91,11 +91,11 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LrI-fY-1iR">
                                 <rect key="frame" x="133" y="447" width="54" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="100 Poly">
+                                <state key="normal" title="Send">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="drawPolies:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LQP-zc-lJ6"/>
+                                    <action selector="sendCoordinates:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gbm-Zr-cnD"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4d-hU-V84">

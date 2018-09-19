@@ -9,15 +9,17 @@
 import UIKit
 import IndoorNavi
 
+let FrontendTargetHost = "http://172.16.170.33:4200"
+let BackendTargetHost = "http://172.16.170.33:90"
+let ApiKey = "TestAdmin"
+
 class ViewController: UIViewController {
-    
-    let FrontendTargetHost = "http://172.16.170.6:4200"
-    let BackendTargetHost = "http://192.168.1.51:90"//"http://172.16.170.6:90"
-    let ApiKey = "TestAdmin"
     
     @IBOutlet weak var map: INMap!
     var marker: INMarker!
     var infoWindow: INInfoWindow!
+    var deviceID: Int?
+    let deviceDataManager = DeviceDataManager(targetHost: BackendTargetHost, apiKey: ApiKey)
     
     let points1: [INPoint] = [INPoint(x: 480, y: 480), INPoint(x: 1220, y: 480), INPoint(x: 1220, y: 1220), INPoint(x: 480, y: 1220), INPoint(x: 750, y: 750)]
     let points2: [INPoint] = [INPoint(x: 2000, y: 2000), INPoint(x: 2500, y: 2000), INPoint(x: 3000, y: 2000), INPoint(x: 3000, y: 1500), INPoint(x: 2500, y: 1500)]
@@ -51,8 +53,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func registerPhone(_ sender: Any) {
-        let connection = Connection(targetHost: BackendTargetHost, apiKey: ApiKey)
-        connection.registerDevice(withUserData: "ABCD") { id, error in
+        deviceDataManager.registerDevice(withUserData: "ABCD") { id, error in
+            self.deviceID = id
             print("ID: \(id != nil ? String(describing: id!) : "nil")")
         }
     }
@@ -83,27 +85,11 @@ class ViewController: UIViewController {
         print("infoWindow id \(String(describing: infoWindow.objectID))")
     }
     
-    @IBAction func drawPolies(_ sender: Any) {
-        
-        var polylines = [INPolyline]()
-        for _ in 1...100 {
-            let polyline = INPolyline(withMap: map)
-            
-            var points = [INPoint]()
-            for _ in 1...10 {
-                points.append(INPoint(x: Int32(arc4random_uniform(2000) + 5), y: Int32(arc4random_uniform(2000) + 5)))
+    @IBAction func sendCoordinates(_ sender: Any) {
+        if let deviceID = deviceID {
+            deviceDataManager.send([CGPoint(x: 500, y: 500)], date: Date(), floorID: 2, deviceID: deviceID) { error in
+                print("Error: \(String(describing: error?.localizedDescription))")
             }
-            
-            let randomRed = CGFloat(arc4random()) / CGFloat(UInt32.max)
-            let randomGreen = CGFloat(arc4random()) / CGFloat(UInt32.max)
-            let randomBlue = CGFloat(arc4random()) / CGFloat(UInt32.max)
-            
-            polyline.points = points
-            polyline.color = UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
-            polyline.draw()
-            polylines.append(polyline)
-            usleep(10000)
-            
         }
     }
     

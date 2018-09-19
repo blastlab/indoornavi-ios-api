@@ -10,14 +10,11 @@ import XCTest
 @testable import IndoorNavi
 
 class INCircleTests: XCTestCase {
-
-    let FrontendTargetHost = "http://172.16.170.6:4200"
-    let ApiKey = "TestAdmin"
     
     var map: INMap!
     
     override func setUp() {
-        map = INMap(frame: CGRect.zero, targetHost: FrontendTargetHost, apiKey: ApiKey)
+        map = INMap(frame: CGRect.zero, targetHost: Constants.FrontendTargetHost, apiKey: Constants.ApiKey)
     }
     
     override func tearDown() {
@@ -27,7 +24,7 @@ class INCircleTests: XCTestCase {
     func testCircleInit() {
         let circleInitPromise = expectation(description: "Marker initialized")
         
-        map.load(2) {
+        map.load(Constants.FloorID) {
             let circle = INCircle(withMap: self.map)
             
             circle.position = INPoint(x: 480, y: 480)
