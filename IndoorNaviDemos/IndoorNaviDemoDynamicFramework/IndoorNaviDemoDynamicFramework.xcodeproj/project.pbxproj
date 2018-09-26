@@ -13,8 +13,8 @@
 		7B59DA27207CC7100021C33D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B59DA26207CC7100021C33D /* Assets.xcassets */; };
 		7B59DA2A207CC7100021C33D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B59DA28207CC7100021C33D /* LaunchScreen.storyboard */; };
 		7B73B97F20D2B23E00154507 /* ObjectiveCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B73B97E20D2B23E00154507 /* ObjectiveCViewController.m */; };
-		7B9DA82F213EB9CF0005ED2A /* IndoorNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B9DA82E213EB9CF0005ED2A /* IndoorNavi.framework */; };
-		7B9DA830213EB9CF0005ED2A /* IndoorNavi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B9DA82E213EB9CF0005ED2A /* IndoorNavi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7B866E40215BDDFE00607BDD /* IndoorNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B866E3F215BDDFE00607BDD /* IndoorNavi.framework */; };
+		7B866E41215BDDFE00607BDD /* IndoorNavi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B866E3F215BDDFE00607BDD /* IndoorNavi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7BBEB6622154F9EA00A4A0D3 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBEB6612154F9EA00A4A0D3 /* MenuViewController.swift */; };
 		7BF035952158E7DE00A88E44 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF035942158E7DE00A88E44 /* MenuTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -26,7 +26,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7B8392172146733300BC4448 /* IndoorNavi.framework in Embed Frameworks */,
+				7B866E41215BDDFE00607BDD /* IndoorNavi.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -44,7 +44,7 @@
 		7B73B97C20D2B23D00154507 /* IndoorNaviDemoDynamicFramework-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IndoorNaviDemoDynamicFramework-Bridging-Header.h"; sourceTree = "<group>"; };
 		7B73B97D20D2B23E00154507 /* ObjectiveCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectiveCViewController.h; sourceTree = "<group>"; };
 		7B73B97E20D2B23E00154507 /* ObjectiveCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectiveCViewController.m; sourceTree = "<group>"; };
-		7B9DA82E213EB9CF0005ED2A /* IndoorNavi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IndoorNavi.framework; path = "../../IndoorNavi/Output/IndoorNavi-Debug-iphoneuniversal/IndoorNavi.framework"; sourceTree = "<group>"; };
+		7B866E3F215BDDFE00607BDD /* IndoorNavi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = IndoorNavi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BBEB6612154F9EA00A4A0D3 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		7BF035942158E7DE00A88E44 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -54,7 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B8392162146733300BC4448 /* IndoorNavi.framework in Frameworks */,
+				7B866E40215BDDFE00607BDD /* IndoorNavi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,7 +64,7 @@
 		7B59DA13207CC7090021C33D = {
 			isa = PBXGroup;
 			children = (
-				7B8392152146733300BC4448 /* IndoorNavi.framework */,
+				7B866E3F215BDDFE00607BDD /* IndoorNavi.framework */,
 				7B59DA1E207CC7090021C33D /* IndoorNaviDemoDynamicFramework */,
 				7B59DA1D207CC7090021C33D /* Products */,
 			);
