@@ -106,14 +106,14 @@ class MapViewController: UIViewController {
         report.getAreaEvents(fromFloorWithID: 2, from: Date(timeIntervalSince1970: 1428105600), to: Date()) { areaEvents in
             print("Area events: ", areaEvents)
         }
-        
+
         report.getCoordinates(fromFloorWithID: 2, from: Date(timeIntervalSince1970: 1428105600), to: Date()) { coordinates in
             print("Coordinates: ", coordinates)
         }
     }
     
     func load() {
-        map.load(1) {
+        map.load(6) {
             self.circle = INCircle(withMap: self.map)
             self.circle.radius = 10
             self.circle.border = INCircle.Border(width: 5, color: .blue)

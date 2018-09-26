@@ -39,10 +39,10 @@ class MenuViewController: UITableViewController {
         return cell
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationvc = segue.destination
-        if let mapvc = destinationvc.contentViewController as? MapViewController, let row = tableView.indexPathForSelectedRow?.row {
-            mapvc.didSelect(optionWithNumber: row)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if let mapvc = self.splitViewController?.viewControllers[1].contentViewController as? MapViewController {
+            mapvc.didSelect(optionWithNumber: indexPath.row)
         }
     }
 }
