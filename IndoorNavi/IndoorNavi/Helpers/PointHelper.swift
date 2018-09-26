@@ -8,6 +8,11 @@
 
 class PointHelper {
     
+    static func pointDictionary(fromPoint point: CGPoint) -> [String: CGFloat] {
+        let pointDictionary = ["x": point.x, "y": point.y]
+        return pointDictionary
+    }
+    
     static func pointsString(fromCoordinatesArray coordinatesArray: [INPoint]) -> String {
         let coordinatesStrings = coordinatesArray.map { "{x: \($0.x), y: \($0.y)}" }
         let coordinatesArrayString = "[" + coordinatesStrings.joined(separator: ",") + "]"

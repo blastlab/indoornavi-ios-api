@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		7B10D8AF2140161800638C06 /* DeviceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10D8AE2140161800638C06 /* DeviceDataManager.swift */; };
 		7B2F3EB420E527E9006D98B4 /* CoordinatesHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2F3EB320E527E9006D98B4 /* CoordinatesHelperTests.swift */; };
 		7B46979120A095D200D6A22B /* INReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B46979020A095D200D6A22B /* INReport.swift */; };
 		7B46979320A0A2B400D6A22B /* AreaEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B46979220A0A2B400D6A22B /* AreaEvent.swift */; };
@@ -41,6 +42,8 @@
 		7B75CD6C2133CF70002598AB /* INCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B75CD6B2133CF70002598AB /* INCircle.swift */; };
 		7B77E6E9207515010019D061 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B77E6E8207515010019D061 /* Paths.swift */; };
 		7B7FD56820936CE200AD409C /* INArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7FD56720936CE200AD409C /* INArea.swift */; };
+		7B83921A2147963A00BC4448 /* DeviceDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8392192147963A00BC4448 /* DeviceDataManagerTests.swift */; };
+		7B83921C21479EB300BC4448 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B83921B21479EB300BC4448 /* Constants.swift */; };
 		7B8570BF20E0DBD400295D00 /* INPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8570BE20E0DBD400295D00 /* INPoint.swift */; };
 		7B8570C120E0E51600295D00 /* ColorHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8570C020E0E51600295D00 /* ColorHelperTests.swift */; };
 		7B8570C320E0F0AA00295D00 /* AreaEventsHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8570C220E0F0AA00295D00 /* AreaEventsHelperTests.swift */; };
@@ -82,6 +85,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B10D8AE2140161800638C06 /* DeviceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDataManager.swift; sourceTree = "<group>"; };
 		7B2F3EB320E527E9006D98B4 /* CoordinatesHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesHelperTests.swift; sourceTree = "<group>"; };
 		7B46979020A095D200D6A22B /* INReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INReport.swift; sourceTree = "<group>"; };
 		7B46979220A0A2B400D6A22B /* AreaEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaEvent.swift; sourceTree = "<group>"; };
@@ -4268,6 +4272,8 @@
 		7B75CD6B2133CF70002598AB /* INCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INCircle.swift; sourceTree = "<group>"; };
 		7B77E6E8207515010019D061 /* Paths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paths.swift; sourceTree = "<group>"; };
 		7B7FD56720936CE200AD409C /* INArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INArea.swift; sourceTree = "<group>"; };
+		7B8392192147963A00BC4448 /* DeviceDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDataManagerTests.swift; sourceTree = "<group>"; };
+		7B83921B21479EB300BC4448 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7B8570BE20E0DBD400295D00 /* INPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INPoint.swift; sourceTree = "<group>"; };
 		7B8570C020E0E51600295D00 /* ColorHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelperTests.swift; sourceTree = "<group>"; };
 		7B8570C220E0F0AA00295D00 /* AreaEventsHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaEventsHelperTests.swift; sourceTree = "<group>"; };
@@ -4322,6 +4328,7 @@
 		7B560E9B2099C2510055F42E /* API */ = {
 			isa = PBXGroup;
 			children = (
+				7B10D8AE2140161800638C06 /* DeviceDataManager.swift */,
 				7BD4679C206CF59500B9F2AD /* INMap.swift */,
 				7B6948BA20863F1400E22BD9 /* INPolyline.swift */,
 				7B666AF32088D3A60031780A /* INObject.swift */,
@@ -11532,6 +11539,7 @@
 		7BD46771206CF34A00B9F2AD /* IndoorNaviTests */ = {
 			isa = PBXGroup;
 			children = (
+				7B83921B21479EB300BC4448 /* Constants.swift */,
 				7BEFEC0220F34C8F00A55FCC /* HelpersTests */,
 				7BEFEC0320F34C9F00A55FCC /* APITests */,
 				7BD46774206CF34A00B9F2AD /* Info.plist */,
@@ -11554,6 +11562,7 @@
 		7BEFEC0320F34C9F00A55FCC /* APITests */ = {
 			isa = PBXGroup;
 			children = (
+				7B8392192147963A00BC4448 /* DeviceDataManagerTests.swift */,
 				7BEFEBEE20EB5B2B00A55FCC /* INPolylineTests.swift */,
 				7BEFEBF020EB738D00A55FCC /* INAreaTests.swift */,
 				7BEFEBF420EBA4E000A55FCC /* INMapTests.swift */,
@@ -11704,6 +11713,7 @@
 				7B560E9D2099C2B60055F42E /* INInfoWindow.swift in Sources */,
 				7B9ABA3320820B6A00A8849F /* WebViewScrollViewDelegate.swift in Sources */,
 				7B75CD6C2133CF70002598AB /* INCircle.swift in Sources */,
+				7B10D8AF2140161800638C06 /* DeviceDataManager.swift in Sources */,
 				7B5F039F20972F0900D112F6 /* ColorHelper.swift in Sources */,
 				7BB78B3C20A1CF5C0087BFEC /* PromisesController.swift in Sources */,
 				7BCB74B920BE70C7006386D1 /* TimeIntervalExtension.swift in Sources */,
@@ -11747,7 +11757,9 @@
 				7BEFEBF520EBA4E000A55FCC /* INMapTests.swift in Sources */,
 				7B2F3EB420E527E9006D98B4 /* CoordinatesHelperTests.swift in Sources */,
 				7BD46773206CF34A00B9F2AD /* PointHelperTests.swift in Sources */,
+				7B83921A2147963A00BC4448 /* DeviceDataManagerTests.swift in Sources */,
 				7BEFEBF920EBA84900A55FCC /* INInfoWindowTests.swift in Sources */,
+				7B83921C21479EB300BC4448 /* Constants.swift in Sources */,
 				7BEFEBF120EB738D00A55FCC /* INAreaTests.swift in Sources */,
 				7B8570C120E0E51600295D00 /* ColorHelperTests.swift in Sources */,
 			);

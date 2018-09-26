@@ -11,13 +11,10 @@ import XCTest
 
 class INMapTests: XCTestCase {
     
-    let FrontendTargetHost = "http://172.16.170.6:4200"
-    let ApiKey = "TestAdmin"
-    
     var map: INMap!
     
     override func setUp() {
-        map = INMap(frame: CGRect.zero, targetHost: FrontendTargetHost, apiKey: ApiKey)
+        map = INMap(frame: CGRect.zero, targetHost: Constants.FrontendTargetHost, apiKey: Constants.ApiKey)
     }
 
     override func tearDown() {
@@ -28,7 +25,7 @@ class INMapTests: XCTestCase {
         let loadMapPromise = expectation(description: "Map with ID 2 loaded.")
         let scaleExpectation = expectation(description: "Scale downloaded.")
         
-        map.load(2) {
+        map.load(Constants.FloorID) {
             loadMapPromise.fulfill()
             
             Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
