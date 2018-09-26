@@ -8,13 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		7B59DA20207CC7090021C33D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59DA1F207CC7090021C33D /* AppDelegate.swift */; };
-		7B59DA22207CC7090021C33D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59DA21207CC7090021C33D /* ViewController.swift */; };
+		7B59DA22207CC7090021C33D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59DA21207CC7090021C33D /* MapViewController.swift */; };
 		7B59DA25207CC7090021C33D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B59DA23207CC7090021C33D /* Main.storyboard */; };
 		7B59DA27207CC7100021C33D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B59DA26207CC7100021C33D /* Assets.xcassets */; };
 		7B59DA2A207CC7100021C33D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B59DA28207CC7100021C33D /* LaunchScreen.storyboard */; };
 		7B73B97F20D2B23E00154507 /* ObjectiveCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B73B97E20D2B23E00154507 /* ObjectiveCViewController.m */; };
 		7B9DA82F213EB9CF0005ED2A /* IndoorNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B9DA82E213EB9CF0005ED2A /* IndoorNavi.framework */; };
 		7B9DA830213EB9CF0005ED2A /* IndoorNavi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B9DA82E213EB9CF0005ED2A /* IndoorNavi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7BBEB6622154F9EA00A4A0D3 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBEB6612154F9EA00A4A0D3 /* MenuViewController.swift */; };
+		7BF035952158E7DE00A88E44 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF035942158E7DE00A88E44 /* MenuTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,7 +36,7 @@
 /* Begin PBXFileReference section */
 		7B59DA1C207CC7090021C33D /* IndoorNaviDemoDynamicFramework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IndoorNaviDemoDynamicFramework.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B59DA1F207CC7090021C33D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7B59DA21207CC7090021C33D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7B59DA21207CC7090021C33D /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		7B59DA24207CC7090021C33D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7B59DA26207CC7100021C33D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B59DA29207CC7100021C33D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -43,6 +45,8 @@
 		7B73B97D20D2B23E00154507 /* ObjectiveCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectiveCViewController.h; sourceTree = "<group>"; };
 		7B73B97E20D2B23E00154507 /* ObjectiveCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectiveCViewController.m; sourceTree = "<group>"; };
 		7B9DA82E213EB9CF0005ED2A /* IndoorNavi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IndoorNavi.framework; path = "../../IndoorNavi/Output/IndoorNavi-Debug-iphoneuniversal/IndoorNavi.framework"; sourceTree = "<group>"; };
+		7BBEB6612154F9EA00A4A0D3 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		7BF035942158E7DE00A88E44 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +82,8 @@
 			isa = PBXGroup;
 			children = (
 				7B59DA1F207CC7090021C33D /* AppDelegate.swift */,
-				7B59DA21207CC7090021C33D /* ViewController.swift */,
+				7BBEB6612154F9EA00A4A0D3 /* MenuViewController.swift */,
+				7B59DA21207CC7090021C33D /* MapViewController.swift */,
 				7B59DA23207CC7090021C33D /* Main.storyboard */,
 				7B59DA26207CC7100021C33D /* Assets.xcassets */,
 				7B59DA28207CC7100021C33D /* LaunchScreen.storyboard */,
@@ -86,6 +91,7 @@
 				7B73B97D20D2B23E00154507 /* ObjectiveCViewController.h */,
 				7B73B97E20D2B23E00154507 /* ObjectiveCViewController.m */,
 				7B73B97C20D2B23D00154507 /* IndoorNaviDemoDynamicFramework-Bridging-Header.h */,
+				7BF035942158E7DE00A88E44 /* MenuTableViewCell.swift */,
 			);
 			path = IndoorNaviDemoDynamicFramework;
 			sourceTree = "<group>";
@@ -163,9 +169,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B59DA22207CC7090021C33D /* ViewController.swift in Sources */,
+				7B59DA22207CC7090021C33D /* MapViewController.swift in Sources */,
 				7B59DA20207CC7090021C33D /* AppDelegate.swift in Sources */,
 				7B73B97F20D2B23E00154507 /* ObjectiveCViewController.m in Sources */,
+				7BBEB6622154F9EA00A4A0D3 /* MenuViewController.swift in Sources */,
+				7BF035952158E7DE00A88E44 /* MenuTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

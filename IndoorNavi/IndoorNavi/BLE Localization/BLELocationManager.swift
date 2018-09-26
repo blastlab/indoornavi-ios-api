@@ -9,10 +9,6 @@
 import UIKit
 import CoreLocation
 
-let ReceiverHeight = 1.2
-let n = 2.0
-let maxStep = 2.0
-
 struct INBeacon {
     var beacon: CLBeacon
     var configuration: INBeaconConfiguration
@@ -49,6 +45,9 @@ public class BLELocationManager: NSObject {
     public var delegate: BLELocationManagerDelegate?
     public var maxStepEnabled = false
     public var useCLBeaconAccuracy = false
+    public var receiverHeight = 1.2
+    public var maxStep = 2.0
+    public var n = 2.0
     
     private var beaconManager: BeaconManager
     private var lastPosition: INLocation?
@@ -207,7 +206,7 @@ public class BLELocationManager: NSObject {
     }
     
     private func distanceOnPlane(fromRealDistance realDistance: Double, fromBeaconOnHeight height: Double) -> Double {
-        let planeDistance = sqrt(fabs(pow(realDistance, 2) - pow(height - ReceiverHeight, 2)))
+        let planeDistance = sqrt(fabs(pow(realDistance, 2) - pow(height - receiverHeight, 2)))
         return planeDistance
     }
 }
