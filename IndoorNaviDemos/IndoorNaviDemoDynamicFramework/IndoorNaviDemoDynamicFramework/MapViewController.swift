@@ -53,7 +53,6 @@ class MapViewController: UIViewController {
         
         map.setupConnection(withTargetHost: FrontendTargetHost, andApiKey: ApiKey)
         load()
-//        self.view.addSubview(map)
     }
     
     func startLocalization() {
@@ -64,6 +63,12 @@ class MapViewController: UIViewController {
     
     func showAlert() {
         let alert = UIAlertController(title: "ALERT!", message: "Marker touched!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showMapNotLoadedAlert() {
+        let alert = UIAlertController(title: "Error", message: "Map is not ready yet.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
@@ -134,6 +139,11 @@ class MapViewController: UIViewController {
     }
     
     func didSelect(optionWithNumber optionNumber: Int) {
+        guard mapLoaded else {
+            showMapNotLoadedAlert()
+            return
+        }
+        
         switch optionNumber {
         case 0:
             drawArea()

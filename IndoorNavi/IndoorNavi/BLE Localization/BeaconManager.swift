@@ -28,7 +28,6 @@ class BeaconManager: NSObject {
         beaconRegion = CLBeaconRegion(proximityUUID: beaconUUID, identifier: BeaconIdentifier)
         super.init()
         locationManager.delegate = self
-//        locationManager.requestWhenInUseAuthorization()
     }
     
     private var locationManager = CLLocationManager()
@@ -36,6 +35,11 @@ class BeaconManager: NSObject {
     
     func startScanning() {
         locationManager.startMonitoring(for: beaconRegion)
+    }
+    
+    func stopScanning() {
+        locationManager.stopRangingBeacons(in: beaconRegion)
+        locationManager.stopMonitoring(for: beaconRegion)
     }
     
     private func inBeacons(fromCLBeacons beacons: [CLBeacon]) -> [INBeacon] {
@@ -85,7 +89,6 @@ extension BeaconManager: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
-        print("Did start monitoring for region \(region.identifier)")
         manager.startRangingBeacons(in: beaconRegion)
     }
     

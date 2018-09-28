@@ -289,6 +289,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Menu" id="uUS-rj-fh4"/>
+                    <connections>
+                        <segue destination="iFS-33-Eaz" kind="showDetail" identifier="ShowMap" id="aqB-OL-o67"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F6m-OF-JyJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -316,4 +319,7 @@
             <point key="canvasLocation" x="1547.4609375" y="456.25"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="aqB-OL-o67"/>
+    </inferredMetricsTieBreakers>
 </document>

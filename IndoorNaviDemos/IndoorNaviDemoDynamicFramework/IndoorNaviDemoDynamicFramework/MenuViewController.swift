@@ -14,6 +14,8 @@ fileprivate let Titles = ["Draw area", "Draw info window", "Locate", "Place mark
 
 class MenuViewController: UITableViewController {
     
+    var mapvc: MapViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
@@ -41,10 +43,24 @@ class MenuViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if let mapvc = self.splitViewController?.viewControllers[1].contentViewController as? MapViewController {
+        
+        if self.splitViewController?.viewControllers.count == 2, let mapvc = self.splitViewController?.viewControllers[1].contentViewController as? MapViewController {
             mapvc.didSelect(optionWithNumber: indexPath.row)
+        } else if let mapvc = mapvc {
+            mapvc.didSelect(optionWithNumber: indexPath.row)
+            show(mapvc, sender: self)
+        } else {
+            performSegue(withIdentifier: "ShowMap", sender: self)
         }
     }
+    
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "ShowMap", let mapvc = segue.destination.contentViewController as? MapViewController, let row = tableView.indexPathForSelectedRow?.row {
+//            mapvc.didSelect(optionWithNumber: row)
+//            self.mapvc = mapvc
+//        }
+//    }
 }
 
 extension UIViewController {

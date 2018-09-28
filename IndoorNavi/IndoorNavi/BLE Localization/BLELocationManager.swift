@@ -9,23 +9,42 @@
 import UIKit
 import CoreLocation
 
+/// Structure representing information about a detected iBeacon, its configuration and location.
 struct INBeacon {
+    /// Information about a detected iBeacon.
     var beacon: CLBeacon
+    /// Configuration of iBeacon, describing its coordinates, major, minor and txPower.
     var configuration: INBeaconConfiguration
-    
+    /// Location of iBeacon.
     var location: INLocation {
         return INLocation(x: configuration.x, y: configuration.y)
     }
 }
 
+/// Configuration of iBeacon, describing its coordinates, major, minor and txPower.
 public struct INBeaconConfiguration {
+    /// The x-coordinate of the iBeacon.
     var x: Double
+    /// The y-coordinate of the iBeacon.
     var y: Double
+    /// The z-coordinate of the iBeacon.
     var z: Double
+    /// The most significant value in the beacon.
     var major: Int
+    /// The least significant value in the beacon.
     var minor: Int
+    /// The one-meter RSSI level.
     var txPower: Int
     
+    /// Initializes a new `INBeaconConfiguration` with the provided parameters.
+    ///
+    /// - Parameters:
+    ///   - x: The x-coordinate of the iBeacon.
+    ///   - y: The y-coordinate of the iBeacon.
+    ///   - z: The z-coordinate of the iBeacon.
+    ///   - txPower: The one-meter RSSI level.
+    ///   - major: The most significant value in the beacon.
+    ///   - minor: The least significant value in the beacon.
     public init(x: Double, y: Double, z: Double, txPower: Int, major: Int, minor: Int) {
         self.x = x
         self.y = y
@@ -36,23 +55,42 @@ public struct INBeaconConfiguration {
     }
 }
 
+/// The methods that you use to receive events about current location.
 public protocol BLELocationManagerDelegate {
+    /// Tells the delegate that new location data is available.
+    ///
+    /// - Parameters:
+    ///   - manager: The object that you use to start and stop the delivery of location events to your app
+    ///   - location: The XY coordinates representing current location.
     func bleLocationManager(_ manager: BLELocationManager, didUpdateLocation location: INLocation)
 }
 
+/// The object that you use to start and stop the delivery of location events to your app based on iBeacons.
 public class BLELocationManager: NSObject {
     
+    /// The delegate object to receive update events.
     public var delegate: BLELocationManagerDelegate?
+    /// Boolean value specifying wether max step algorithm should be enabled.
     public var maxStepEnabled = false
+    /// Boolean value specifying wether distance should be obtained as `CLBeacon`'s accuracy or calculated.
     public var useCLBeaconAccuracy = false
+    /// Average receiver's height.
     public var receiverHeight = 1.2
+    /// If `maxStepEnabled` is `true`, this is the value of maximum step a reciver is able to make.
     public var maxStep = 2.0
+    /// A path-loss exponent that varies in value depending on the environment.
     public var n = 2.0
     
     private var beaconManager: BeaconManager
     private var lastPosition: INLocation?
     private var lastPositions = [INLocation]()
     
+    /// Initializes a new `BLELocationManager` with the provided parameters.
+    ///
+    /// - Parameters:
+    ///   - beaconUUID: The unique ID of the beacons being targeted.
+    ///   - configurations: Array of `INBeaconConfiguration`, specifying beacons to target. Only iBeacons specified in `configurations` will be considered.
+    ///   - delegate: The delegate object to receive update events.
     public init(beaconUUID: UUID, configurations: [INBeaconConfiguration], delegate: BLELocationManagerDelegate? = nil) {
         beaconManager = BeaconManager(configurations: configurations, beaconUUID: beaconUUID)
         self.delegate = delegate
@@ -60,8 +98,14 @@ public class BLELocationManager: NSObject {
         beaconManager.delegate = self
     }
     
+    /// Starts the generation of updates that report the user’s current location.
     public func startUpdatingLocation() {
         beaconManager.startScanning()
+    }
+    
+    /// Stops the generation of location updates.
+    public func stopUpdatingLocation() {
+        beaconManager.stopScanning()
     }
     
     private func getCurrentLocation(withBeacons beacons: [INBeacon]) -> INLocation? {
