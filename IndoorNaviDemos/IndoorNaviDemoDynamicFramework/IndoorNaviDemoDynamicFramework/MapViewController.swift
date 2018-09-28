@@ -12,7 +12,7 @@ import IndoorNavi
 class MapViewController: UIViewController {
     
     let FrontendTargetHost = "http://172.16.170.6:4200"
-    let BackendTargetHost = "http://172.16.170.6:90"
+    let BackendTargetHost = "http://172.16.170.50:90"
     let ApiKey = "TestAdmin"
     let BeaconUUID = "30FD7D40-2EDC-4D83-9D47-D88AA7E0492A"
     

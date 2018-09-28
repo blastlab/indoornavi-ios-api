@@ -32,7 +32,7 @@ public struct Complex {
         if let dictionary = jsonObject as? [String: Any] {
             let identifier = dictionary["id"] as? Int
             let name = dictionary["name"] as? String
-            let buildings = ComplexHelper.buildings(fromJSONObject:  dictionary["buildings"])
+            let buildings = ComplexHelper.buildings(fromJSONObject: dictionary["buildings"])
             
             if let identifier = identifier, let name = name{
                 self.init(identifier: identifier, name: name, buildings: buildings)
