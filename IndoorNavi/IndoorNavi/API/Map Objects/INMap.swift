@@ -22,6 +22,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         static let ToggleTagVisibility = "navi.toggleTagVisibility(%d);"
         static let AddAreaEventListener = "navi.addEventListener(Event.LISTENER.AREA, res => webkit.messageHandlers.AreaEventListenerCallbacksController.postMessage(%@));"
         static let AddCoordinatesEventListener = "navi.addEventListener(Event.LISTENER.COORDINATES, res => webkit.messageHandlers.CoordinatesEventListenerCallbacksController.postMessage(%@));"
+        static let GetComplexes = "navi.getComplexes(res => webkit.messageHandlers.ComplexesCallbacksController.postMessage(%@));"
     }
     
     fileprivate struct WebViewConfigurationScripts {
@@ -40,6 +41,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     var longClickEventCallbacksController = LongClickEventCallbacksController()
     var areaEventListenerCallbacksController = AreaEventListenerCallbacksController()
     var coordinatesEventListenerCallbacksController = CoordinatesEventListenerCallbacksController()
+    var complexesCallbacksController = ComplexesCallbacksController()
     
     private var webView: WKWebView!
     
@@ -86,8 +88,6 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         
         evaluate(javaScriptString: javaScriptString)
     }
-    
-    
     
     /// Initializes a new `INMap` object with the provided parameters to communicate with `INMap` frontend server.
     ///
@@ -170,6 +170,17 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
     }
     
+    /// Returns the list of complexes with all buildings and floors.
+    ///
+    /// - Parameter complexesCallbackHandler: A block to invoke when array of `Complex` is available.
+    public func getComplexes(withCallbackHandler complexesCallbackHandler: @escaping ([Complex]) -> Void) {
+        let uuid = UUID().uuidString
+        complexesCallbacksController.complexesCallbacks[uuid] = complexesCallbackHandler
+        let message = String(format: ScriptTemplates.Message, uuid)
+        let javaScriptString = String(format: ScriptTemplates.GetComplexes, message)
+        evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
+    }
+    
     @objc public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupWebView(withFrame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
@@ -232,6 +243,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         controller.add(longClickEventCallbacksController, name: LongClickEventCallbacksController.ControllerName)
         controller.add(areaEventListenerCallbacksController, name: AreaEventListenerCallbacksController.ControllerName)
         controller.add(coordinatesEventListenerCallbacksController, name: CoordinatesEventListenerCallbacksController.ControllerName)
+        controller.add(complexesCallbacksController, name: ComplexesCallbacksController.ControllerName)
         configuration.userContentController = controller
         
         return configuration

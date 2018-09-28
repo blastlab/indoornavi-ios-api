@@ -9,8 +9,8 @@
 import UIKit
 
 fileprivate let MenuItemCellIdentifier = "MenuItem"
-fileprivate let Images = ["area", "info", "localization", "marker", "polyline", "report"]
-fileprivate let Titles = ["Draw area", "Draw info window", "Locate", "Place marker", "Draw polyline", "Report"]
+fileprivate let Images = ["area", "info", "localization", "marker", "polyline", "report", "report"]
+fileprivate let Titles = ["Draw area", "Draw info window", "Locate", "Place marker", "Draw polyline", "Report", "Complexes"]
 
 class MenuViewController: UITableViewController {
     
@@ -28,7 +28,7 @@ class MenuViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let rowsCount = Images.count
+        let rowsCount = Titles.count
         return rowsCount
     }
     
@@ -53,7 +53,6 @@ class MenuViewController: UITableViewController {
             performSegue(withIdentifier: "ShowMap", sender: self)
         }
     }
-    
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        if segue.identifier == "ShowMap", let mapvc = segue.destination.contentViewController as? MapViewController, let row = tableView.indexPathForSelectedRow?.row {

@@ -11,8 +11,8 @@ import IndoorNavi
 
 class MapViewController: UIViewController {
     
-    let FrontendTargetHost = "http://172.16.170.20:4200"
-    let BackendTargetHost = "http://172.16.170.20:90"
+    let FrontendTargetHost = "http://172.16.170.6:4200"
+    let BackendTargetHost = "http://172.16.170.6:90"
     let ApiKey = "TestAdmin"
     let BeaconUUID = "30FD7D40-2EDC-4D83-9D47-D88AA7E0492A"
     
@@ -118,7 +118,7 @@ class MapViewController: UIViewController {
     }
     
     func load() {
-        map.load(6) {
+        map.load(2) {
             self.circle = INCircle(withMap: self.map)
             self.circle.radius = 10
             self.circle.border = INCircle.Border(width: 5, color: .blue)
@@ -138,11 +138,17 @@ class MapViewController: UIViewController {
         map.toggleTagVisibility(withID: 10999)
     }
     
-    func didSelect(optionWithNumber optionNumber: Int) {
-        guard mapLoaded else {
-            showMapNotLoadedAlert()
-            return
+    func getComplexes() {
+        map.getComplexes { complexes in
+            print("Complexes: \(complexes)")
         }
+    }
+    
+    func didSelect(optionWithNumber optionNumber: Int) {
+//        guard mapLoaded else {
+//            showMapNotLoadedAlert()
+//            return
+//        }
         
         switch optionNumber {
         case 0:
@@ -157,6 +163,8 @@ class MapViewController: UIViewController {
             drawPolyline1()
         case 5:
             createReport()
+        case 6:
+            getComplexes()
         default:
             return
         }

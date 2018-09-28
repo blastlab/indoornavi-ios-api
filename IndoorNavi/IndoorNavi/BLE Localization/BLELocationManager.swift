@@ -60,7 +60,7 @@ public protocol BLELocationManagerDelegate {
     /// Tells the delegate that new location data is available.
     ///
     /// - Parameters:
-    ///   - manager: The object that you use to start and stop the delivery of location events to your app
+    ///   - manager: The object that you use to start and stop the delivery of location events to your app.
     ///   - location: The XY coordinates representing current location.
     func bleLocationManager(_ manager: BLELocationManager, didUpdateLocation location: INLocation)
 }

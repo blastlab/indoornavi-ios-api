@@ -47,6 +47,11 @@
 		7B8570BF20E0DBD400295D00 /* INPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8570BE20E0DBD400295D00 /* INPoint.swift */; };
 		7B8570C120E0E51600295D00 /* ColorHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8570C020E0E51600295D00 /* ColorHelperTests.swift */; };
 		7B8570C320E0F0AA00295D00 /* AreaEventsHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8570C220E0F0AA00295D00 /* AreaEventsHelperTests.swift */; };
+		7B866E45215E2EEB00607BDD /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B866E44215E2EEB00607BDD /* Building.swift */; };
+		7B866E47215E300B00607BDD /* Floor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B866E46215E300B00607BDD /* Floor.swift */; };
+		7B866E49215E31E100607BDD /* Complex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B866E48215E31E100607BDD /* Complex.swift */; };
+		7B866E4B215E358B00607BDD /* ComplexesCallbacksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B866E4A215E358B00607BDD /* ComplexesCallbacksController.swift */; };
+		7B866E4D215E39F500607BDD /* ComplexHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B866E4C215E39F500607BDD /* ComplexHelper.swift */; };
 		7B901C3120D51AA100A1D216 /* INPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B901C2C20D519AF00A1D216 /* INPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B9ABA3320820B6A00A8849F /* WebViewScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */; };
 		7B9BC33320DD134C00426E78 /* IndoorNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD46764206CF34A00B9F2AD /* IndoorNavi.framework */; };
@@ -4277,6 +4282,11 @@
 		7B8570BE20E0DBD400295D00 /* INPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INPoint.swift; sourceTree = "<group>"; };
 		7B8570C020E0E51600295D00 /* ColorHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelperTests.swift; sourceTree = "<group>"; };
 		7B8570C220E0F0AA00295D00 /* AreaEventsHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaEventsHelperTests.swift; sourceTree = "<group>"; };
+		7B866E44215E2EEB00607BDD /* Building.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
+		7B866E46215E300B00607BDD /* Floor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Floor.swift; sourceTree = "<group>"; };
+		7B866E48215E31E100607BDD /* Complex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Complex.swift; sourceTree = "<group>"; };
+		7B866E4A215E358B00607BDD /* ComplexesCallbacksController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexesCallbacksController.swift; sourceTree = "<group>"; };
+		7B866E4C215E39F500607BDD /* ComplexHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexHelper.swift; sourceTree = "<group>"; };
 		7B901C2C20D519AF00A1D216 /* INPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = INPoint.h; sourceTree = "<group>"; };
 		7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewScrollViewDelegate.swift; sourceTree = "<group>"; };
 		7BB6161021355E17003DD41C /* INCircleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INCircleTests.swift; sourceTree = "<group>"; };
@@ -4328,20 +4338,9 @@
 		7B560E9B2099C2510055F42E /* API */ = {
 			isa = PBXGroup;
 			children = (
+				7B866E42215E2D6100607BDD /* Map Objects */,
+				7B866E43215E2DA300607BDD /* Structures */,
 				7B10D8AE2140161800638C06 /* DeviceDataManager.swift */,
-				7BD4679C206CF59500B9F2AD /* INMap.swift */,
-				7B6948BA20863F1400E22BD9 /* INPolyline.swift */,
-				7B666AF32088D3A60031780A /* INObject.swift */,
-				7B7FD56720936CE200AD409C /* INArea.swift */,
-				7B5F03A02097455B00D112F6 /* INMarker.swift */,
-				7B560E9C2099C2B60055F42E /* INInfoWindow.swift */,
-				7B46979020A095D200D6A22B /* INReport.swift */,
-				7B46979220A0A2B400D6A22B /* AreaEvent.swift */,
-				7BCB74BA20BE7B96006386D1 /* Coordinates.swift */,
-				7B901C2C20D519AF00A1D216 /* INPoint.h */,
-				7B8570BE20E0DBD400295D00 /* INPoint.swift */,
-				7BEFEBFC20ED23C900A55FCC /* Scale.swift */,
-				7B75CD6B2133CF70002598AB /* INCircle.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -11458,6 +11457,7 @@
 				7BCB74B820BE70C7006386D1 /* TimeIntervalExtension.swift */,
 				7BCB74BC20BE7F05006386D1 /* CoordinatesHelper.swift */,
 				7BEFEBFE20ED32BC00A55FCC /* MapHelper.swift */,
+				7B866E4C215E39F500607BDD /* ComplexHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -11469,6 +11469,36 @@
 				7B7180AB207CAF1B00EC3E34 /* indoorNavi.html */,
 			);
 			path = "Web resources";
+			sourceTree = "<group>";
+		};
+		7B866E42215E2D6100607BDD /* Map Objects */ = {
+			isa = PBXGroup;
+			children = (
+				7BD4679C206CF59500B9F2AD /* INMap.swift */,
+				7B6948BA20863F1400E22BD9 /* INPolyline.swift */,
+				7B666AF32088D3A60031780A /* INObject.swift */,
+				7B7FD56720936CE200AD409C /* INArea.swift */,
+				7B5F03A02097455B00D112F6 /* INMarker.swift */,
+				7B560E9C2099C2B60055F42E /* INInfoWindow.swift */,
+				7B46979020A095D200D6A22B /* INReport.swift */,
+				7B75CD6B2133CF70002598AB /* INCircle.swift */,
+			);
+			path = "Map Objects";
+			sourceTree = "<group>";
+		};
+		7B866E43215E2DA300607BDD /* Structures */ = {
+			isa = PBXGroup;
+			children = (
+				7B46979220A0A2B400D6A22B /* AreaEvent.swift */,
+				7BCB74BA20BE7B96006386D1 /* Coordinates.swift */,
+				7B901C2C20D519AF00A1D216 /* INPoint.h */,
+				7B8570BE20E0DBD400295D00 /* INPoint.swift */,
+				7BEFEBFC20ED23C900A55FCC /* Scale.swift */,
+				7B866E44215E2EEB00607BDD /* Building.swift */,
+				7B866E46215E300B00607BDD /* Floor.swift */,
+				7B866E48215E31E100607BDD /* Complex.swift */,
+			);
+			path = Structures;
 			sourceTree = "<group>";
 		};
 		7B94B814208A2F3C006A61BF /* Frameworks */ = {
@@ -11498,6 +11528,7 @@
 				7BEFEC0020EFA3EE00A55FCC /* LongClickEventCallbacksController.swift */,
 				7B4D689920F5DD6A00D491A2 /* AreaEventListenerCallbacksController.swift */,
 				7B4D689B20F5EFB900D491A2 /* CoordinatesListenerCallbacksController.swift */,
+				7B866E4A215E358B00607BDD /* ComplexesCallbacksController.swift */,
 			);
 			path = HandlerControllers;
 			sourceTree = "<group>";
@@ -11710,12 +11741,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B866E4B215E358B00607BDD /* ComplexesCallbacksController.swift in Sources */,
 				7B560E9D2099C2B60055F42E /* INInfoWindow.swift in Sources */,
 				7B9ABA3320820B6A00A8849F /* WebViewScrollViewDelegate.swift in Sources */,
 				7B75CD6C2133CF70002598AB /* INCircle.swift in Sources */,
 				7B10D8AF2140161800638C06 /* DeviceDataManager.swift in Sources */,
 				7B5F039F20972F0900D112F6 /* ColorHelper.swift in Sources */,
+				7B866E4D215E39F500607BDD /* ComplexHelper.swift in Sources */,
 				7BB78B3C20A1CF5C0087BFEC /* PromisesController.swift in Sources */,
+				7B866E47215E300B00607BDD /* Floor.swift in Sources */,
 				7BCB74B920BE70C7006386D1 /* TimeIntervalExtension.swift in Sources */,
 				7B46979320A0A2B400D6A22B /* AreaEvent.swift in Sources */,
 				7BB616172135946A003DD41C /* BLELocationManager.swift in Sources */,
@@ -11727,12 +11761,14 @@
 				7B714FBE20A1EEAF00836BBD /* AreaEventsHelper.swift in Sources */,
 				7BB616152135934E003DD41C /* BeaconManager.swift in Sources */,
 				7B4D689A20F5DD6A00D491A2 /* AreaEventListenerCallbacksController.swift in Sources */,
+				7B866E49215E31E100607BDD /* Complex.swift in Sources */,
 				7B46979120A095D200D6A22B /* INReport.swift in Sources */,
 				7BC6D0C4214B96B3002B252C /* INLocation.swift in Sources */,
 				7B77E6E9207515010019D061 /* Paths.swift in Sources */,
 				7B714FB920A1D37200836BBD /* EventCallbacksController.swift in Sources */,
 				7BCB74BD20BE7F05006386D1 /* CoordinatesHelper.swift in Sources */,
 				7B714FC020A1FCB500836BBD /* CoordinatesCallbacksController.swift in Sources */,
+				7B866E45215E2EEB00607BDD /* Building.swift in Sources */,
 				7BEFEBFF20ED32BC00A55FCC /* MapHelper.swift in Sources */,
 				7B6948BB20863F1400E22BD9 /* INPolyline.swift in Sources */,
 				7B4D689C20F5EFB900D491A2 /* CoordinatesListenerCallbacksController.swift in Sources */,
