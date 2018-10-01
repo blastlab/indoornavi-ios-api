@@ -53,11 +53,10 @@
                             </view>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ij6-8d-Adf" secondAttribute="bottom" id="7xZ-61-feR"/>
-                            <constraint firstItem="Ij6-8d-Adf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="8Xg-6f-C0I"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ij6-8d-Adf" secondAttribute="trailing" id="Uv7-46-Eta"/>
-                            <constraint firstItem="Ij6-8d-Adf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="gFR-1W-VNZ"/>
-                            <constraint firstItem="Ij6-8d-Adf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ktI-Fa-mhw"/>
+                            <constraint firstItem="Ij6-8d-Adf" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="EQw-I7-Fe3"/>
+                            <constraint firstItem="Ij6-8d-Adf" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Gec-wD-b7n"/>
+                            <constraint firstItem="Ij6-8d-Adf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="IWZ-NV-UDd"/>
+                            <constraint firstItem="Ij6-8d-Adf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cCJ-e6-JJP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

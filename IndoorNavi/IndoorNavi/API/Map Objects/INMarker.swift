@@ -78,16 +78,19 @@ public class INMarker: INObject {
         ready {
             self.map.evaluate(javaScriptString: javaScriptString)
         }
+        draw()
     }
     
     /// Removes block invoked on tap if exists. Use of this method is optional.
     @objc public func removeEventListener() {
         if let uuid = self.callbackUUID {
+            callbackUUID = nil
             self.map.eventCallbacksController.removeEventCallback(forUUID: uuid)
             let javaScriptString = String(format: ScriptTemplates.RemoveEventListener, self.javaScriptVariableName)
             ready {
                 self.map.evaluate(javaScriptString: javaScriptString)
             }
+            draw()
         }
     }
     
