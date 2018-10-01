@@ -77,8 +77,8 @@ public class INMarker: INObject {
         let javaScriptString = String(format: ScriptTemplates.AddEventListener, self.javaScriptVariableName, self.callbackUUID!)
         ready {
             self.map.evaluate(javaScriptString: javaScriptString)
+            self.draw()
         }
-        draw()
     }
     
     /// Removes block invoked on tap if exists. Use of this method is optional.
@@ -89,8 +89,8 @@ public class INMarker: INObject {
             let javaScriptString = String(format: ScriptTemplates.RemoveEventListener, self.javaScriptVariableName)
             ready {
                 self.map.evaluate(javaScriptString: javaScriptString)
+                self.draw()
             }
-            draw()
         }
     }
     
