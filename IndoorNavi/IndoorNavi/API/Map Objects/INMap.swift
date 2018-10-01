@@ -183,7 +183,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     
     @objc public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setupWebView(withFrame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
+        setupWebView(withFrame: CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height))
     }
     
     private func initInJavaScript() {
@@ -206,6 +206,10 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
                 self.scale = scale
             }
         }
+    }
+    
+    public override func layoutSubviews() {
+        webView.frame = CGRect(x: 0, y: 0, width: super.bounds.width, height: super.bounds.height)
     }
     
     // Setups
