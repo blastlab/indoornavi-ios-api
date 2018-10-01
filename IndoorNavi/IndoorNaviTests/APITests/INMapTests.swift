@@ -36,4 +36,15 @@ class INMapTests: XCTestCase {
         
         waitForExpectations(timeout: 15)
     }
+    
+    func testGetComplexes() {
+        let getComplexesPromise = expectation(description: "Complexes downloaded.")
+        
+        map.getComplexes { complexes in
+            XCTAssertNotEqual(complexes.count, 0)
+            getComplexesPromise.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10)
+    }
 }

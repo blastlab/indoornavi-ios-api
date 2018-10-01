@@ -9,8 +9,8 @@
 import UIKit
 
 struct Constants {
-    static let FrontendTargetHost = "http://172.16.170.20:4200"
-    static let BackendTargetHost = "http://172.16.170.20:90"
+    static let FrontendTargetHost = "http://172.16.170.6:4200"
+    static let BackendTargetHost = "http://172.16.170.6:90"
     static let ApiKey = "TestAdmin"
-    static let FloorID = 1
+    static let FloorID = 2
 }
