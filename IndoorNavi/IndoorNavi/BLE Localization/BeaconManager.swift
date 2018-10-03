@@ -12,7 +12,10 @@ import CoreLocation
 let BeaconIdentifier = "INBeacon"
 
 protocol BeaconManagerDelegate {
+    
     func didRange(beacons: [INBeacon])
+    
+    func didChange(authorization status: CLAuthorizationStatus)
 }
 
 class BeaconManager: NSObject {
@@ -70,10 +73,7 @@ class BeaconManager: NSObject {
 extension BeaconManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print("Did change authorization status \(String(describing: status))")
-        if status == .notDetermined {
-            manager.requestWhenInUseAuthorization()
-        }
+        delegate?.didChange(authorization: status)
     }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {

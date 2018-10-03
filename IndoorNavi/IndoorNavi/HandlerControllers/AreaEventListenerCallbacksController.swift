@@ -21,10 +21,10 @@ class AreaEventListenerCallbacksController: NSObject, WKScriptMessageHandler {
     }
     
     private func receivedMessage(withUUID uuid: String, andJSONObject jsonObject: Any) {
-        if let areaEventListenerCallback = areaEventListenerCallbacks[uuid] {
-            if let areaEvent = AreaEvent(fromJSONObject: jsonObject) {
-                areaEventListenerCallback(areaEvent)
-            }
+        if let areaEventListenerCallback = areaEventListenerCallbacks[uuid], let areaEvent = AreaEvent(fromJSONObject: jsonObject) {
+            areaEventListenerCallback(areaEvent)
         }
+        
+        areaEventListenerCallbacks.removeValue(forKey: uuid)
     }
 }

@@ -59,8 +59,8 @@ public struct Scale: Equatable {
             let measureString = scaleDictionary["measure"] as? String
             let measure = measureString != nil ? Scale.Measure(rawValue: measureString!) : nil
             let realDistance = scaleDictionary["realDistance"] as? Int
-            let start = PointHelper.point(fromJSONObject: scaleDictionary["start"])
-            let stop = PointHelper.point(fromJSONObject: scaleDictionary["stop"])
+            let start = INPoint(fromJSONObject: scaleDictionary["start"])
+            let stop = INPoint(fromJSONObject: scaleDictionary["stop"])
             
             if let measure = measure, let realDistance = realDistance, let start = start, let stop = stop {
                 self.init(measure: measure, realDistance: realDistance, start: start, stop: stop)

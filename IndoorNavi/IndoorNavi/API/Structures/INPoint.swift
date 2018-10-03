@@ -26,4 +26,12 @@ extension INPoint : Equatable {
     public static var zero: INPoint {
         return INPoint(x: 0, y: 0)
     }
+    
+    init?(fromJSONObject jsonObject: Any?) {
+        if let pointDictionary = jsonObject as? [String: Int32], let x = pointDictionary["x"], let y = pointDictionary["y"] {
+            self.init(x: x, y: y)
+        } else {
+            return nil
+        }
+    }
 }

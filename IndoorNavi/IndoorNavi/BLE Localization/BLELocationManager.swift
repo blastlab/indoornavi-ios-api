@@ -57,12 +57,20 @@ public struct INBeaconConfiguration {
 
 /// The methods that you use to receive events about current location.
 public protocol BLELocationManagerDelegate {
+    
     /// Tells the delegate that new location data is available.
     ///
     /// - Parameters:
     ///   - manager: The object that you use to start and stop the delivery of location events to your app.
     ///   - location: The XY coordinates representing current location.
     func bleLocationManager(_ manager: BLELocationManager, didUpdateLocation location: INLocation)
+    
+    /// Tells the delegate that the authorization status for the application changed.
+    ///
+    /// - Parameters:
+    ///   - manager: The object that you use to start and stop the delivery of location events to your app.
+    ///   - status: The new authorization status for the application.
+    func bleLocationManager(_ manager: BLELocationManager, didChangeAuthorization status: CLAuthorizationStatus)
 }
 
 /// The object that you use to start and stop the delivery of location events to your app based on iBeacons.
@@ -307,5 +315,9 @@ extension BLELocationManager: BeaconManagerDelegate {
         if let location = maxStepEnabled ? getPositionMaxStep(withBeacons: beacons) : getCurrentLocation(withBeacons: beacons) {
             delegate?.bleLocationManager(self, didUpdateLocation: location)
         }
+    }
+    
+    func didChange(authorization status: CLAuthorizationStatus) {
+        delegate?.bleLocationManager(self, didChangeAuthorization: status)
     }
 }

@@ -23,6 +23,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         static let AddAreaEventListener = "navi.addEventListener(Event.LISTENER.AREA, res => webkit.messageHandlers.AreaEventListenerCallbacksController.postMessage(%@));"
         static let AddCoordinatesEventListener = "navi.addEventListener(Event.LISTENER.COORDINATES, res => webkit.messageHandlers.CoordinatesEventListenerCallbacksController.postMessage(%@));"
         static let GetComplexes = "navi.getComplexes(res => webkit.messageHandlers.ComplexesCallbacksController.postMessage(%@));"
+        static let PullToPath = "navi.pullToPath({x: %d, y: %d}, %d).then(res => webkit.messageHandlers.PullToPathCallbacksController.postMessage(%@));"
     }
     
     fileprivate struct WebViewConfigurationScripts {
@@ -42,6 +43,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     var areaEventListenerCallbacksController = AreaEventListenerCallbacksController()
     var coordinatesEventListenerCallbacksController = CoordinatesEventListenerCallbacksController()
     var complexesCallbacksController = ComplexesCallbacksController()
+    var pullToPathCallbacksController = PullToPathCallbacksController()
     
     private var webView: WKWebView!
     
@@ -181,6 +183,20 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
     }
     
+    /// Returns nearest position on path for given coordinates.
+    ///
+    /// - Parameters:
+    ///   - location: The XY coordinates representing current coordinates in pixels.
+    ///   - accuracy: Accuracy of path pull
+    ///   - pullToPathCallbackHandler: A block to invoke when calculated position on path is available.
+    public func pullToPath(point: INPoint, accuracy: Int, withCallbackHandler pullToPathCallbackHandler: @escaping (INPoint) -> Void) {
+        let uuid = UUID().uuidString
+        pullToPathCallbacksController.pullToPathCallbacks[uuid] = pullToPathCallbackHandler
+        let message = String(format: ScriptTemplates.Message, uuid)
+        let javaScriptString = String(format: ScriptTemplates.PullToPath, point.x, point.y, accuracy, message)
+        evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
+    }
+    
     @objc public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupWebView(withFrame: CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height))
@@ -248,6 +264,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         controller.add(areaEventListenerCallbacksController, name: AreaEventListenerCallbacksController.ControllerName)
         controller.add(coordinatesEventListenerCallbacksController, name: CoordinatesEventListenerCallbacksController.ControllerName)
         controller.add(complexesCallbacksController, name: ComplexesCallbacksController.ControllerName)
+        controller.add(pullToPathCallbacksController, name: PullToPathCallbacksController.ControllerName)
         configuration.userContentController = controller
         
         return configuration

@@ -21,7 +21,7 @@ class LongClickEventCallbacksController: NSObject, WKScriptMessageHandler {
     }
     
     private func receivedMessage(withUUID uuid: String, andJSONObject jsonObject: Any) {
-        if let longClickEventCallback = longClickEventCallbacks[uuid], let dictionary = jsonObject as? [String: Any], let point = PointHelper.point(fromJSONObject: dictionary["position"]) {
+        if let longClickEventCallback = longClickEventCallbacks[uuid], let dictionary = jsonObject as? [String: Any], let point = INPoint(fromJSONObject: dictionary["position"]) {
             longClickEventCallback(point)
         }
     }
