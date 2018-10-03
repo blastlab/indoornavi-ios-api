@@ -28,8 +28,8 @@ extension INPoint : Equatable {
     }
     
     init?(fromJSONObject jsonObject: Any?) {
-        if let pointDictionary = jsonObject as? [String: Int32], let x = pointDictionary["x"], let y = pointDictionary["y"] {
-            self.init(x: x, y: y)
+        if let pointDictionary = jsonObject as? [String: Int], let x = pointDictionary["x"], let y = pointDictionary["y"] {
+            self.init(x: Int32(x), y: Int32(y))
         } else {
             return nil
         }

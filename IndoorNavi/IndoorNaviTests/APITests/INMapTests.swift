@@ -47,4 +47,15 @@ class INMapTests: XCTestCase {
         
         waitForExpectations(timeout: 10)
     }
+    
+    func testPullToPath() {
+        let pullToPathPromise = expectation(description: "Pulled to path.")
+        
+        let point = INPoint(x: 1305, y: 396)
+        map.pullToPath(point: point, accuracy: 10000) { point in
+            pullToPathPromise.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10)
+    }
 }
