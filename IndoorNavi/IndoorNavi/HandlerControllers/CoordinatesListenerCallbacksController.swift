@@ -21,10 +21,10 @@ class CoordinatesEventListenerCallbacksController: NSObject, WKScriptMessageHand
     }
     
     private func receivedMessage(withUUID uuid: String, andJSONObject jsonObject: Any) {
-        if let coordinatesListenerCallback = coordinatesListenerCallbacks[uuid] {
-            if let areaEvent = Coordinates(fromJSONObject: jsonObject) {
-                coordinatesListenerCallback(areaEvent)
-            }
+        if let coordinatesListenerCallback = coordinatesListenerCallbacks[uuid], let coordinates = Coordinates(fromJSONObject: jsonObject) {
+            coordinatesListenerCallback(coordinates)
         }
+        
+        coordinatesListenerCallbacks.removeValue(forKey: uuid)
     }
 }

@@ -28,19 +28,12 @@ class PointHelper {
     static func points(fromJSONObject jsonObject: Any?) -> [INPoint] {
         if let points = jsonObject as? [[String: Int]] {
             let coordinatesArray = points.compactMap { element -> INPoint? in
-                return point(fromJSONObject: element)
+                let point = INPoint(fromJSONObject: element)
+                return point
             }
             return coordinatesArray
         } else {
             return [INPoint]()
-        }
-    }
-    
-    static func point(fromJSONObject jsonObject: Any?) -> INPoint? {
-        if let pointDictionary = jsonObject as? [String: Int], let x = pointDictionary["x"], let y = pointDictionary["y"] {
-            return INPoint(x: Int32(x), y: Int32(y))
-        } else {
-            return nil
         }
     }
     

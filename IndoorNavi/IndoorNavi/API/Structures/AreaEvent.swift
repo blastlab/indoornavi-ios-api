@@ -37,7 +37,7 @@ public struct AreaEvent: Equatable {
     ///   - areaID: Area's ID.
     ///   - areaName: Area's name.
     ///   - mode: Specifies either it was entering or leaving the area.
-    public init(tagID: Int, date: Date, areaID: Int, areaName: String, mode: Mode) {
+    init(tagID: Int, date: Date, areaID: Int, areaName: String, mode: Mode) {
         self.tagID = tagID
         self.date = date
         self.areaID = areaID

@@ -22,6 +22,8 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         static let ToggleTagVisibility = "navi.toggleTagVisibility(%d);"
         static let AddAreaEventListener = "navi.addEventListener(Event.LISTENER.AREA, res => webkit.messageHandlers.AreaEventListenerCallbacksController.postMessage(%@));"
         static let AddCoordinatesEventListener = "navi.addEventListener(Event.LISTENER.COORDINATES, res => webkit.messageHandlers.CoordinatesEventListenerCallbacksController.postMessage(%@));"
+        static let GetComplexes = "navi.getComplexes(res => webkit.messageHandlers.ComplexesCallbacksController.postMessage(%@));"
+        static let PullToPath = "navi.pullToPath({x: %d, y: %d}, %d).then(res => webkit.messageHandlers.PullToPathCallbacksController.postMessage(%@));"
     }
     
     fileprivate struct WebViewConfigurationScripts {
@@ -40,6 +42,9 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     var longClickEventCallbacksController = LongClickEventCallbacksController()
     var areaEventListenerCallbacksController = AreaEventListenerCallbacksController()
     var coordinatesEventListenerCallbacksController = CoordinatesEventListenerCallbacksController()
+    var complexesCallbacksController = ComplexesCallbacksController()
+    var pullToPathCallbacksController = PullToPathCallbacksController()
+    var getPathsCallbacksController = GetPathsCallbacksController()
     
     private var webView: WKWebView!
     
@@ -86,8 +91,6 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         
         evaluate(javaScriptString: javaScriptString)
     }
-    
-    
     
     /// Initializes a new `INMap` object with the provided parameters to communicate with `INMap` frontend server.
     ///
@@ -140,8 +143,8 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     }
     
     @available(swift, obsoleted: 1.0)
-    @objc(addAreaEventListener:) public func addAreaEventListener(withCallback areaEventCallback: @escaping (ObjCAreaEvent) -> Void) {
-        let callbackTakingStructs = AreaEventsHelper.callbackHandlerTakingStruct(fromCallbackHandlerTakingObject: areaEventCallback)
+    @objc(addAreaEventListener:) public func addAreaEventListener(withCallback callback: @escaping (ObjCAreaEvent) -> Void) {
+        let callbackTakingStructs = AreaEventsHelper.callbackHandlerTakingStruct(fromCallbackHandlerTakingObject: callback)
         addAreaEventListener(withCallback: callbackTakingStructs)
     }
     
@@ -170,9 +173,34 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
     }
     
+    /// Returns the list of complexes with all buildings and floors.
+    ///
+    /// - Parameter completionHandler: A block to invoke when array of `Complex` is available. This completion handler takes array of `Complex`'es.
+    public func getComplexes(withCallbackHandler completionHandler: @escaping ([Complex]) -> Void) {
+        let uuid = UUID().uuidString
+        complexesCallbacksController.complexesCallbacks[uuid] = completionHandler
+        let message = String(format: ScriptTemplates.Message, uuid)
+        let javaScriptString = String(format: ScriptTemplates.GetComplexes, message)
+        evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
+    }
+    
+    /// Returns nearest position on path for given coordinates.
+    ///
+    /// - Parameters:
+    ///   - location: The XY coordinates representing current coordinates in pixels.
+    ///   - accuracy: Accuracy of path pull
+    ///   - completionHandler: A block to invoke when calculated position on path is available. This completion handler takes `INPoint` as a position on Path.
+    public func pullToPath(point: INPoint, accuracy: Int, withCompletionHandler completionHandler: @escaping (INPoint) -> Void) {
+        let uuid = UUID().uuidString
+        pullToPathCallbacksController.pullToPathCallbacks[uuid] = completionHandler
+        let message = String(format: ScriptTemplates.Message, uuid)
+        let javaScriptString = String(format: ScriptTemplates.PullToPath, point.x, point.y, accuracy, message)
+        evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
+    }
+    
     @objc public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setupWebView(withFrame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
+        setupWebView(withFrame: CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height))
     }
     
     private func initInJavaScript() {
@@ -195,6 +223,10 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
                 self.scale = scale
             }
         }
+    }
+    
+    public override func layoutSubviews() {
+        webView.frame = CGRect(x: 0, y: 0, width: super.bounds.width, height: super.bounds.height)
     }
     
     // Setups
@@ -232,6 +264,9 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         controller.add(longClickEventCallbacksController, name: LongClickEventCallbacksController.ControllerName)
         controller.add(areaEventListenerCallbacksController, name: AreaEventListenerCallbacksController.ControllerName)
         controller.add(coordinatesEventListenerCallbacksController, name: CoordinatesEventListenerCallbacksController.ControllerName)
+        controller.add(complexesCallbacksController, name: ComplexesCallbacksController.ControllerName)
+        controller.add(pullToPathCallbacksController, name: PullToPathCallbacksController.ControllerName)
+        controller.add(getPathsCallbacksController, name: GetPathsCallbacksController.ControllerName)
         configuration.userContentController = controller
         
         return configuration

@@ -34,7 +34,7 @@ public struct Scale: Equatable {
     ///   - realDistance: Actual distance between `start` and `stop` point, given in proper unit.
     ///   - start: `INPoint` representing starting point of the set scale given in pixels
     ///   - stop: `INPoint` representing end point of the set scale given in pixels
-    public init(measure: Measure, realDistance: Int, start: INPoint, stop: INPoint) {
+    init(measure: Measure, realDistance: Int, start: INPoint, stop: INPoint) {
         self.measure = measure
         self.realDistance = realDistance
         self.start = start
@@ -59,8 +59,8 @@ public struct Scale: Equatable {
             let measureString = scaleDictionary["measure"] as? String
             let measure = measureString != nil ? Scale.Measure(rawValue: measureString!) : nil
             let realDistance = scaleDictionary["realDistance"] as? Int
-            let start = PointHelper.point(fromJSONObject: scaleDictionary["start"])
-            let stop = PointHelper.point(fromJSONObject: scaleDictionary["stop"])
+            let start = INPoint(fromJSONObject: scaleDictionary["start"])
+            let stop = INPoint(fromJSONObject: scaleDictionary["stop"])
             
             if let measure = measure, let realDistance = realDistance, let start = start, let stop = stop {
                 self.init(measure: measure, realDistance: realDistance, start: start, stop: stop)

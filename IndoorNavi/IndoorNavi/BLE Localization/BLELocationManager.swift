@@ -57,12 +57,20 @@ public struct INBeaconConfiguration {
 
 /// The methods that you use to receive events about current location.
 public protocol BLELocationManagerDelegate {
+    
     /// Tells the delegate that new location data is available.
     ///
     /// - Parameters:
-    ///   - manager: The object that you use to start and stop the delivery of location events to your app
+    ///   - manager: The object that you use to start and stop the delivery of location events to your app.
     ///   - location: The XY coordinates representing current location.
     func bleLocationManager(_ manager: BLELocationManager, didUpdateLocation location: INLocation)
+    
+    /// Tells the delegate that the authorization status for the application changed.
+    ///
+    /// - Parameters:
+    ///   - manager: The object that you use to start and stop the delivery of location events to your app.
+    ///   - status: The new authorization status for the application.
+    func bleLocationManager(_ manager: BLELocationManager, didChangeAuthorization status: CLAuthorizationStatus)
 }
 
 /// The object that you use to start and stop the delivery of location events to your app based on iBeacons.
@@ -70,15 +78,15 @@ public class BLELocationManager: NSObject {
     
     /// The delegate object to receive update events.
     public var delegate: BLELocationManagerDelegate?
-    /// Boolean value specifying wether max step algorithm should be enabled.
+    /// Boolean value specifying wether max step algorithm should be enabled. Default value is `false`.
     public var maxStepEnabled = false
-    /// Boolean value specifying wether distance should be obtained as `CLBeacon`'s accuracy or calculated.
+    /// Boolean value specifying wether distance should be obtained as `CLBeacon`'s accuracy or calculated. Default value is `false`.
     public var useCLBeaconAccuracy = false
-    /// Average receiver's height.
+    /// Average receiver's height. Default value is `1.2`.
     public var receiverHeight = 1.2
-    /// If `maxStepEnabled` is `true`, this is the value of maximum step a reciver is able to make.
+    /// If `maxStepEnabled` is `true`, this is the value of maximum step a reciver is able to make. Default value is `2.0`.
     public var maxStep = 2.0
-    /// A path-loss exponent that varies in value depending on the environment.
+    /// A path-loss exponent that varies in value depending on the environment. Default value is `2.0`.
     public var n = 2.0
     
     private var beaconManager: BeaconManager
@@ -307,5 +315,9 @@ extension BLELocationManager: BeaconManagerDelegate {
         if let location = maxStepEnabled ? getPositionMaxStep(withBeacons: beacons) : getCurrentLocation(withBeacons: beacons) {
             delegate?.bleLocationManager(self, didUpdateLocation: location)
         }
+    }
+    
+    func didChange(authorization status: CLAuthorizationStatus) {
+        delegate?.bleLocationManager(self, didChangeAuthorization: status)
     }
 }

@@ -1,18 +1,18 @@
 //
-//  AreaEventListenerCallbacksController.swift
+//  ComplexesCallbacksController.swift
 //  IndoorNavi
 //
-//  Created by Michał Pastwa on 11.07.2018.
+//  Created by Michał Pastwa on 28/09/2018.
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
 import WebKit
 
-class AreaEventListenerCallbacksController: NSObject, WKScriptMessageHandler {
+class ComplexesCallbacksController: NSObject, WKScriptMessageHandler {
     
-    static let ControllerName = "AreaEventListenerCallbacksController"
+    static let ControllerName = "ComplexesCallbacksController"
     
-    var areaEventListenerCallbacks = [String: (AreaEvent) -> Void]()
+    var complexesCallbacks = [String: ([Complex]) -> Void]()
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if let dictionary = message.body as? [String: Any], let uuid = dictionary["uuid"] as? String, let response = dictionary["response"] {
@@ -21,10 +21,10 @@ class AreaEventListenerCallbacksController: NSObject, WKScriptMessageHandler {
     }
     
     private func receivedMessage(withUUID uuid: String, andJSONObject jsonObject: Any) {
-        if let areaEventListenerCallback = areaEventListenerCallbacks[uuid], let areaEvent = AreaEvent(fromJSONObject: jsonObject) {
-            areaEventListenerCallback(areaEvent)
+        if let complexesCallback = complexesCallbacks[uuid] {
+            let complexes = ComplexHelper.complexes(fromJSONObject: jsonObject)
+            complexesCallback(complexes)
+            complexesCallbacks.removeValue(forKey: uuid)
         }
-        
-        areaEventListenerCallbacks.removeValue(forKey: uuid)
     }
 }
