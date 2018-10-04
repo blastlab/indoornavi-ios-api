@@ -25,7 +25,7 @@ public struct Coordinates: Equatable {
     ///   - y: The y-coordinate in centimiters
     ///   - tagID: Short ID of the tag.
     ///   - date: Date of `Coordinates` registration.
-    public init(x: Int, y: Int, tagID: Int, date: Date) {
+    init(x: Int, y: Int, tagID: Int, date: Date) {
         self.x = x
         self.y = y
         self.tagID = tagID

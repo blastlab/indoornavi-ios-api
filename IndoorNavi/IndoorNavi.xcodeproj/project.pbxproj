@@ -32,6 +32,10 @@
 		7B5F03A12097455B00D112F6 /* INMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5F03A02097455B00D112F6 /* INMarker.swift */; };
 		7B666AF020888FBF0031780A /* PointHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B666AEF20888FBF0031780A /* PointHelper.swift */; };
 		7B666AF42088D3A60031780A /* INObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B666AF32088D3A60031780A /* INObject.swift */; };
+		7B682BF421664D0800533948 /* INData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B682BF321664D0800533948 /* INData.swift */; };
+		7B682BF72166503B00533948 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B682BF62166503B00533948 /* Path.swift */; };
+		7B682BF92166545A00533948 /* GetPathsCallbacksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B682BF82166545A00533948 /* GetPathsCallbacksController.swift */; };
+		7B682BFB216654DD00533948 /* DataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B682BFA216654DD00533948 /* DataHelper.swift */; };
 		7B6856C220FF25F200659C3C /* indoorNavi.html in Resources */ = {isa = PBXBuildFile; fileRef = 7B7180AB207CAF1B00EC3E34 /* indoorNavi.html */; };
 		7B6856C320FF260600659C3C /* indoorNavi.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B68465C20FF258800659C3C /* indoorNavi.js */; };
 		7B6948BB20863F1400E22BD9 /* INPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6948BA20863F1400E22BD9 /* INPolyline.swift */; };
@@ -102,6 +106,10 @@
 		7B5F03A02097455B00D112F6 /* INMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INMarker.swift; sourceTree = "<group>"; };
 		7B666AEF20888FBF0031780A /* PointHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHelper.swift; sourceTree = "<group>"; };
 		7B666AF32088D3A60031780A /* INObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INObject.swift; sourceTree = "<group>"; };
+		7B682BF321664D0800533948 /* INData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INData.swift; sourceTree = "<group>"; };
+		7B682BF62166503B00533948 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
+		7B682BF82166545A00533948 /* GetPathsCallbacksController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPathsCallbacksController.swift; sourceTree = "<group>"; };
+		7B682BFA216654DD00533948 /* DataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHelper.swift; sourceTree = "<group>"; };
 		7B6834CB20FF257900659C3C /* Gruntfile.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Gruntfile.js; sourceTree = "<group>"; };
 		7B6834CC20FF257900659C3C /* indoornavi_api.iml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = indoornavi_api.iml; sourceTree = "<group>"; };
 		7B6834CD20FF257900659C3C /* python_modules */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = python_modules; sourceTree = "<group>"; };
@@ -11460,6 +11468,7 @@
 				7BCB74BC20BE7F05006386D1 /* CoordinatesHelper.swift */,
 				7BEFEBFE20ED32BC00A55FCC /* MapHelper.swift */,
 				7B866E4C215E39F500607BDD /* ComplexHelper.swift */,
+				7B682BFA216654DD00533948 /* DataHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -11484,6 +11493,7 @@
 				7B560E9C2099C2B60055F42E /* INInfoWindow.swift */,
 				7B46979020A095D200D6A22B /* INReport.swift */,
 				7B75CD6B2133CF70002598AB /* INCircle.swift */,
+				7B682BF321664D0800533948 /* INData.swift */,
 			);
 			path = "Map Objects";
 			sourceTree = "<group>";
@@ -11499,6 +11509,7 @@
 				7B866E44215E2EEB00607BDD /* Building.swift */,
 				7B866E46215E300B00607BDD /* Floor.swift */,
 				7B866E48215E31E100607BDD /* Complex.swift */,
+				7B682BF62166503B00533948 /* Path.swift */,
 			);
 			path = Structures;
 			sourceTree = "<group>";
@@ -11532,6 +11543,7 @@
 				7B4D689B20F5EFB900D491A2 /* CoordinatesListenerCallbacksController.swift */,
 				7B866E4A215E358B00607BDD /* ComplexesCallbacksController.swift */,
 				7BDE207C2163888800E9D707 /* PullToPathCallbacksController.swift */,
+				7B682BF82166545A00533948 /* GetPathsCallbacksController.swift */,
 			);
 			path = HandlerControllers;
 			sourceTree = "<group>";
@@ -11744,15 +11756,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B682BF92166545A00533948 /* GetPathsCallbacksController.swift in Sources */,
 				7B866E4B215E358B00607BDD /* ComplexesCallbacksController.swift in Sources */,
 				7B560E9D2099C2B60055F42E /* INInfoWindow.swift in Sources */,
+				7B682BF421664D0800533948 /* INData.swift in Sources */,
 				7B9ABA3320820B6A00A8849F /* WebViewScrollViewDelegate.swift in Sources */,
 				7B75CD6C2133CF70002598AB /* INCircle.swift in Sources */,
 				7B10D8AF2140161800638C06 /* DeviceDataManager.swift in Sources */,
 				7B5F039F20972F0900D112F6 /* ColorHelper.swift in Sources */,
+				7B682BFB216654DD00533948 /* DataHelper.swift in Sources */,
 				7B866E4D215E39F500607BDD /* ComplexHelper.swift in Sources */,
 				7BB78B3C20A1CF5C0087BFEC /* PromisesController.swift in Sources */,
 				7B866E47215E300B00607BDD /* Floor.swift in Sources */,
+				7B682BF72166503B00533948 /* Path.swift in Sources */,
 				7BCB74B920BE70C7006386D1 /* TimeIntervalExtension.swift in Sources */,
 				7B46979320A0A2B400D6A22B /* AreaEvent.swift in Sources */,
 				7BB616172135946A003DD41C /* BLELocationManager.swift in Sources */,

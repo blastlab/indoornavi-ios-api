@@ -44,6 +44,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     var coordinatesEventListenerCallbacksController = CoordinatesEventListenerCallbacksController()
     var complexesCallbacksController = ComplexesCallbacksController()
     var pullToPathCallbacksController = PullToPathCallbacksController()
+    var getPathsCallbacksController = GetPathsCallbacksController()
     
     private var webView: WKWebView!
     
@@ -142,8 +143,8 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     }
     
     @available(swift, obsoleted: 1.0)
-    @objc(addAreaEventListener:) public func addAreaEventListener(withCallback areaEventCallback: @escaping (ObjCAreaEvent) -> Void) {
-        let callbackTakingStructs = AreaEventsHelper.callbackHandlerTakingStruct(fromCallbackHandlerTakingObject: areaEventCallback)
+    @objc(addAreaEventListener:) public func addAreaEventListener(withCallback callback: @escaping (ObjCAreaEvent) -> Void) {
+        let callbackTakingStructs = AreaEventsHelper.callbackHandlerTakingStruct(fromCallbackHandlerTakingObject: callback)
         addAreaEventListener(withCallback: callbackTakingStructs)
     }
     
@@ -174,10 +175,10 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     
     /// Returns the list of complexes with all buildings and floors.
     ///
-    /// - Parameter complexesCallbackHandler: A block to invoke when array of `Complex` is available.
-    public func getComplexes(withCallbackHandler complexesCallbackHandler: @escaping ([Complex]) -> Void) {
+    /// - Parameter completionHandler: A block to invoke when array of `Complex` is available. This completion handler takes array of `Complex`'es.
+    public func getComplexes(withCallbackHandler completionHandler: @escaping ([Complex]) -> Void) {
         let uuid = UUID().uuidString
-        complexesCallbacksController.complexesCallbacks[uuid] = complexesCallbackHandler
+        complexesCallbacksController.complexesCallbacks[uuid] = completionHandler
         let message = String(format: ScriptTemplates.Message, uuid)
         let javaScriptString = String(format: ScriptTemplates.GetComplexes, message)
         evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
@@ -188,10 +189,10 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     /// - Parameters:
     ///   - location: The XY coordinates representing current coordinates in pixels.
     ///   - accuracy: Accuracy of path pull
-    ///   - pullToPathCallbackHandler: A block to invoke when calculated position on path is available.
-    public func pullToPath(point: INPoint, accuracy: Int, withCallbackHandler pullToPathCallbackHandler: @escaping (INPoint) -> Void) {
+    ///   - completionHandler: A block to invoke when calculated position on path is available. This completion handler takes `INPoint` as a position on Path.
+    public func pullToPath(point: INPoint, accuracy: Int, withCompletionHandler completionHandler: @escaping (INPoint) -> Void) {
         let uuid = UUID().uuidString
-        pullToPathCallbacksController.pullToPathCallbacks[uuid] = pullToPathCallbackHandler
+        pullToPathCallbacksController.pullToPathCallbacks[uuid] = completionHandler
         let message = String(format: ScriptTemplates.Message, uuid)
         let javaScriptString = String(format: ScriptTemplates.PullToPath, point.x, point.y, accuracy, message)
         evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
@@ -265,6 +266,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         controller.add(coordinatesEventListenerCallbacksController, name: CoordinatesEventListenerCallbacksController.ControllerName)
         controller.add(complexesCallbacksController, name: ComplexesCallbacksController.ControllerName)
         controller.add(pullToPathCallbacksController, name: PullToPathCallbacksController.ControllerName)
+        controller.add(getPathsCallbacksController, name: GetPathsCallbacksController.ControllerName)
         configuration.userContentController = controller
         
         return configuration

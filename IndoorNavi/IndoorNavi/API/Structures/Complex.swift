@@ -22,7 +22,7 @@ public struct Complex {
     ///   - identifier: `Complex`'s unique ifentifier.
     ///   - name: Name of the complex.
     ///   - buildings: Array of all buildings in the `Complex`.
-    public init(identifier: Int, name: String, buildings: [Building]) {
+    init(identifier: Int, name: String, buildings: [Building]) {
         self.identifier = identifier
         self.name = name
         self.buildings = buildings

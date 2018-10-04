@@ -22,7 +22,7 @@ public struct Floor {
     ///   - identifier: `Flour`'s unique identifier.
     ///   - name: Name of the floor.
     ///   - level: `Floor`'s level.
-    public init(identifier: Int, name: String, level: Int) {
+    init(identifier: Int, name: String, level: Int) {
         self.identifier = identifier
         self.name = name
         self.level = level

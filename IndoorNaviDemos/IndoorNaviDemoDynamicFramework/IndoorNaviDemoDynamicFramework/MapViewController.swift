@@ -13,7 +13,7 @@ import CoreLocation
 class MapViewController: UIViewController {
     
     let FrontendTargetHost = "http://172.16.170.6:4200"
-    let BackendTargetHost = "http://172.16.170.50:90"
+    let BackendTargetHost = "http://172.16.170.6:90"
     let ApiKey = "TestAdmin"
     let BeaconUUID = "30FD7D40-2EDC-4D83-9D47-D88AA7E0492A"
     
@@ -144,11 +144,18 @@ class MapViewController: UIViewController {
         }
     }
     
+    func getPaths() {
+        let data = INData(map: map, targetHost: BackendTargetHost, apiKey: ApiKey)
+        data.getPaths(fromFlootWithID: 2) { paths in
+            print("Paths: \(paths)")
+        }
+    }
+    
     func didSelect(optionWithNumber optionNumber: Int) {
-//        guard mapLoaded else {
-//            showMapNotLoadedAlert()
-//            return
-//        }
+        guard mapLoaded else {
+            showMapNotLoadedAlert()
+            return
+        }
         
         switch optionNumber {
         case 0:
@@ -166,6 +173,8 @@ class MapViewController: UIViewController {
             createReport()
         case 6:
             getComplexes()
+        case 7:
+            getPaths()
         default:
             return
         }

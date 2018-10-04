@@ -34,7 +34,7 @@ public struct Scale: Equatable {
     ///   - realDistance: Actual distance between `start` and `stop` point, given in proper unit.
     ///   - start: `INPoint` representing starting point of the set scale given in pixels
     ///   - stop: `INPoint` representing end point of the set scale given in pixels
-    public init(measure: Measure, realDistance: Int, start: INPoint, stop: INPoint) {
+    init(measure: Measure, realDistance: Int, start: INPoint, stop: INPoint) {
         self.measure = measure
         self.realDistance = realDistance
         self.start = start

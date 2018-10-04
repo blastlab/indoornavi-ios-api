@@ -22,7 +22,7 @@ public struct Building {
     ///   - identifier: `Building`'s unique identifier.
     ///   - name: Name of the building.
     ///   - floors: Array of all floors in the `Building`.
-    public init(identifier: Int, name: String, floors: [Floor]) {
+    init(identifier: Int, name: String, floors: [Floor]) {
         self.identifier = identifier
         self.name = name
         self.floors = floors
