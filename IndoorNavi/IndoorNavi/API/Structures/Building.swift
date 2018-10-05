@@ -7,7 +7,7 @@
 //
 
 /// Structure representing building.
-public struct Building {
+public struct Building: Equatable {
     
     /// `Building`'s unique identifier.
     public var identifier: Int
@@ -15,6 +15,18 @@ public struct Building {
     public var name: String
     /// Array of all floors in the `Building`.
     public var floors: [Floor]
+    
+    /// Returns a Boolean value indicating whether two values are equal.
+    ///
+    /// Equality is the inverse of inequality. For any values `a` and `b`,
+    /// `a == b` implies that `a != b` is `false`.
+    ///
+    /// - Parameters:
+    ///   - lhs: A value to compare.
+    ///   - rhs: Another value to compare.
+    public static func == (lhs: Building, rhs: Building) -> Bool {
+        return lhs.identifier == rhs.identifier && lhs.name == rhs.name && lhs.floors == rhs.floors
+    }
     
     /// Initializes a new `Floor` with the provided parameters.
     ///
