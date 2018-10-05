@@ -28,7 +28,7 @@ class INReportTests: XCTestCase {
         let getAreaEventsResponsePromise = expectation(description: "getAreaEvents response arrived")
         
         map.load(Constants.FloorID) {
-            self.report.getAreaEvents(fromFloorWithID: 2, from: Date(timeIntervalSince1970: 1428105600), to: Date()) { areaEvents in
+            self.report.getAreaEvents(fromFloorWithID: Constants.FloorID, from: Date(timeIntervalSince1970: 1428105600), to: Date()) { areaEvents in
                 getAreaEventsResponsePromise.fulfill()
             }
         }
@@ -40,7 +40,7 @@ class INReportTests: XCTestCase {
         let getCoordinatesResponsePromise = expectation(description: "getCoordinates response arrived")
         
         map.load(Constants.FloorID) {
-            self.report.getCoordinates(fromFloorWithID: 2, from: Date(timeIntervalSince1970: 1428105600), to: Date()) { coordinates in
+            self.report.getCoordinates(fromFloorWithID: Constants.FloorID, from: Date(timeIntervalSince1970: 1428105600), to: Date()) { coordinates in
                 getCoordinatesResponsePromise.fulfill()
             }
         }

@@ -7,7 +7,7 @@
 //
 
 /// Structure representing a floor.
-public struct Floor {
+public struct Floor: Equatable {
     
     /// `Flour`'s unique identifier.
     public var identifier: Int
@@ -15,6 +15,18 @@ public struct Floor {
     public var name: String
     /// `Floor`'s level.
     public var level: Int
+    
+    /// Returns a Boolean value indicating whether two values are equal.
+    ///
+    /// Equality is the inverse of inequality. For any values `a` and `b`,
+    /// `a == b` implies that `a != b` is `false`.
+    ///
+    /// - Parameters:
+    ///   - lhs: A value to compare.
+    ///   - rhs: Another value to compare.
+    public static func == (lhs: Floor, rhs: Floor) -> Bool {
+        return lhs.identifier == rhs.identifier && lhs.name == rhs.name && lhs.level == rhs.level
+    }
     
     /// Initializes a new `Floor` with the provided parameters.
     ///

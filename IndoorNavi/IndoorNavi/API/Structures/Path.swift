@@ -7,12 +7,24 @@
 //
 
 /// Structure representing a path.
-public struct Path {
+public struct Path: Equatable {
     
     /// Point, at which `Path` starts.
     public var startPoint: INPoint
     /// Point, at which `Path` ends.
     public var endPoint: INPoint
+    
+    /// Returns a Boolean value indicating whether two values are equal.
+    ///
+    /// Equality is the inverse of inequality. For any values `a` and `b`,
+    /// `a == b` implies that `a != b` is `false`.
+    ///
+    /// - Parameters:
+    ///   - lhs: A value to compare.
+    ///   - rhs: Another value to compare.
+    public static func == (lhs: Path, rhs: Path) -> Bool {
+        return lhs.startPoint == rhs.startPoint && lhs.endPoint == rhs.endPoint
+    }
     
     /// Initializes a new `Path` with the provided parameters.
     ///

@@ -36,6 +36,9 @@
 		7B682BF72166503B00533948 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B682BF62166503B00533948 /* Path.swift */; };
 		7B682BF92166545A00533948 /* GetPathsCallbacksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B682BF82166545A00533948 /* GetPathsCallbacksController.swift */; };
 		7B682BFB216654DD00533948 /* DataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B682BFA216654DD00533948 /* DataHelper.swift */; };
+		7B682BFD2166630800533948 /* INDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B682BFC2166630800533948 /* INDataTests.swift */; };
+		7B682BFF216663D600533948 /* DataHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B682BFE216663D600533948 /* DataHelperTests.swift */; };
+		7B682C0121676E1100533948 /* ComplexHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B682C0021676E1100533948 /* ComplexHelperTests.swift */; };
 		7B6856C220FF25F200659C3C /* indoorNavi.html in Resources */ = {isa = PBXBuildFile; fileRef = 7B7180AB207CAF1B00EC3E34 /* indoorNavi.html */; };
 		7B6856C320FF260600659C3C /* indoorNavi.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B68465C20FF258800659C3C /* indoorNavi.js */; };
 		7B6948BB20863F1400E22BD9 /* INPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6948BA20863F1400E22BD9 /* INPolyline.swift */; };
@@ -110,6 +113,9 @@
 		7B682BF62166503B00533948 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		7B682BF82166545A00533948 /* GetPathsCallbacksController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPathsCallbacksController.swift; sourceTree = "<group>"; };
 		7B682BFA216654DD00533948 /* DataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHelper.swift; sourceTree = "<group>"; };
+		7B682BFC2166630800533948 /* INDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INDataTests.swift; sourceTree = "<group>"; };
+		7B682BFE216663D600533948 /* DataHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHelperTests.swift; sourceTree = "<group>"; };
+		7B682C0021676E1100533948 /* ComplexHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexHelperTests.swift; sourceTree = "<group>"; };
 		7B6834CB20FF257900659C3C /* Gruntfile.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Gruntfile.js; sourceTree = "<group>"; };
 		7B6834CC20FF257900659C3C /* indoornavi_api.iml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = indoornavi_api.iml; sourceTree = "<group>"; };
 		7B6834CD20FF257900659C3C /* python_modules */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = python_modules; sourceTree = "<group>"; };
@@ -11601,6 +11607,8 @@
 				7B8570C220E0F0AA00295D00 /* AreaEventsHelperTests.swift */,
 				7B2F3EB320E527E9006D98B4 /* CoordinatesHelperTests.swift */,
 				7BEFEC0420F34CC900A55FCC /* MapHelperTests.swift */,
+				7B682C0021676E1100533948 /* ComplexHelperTests.swift */,
+				7B682BFE216663D600533948 /* DataHelperTests.swift */,
 			);
 			path = HelpersTests;
 			sourceTree = "<group>";
@@ -11616,6 +11624,7 @@
 				7BEFEBF820EBA84900A55FCC /* INInfoWindowTests.swift */,
 				7BEFEBFA20EBB7B200A55FCC /* INReportTests.swift */,
 				7BB6161021355E17003DD41C /* INCircleTests.swift */,
+				7B682BFC2166630800533948 /* INDataTests.swift */,
 			);
 			path = APITests;
 			sourceTree = "<group>";
@@ -11816,8 +11825,11 @@
 				7B83921A2147963A00BC4448 /* DeviceDataManagerTests.swift in Sources */,
 				7BEFEBF920EBA84900A55FCC /* INInfoWindowTests.swift in Sources */,
 				7B83921C21479EB300BC4448 /* Constants.swift in Sources */,
+				7B682C0121676E1100533948 /* ComplexHelperTests.swift in Sources */,
 				7BEFEBF120EB738D00A55FCC /* INAreaTests.swift in Sources */,
+				7B682BFF216663D600533948 /* DataHelperTests.swift in Sources */,
 				7B8570C120E0E51600295D00 /* ColorHelperTests.swift in Sources */,
+				7B682BFD2166630800533948 /* INDataTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

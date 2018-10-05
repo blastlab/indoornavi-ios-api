@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension INPoint : Equatable {
+extension INPoint: Equatable {
     
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -28,10 +28,16 @@ extension INPoint : Equatable {
     }
     
     init?(fromJSONObject jsonObject: Any?) {
-        if let pointDictionary = jsonObject as? [String: Int], let x = pointDictionary["x"], let y = pointDictionary["y"] {
-            self.init(x: Int32(x), y: Int32(y))
-        } else {
-            return nil
+        if let pointDictionary = jsonObject as? [String: Any] {
+            if let x = pointDictionary["x"] as? Int32, let y = pointDictionary["y"] as? Int32 {
+                self.init(x: x, y: y)
+                return
+            } else if let x = pointDictionary["x"] as? Int, let y = pointDictionary["y"] as? Int {
+                self.init(x: Int32(x), y: Int32(y))
+                return
+            }
         }
+        
+        return nil
     }
 }
