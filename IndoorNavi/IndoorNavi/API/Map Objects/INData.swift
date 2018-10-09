@@ -57,6 +57,11 @@ public class INData: NSObject {
         map.evaluate(javaScriptString: javaScriptString)
     }
     
+    /// Returns array of `INArea` representing areas on specified `floorID`.
+    ///
+    /// - Parameters:
+    ///   - floorID: ID of the floor you want to get paths from.
+    ///   - completionHandler: A block to invoke when array of `INArea` is available.
     public func getAreas(fromFloorWithID floorID: Int, completionHandler: @escaping ([INArea]) -> Void) {
         let uuid = UUID().uuidString
         map.getAreasCallbacksController.getAreasCallbacks[uuid] = completionHandler
