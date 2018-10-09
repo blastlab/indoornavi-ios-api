@@ -44,7 +44,6 @@ public class INMarker: INObject {
             self.label = label
             setLabelInJavaScript()
         }
-        draw()
     }
     
     @available(swift, obsoleted: 1.0)

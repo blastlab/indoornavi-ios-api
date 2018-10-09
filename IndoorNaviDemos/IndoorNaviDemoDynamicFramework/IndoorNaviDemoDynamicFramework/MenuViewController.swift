@@ -9,8 +9,8 @@
 import UIKit
 
 fileprivate let MenuItemCellIdentifier = "MenuItem"
-fileprivate let Images = ["area", "info", "localization", "marker", "polyline", "report", "report", "report"]
-fileprivate let Titles = ["Draw area", "Draw info window", "Locate", "Place marker", "Draw polyline", "Report", "Complexes", "Get paths"]
+fileprivate let Images = ["area", "info", "localization", "marker", "polyline", "report", "report", "report", "report"]
+fileprivate let Titles = ["Draw area", "Draw info window", "Locate", "Place marker", "Draw polyline", "Report", "Complexes", "Get paths", "Get areas"]
 
 class MenuViewController: UITableViewController {
     

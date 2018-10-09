@@ -45,6 +45,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     var complexesCallbacksController = ComplexesCallbacksController()
     var pullToPathCallbacksController = PullToPathCallbacksController()
     var getPathsCallbacksController = GetPathsCallbacksController()
+    var getAreasCallbacksController = GetAreasCallbacksController()
     
     private var webView: WKWebView!
     
@@ -201,6 +202,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     @objc public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupWebView(withFrame: CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height))
+        getAreasCallbacksController.map = self
     }
     
     private func initInJavaScript() {
@@ -267,6 +269,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         controller.add(complexesCallbacksController, name: ComplexesCallbacksController.ControllerName)
         controller.add(pullToPathCallbacksController, name: PullToPathCallbacksController.ControllerName)
         controller.add(getPathsCallbacksController, name: GetPathsCallbacksController.ControllerName)
+        controller.add(getAreasCallbacksController, name: GetAreasCallbacksController.ControllerName)
         configuration.userContentController = controller
         
         return configuration

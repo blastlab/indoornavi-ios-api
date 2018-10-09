@@ -51,7 +51,9 @@ public struct Scale: Equatable {
     
     /// Real distance length corresponding to one pixel on map
     public var centimetresPerPixel: Double {
-        return Double(realDistance) / scaleInPixels
+        let unitPerPixel = Double(realDistance) / scaleInPixels
+        let centimetersPerPixel = measure == .centimeters ? unitPerPixel : unitPerPixel * 100
+        return centimetersPerPixel
     }
     
     init?(fromJSONObject jsonObject: Any) {
@@ -99,7 +101,9 @@ public struct Scale: Equatable {
     }
     
     @objc public var centimetresPerPixel: Double {
-        return Double(realDistance) / scaleInPixels
+        let unitPerPixel = Double(realDistance) / scaleInPixels
+        let centimetersPerPixel = measure == .centimeters ? unitPerPixel : unitPerPixel * 100
+        return centimetersPerPixel
     }
     
     convenience init(fromScale scale: Scale) {

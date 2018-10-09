@@ -37,7 +37,24 @@ public class INArea: INObject {
             self.color = color
             applyColorInJavaScript()
         }
-        draw()
+    }
+    
+    convenience init?(withMap map: INMap, fromJSONObject jsonObject: Any?) {
+        
+        if let dictionary = jsonObject as? [String: Any], let scale = map.scale {
+            let points = PointHelper.points(fromJSONObject: dictionary["points"])
+            
+            guard points.count > 2 else {
+                return nil
+            }
+            
+            let pointsInRealDimensions = MapHelper.realCoordinatesArray(fromPixelArray: points, scale: scale)
+            let defaultColor = UIColor(red: 0, green: 1, blue: 0, alpha: 0.3)
+            self.init(withMap: map, points: pointsInRealDimensions, color: defaultColor)
+            return
+        }
+        
+        return nil
     }
     
     @available(swift, obsoleted: 1.0)
