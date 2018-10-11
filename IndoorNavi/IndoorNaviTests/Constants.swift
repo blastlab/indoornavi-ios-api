@@ -6,8 +6,6 @@
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
-import UIKit
-
 struct Constants {
     static let FrontendTargetHost = "http://172.16.170.6:4200"
     static let BackendTargetHost = "http://172.16.170.50:90"
