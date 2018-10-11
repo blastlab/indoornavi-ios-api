@@ -33,6 +33,7 @@ class MapViewController: UIViewController {
     var circle1: INCircle!
     var circle2: INCircle!
     var bleLocationManager: BLELocationManager?
+    var navigation: INNavigation?
     
     var mapLoaded = false
     
@@ -151,6 +152,11 @@ class MapViewController: UIViewController {
         }
     }
     
+    func navigate() {
+        navigation = INNavigation(map: map, bleLocationManager: bleLocationManager)
+        navigation?.startNavigation(from: INPoint(x: 1213, y: 793), to: INPoint(x: 845, y: 315), withAccuracy: 200)
+    }
+    
     func didSelect(optionWithNumber optionNumber: Int) {
         guard mapLoaded else {
             showMapNotLoadedAlert()
@@ -175,6 +181,8 @@ class MapViewController: UIViewController {
             getComplexes()
         case 7:
             getPaths()
+        case 8:
+            navigate()
         default:
             return
         }

@@ -6,8 +6,6 @@
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
-import UIKit
-
 /// Object containing functions to retrieve data.
 public class INData: NSObject {
     
@@ -26,7 +24,7 @@ public class INData: NSObject {
     /// Initializes a new `INData` object with the provided parameters.
     ///
     /// - Parameters:
-    ///   - map: An `INData` object, in which object is going to be created.
+    ///   - map: An `INMap` object, in which object is going to be created.
     ///   - targetHost: Address to the INMap server.
     ///   - apiKey: The API key created on the INMap server.
     public init(map: INMap, targetHost: String, apiKey: String) {
