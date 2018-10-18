@@ -34,7 +34,6 @@ public class INPolyline: INObject {
             self.color = color
             setColorInJavaScript()
         }
-        draw()
     }
     
     @available(swift, obsoleted: 1.0)

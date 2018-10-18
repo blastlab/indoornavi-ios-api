@@ -55,6 +55,14 @@ class MapViewController: UIViewController {
     
     var mapLoaded = false
     
+    var areas = [INArea]() {
+        didSet {
+            for area in areas {
+                area.draw()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -161,16 +169,24 @@ class MapViewController: UIViewController {
     
     func getPaths() {
         let data = INData(map: map, targetHost: BackendTargetHost, apiKey: ApiKey)
-        data.getPaths(fromFlootWithID: 2) { paths in
+        data.getPaths(fromFloorWithID: 2) { paths in
             print("Paths: \(paths)")
         }
     }
     
+
     func navigate() {
         navigation = INNavigation(map: map, bleLocationManager: bleLocationManager)
         
         if let lastPosition = lastPosition {
             navigation!.startNavigation(from: lastPosition, to: destination, withAccuracy: 200)
+        }
+    }
+
+    func getAreas() {
+        let data = INData(map: map, targetHost: BackendTargetHost, apiKey: ApiKey)
+        data.getAreas(fromFloorWithID: 2) { areas in
+            self.areas = areas
         }
     }
     
@@ -200,6 +216,8 @@ class MapViewController: UIViewController {
             getPaths()
         case 8:
             navigate()
+        case 9:
+            getAreas()
         default:
             return
         }
@@ -209,14 +227,19 @@ class MapViewController: UIViewController {
 extension MapViewController: BLELocationManagerDelegate {
     
     func bleLocationManager(_ manager: BLELocationManager, didUpdateLocation location: INLocation) {
-        let positionInCentimeters = INPoint(x: Int32( (location.x * 100).rounded()), y: Int32( (location.y * 100).rounded()))
+        guard let scale = map.scale else {
+            return
+        }
+        
+        let positionInCentimeters = scale.measure == .centimeters ? INPoint(x: Int32( (location.x * 100).rounded()), y: Int32( (location.y * 100).rounded())) : INPoint(x: Int32( (location.x * 100).rounded()), y: Int32( (location.y * 100).rounded()))
         lastPosition = positionInCentimeters
         self.circle1.position = positionInCentimeters
         self.circle1.draw()
+        
         if mapLoaded {
-            let positionInPixels = MapHelper.pixel(fromReaCoodinates: positionInCentimeters, scale: map.scale!)
+            let positionInPixels = MapHelper.pixel(fromReaCoodinates: positionInCentimeters, scale: scale)
             map.pullToPath(point: positionInPixels, accuracy: 10000) { pixel in
-                let newPositionInCentimeters = MapHelper.realCoordinates(fromPixel: pixel, scale: self.map.scale!)
+                let newPositionInCentimeters = MapHelper.realCoordinates(fromPixel: pixel, scale: scale)
                 self.circle2.position = newPositionInCentimeters
                 self.circle2.draw()
             }

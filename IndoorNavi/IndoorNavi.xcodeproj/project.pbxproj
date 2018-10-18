@@ -40,6 +40,7 @@
 		7B682BFD2166630800533948 /* INDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B682BFC2166630800533948 /* INDataTests.swift */; };
 		7B682BFF216663D600533948 /* DataHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B682BFE216663D600533948 /* DataHelperTests.swift */; };
 		7B682C0121676E1100533948 /* ComplexHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B682C0021676E1100533948 /* ComplexHelperTests.swift */; };
+		7B682C052167A58E00533948 /* GetAreasCallbacksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B682C042167A58E00533948 /* GetAreasCallbacksController.swift */; };
 		7B6856C220FF25F200659C3C /* indoorNavi.html in Resources */ = {isa = PBXBuildFile; fileRef = 7B7180AB207CAF1B00EC3E34 /* indoorNavi.html */; };
 		7B6856C320FF260600659C3C /* indoorNavi.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B68465C20FF258800659C3C /* indoorNavi.js */; };
 		7B6948BB20863F1400E22BD9 /* INPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6948BA20863F1400E22BD9 /* INPolyline.swift */; };
@@ -118,6 +119,7 @@
 		7B682BFC2166630800533948 /* INDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INDataTests.swift; sourceTree = "<group>"; };
 		7B682BFE216663D600533948 /* DataHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHelperTests.swift; sourceTree = "<group>"; };
 		7B682C0021676E1100533948 /* ComplexHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexHelperTests.swift; sourceTree = "<group>"; };
+		7B682C042167A58E00533948 /* GetAreasCallbacksController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAreasCallbacksController.swift; sourceTree = "<group>"; };
 		7B6834CB20FF257900659C3C /* Gruntfile.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Gruntfile.js; sourceTree = "<group>"; };
 		7B6834CC20FF257900659C3C /* indoornavi_api.iml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = indoornavi_api.iml; sourceTree = "<group>"; };
 		7B6834CD20FF257900659C3C /* python_modules */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = python_modules; sourceTree = "<group>"; };
@@ -11553,6 +11555,7 @@
 				7B866E4A215E358B00607BDD /* ComplexesCallbacksController.swift */,
 				7BDE207C2163888800E9D707 /* PullToPathCallbacksController.swift */,
 				7B682BF82166545A00533948 /* GetPathsCallbacksController.swift */,
+				7B682C042167A58E00533948 /* GetAreasCallbacksController.swift */,
 			);
 			path = HandlerControllers;
 			sourceTree = "<group>";
@@ -11809,6 +11812,7 @@
 				7BEFEBFD20ED23C900A55FCC /* Scale.swift in Sources */,
 				7BD4679D206CF59500B9F2AD /* INMap.swift in Sources */,
 				7B666AF42088D3A60031780A /* INObject.swift in Sources */,
+				7B682C052167A58E00533948 /* GetAreasCallbacksController.swift in Sources */,
 				7BCB74BB20BE7B96006386D1 /* Coordinates.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

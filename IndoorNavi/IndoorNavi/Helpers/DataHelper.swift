@@ -21,4 +21,18 @@ class DataHelper: NSObject {
             return [Path]()
         }
     }
+    
+    static func areas(fromJSONObject jsonObject: Any?, withMap map: INMap) -> [INArea] {
+        if let areasDictionaries = jsonObject as? [[String: Any]] {
+            
+            let areas = areasDictionaries.compactMap { element -> INArea? in
+                let area = INArea(withMap: map, fromJSONObject: element)
+                return area
+            }
+            
+            return areas
+        } else {
+            return [INArea]()
+        }
+    }
 }

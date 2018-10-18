@@ -22,6 +22,17 @@ public class MapHelper: NSObject {
         return point
     }
     
+    /// Converts array of pixel points to the points corresponding to the actual locations in proper unit.
+    ///
+    /// - Parameters:
+    ///   - pixelArray: `INPoint`'s describing locations of the pixel.
+    ///   - scale: `Scale` of the map.
+    /// - Returns: Array of `INPoint`'s describing locations of points given in real dimensions, specified in `scale`.
+    public static func realCoordinatesArray(fromPixelArray pixelArray: [INPoint], scale: Scale) -> [INPoint] {
+        let pointsInRealCoordinates = pixelArray.map { realCoordinates(fromPixel: $0, scale: scale) }
+        return pointsInRealCoordinates
+    }
+    
     @available(swift, obsoleted: 1.0)
     @objc public static func realCoordinates(fromPixel pixel: INPoint, scale: ObjCScale) -> INPoint {
         let x = Int32(Double(pixel.x) * scale.centimetresPerPixel)

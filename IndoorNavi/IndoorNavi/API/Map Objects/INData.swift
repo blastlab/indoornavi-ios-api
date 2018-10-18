@@ -14,6 +14,7 @@ public class INData: NSObject {
         static let Initialization = "var %@ = new INData('%@','%@');"
         static let Message = "{uuid: '%@', response: res}"
         static let GetPaths = "%@.getPaths(%d).then(res => webkit.messageHandlers.GetPathsCallbacksController.postMessage(%@));"
+        static let GetAreas = "%@.getAreas(%d).then(res => webkit.messageHandlers.GetAreasCallbacksController.postMessage(%@));"
     }
     
     private var map: INMap
@@ -46,11 +47,24 @@ public class INData: NSObject {
     /// - Parameters:
     ///   - floorID: ID of the floor you want to get paths from.
     ///   - completionHandler: A block to invoke when array of `Path` is available.
-    public func getPaths(fromFlootWithID floorID: Int, completionHandler: @escaping ([Path]) -> Void) {
+    public func getPaths(fromFloorWithID floorID: Int, completionHandler: @escaping ([Path]) -> Void) {
         let uuid = UUID().uuidString
         map.getPathsCallbacksController.getPathsCallbacks[uuid] = completionHandler
         let message = String(format: ScriptTemplates.Message, uuid)
         let javaScriptString = String(format: ScriptTemplates.GetPaths, javaScriptVariableName, floorID, message)
+        map.evaluate(javaScriptString: javaScriptString)
+    }
+    
+    /// Returns array of `INArea` representing areas on specified `floorID`.
+    ///
+    /// - Parameters:
+    ///   - floorID: ID of the floor you want to get paths from.
+    ///   - completionHandler: A block to invoke when array of `INArea` is available.
+    public func getAreas(fromFloorWithID floorID: Int, completionHandler: @escaping ([INArea]) -> Void) {
+        let uuid = UUID().uuidString
+        map.getAreasCallbacksController.getAreasCallbacks[uuid] = completionHandler
+        let message = String(format: ScriptTemplates.Message, uuid)
+        let javaScriptString = String(format: ScriptTemplates.GetAreas, javaScriptVariableName, floorID, message)
         map.evaluate(javaScriptString: javaScriptString)
     }
 }

@@ -46,7 +46,6 @@ public class INCircle: INObject {
             self.color = color
             applyColorInJavaScript()
         }
-        draw()
     }
     
     @available(swift, obsoleted: 1.0)
