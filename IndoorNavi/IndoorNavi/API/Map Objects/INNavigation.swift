@@ -48,14 +48,20 @@ public class INNavigation: NSObject {
     /// Calculates shortest path for given beginning and destination coordinates.
     ///
     /// - Parameters:
-    ///   - position: `INPoint` representing starting position from which navigation is going to begin.
-    ///   - destination: `INPoint` representing destination to which navigation is going to calculate and draw a path.
+    ///   - position: `INPoint` representing starting position from which navigation is going to begin. Should be given in real world dimensions, same as set for map's scale.
+    ///   - destination: `INPoint` representing destination to which navigation is going to calculate and draw a path. Should be given in real world dimensions, same as set for map's scale.
     ///   - accuracy: Number representing margin for which navigation will pull point to the nearest path.
     public func startNavigation(from position: INPoint, to destination: INPoint, withAccuracy accuracy: Int) {
-        self.lastPosition = position
-        self.destination = destination
+        
+        guard let scale = map.scale else {
+            NSLog("Scale has not loaded yet.")
+            return
+        }
+        
+        self.lastPosition = MapHelper.pixel(fromReaCoodinates: position, scale: scale)
+        self.destination = MapHelper.pixel(fromReaCoodinates: destination, scale: scale)
         self.accuracy = accuracy
-        let javaScriptString = String(format: ScriptTemplates.Start, javaScriptVariableName, position.x, position.y, destination.x, destination.y, accuracy)
+        let javaScriptString = String(format: ScriptTemplates.Start, javaScriptVariableName, self.lastPosition!.x, self.lastPosition!.y, self.destination!.x, self.destination!.y, accuracy)
         map.evaluate(javaScriptString: javaScriptString)
         
         if let bleLocationManager = bleLocationManager {
@@ -87,8 +93,13 @@ public class INNavigation: NSObject {
     }
     
     private func update(position: INPoint) {
-        lastPosition = position
-        let javaScriptString = String(format: ScriptTemplates.UpdatePosition, javaScriptVariableName, position.x, position.y)
+        
+        guard let scale = map.scale else {
+            return
+        }
+        
+        lastPosition = MapHelper.pixel(fromReaCoodinates: position, scale: scale)
+        let javaScriptString = String(format: ScriptTemplates.UpdatePosition, javaScriptVariableName, lastPosition!.x, lastPosition!.y)
         map.evaluate(javaScriptString: javaScriptString)
     }
 }
