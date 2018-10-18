@@ -9,6 +9,10 @@
 import UIKit
 import CoreLocation
 
+extension Notification.Name {
+    static let didUpdateLocation = Notification.Name("didUpdateLocation")
+}
+
 /// Structure representing information about a detected iBeacon, its configuration and location.
 struct INBeacon {
     /// Information about a detected iBeacon.
@@ -313,6 +317,7 @@ extension BLELocationManager: BeaconManagerDelegate {
     
     func didRange(beacons: [INBeacon]) {
         if let location = maxStepEnabled ? getPositionMaxStep(withBeacons: beacons) : getCurrentLocation(withBeacons: beacons) {
+            NotificationCenter.default.post(name: .didUpdateLocation, object: self, userInfo: ["location": location])
             delegate?.bleLocationManager(self, didUpdateLocation: location)
         }
     }

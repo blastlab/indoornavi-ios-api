@@ -22,6 +22,7 @@
 
 /* Begin PBXBuildFile section */
 		7B10D8AF2140161800638C06 /* DeviceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10D8AE2140161800638C06 /* DeviceDataManager.swift */; };
+		7B2EED7C216D075200C919AF /* INNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2EED7B216D075200C919AF /* INNavigation.swift */; };
 		7B2F3EB420E527E9006D98B4 /* CoordinatesHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2F3EB320E527E9006D98B4 /* CoordinatesHelperTests.swift */; };
 		7B46979120A095D200D6A22B /* INReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B46979020A095D200D6A22B /* INReport.swift */; };
 		7B46979320A0A2B400D6A22B /* AreaEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B46979220A0A2B400D6A22B /* AreaEvent.swift */; };
@@ -99,6 +100,7 @@
 
 /* Begin PBXFileReference section */
 		7B10D8AE2140161800638C06 /* DeviceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDataManager.swift; sourceTree = "<group>"; };
+		7B2EED7B216D075200C919AF /* INNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INNavigation.swift; sourceTree = "<group>"; };
 		7B2F3EB320E527E9006D98B4 /* CoordinatesHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesHelperTests.swift; sourceTree = "<group>"; };
 		7B46979020A095D200D6A22B /* INReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INReport.swift; sourceTree = "<group>"; };
 		7B46979220A0A2B400D6A22B /* AreaEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaEvent.swift; sourceTree = "<group>"; };
@@ -11500,6 +11502,7 @@
 				7B46979020A095D200D6A22B /* INReport.swift */,
 				7B75CD6B2133CF70002598AB /* INCircle.swift */,
 				7B682BF321664D0800533948 /* INData.swift */,
+				7B2EED7B216D075200C919AF /* INNavigation.swift */,
 			);
 			path = "Map Objects";
 			sourceTree = "<group>";
@@ -11781,6 +11784,7 @@
 				7BCB74B920BE70C7006386D1 /* TimeIntervalExtension.swift in Sources */,
 				7B46979320A0A2B400D6A22B /* AreaEvent.swift in Sources */,
 				7BB616172135946A003DD41C /* BLELocationManager.swift in Sources */,
+				7B2EED7C216D075200C919AF /* INNavigation.swift in Sources */,
 				7BEFEC0120EFA3EE00A55FCC /* LongClickEventCallbacksController.swift in Sources */,
 				7B714FBB20A1D47800836BBD /* AreaEventsCallbacksController.swift in Sources */,
 				7B7FD56820936CE200AD409C /* INArea.swift in Sources */,

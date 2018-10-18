@@ -12,7 +12,7 @@ import CoreLocation
 
 class MapViewController: UIViewController {
     
-    let FrontendTargetHost = "http://172.16.170.6:4200"
+    let FrontendTargetHost = "http://172.16.170.50:4200"
     let BackendTargetHost = "http://172.16.170.50:90"
     let ApiKey = "TestAdmin"
     let BeaconUUID = "30FD7D40-2EDC-4D83-9D47-D88AA7E0492A"
@@ -25,14 +25,33 @@ class MapViewController: UIViewController {
     let points1: [INPoint] = [INPoint(x: 480, y: 480), INPoint(x: 1220, y: 480), INPoint(x: 1220, y: 1220), INPoint(x: 480, y: 1220), INPoint(x: 750, y: 750)]
     let points2: [INPoint] = [INPoint(x: 2000, y: 2000), INPoint(x: 2500, y: 2000), INPoint(x: 3000, y: 2000), INPoint(x: 3000, y: 1500), INPoint(x: 2500, y: 1500)]
     
-    let configurations = [INBeaconConfiguration(x: 32.12, y: 2.46, z: 3, txPower: -69, major: 65022, minor: 187),
-                         INBeaconConfiguration(x: 36.81, y: 1.4, z: 3, txPower: -69, major: 65023, minor: 187),
-                         INBeaconConfiguration(x: 32.2, y: 11.61, z: 3, txPower: -69, major: 65024, minor: 187),
-                         INBeaconConfiguration(x: 37.49, y: 12.27, z: 3, txPower: -69, major: 65025, minor: 187)]
+    let configurations = [INBeaconConfiguration(x: 32.12, y: 2.46, z: 3, txPower: -69, major: 65014, minor: 187),
+                          INBeaconConfiguration(x: 36.81, y: 1.4, z: 3, txPower: -69, major: 65008, minor: 187),
+                          INBeaconConfiguration(x: 32.2, y: 11.61, z: 3, txPower: -69, major: 65021, minor: 187),
+                          INBeaconConfiguration(x: 37.49, y: 12.27, z: 3, txPower: -69, major: 65007, minor: 187),
+                          
+                          INBeaconConfiguration(x: 34.61, y: 14.59, z: 3, txPower: -69, major: 65030, minor: 187),
+                          INBeaconConfiguration(x: 24.34, y: 14.41, z: 3, txPower: -69, major: 65031, minor: 187),
+                          INBeaconConfiguration(x: 16.82, y: 14.44, z: 3, txPower: -69, major: 65017, minor: 187),
+                          
+                          INBeaconConfiguration(x: 24.45, y: 1.97, z: 3, txPower: -69, major: 65027, minor: 187),
+                          INBeaconConfiguration(x: 29.91, y: 1.94, z: 3, txPower: -69, major: 65028, minor: 187),
+                          INBeaconConfiguration(x: 24.6, y: 8.69, z: 3, txPower: -69, major: 65026, minor: 187),
+                          INBeaconConfiguration(x: 29.91, y: 9.09, z: 3, txPower: -69, major: 65029, minor: 187),
+                          
+                          INBeaconConfiguration(x: 1.17, y: 17.42, z: 3, txPower: -69, major: 65020, minor: 187),
+                          INBeaconConfiguration(x: 7.6, y: 16.44, z: 3, txPower: -69, major: 65003, minor: 187),
+                          INBeaconConfiguration(x: 1.26, y: 22.88, z: 3, txPower: -69, major: 65006, minor: 187),
+                          INBeaconConfiguration(x: 7, y: 23.22, z: 3, txPower: -69, major: 65009, minor: 187)]
+    
+    let destination = INPoint(x: 2600, y: 200)
     
     var circle1: INCircle!
     var circle2: INCircle!
     var bleLocationManager: BLELocationManager?
+    var navigation: INNavigation?
+    
+    var lastPosition: INPoint?
     
     var mapLoaded = false
     
@@ -87,12 +106,8 @@ class MapViewController: UIViewController {
         area.draw()
     }
     
-    var booleanValue = true
-    
     func placeMarker() {
-        let marker = INMarker(withMap: map, position: INPoint(x: 600 + (booleanValue ? 0 : 600), y: 600 + (booleanValue ? 0 : 600)), iconPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png", label: "Tekst ABCD" + (booleanValue ? " 1" : " 2"))
-        booleanValue = !booleanValue
-//        marker = INMarker(withMap: map, position: INPoint(x: 600, y: 600), iconPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png", label: "Tekst ABCD")
+        let marker = INMarker(withMap: map, position: INPoint(x: 600, y: 600), iconPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png", label: "Tekst ABCD")
         marker.addEventListener {
             self.showAlert()
         }
@@ -151,6 +166,14 @@ class MapViewController: UIViewController {
         }
     }
     
+    func navigate() {
+        navigation = INNavigation(map: map, bleLocationManager: bleLocationManager)
+        
+        if let lastPosition = lastPosition {
+            navigation!.startNavigation(from: lastPosition, to: destination, withAccuracy: 200)
+        }
+    }
+    
     func didSelect(optionWithNumber optionNumber: Int) {
         guard mapLoaded else {
             showMapNotLoadedAlert()
@@ -175,6 +198,8 @@ class MapViewController: UIViewController {
             getComplexes()
         case 7:
             getPaths()
+        case 8:
+            navigate()
         default:
             return
         }
@@ -185,6 +210,7 @@ extension MapViewController: BLELocationManagerDelegate {
     
     func bleLocationManager(_ manager: BLELocationManager, didUpdateLocation location: INLocation) {
         let positionInCentimeters = INPoint(x: Int32( (location.x * 100).rounded()), y: Int32( (location.y * 100).rounded()))
+        lastPosition = positionInCentimeters
         self.circle1.position = positionInCentimeters
         self.circle1.draw()
         if mapLoaded {
