@@ -54,7 +54,7 @@ public class INNavigation: NSObject {
     public func startNavigation(from position: INPoint, to destination: INPoint, withAccuracy accuracy: Int) {
         
         guard let scale = map.scale else {
-            NSLog("Scale has not loaded yet.")
+            NSLog("Scale has not loaded yet. Navigation could not be performed.")
             return
         }
         

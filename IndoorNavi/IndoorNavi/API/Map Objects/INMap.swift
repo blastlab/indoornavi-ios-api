@@ -80,15 +80,13 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     ///   - onCompletion: A block to invoke when the map is loaded.
     @objc public func load(_ mapId: Int, onCompletion: (() -> Void)? = nil) {
         var javaScriptString = String()
-        let callback = {
-            self.getDimensions()
-            onCompletion?()
+        let uuid = UUID().uuidString
+        
+        promisesController.promises[uuid] = {
+            self.getDimensions(onCompletion: onCompletion)
         }
         
-        let uuid = UUID().uuidString
-        promisesController.promises[uuid] = callback
         javaScriptString = String(format: ScriptTemplates.LoadMapPromise, mapId, uuid)
-        
         evaluate(javaScriptString: javaScriptString)
     }
     
@@ -211,16 +209,17 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         }
     }
     
-    private func getDimensions() {
+    private func getDimensions(onCompletion: (() -> Void)? = nil) {
         evaluate(javaScriptString: ScriptTemplates.Parameters) { response, error in
             
             guard error == nil, response != nil else {
-                print("Error: \(String(describing: error))")
+                NSLog("Error: \(String(describing: error?.localizedDescription))")
                 return
             }
             
             if let scale = Scale(fromJSONObject: response!) {
                 self.scale = scale
+                onCompletion?()
             }
         }
     }
@@ -292,7 +291,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         evaluateScriptsAfterInitialization()
     }
     
-    internal func evaluate(javaScriptString string: String, completionHandler: ((Any?, Error?) -> Void)? = nil ) {
+    func evaluate(javaScriptString string: String, completionHandler: ((Any?, Error?) -> Void)? = nil ) {
         if initializedInJavaScript {
             webView.evaluateJavaScript(string, completionHandler: completionHandler)
         } else {
