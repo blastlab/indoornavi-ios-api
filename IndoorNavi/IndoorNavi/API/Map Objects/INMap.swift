@@ -60,6 +60,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     private(set) public var scale: Scale? {
         didSet {
             if scale != nil {
+                longClickEventCallbacksController.scale = scale
                 evaluateScriptsAfterScaleLoad()
             }
         }
@@ -132,7 +133,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     
     /// Adds a block to invoke when area event occurs.
     ///
-    /// - Parameter areaEventCallback: A block to invoke when area event occurs.
+    /// - Parameter areaEventCallback: A block to invoke when area event occurs. This handler takes the point as a parameter given in real dimensions.
     public func addAreaEventListener(withCallback areaEventCallback: @escaping (AreaEvent) -> Void) {
         let uuid = UUID().uuidString
         areaEventListenerCallbacksController.areaEventListenerCallbacks[uuid] = areaEventCallback
