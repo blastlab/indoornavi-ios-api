@@ -9,8 +9,8 @@
 /// Structure representing AreaEvent.
 public struct AreaEvent: Equatable {
     
-    /// Short ID of the tag that entered/left INArea.
-    public var tagID: Int
+    /// Short ID of the tag that entered/left INArea. Value is optional.
+    public var tagID: Int?
     /// ID of the `INArea` where `AreaEvent` occured.
     public var areaID: Int
     /// Date when `AreaEvent` occured.
@@ -37,7 +37,7 @@ public struct AreaEvent: Equatable {
     ///   - areaID: Area's ID.
     ///   - areaName: Area's name.
     ///   - mode: Specifies either it was entering or leaving the area.
-    init(tagID: Int, date: Date, areaID: Int, areaName: String, mode: Mode) {
+    init(tagID: Int? = nil, date: Date, areaID: Int, areaName: String, mode: Mode) {
         self.tagID = tagID
         self.date = date
         self.areaID = areaID
@@ -54,8 +54,28 @@ public struct AreaEvent: Equatable {
             let modeString = dictionary["mode"] as? String
             let mode = modeString != nil ? AreaEvent.Mode(rawValue: modeString!) : nil
             
-            if let date = date, let tagID = tagID, let areaID = areaID, let areaName = areaName, let mode = mode {
+            if let date = date, let areaID = areaID, let areaName = areaName, let mode = mode {
                 self.init(tagID: tagID, date: date, areaID: areaID, areaName: areaName, mode: mode)
+                return
+            }
+        }
+        
+        return nil
+    }
+    
+    init?(fromBleJSONObject jsonObject: Any?) {
+        if let dictionary = jsonObject as? [String: Any] {
+            let date = dictionary["date"] as? Date
+            
+            let area = dictionary["area"] as? [String: Any]
+            let areaID = Int(area?["id"] as? String ?? "")
+            let areaName = area?["name"] as? String
+            
+            let modeString = dictionary["mode"] as? String
+            let mode = modeString != nil ? AreaEvent.Mode(rawValue: modeString!) : nil
+            
+             if let date = date, let areaID = areaID, let areaName = areaName, let mode = mode {
+                self.init(tagID: nil, date: date, areaID: areaID, areaName: areaName, mode: mode)
                 return
             }
         }
@@ -106,6 +126,6 @@ public struct AreaEvent: Equatable {
             mode = .onEnter
         }
         
-        self.init(tagID: areaEvent.tagID, date: areaEvent.date, areaID: areaEvent.areaID, areaName: areaEvent.areaName, mode: mode)
+        self.init(tagID: areaEvent.tagID ?? 0, date: areaEvent.date, areaID: areaEvent.areaID, areaName: areaEvent.areaName, mode: mode)
     }
 }
