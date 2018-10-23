@@ -67,6 +67,7 @@ public class INBle: NSObject {
         if let uuid = areaEventListenerUUID?.uuidString {
             map.areaEventListenerCallbacksController.areaEventListenerCallbacks.removeValue(forKey: uuid)
         }
+        NotificationCenter.default.removeObserver(self)
         areaEventListenerUUID = nil
     }
     
