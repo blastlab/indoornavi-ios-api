@@ -17,17 +17,17 @@ public class INData: NSObject {
         static let GetAreas = "%@.getAreas(%d).then(res => webkit.messageHandlers.GetAreasCallbacksController.postMessage(%@));"
     }
     
-    private var map: INMap
+    private let map: INMap
     private var javaScriptVariableName: String!
-    private var targetHost: String
-    private var apiKey: String
+    private let targetHost: String
+    private let apiKey: String
     
     /// Initializes a new `INData` object with the provided parameters.
     ///
     /// - Parameters:
     ///   - map: An `INMap` object, in which object is going to be created.
-    ///   - targetHost: Address to the INMap server.
-    ///   - apiKey: The API key created on the INMap server.
+    ///   - targetHost: Address to the `INMap` backend server.
+    ///   - apiKey: The API key created on the `INMap` server.
     public init(map: INMap, targetHost: String, apiKey: String) {
         self.map = map
         self.targetHost = targetHost

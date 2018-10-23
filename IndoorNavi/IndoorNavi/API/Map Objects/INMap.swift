@@ -95,8 +95,8 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     ///
     /// - Parameters:
     ///   - frame: Frame of the view containing map.
-    ///   - targetHost: Address to the INMap server.
-    ///   - apiKey: The API key created on the INMap server.
+    ///   - targetHost: Address to the `INMap` backend server.
+    ///   - apiKey: The API key created on the `INMap` server.
     @objc public init(frame: CGRect, targetHost: String, apiKey: String) {
         self.targetHost = targetHost
         self.apiKey = apiKey
@@ -111,8 +111,8 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     /// Setups communication with `INMap` frontend server.
     ///
     /// - Parameters:
-    ///   - targetHost: Address to the INMap server.
-    ///   - apiKey: The API key created on the INMap server.
+    ///   - targetHost: Address to the `INMap` backend server.
+    ///   - apiKey: The API key created on the `INMap` server.
     @objc public func setupConnection(withTargetHost targetHost: String, andApiKey apiKey: String) {
         self.targetHost = targetHost
         self.apiKey = apiKey
