@@ -208,14 +208,19 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     /// Returns nearest position on path for given coordinates.
     ///
     /// - Parameters:
-    ///   - location: The XY coordinates representing current coordinates in pixels.
-    ///   - accuracy: Accuracy of path pull
+    ///   - point: The XY coordinates representing current coordinates in real world dimensions.
+    ///   - accuracy: Accuracy of path pull.
     ///   - completionHandler: A block to invoke when calculated position on path is available. This completion handler takes `INPoint` as a position on Path.
     public func pullToPath(point: INPoint, accuracy: Int, withCompletionHandler completionHandler: @escaping (INPoint) -> Void) {
+        guard let scale = scale else {
+            NSLog("Scale has not loaded yet. Could not pull to path.")
+            return
+        }
         let uuid = UUID().uuidString
         pullToPathCallbacksController.pullToPathCallbacks[uuid] = completionHandler
         let message = String(format: ScriptTemplates.Message, uuid)
-        let javaScriptString = String(format: ScriptTemplates.PullToPath, point.x, point.y, accuracy, message)
+        let pixel = MapHelper.pixel(fromReaCoodinates: point, scale: scale)
+        let javaScriptString = String(format: ScriptTemplates.PullToPath, pixel.x, pixel.y, accuracy, message)
         evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
     }
     
