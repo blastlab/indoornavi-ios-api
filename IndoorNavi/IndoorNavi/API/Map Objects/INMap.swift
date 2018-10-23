@@ -64,6 +64,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         didSet {
             if scale != nil {
                 longClickEventCallbacksController.scale = scale
+                pullToPathCallbacksController.scale = scale
                 evaluateScriptsAfterScaleLoad()
             }
         }
