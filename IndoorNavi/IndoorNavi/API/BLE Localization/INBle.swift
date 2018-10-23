@@ -6,6 +6,7 @@
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
+/// Class containing methods to handle BLE localization events.
 public class INBle: NSObject {
 
     fileprivate struct ScriptTemplates {
@@ -16,19 +17,28 @@ public class INBle: NSObject {
         static let AddCallback = "%@.addCallbackFunction(res => webkit.messageHandlers.AreaEventListenerCallbacksController.postMessage(%@));"
     }
     
-    public var bleLocationManager: BLELocationManager?
-    
+    private let bleLocationManager: BLELocationManager
     private let map: INMap
     private var javaScriptVariableName: String!
     private let targetHost: String
     private let apiKey: String
     private let floorID: Int
+    private var areaEventListenerUUID: UUID?
     
-    public init(map: INMap, targetHost: String, floorID: Int, apiKey: String, bleLocationManager: BLELocationManager? = nil) {
+    /// Initializes a new `INBle` object with the provided parameters.
+    ///
+    /// - Parameters:
+    ///   - map: An `INMap` object, in which object is going to be created.
+    ///   - targetHost: Address to the `INMap` backend server.
+    ///   - floorID: ID number of the map you want to load.
+    ///   - apiKey: The API key created on the `INMap` server.
+    ///   - bleLocationManager: `BLELocationManager` object, used to update localization to check for area events. If set appriopriately, event listener is called on every event.
+    public init(map: INMap, targetHost: String, floorID: Int, apiKey: String, bleLocationManager: BLELocationManager) {
         self.map = map
         self.targetHost = targetHost
         self.apiKey = apiKey
         self.floorID = floorID
+        self.bleLocationManager = bleLocationManager
         super.init()
         javaScriptVariableName = String(format: ScriptTemplates.VariableName, hash)
         initInJavaScript()
@@ -39,8 +49,12 @@ public class INBle: NSObject {
         map.evaluate(javaScriptString: javaScriptString)
     }
     
+    /// Adds a block to invoke when area event occurs.
+    ///
+    /// - Parameter areaEventCallback: A block to invoke when area event occurs.
     public func addAreaEventListener(withCallback areaEventCallback: @escaping (AreaEvent) -> Void) {
-        let uuid = UUID().uuidString
+        areaEventListenerUUID = UUID()
+        let uuid = areaEventListenerUUID!.uuidString
         map.areaEventListenerCallbacksController.areaEventListenerCallbacks[uuid] = areaEventCallback
         let message = String(format: ScriptTemplates.Message, uuid)
         let javaScriptString = String(format: ScriptTemplates.AddCallback, javaScriptVariableName, message)
@@ -48,8 +62,12 @@ public class INBle: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveData(_:)), name: .didUpdateLocation, object: bleLocationManager)
     }
     
+    /// Removes area event listener.
     public func removeAreaEventListener() {
-        
+        if let uuid = areaEventListenerUUID?.uuidString {
+            map.areaEventListenerCallbacksController.areaEventListenerCallbacks.removeValue(forKey: uuid)
+        }
+        areaEventListenerUUID = nil
     }
     
     @objc private func didReceiveData(_ notification: Notification) {

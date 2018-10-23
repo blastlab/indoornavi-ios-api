@@ -56,6 +56,9 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     private var scriptsToEvaluateAfterInitialization = [String]()
     private var scriptsToEvaluateAfterScaleLoad = [String]()
     
+    private var areaEventListenerUUID: UUID?
+    private var coordinatesEventListenerUUID: UUID?
+    
     /// `Scale` object representing scale of the map
     private(set) public var scale: Scale? {
         didSet {
@@ -134,7 +137,8 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     ///
     /// - Parameter areaEventCallback: A block to invoke when area event occurs.
     public func addAreaEventListener(withCallback areaEventCallback: @escaping (AreaEvent) -> Void) {
-        let uuid = UUID().uuidString
+        areaEventListenerUUID = UUID()
+        let uuid = areaEventListenerUUID!.uuidString
         areaEventListenerCallbacksController.areaEventListenerCallbacks[uuid] = areaEventCallback
         let message = String(format: ScriptTemplates.Message, uuid)
         let javaScriptString = String(format: ScriptTemplates.AddAreaEventListener, message)
@@ -147,15 +151,32 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         addAreaEventListener(withCallback: callbackTakingStructs)
     }
     
+    /// Removes area event listener.
+    public func removeAreaEventListener() {
+        if let uuid = areaEventListenerUUID?.uuidString {
+            areaEventListenerCallbacksController.areaEventListenerCallbacks.removeValue(forKey: uuid)
+        }
+        areaEventListenerUUID = nil
+    }
+    
     /// Adds a block to invoke when coordinates event occurs.
     ///
     /// - Parameter coordinatesListenerEventCallback: A block to invoke when coordinates event occurs.
     public func addCoordinatesEventListener(withCallback coordinatesListenerEventCallback: @escaping (Coordinates) -> Void) {
-        let uuid = UUID().uuidString
+        coordinatesEventListenerUUID = UUID()
+        let uuid = coordinatesEventListenerUUID!.uuidString
         coordinatesEventListenerCallbacksController.coordinatesListenerCallbacks[uuid] = coordinatesListenerEventCallback
         let message = String(format: ScriptTemplates.Message, uuid)
         let javaScriptString = String(format: ScriptTemplates.AddAreaEventListener, message)
         evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
+    }
+    
+    /// Removes coordinates event listener.
+    public func removeCoordinatesEventListener() {
+        if let uuid = coordinatesEventListenerUUID?.uuidString {
+            coordinatesEventListenerCallbacksController.coordinatesListenerCallbacks.removeValue(forKey: uuid)
+        }
+        coordinatesEventListenerUUID = nil
     }
     
     @available(swift, obsoleted: 1.0)

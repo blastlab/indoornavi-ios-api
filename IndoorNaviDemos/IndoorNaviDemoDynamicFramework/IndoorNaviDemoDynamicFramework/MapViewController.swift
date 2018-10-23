@@ -69,7 +69,7 @@ class MapViewController: UIViewController {
         bleLocationManager = BLELocationManager(beaconUUID: UUID(uuidString: BeaconUUID)!, configurations: configurations, delegate: self)
         bleLocationManager!.useCLBeaconAccuracy = true
         bleLocationManager!.startUpdatingLocation()
-        ble = INBle(map: self.map, targetHost: self.BackendTargetHost, floorID: 2, apiKey: self.ApiKey, bleLocationManager: self.bleLocationManager)
+        ble = INBle(map: self.map, targetHost: self.BackendTargetHost, floorID: 2, apiKey: self.ApiKey, bleLocationManager: self.bleLocationManager!)
         ble!.addAreaEventListener() { event in
             print("event \(event)")
         }
@@ -244,6 +244,6 @@ extension MapViewController: BLELocationManagerDelegate {
     }
     
     func bleLocationManager(_ manager: BLELocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print("no i co")
+        print("Did change authorization")
     }
 }
