@@ -184,11 +184,16 @@ class MapViewController: UIViewController {
     }
     
     func navigate() {
-        navigation = INNavigation(map: map, bleLocationManager: bleLocationManager)
-        
-        if let lastPosition = lastPosition {
+        if let navigation = navigation {
+            navigation.restartNavigation()
+        } else if let lastPosition = lastPosition {
+            navigation = INNavigation(map: map, bleLocationManager: bleLocationManager)
             navigation!.startNavigation(from: lastPosition, to: destination, withAccuracy: 200)
         }
+    }
+    
+    func stopNavigation() {
+        navigation?.stopNavigation()
     }
 
     func getAreas() {
@@ -224,6 +229,8 @@ class MapViewController: UIViewController {
         case 8:
             navigate()
         case 9:
+            stopNavigation()
+        case 10:
             getAreas()
         default:
             return
