@@ -28,7 +28,7 @@ class INDataTests: XCTestCase {
         let getPathsResponsePromise = expectation(description: "Paths retrieved")
         
         map.load(Constants.FloorID) {
-            self.data.getPaths(fromFlootWithID: Constants.FloorID) { paths in
+            self.data.getPaths(fromFloorWithID: Constants.FloorID) { paths in
                 getPathsResponsePromise.fulfill()
             }
         }

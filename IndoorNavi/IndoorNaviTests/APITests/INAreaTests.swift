@@ -23,10 +23,12 @@ class INAreaTests: XCTestCase {
     
     func testAreaInit() {
         let areaInitPromise = expectation(description: "Area initialized")
+        let areaIsWithin1Promise = expectation(description: "Is Within 1")
+        let areaIsWithin2Promise = expectation(description: "Is Within 2")
         
         map.load(Constants.FloorID) {
             let area = INArea(withMap: self.map)
-            let points = [INPoint(x: 480, y: 480), INPoint(x: 1220, y: 480), INPoint(x: 1220, y: 1220), INPoint(x: 480, y: 1220), INPoint(x: 750, y: 750)]
+            let points = [INPoint(x: 480, y: 480), INPoint(x: 1220, y: 480), INPoint(x: 1220, y: 1220), INPoint(x: 480, y: 1220)]
             
             area.points = points
             area.color = UIColor(red: 0.8, green: 0.4, blue: 0.2, alpha: 0.5)
@@ -36,8 +38,16 @@ class INAreaTests: XCTestCase {
                 areaInitPromise.fulfill()
             })
             
-            area.isWithin(coordinates: [INPoint(x: 200, y: 400)]) { isWithin in
-                XCTAssertNotNil(isWithin)
+            area.isWithin(coordinates: INPoint(x: 600, y: 600)) { isWithin in
+                print("\(String(describing: isWithin))")
+                XCTAssertTrue(isWithin ?? false)
+                areaIsWithin1Promise.fulfill()
+            }
+            
+            area.isWithin(coordinates: INPoint(x: 100, y: 100)) { isWithin in
+                print("\(String(describing: isWithin))")
+                XCTAssertFalse(isWithin ?? true)
+                areaIsWithin2Promise.fulfill()
             }
         }
         

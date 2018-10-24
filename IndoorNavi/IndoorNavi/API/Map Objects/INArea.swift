@@ -117,14 +117,14 @@ public class INArea: INObject {
     /// - Parameters:
     ///   - coordinates: Coordinates that are described in real world dimensions. Coordinates are calculated to the map scale.
     ///   - callbackHandler: A block to invoke when the boolean is available.
-    public func isWithin(coordinates: [INPoint], callbackHandler: @escaping (Bool?) -> Void) {
-        let coordinatesString = PointHelper.pointsString(fromCoordinatesArray: coordinates)
+    public func isWithin(coordinates: INPoint, callbackHandler: @escaping (Bool?) -> Void) {
+        let coordinatesString = PointHelper.pointString(fromCoordinates: coordinates)
         let javaScriptString = String(format: ScriptTemplates.IsWithin, self.javaScriptVariableName, coordinatesString)
         ready {
             self.map.evaluate(javaScriptString: javaScriptString) { response, error in
                 
                 guard error == nil, response != nil else {
-                    print("Error: \(String(describing: error))")
+                    NSLog("Error: \(String(describing: error))")
                     callbackHandler(nil)
                     return
                 }
@@ -139,9 +139,7 @@ public class INArea: INObject {
     }
     
     @available(swift, obsoleted: 1.0)
-    @objc public func isWithin(coordinates: UnsafePointer<INPoint>, withSize size: Int, callbackHandler: @escaping (Bool) -> Void)  {
-        let coordinates = PointHelper.pointsArray(fromCArray: coordinates, withSize: size)
-        
+    @objc public func isWithin(coordinates: INPoint, callbackHandler: @escaping (Bool) -> Void)  {
         let callback: (Bool?) -> Void = { isWithin in
             if let isWithin = isWithin {
                 callbackHandler(isWithin)
