@@ -65,7 +65,6 @@ public class INNavigation: NSObject {
         self.lastPosition = position
         self.destination = destination
         self.accuracy = accuracy
-        let javaScriptString = String(format: ScriptTemplates.Start, javaScriptVariableName, self.lastPosition!.x, self.lastPosition!.y, self.destination!.x, self.destination!.y, accuracy)
         
         if isNavigating {
             restartNavigation()

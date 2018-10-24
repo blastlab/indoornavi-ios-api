@@ -39,13 +39,11 @@ class INAreaTests: XCTestCase {
             })
             
             area.isWithin(coordinates: INPoint(x: 600, y: 600)) { isWithin in
-                print("\(String(describing: isWithin))")
                 XCTAssertTrue(isWithin ?? false)
                 areaIsWithin1Promise.fulfill()
             }
             
             area.isWithin(coordinates: INPoint(x: 100, y: 100)) { isWithin in
-                print("\(String(describing: isWithin))")
                 XCTAssertFalse(isWithin ?? true)
                 areaIsWithin2Promise.fulfill()
             }

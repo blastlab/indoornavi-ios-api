@@ -26,7 +26,7 @@ class AreaEventsHelper: NSObject {
         if let dictionaries = jsonObject as? [[String: Any]] {
             
             let bleAreaEvents = dictionaries.compactMap { element -> String? in
-                print("element = \(element)")
+//                print("element = \(element)")
                 return nil
             }
             

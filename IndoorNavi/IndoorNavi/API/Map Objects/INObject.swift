@@ -46,7 +46,7 @@ public class INObject: NSObject {
             self.map.evaluate(javaScriptString: javaScriptString) { response, error in
                 
                 guard error == nil, response != nil else {
-                    print("Error: \(String(describing: error))")
+                    NSLog("Error: \(String(describing: error))")
                     return
                 }
                 
