@@ -40,9 +40,11 @@ class INMapTests: XCTestCase {
     func testGetComplexes() {
         let getComplexesPromise = expectation(description: "Complexes downloaded.")
         
-        map.getComplexes { complexes in
-            XCTAssertNotEqual(complexes.count, 0)
-            getComplexesPromise.fulfill()
+        map.load(Constants.FloorID) {
+            self.map.getComplexes { complexes in
+                XCTAssertNotEqual(complexes.count, 0)
+                getComplexesPromise.fulfill()
+            }
         }
         
         waitForExpectations(timeout: 10)
@@ -52,8 +54,10 @@ class INMapTests: XCTestCase {
         let pullToPathPromise = expectation(description: "Pulled to path.")
         
         let point = INPoint(x: 1305, y: 396)
-        map.pullToPath(point: point, accuracy: 10000) { point in
-            pullToPathPromise.fulfill()
+        map.load(Constants.FloorID) {
+            self.map.pullToPath(point: point, accuracy: 10000) { point in
+                pullToPathPromise.fulfill()
+            }
         }
         
         waitForExpectations(timeout: 10)
