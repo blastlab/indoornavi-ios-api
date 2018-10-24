@@ -108,9 +108,20 @@ class MapViewController: UIViewController {
         print("Polyline 2 ID: %d", polyline.objectID != nil ? polyline.objectID! : 0)
     }
     
+    var area: INArea!
+    
     func drawArea() {
-        let area = INArea(withMap: map, points: points1, color: UIColor(red: 0.8, green: 0.4, blue: 0.2, alpha: 0.5))
-        area.draw()
+        if let area = area {
+            area.addEventListener {
+                self.showAlert()
+            }
+        } else {
+            area = INArea(withMap: map, points: points1, color: UIColor(red: 0.8, green: 0.4, blue: 0.2, alpha: 0.5))
+            area.addEventListener {
+                self.showAlert()
+            }
+            area.draw()
+        }
     }
     
     func placeMarker() {

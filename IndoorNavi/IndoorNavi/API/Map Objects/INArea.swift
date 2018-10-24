@@ -19,7 +19,11 @@ public class INArea: INObject {
         static let PointsDeclaration = "var points = %@;"
         static let Remove = "%@.remove()"
         static let IsWithin = "%@.isWithin(%@);"
+        static let AddEventListener = "%@.addEventListener(Event.MOUSE.CLICK, () => webkit.messageHandlers.EventCallbacksController.postMessage('%@'));"
+        static let RemoveEventListener = "%@.removeEventListener(Event.MOUSE.CLICK);"
     }
+    
+    private var callbackUUID: String?
     
     /// Initializes a new `INArea` object inside given `INMap` object.
     ///
@@ -149,6 +153,32 @@ public class INArea: INObject {
         }
         
         isWithin(coordinates: coordinates, callbackHandler: callback)
+    }
+    
+    /// Adds a block to invoke when the area is tapped.
+    ///
+    /// - Parameter onClickCallback: A block to invoke when area is tapped.
+    @objc public func addEventListener(onClickCallback: @escaping () -> Void) {
+        self.callbackUUID = UUID().uuidString
+        self.map.eventCallbacksController.eventCallbacks[self.callbackUUID!] = onClickCallback
+        let javaScriptString = String(format: ScriptTemplates.AddEventListener, self.javaScriptVariableName, self.callbackUUID!)
+        ready {
+            self.map.evaluate(javaScriptString: javaScriptString)
+            self.draw()
+        }
+    }
+    
+    /// Removes block invoked on tap if exists. Use of this method is optional.
+    @objc public func removeEventListener() {
+        if let uuid = self.callbackUUID {
+            callbackUUID = nil
+            self.map.eventCallbacksController.removeEventCallback(forUUID: uuid)
+            let javaScriptString = String(format: ScriptTemplates.RemoveEventListener, self.javaScriptVariableName)
+            ready {
+                self.map.evaluate(javaScriptString: javaScriptString)
+                self.draw()
+            }
+        }
     }
     
     private func applyColorInJavaScript() {
