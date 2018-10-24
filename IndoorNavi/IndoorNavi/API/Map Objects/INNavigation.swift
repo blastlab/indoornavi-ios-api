@@ -71,6 +71,9 @@ public class INNavigation: NSObject {
             restartNavigation()
             return
         }
+        let lastPositionInPixels = MapHelper.pixel(fromRealCoodinates: position, scale: scale)
+        let destinationInPixels = MapHelper.pixel(fromRealCoodinates: destination, scale: scale)
+        let javaScriptString = String(format: ScriptTemplates.Start, javaScriptVariableName, lastPositionInPixels.x, lastPositionInPixels.y, destinationInPixels.x, destinationInPixels.y, accuracy)
         map.evaluate(javaScriptString: javaScriptString)
         self.isNavigating = true
         
