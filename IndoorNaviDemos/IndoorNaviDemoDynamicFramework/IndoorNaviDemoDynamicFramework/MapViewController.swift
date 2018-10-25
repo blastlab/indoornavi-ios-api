@@ -189,6 +189,9 @@ class MapViewController: UIViewController {
         } else if let lastPosition = lastPosition {
             navigation = INNavigation(map: map, bleLocationManager: bleLocationManager)
             navigation!.startNavigation(from: lastPosition, to: destination, withAccuracy: 200)
+//            navigation!.startNavigation(from: lastPosition, to: destination, withAccuracy: 200) { event in
+//                print("Event: \(event)")
+//            }
         }
     }
     

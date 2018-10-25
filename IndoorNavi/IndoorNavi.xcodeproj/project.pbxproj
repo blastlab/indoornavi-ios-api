@@ -62,6 +62,7 @@
 		7B866E4B215E358B00607BDD /* ComplexesCallbacksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B866E4A215E358B00607BDD /* ComplexesCallbacksController.swift */; };
 		7B866E4D215E39F500607BDD /* ComplexHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B866E4C215E39F500607BDD /* ComplexHelper.swift */; };
 		7B901C3120D51AA100A1D216 /* INPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B901C2C20D519AF00A1D216 /* INPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B962EC62180978700FE2CBB /* NavigationCallbacksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B962EC52180978700FE2CBB /* NavigationCallbacksController.swift */; };
 		7B9ABA3320820B6A00A8849F /* WebViewScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */; };
 		7B9BC33320DD134C00426E78 /* IndoorNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD46764206CF34A00B9F2AD /* IndoorNavi.framework */; };
 		7BAD0CF22179B6CA00BBF5E2 /* INBle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAD0CF12179B6CA00BBF5E2 /* INBle.swift */; };
@@ -4308,6 +4309,7 @@
 		7B866E4A215E358B00607BDD /* ComplexesCallbacksController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexesCallbacksController.swift; sourceTree = "<group>"; };
 		7B866E4C215E39F500607BDD /* ComplexHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexHelper.swift; sourceTree = "<group>"; };
 		7B901C2C20D519AF00A1D216 /* INPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = INPoint.h; sourceTree = "<group>"; };
+		7B962EC52180978700FE2CBB /* NavigationCallbacksController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCallbacksController.swift; sourceTree = "<group>"; };
 		7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewScrollViewDelegate.swift; sourceTree = "<group>"; };
 		7BAD0CF12179B6CA00BBF5E2 /* INBle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INBle.swift; sourceTree = "<group>"; };
 		7BB6161021355E17003DD41C /* INCircleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INCircleTests.swift; sourceTree = "<group>"; };
@@ -11560,6 +11562,7 @@
 				7BDE207C2163888800E9D707 /* PullToPathCallbacksController.swift */,
 				7B682BF82166545A00533948 /* GetPathsCallbacksController.swift */,
 				7B682C042167A58E00533948 /* GetAreasCallbacksController.swift */,
+				7B962EC52180978700FE2CBB /* NavigationCallbacksController.swift */,
 			);
 			path = HandlerControllers;
 			sourceTree = "<group>";
@@ -11776,6 +11779,7 @@
 			files = (
 				7B682BF92166545A00533948 /* GetPathsCallbacksController.swift in Sources */,
 				7B866E4B215E358B00607BDD /* ComplexesCallbacksController.swift in Sources */,
+				7B962EC62180978700FE2CBB /* NavigationCallbacksController.swift in Sources */,
 				7B560E9D2099C2B60055F42E /* INInfoWindow.swift in Sources */,
 				7B682BF421664D0800533948 /* INData.swift in Sources */,
 				7BAD0CF22179B6CA00BBF5E2 /* INBle.swift in Sources */,

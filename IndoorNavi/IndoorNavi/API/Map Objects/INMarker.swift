@@ -22,7 +22,7 @@ public class INMarker: INObject {
         static let SetIcon = "%@.setIcon('%@');"
     }
     
-    private var callbackUUID: String?
+    private var callbackUUID: UUID?
     
     /// Initializes a new `INMarker` object inside given `INMap` object.
     ///
@@ -71,9 +71,10 @@ public class INMarker: INObject {
     ///
     /// - Parameter onClickCallback: A block to invoke when marker is tapped.
     @objc public func addEventListener(onClickCallback: @escaping () -> Void) {
-        self.callbackUUID = UUID().uuidString
-        self.map.eventCallbacksController.eventCallbacks[self.callbackUUID!] = onClickCallback
-        let javaScriptString = String(format: ScriptTemplates.AddEventListener, self.javaScriptVariableName, self.callbackUUID!)
+        self.callbackUUID = UUID()
+        let uuid = callbackUUID!.uuidString
+        self.map.eventCallbacksController.eventCallbacks[uuid] = onClickCallback
+        let javaScriptString = String(format: ScriptTemplates.AddEventListener, self.javaScriptVariableName, uuid)
         ready {
             self.map.evaluate(javaScriptString: javaScriptString)
             self.draw()
@@ -82,7 +83,7 @@ public class INMarker: INObject {
     
     /// Removes block invoked on tap if exists. Use of this method is optional.
     @objc public func removeEventListener() {
-        if let uuid = self.callbackUUID {
+        if let uuid = self.callbackUUID?.uuidString {
             callbackUUID = nil
             self.map.eventCallbacksController.removeEventCallback(forUUID: uuid)
             let javaScriptString = String(format: ScriptTemplates.RemoveEventListener, self.javaScriptVariableName)

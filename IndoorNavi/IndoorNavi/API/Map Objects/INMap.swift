@@ -46,6 +46,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     var pullToPathCallbacksController = PullToPathCallbacksController()
     var getPathsCallbacksController = GetPathsCallbacksController()
     var getAreasCallbacksController = GetAreasCallbacksController()
+    var navigationCallbacksController = NavigationCallbacksController()
     
     private var webView: WKWebView!
     
@@ -297,6 +298,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         controller.add(pullToPathCallbacksController, name: PullToPathCallbacksController.ControllerName)
         controller.add(getPathsCallbacksController, name: GetPathsCallbacksController.ControllerName)
         controller.add(getAreasCallbacksController, name: GetAreasCallbacksController.ControllerName)
+        controller.add(navigationCallbacksController, name: NavigationCallbacksController.ControllerName)
         configuration.userContentController = controller
         
         return configuration
