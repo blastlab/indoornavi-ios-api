@@ -14,16 +14,16 @@ public class INArea: INObject {
         static let Initialization = "var %@ = new INArea(navi);"
         static let SetPoints = "%@.setPoints(points);"
         static let Draw = "%@.draw();"
-        static let SetFillColor = "%@.setColor('%@')"
-        static let SetOpacity = "%@.setOpacity('%f')"
+        static let SetFillColor = "%@.setColor('%@');"
+        static let SetOpacity = "%@.setOpacity('%f');"
         static let PointsDeclaration = "var points = %@;"
-        static let Remove = "%@.remove()"
+        static let Remove = "%@.remove();"
         static let IsWithin = "%@.isWithin(%@);"
         static let AddEventListener = "%@.addEventListener(Event.MOUSE.CLICK, () => webkit.messageHandlers.EventCallbacksController.postMessage('%@'));"
         static let RemoveEventListener = "%@.removeEventListener(Event.MOUSE.CLICK);"
     }
     
-    private var callbackUUID: String?
+    private var callbackUUID: UUID?
     
     /// Initializes a new `INArea` object inside given `INMap` object.
     ///
@@ -33,13 +33,20 @@ public class INArea: INObject {
     ///   - color: Area's fill color and opacity.
     public convenience init(withMap map: INMap, points: [INPoint]? = nil, color: UIColor? = nil) {
         self.init(withMap: map)
+        var javaScriptString = String()
         if let points = points {
             self.points = points
-            setPointsInJavaScript()
+            javaScriptString += getSetPointsScript()
         }
         if let color = color {
             self.color = color
-            applyColorInJavaScript()
+            if let colorScript = getAppplyColorScript() {
+                javaScriptString += colorScript
+            }
+        }
+        
+        if javaScriptString.count > 0 {
+            ready(javaScriptString)
         }
     }
     
@@ -82,26 +89,28 @@ public class INArea: INObject {
     /// Place Area on the map with all given settings. There is necessary to use `points()` before `draw()` to indicate where area should to be located.
     /// Use of this method is indispensable to draw area with set configuration in the IndoorNavi Map.
     @objc public func draw() {
-        let javaScriptString = String(format: ScriptTemplates.Draw, self.javaScriptVariableName)
-        ready {
-            self.map.evaluate(javaScriptString: javaScriptString)
+        var javaScriptString = String()
+        javaScriptString += getSetPointsScript()
+        if let colorScript = getAppplyColorScript() {
+            javaScriptString += colorScript
         }
+        if let addEventListenerScript = getAddEventListenerScript() {
+            javaScriptString += addEventListenerScript
+        } else {
+            javaScriptString += getRemoveEventListener()
+        }
+        
+        javaScriptString += String(format: ScriptTemplates.Draw, self.javaScriptVariableName)
+        ready(javaScriptString)
     }
     
     /// Array of Point's that is describing area in real world dimensions. Coordinates needs to be given as real world dimensions that map is representing. For less than 3 points supplied to this method, Area isn't going to be drawn. Use of this method is indispensable.
-    public var points = [INPoint]() {
-        didSet {
-            setPointsInJavaScript()
-        }
-    }
+    public var points = [INPoint]()
     
-    private func setPointsInJavaScript() {
+    private func getSetPointsScript() -> String {
         let pointsString = PointHelper.pointsString(fromCoordinatesArray: points)
-        let javaScriptString = String(format: ScriptTemplates.SetPoints, self.javaScriptVariableName)
-        ready {
-            self.map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
-            self.map.evaluate(javaScriptString: javaScriptString)
-        }
+        let javaScriptString = String(format: ScriptTemplates.PointsDeclaration, pointsString) + String(format: ScriptTemplates.SetPoints, self.javaScriptVariableName)
+        return javaScriptString
     }
     
     @available(swift, obsoleted: 1.0)
@@ -110,11 +119,7 @@ public class INArea: INObject {
     }
     
     /// `INArea`'s fill color and opacity. To apply this it's necessary to call `draw()` after. Default value is `.black`.
-    @objc public var color: UIColor = .black {
-        didSet {
-            applyColorInJavaScript()
-        }
-    }
+    @objc public var color: UIColor = .black
     
     /// Checks if point of given coordinates is inside area. Use of this method is optional.
     ///
@@ -155,52 +160,62 @@ public class INArea: INObject {
         isWithin(coordinates: coordinates, callbackHandler: callback)
     }
     
+    private func getAddEventListenerScript() -> String? {
+        if let uuid = callbackUUID?.uuidString {
+            let javaScriptString = String(format: ScriptTemplates.AddEventListener, self.javaScriptVariableName, uuid)
+            return javaScriptString
+        }
+        
+        return nil
+    }
+    
     /// Adds a block to invoke when the area is tapped.
     ///
     /// - Parameter onClickCallback: A block to invoke when area is tapped.
     @objc public func addEventListener(onClickCallback: @escaping () -> Void) {
-        self.callbackUUID = UUID().uuidString
-        self.map.eventCallbacksController.eventCallbacks[self.callbackUUID!] = onClickCallback
-        let javaScriptString = String(format: ScriptTemplates.AddEventListener, self.javaScriptVariableName, self.callbackUUID!)
-        ready {
-            self.map.evaluate(javaScriptString: javaScriptString)
-            self.draw()
-        }
+        self.callbackUUID = UUID()
+        self.map.eventCallbacksController.eventCallbacks[self.callbackUUID!.uuidString] = onClickCallback
+    }
+    
+    private func getRemoveEventListener() -> String {
+        let javaScriptString = String(format: ScriptTemplates.RemoveEventListener, self.javaScriptVariableName)
+        return javaScriptString
     }
     
     /// Removes block invoked on tap if exists. Use of this method is optional.
     @objc public func removeEventListener() {
-        if let uuid = self.callbackUUID {
+        if let uuid = self.callbackUUID?.uuidString {
             callbackUUID = nil
             self.map.eventCallbacksController.removeEventCallback(forUUID: uuid)
-            let javaScriptString = String(format: ScriptTemplates.RemoveEventListener, self.javaScriptVariableName)
-            ready {
-                self.map.evaluate(javaScriptString: javaScriptString)
-                self.draw()
-            }
         }
     }
     
-    private func applyColorInJavaScript() {
+    /// Geometric center of the `INArea` in centimeters.
+    public var center: INPoint {
+        let x = points.map({ $0.x }).reduce(0, +) / Int32(points.count)
+        let y = points.map({ $0.y }).reduce(0, +) / Int32(points.count)
+        let centerPoint = INPoint(x: x, y: y)
+        return centerPoint
+    }
+    
+    private func getAppplyColorScript() -> String? {
         if let (red, green, blue, opacity) = ColorHelper.colorComponents(fromColor: color) {
-            setColorInJavaScript(withRed: red, green: green, blue: blue)
-            setOpacityInJavaScript(opacity: opacity)
+            let javaScriptString = getSetColorScript(withRed: red, green: green, blue: blue) + getSetOpacityScript(opacity: opacity)
+            return javaScriptString
         }
+        
+        return nil
     }
     
-    private func setColorInJavaScript(withRed red: CGFloat, green: CGFloat, blue: CGFloat) {
+    private func getSetColorScript(withRed red: CGFloat, green: CGFloat, blue: CGFloat) -> String {
         let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
         let javaScriptString = String(format: ScriptTemplates.SetFillColor, self.javaScriptVariableName, stringColor)
-        ready {
-            self.map.evaluate(javaScriptString: javaScriptString)
-        }
+        return javaScriptString
     }
     
-    private func setOpacityInJavaScript(opacity: CGFloat) {
+    private func getSetOpacityScript(opacity: CGFloat) -> String {
         let standarizedOpacity = ColorHelper.standarizedOpacity(fromValue: opacity)
         let javaScriptString = String(format: ScriptTemplates.SetOpacity, self.javaScriptVariableName, standarizedOpacity)
-        ready {
-            self.map.evaluate(javaScriptString: javaScriptString)
-        }
+        return javaScriptString
     }
 }

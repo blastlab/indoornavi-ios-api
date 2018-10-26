@@ -68,9 +68,7 @@ public class INCircle: INObject {
     /// Use of this method is indispensable to draw Circle with set configuration in the IndoorNavi Map.
     @objc public func draw() {
         let javaScriptString = String(format: ScriptTemplates.DrawTemplate, javaScriptVariableName)
-        ready {
-            self.map.evaluate(javaScriptString: javaScriptString)
-        }
+        ready(javaScriptString)
     }
     
     /// Locates Circle at given coordinates. Coordinates needs to be given as real world dimensions that map is representing. Use of this method is indispensable.
@@ -80,9 +78,7 @@ public class INCircle: INObject {
     @objc(setPoint:) public func set(position: INPoint) {
         let positionString = PointHelper.pointString(fromCoordinates: position)
         let javaScriptString = String(format: ScriptTemplates.SetPosition, javaScriptVariableName, positionString)
-        ready {
-            self.map.evaluate(javaScriptString: javaScriptString)
-        }
+        ready(javaScriptString)
     }
     
     /// Represents position of the Circle in real world. Coordinates needs to be given as real world dimensions that map is representing. To apply this it's necessary to call `draw()` after. Default value is `INPoint.zero`.
@@ -90,9 +86,7 @@ public class INCircle: INObject {
         didSet {
             let positionString = PointHelper.pointString(fromCoordinates: position)
             let javaScriptString = String(format: ScriptTemplates.SetPosition, javaScriptVariableName, positionString)
-            ready {
-                self.map.evaluate(javaScriptString: javaScriptString)
-            }
+            ready(javaScriptString)
         }
     }
     
@@ -100,9 +94,7 @@ public class INCircle: INObject {
     @objc public var radius: Int = 5 {
         didSet {
             let javaScriptString = String(format: ScriptTemplates.SetRadius, javaScriptVariableName, radius)
-            ready {
-                self.map.evaluate(javaScriptString: javaScriptString)
-            }
+            ready(javaScriptString)
         }
     }
     
@@ -112,9 +104,7 @@ public class INCircle: INObject {
             if let stringColor = ColorHelper.colorString(fromColor: border.color) {
                 let borderString = String(format: ScriptTemplates.Border, border.width, stringColor)
                 let javaScriptString = String(format: ScriptTemplates.SetBorder, javaScriptVariableName, borderString)
-                ready {
-                    self.map.evaluate(javaScriptString: javaScriptString)
-                }
+                ready(javaScriptString)
             }
         }
     }
@@ -156,16 +146,12 @@ public class INCircle: INObject {
     private func setColorInJavaScript(withRed red: CGFloat, green: CGFloat, blue: CGFloat) {
         let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
         let javaScriptString = String(format: ScriptTemplates.SetColor, javaScriptVariableName, stringColor)
-        ready {
-            self.map.evaluate(javaScriptString: javaScriptString)
-        }
+        ready(javaScriptString)
     }
     
     private func setOpacityInJavaScript(opacity: CGFloat) {
         let standarizedOpacity = ColorHelper.standarizedOpacity(fromValue: opacity)
         let javaScriptString = String(format: ScriptTemplates.SetOpacity, javaScriptVariableName, standarizedOpacity)
-        ready {
-            self.map.evaluate(javaScriptString: javaScriptString)
-        }
+        ready(javaScriptString)
     }
 }

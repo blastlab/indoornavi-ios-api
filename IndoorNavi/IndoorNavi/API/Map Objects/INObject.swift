@@ -10,7 +10,8 @@
 public class INObject: NSObject {
     
     fileprivate struct ScriptTemplates {
-        static let Ready = "%@.ready().then(() => webkit.messageHandlers.PromisesController.postMessage('%@'));"
+        static let ReadyNative = "%@.ready().then(() => webkit.messageHandlers.PromisesController.postMessage('%@'));"
+        static let Ready = "%@.ready().then(() => {%@});"
         static let GetID = "%@.getID();"
         static let Remove = "%@.remove();"
     }
@@ -66,7 +67,16 @@ public class INObject: NSObject {
         } else {
             let uuid = UUID().uuidString
             map.promisesController.promises[uuid] = readyClousure
-            let javaScriptString = String(format: ScriptTemplates.Ready, javaScriptVariableName, uuid)
+            let javaScriptString = String(format: ScriptTemplates.ReadyNative, javaScriptVariableName, uuid)
+            map.evaluate(javaScriptString: javaScriptString)
+        }
+    }
+    
+    func ready(_ readyScript: String) {
+        if objectID != nil {
+            map.evaluate(javaScriptString: readyScript)
+        } else {
+            let javaScriptString = String(format: ScriptTemplates.Ready, javaScriptVariableName, readyScript)
             map.evaluate(javaScriptString: javaScriptString)
         }
     }
@@ -74,8 +84,6 @@ public class INObject: NSObject {
     /// Removes object and destroys instance of the object in the frontend server, but do not destroys object class instance in your app.
     @objc public func remove() {
         let javaScriptString = String(format: ScriptTemplates.Remove, self.javaScriptVariableName)
-        ready {
-            self.map.evaluate(javaScriptString: javaScriptString)
-        }
+        ready(javaScriptString)
     }
 }

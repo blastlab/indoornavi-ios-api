@@ -26,13 +26,19 @@ public class INPolyline: INObject {
     ///   - color: Polyline's lines and points color.
     public convenience init(withMap map: INMap, points: [INPoint]? = nil, color: UIColor? = nil) {
         self.init(withMap: map)
+        var javaScriptString = String()
         if let points = points {
             self.points = points
-            setPointsInJavaScript()
+            javaScriptString += getSetPointsScript()
         }
         if let color = color {
             self.color = color
-            setColorInJavaScript()
+            if let colorScript = getColorScript() {
+                javaScriptString += colorScript
+            }
+        }
+        if javaScriptString.count > 0 {
+            ready(javaScriptString)
         }
     }
     
@@ -57,19 +63,17 @@ public class INPolyline: INObject {
     /// Locates polyline at given coordinates. Coordinates needs to be given as real world dimensions that map is representing. Use of this method is indispensable.
     ///
     /// - Parameter points: Array of `Point`'s that are describing polyline in real world dimensions. Coordinates are calculated to the map scale and then displayed.
-    public var points = [INPoint]() {
-        didSet {
-            setPointsInJavaScript()
-        }
+    public var points = [INPoint]()
+    
+    private func getSetPointsScript() -> String {
+        let pointsString = PointHelper.pointsString(fromCoordinatesArray: points)
+        let javaScriptString = String(format: ScriptTemplates.PointsDeclaration, pointsString) + String(format: ScriptTemplates.SetPoints, self.javaScriptVariableName)
+        return javaScriptString
     }
     
     private func setPointsInJavaScript() {
-        let pointsString = PointHelper.pointsString(fromCoordinatesArray: points)
-        let javaScriptString = String(format: ScriptTemplates.SetPoints, self.javaScriptVariableName)
-        ready {
-            self.map.evaluate(javaScriptString: String(format: ScriptTemplates.PointsDeclaration, pointsString))
-            self.map.evaluate(javaScriptString: javaScriptString)
-        }
+        let javaScriptString = getSetPointsScript()
+        ready(javaScriptString)
     }
     
     @available(swift, obsoleted: 1.0)
@@ -81,26 +85,31 @@ public class INPolyline: INObject {
     /// There is necessary to use `points()` before `draw()` to indicate where polyline should to be located.
     /// Use of this method is indispensable to draw polyline with set configuration.
     @objc public func draw() {
-        let javaScriptString = String(format: ScriptTemplates.Draw, self.javaScriptVariableName)
-        ready {
-            self.map.evaluate(javaScriptString: javaScriptString)
+        var javaScriptString = String()
+        javaScriptString += getSetPointsScript()
+        if let colorScript = getColorScript() {
+            javaScriptString += colorScript
         }
+        javaScriptString += String(format: ScriptTemplates.Draw, self.javaScriptVariableName)
+        ready(javaScriptString)
     }
     
     /// `INPolyline`'s color. To apply this it's necessary to call `draw()` after. It cannot be opaque, so color's opacity parameter is omitted. Default value is `.black`.
-    @objc public var color: UIColor = .black {
-        didSet {
-            setColorInJavaScript()
-        }
-    }
+    @objc public var color: UIColor = .black
     
-    private func setColorInJavaScript() {
+    private func getColorScript() -> String? {
         if let (red, green, blue, _) = ColorHelper.colorComponents(fromColor: color) {
             let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
             let javaScriptString = String(format: ScriptTemplates.SetLineColor, self.javaScriptVariableName, stringColor)
-            ready {
-                self.map.evaluate(javaScriptString: javaScriptString)
-            }
+            return javaScriptString
+        }
+        
+        return nil
+    }
+    
+    private func setColorInJavaScript() {
+        if let javaScriptString = getColorScript() {
+            ready(javaScriptString)
         }
     }
 }

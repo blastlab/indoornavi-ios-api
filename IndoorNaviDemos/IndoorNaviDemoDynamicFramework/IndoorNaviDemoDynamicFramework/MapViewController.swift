@@ -54,6 +54,8 @@ class MapViewController: UIViewController {
         didSet {
             for area in areas {
                 area.draw()
+                let circle = INCircle(withMap: map, position: area.center, color: .red)
+                circle.draw()
             }
         }
     }
@@ -115,6 +117,7 @@ class MapViewController: UIViewController {
             area.addEventListener {
                 self.showAlert()
             }
+            area.draw()
         } else {
             area = INArea(withMap: map, points: points1, color: UIColor(red: 0.8, green: 0.4, blue: 0.2, alpha: 0.5))
             area.addEventListener {
@@ -125,10 +128,11 @@ class MapViewController: UIViewController {
     }
     
     func placeMarker() {
-        let marker = INMarker(withMap: map, position: INPoint(x: 600, y: 600), iconPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png", label: "Tekst ABCD")
+        marker = INMarker(withMap: map, position: INPoint(x: 600, y: 600), iconPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png", label: "Tekst ABCD")
         marker.addEventListener {
             self.showAlert()
         }
+        marker.draw()
     }
     
     func createReport() {
@@ -160,11 +164,12 @@ class MapViewController: UIViewController {
         
         map.addLongClickListener { point in
             let marker = INMarker(withMap: self.map)
-            marker.setIcon(withPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png")
+            marker.iconPath = "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png"
             marker.position = point
             marker.addEventListener {
                 self.showAlert()
             }
+            marker.draw()
         }
         
         map.toggleTagVisibility(withID: 10999)
@@ -198,7 +203,7 @@ class MapViewController: UIViewController {
     func stopNavigation() {
         navigation?.stopNavigation()
     }
-
+    
     func getAreas() {
         let data = INData(map: map, targetHost: BackendTargetHost, apiKey: ApiKey)
         data.getAreas(fromFloorWithID: 2) { areas in
@@ -235,6 +240,8 @@ class MapViewController: UIViewController {
             stopNavigation()
         case 10:
             getAreas()
+        case 11:
+            load()
         default:
             return
         }
