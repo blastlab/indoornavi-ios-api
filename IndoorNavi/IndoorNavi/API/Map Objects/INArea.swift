@@ -33,19 +33,8 @@ public class INArea: INObject {
     ///   - color: Area's fill color and opacity.
     public convenience init(withMap map: INMap, points: [INPoint]? = nil, color: UIColor? = nil) {
         self.init(withMap: map)
-        var javaScriptString = String()
-        if let points = points {
-            self.points = points
-            javaScriptString += getSetPointsScript()
-        }
-        if let color = color {
-            self.color = color
-            javaScriptString += getAppplyColorScript()
-        }
-        
-        if javaScriptString.count > 0 {
-            ready(javaScriptString)
-        }
+        self.points = points ?? [INPoint]()
+        self.color = color ?? .black
     }
     
     convenience init?(withMap map: INMap, fromJSONObject jsonObject: Any?) {
@@ -160,7 +149,7 @@ public class INArea: INObject {
         return nil
     }
     
-    /// Adds a block to invoke when the area is tapped.
+    /// Adds a block to invoke when the area is tapped. To apply this it's necessary to call `draw()` after.
     ///
     /// - Parameter onClickCallback: A block to invoke when area is tapped.
     @objc public func addEventListener(onClickCallback: @escaping () -> Void) {

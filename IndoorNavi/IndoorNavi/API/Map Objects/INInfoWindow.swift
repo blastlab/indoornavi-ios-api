@@ -51,19 +51,13 @@ public class INInfoWindow: INObject {
         self.init(withMap: map)
         self.width = width ?? 250
         self.height = height ?? 250
-        if let position = position {
-            self.position = position
-        }
-        if let content = content {
-            self.content = content
-        }
-        let javaScriptString = getSetPropertiesScript()
-        ready(javaScriptString)
+        self.position = position ?? .top
+        self.content = content
     }
     
     func getSetPropertiesScript() -> String {
         var javaScriptString = String()
-        javaScriptString += getSetPositionInJavaScript()
+        javaScriptString += getSetPositionScript()
         javaScriptString += getSetContentScript()
         javaScriptString += getSetWidthScript()
         javaScriptString += getSetHeightScript()
@@ -119,7 +113,7 @@ public class INInfoWindow: INObject {
     /// Position of info window regarding to object that info window will be appended to. Default position for info window is `.top`.
     @objc public var position: Position = .top
     
-    private func getSetPositionInJavaScript() -> String {
+    private func getSetPositionScript() -> String {
         let javaScriptString = String(format: ScriptTemplates.SetPosition, self.javaScriptVariableName, self.position.rawValue)
         return javaScriptString
     }

@@ -34,23 +34,9 @@ public class INMarker: INObject {
     ///   - labelText: `String` that will be used as a marker label.
     public convenience init(withMap map: INMap, position: INPoint? = nil, iconPath: String? = nil, label: String? = nil) {
         self.init(withMap: map)
-        var javaScriptString = String()
-        if let iconPath = iconPath {
-            self.iconPath = iconPath
-            javaScriptString += getSetIconScript(withPath: iconPath)
-        }
-        if let position = position {
-            self.position = position
-            javaScriptString += getSetPositionScript()
-        }
-        if let label = label {
-            self.label = label
-            javaScriptString += getSetLabelScript() ?? ""
-        }
-        
-        if javaScriptString.count > 0 {
-            ready(javaScriptString)
-        }
+        self.iconPath = iconPath
+        self.position = position ?? .zero
+        self.label = label
     }
     
     @available(swift, obsoleted: 1.0)
@@ -117,7 +103,7 @@ public class INMarker: INObject {
     }
     
     /// Represents position of the marker in real world. Coordinates needs to be given as real world dimensions that map is representing. Position will be clipped to the point in the bottom center of marker icon. Use of this method is indispensable. Default value is `.zero`.
-    @objc public var position: INPoint = INPoint.zero
+    @objc public var position = INPoint.zero
     
     private func getSetPositionScript() -> String {
         let pointString = PointHelper.pointString(fromCoordinates: position)

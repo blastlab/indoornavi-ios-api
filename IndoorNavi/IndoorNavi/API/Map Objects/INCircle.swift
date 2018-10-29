@@ -39,19 +39,8 @@ public class INCircle: INObject {
     ///   - color: Circles's fill color and opacity.
     public convenience init(withMap map: INMap, position: INPoint? = nil, color: UIColor? = nil) {
         self.init(withMap: map)
-        var javaScriptString = String()
-        if let position = position {
-            self.position = position
-            javaScriptString += getSetPositionScript()
-        }
-        if let color = color {
-            self.color = color
-            javaScriptString += getApplyColorScript()
-        }
-        
-        if javaScriptString.count > 0 {
-            ready(javaScriptString)
-        }
+        self.position = position ?? .zero
+        self.color = color ?? .black
     }
     
     @available(swift, obsoleted: 1.0)

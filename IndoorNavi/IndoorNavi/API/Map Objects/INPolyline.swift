@@ -26,18 +26,8 @@ public class INPolyline: INObject {
     ///   - color: Polyline's lines and points color.
     public convenience init(withMap map: INMap, points: [INPoint]? = nil, color: UIColor? = nil) {
         self.init(withMap: map)
-        var javaScriptString = String()
-        if let points = points {
-            self.points = points
-            javaScriptString += getSetPointsScript()
-        }
-        if let color = color {
-            self.color = color
-            javaScriptString += getColorScript()
-        }
-        if javaScriptString.count > 0 {
-            ready(javaScriptString)
-        }
+        self.points = points ?? [INPoint]()
+        self.color = color ?? .black
     }
     
     @available(swift, obsoleted: 1.0)
