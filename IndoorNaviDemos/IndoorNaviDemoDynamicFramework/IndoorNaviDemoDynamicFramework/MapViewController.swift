@@ -25,24 +25,18 @@ class MapViewController: UIViewController {
     let points1: [INPoint] = [INPoint(x: 480, y: 480), INPoint(x: 1220, y: 480), INPoint(x: 1220, y: 1220), INPoint(x: 480, y: 1220), INPoint(x: 750, y: 750)]
     let points2: [INPoint] = [INPoint(x: 2000, y: 2000), INPoint(x: 2500, y: 2000), INPoint(x: 3000, y: 2000), INPoint(x: 3000, y: 1500), INPoint(x: 2500, y: 1500)]
     
-    let configurations = [INBeaconConfiguration(x: 32.12, y: 2.46, z: 3, txPower: -69, major: 65014, minor: 187),
-                          INBeaconConfiguration(x: 36.81, y: 1.4, z: 3, txPower: -69, major: 65008, minor: 187),
-                          INBeaconConfiguration(x: 32.2, y: 11.61, z: 3, txPower: -69, major: 65021, minor: 187),
-                          INBeaconConfiguration(x: 37.49, y: 12.27, z: 3, txPower: -69, major: 65007, minor: 187),
+    let configurations = [INBeaconConfiguration(x: 3212, y: 246, z: 300, txPower: -69, major: 65050, minor: 187),
+                          INBeaconConfiguration(x: 3681, y: 140, z: 300, txPower: -69, major: 65045, minor: 187),
+                          INBeaconConfiguration(x: 3220, y: 1161, z: 300, txPower: -69, major: 65049, minor: 187),
+                          INBeaconConfiguration(x: 3749, y: 1227, z: 300, txPower: -69, major: 65048, minor: 187),
                           
-                          INBeaconConfiguration(x: 34.61, y: 14.59, z: 3, txPower: -69, major: 65030, minor: 187),
-                          INBeaconConfiguration(x: 24.34, y: 14.41, z: 3, txPower: -69, major: 65031, minor: 187),
-                          INBeaconConfiguration(x: 16.82, y: 14.44, z: 3, txPower: -69, major: 65017, minor: 187),
+                          INBeaconConfiguration(x: 2460, y: 869, z: 300, txPower: -69, major: 65051, minor: 187),
+                          INBeaconConfiguration(x: 2445, y: 197, z: 300, txPower: -69, major: 65044, minor: 187),
+                          INBeaconConfiguration(x: 2991, y: 197, z: 300, txPower: -69, major: 65052, minor: 187),
+                          INBeaconConfiguration(x: 2991, y: 909, z: 300, txPower: -69, major: 65043, minor: 187),
                           
-                          INBeaconConfiguration(x: 24.45, y: 1.97, z: 3, txPower: -69, major: 65027, minor: 187),
-                          INBeaconConfiguration(x: 29.91, y: 1.94, z: 3, txPower: -69, major: 65028, minor: 187),
-                          INBeaconConfiguration(x: 24.6, y: 8.69, z: 3, txPower: -69, major: 65026, minor: 187),
-                          INBeaconConfiguration(x: 29.91, y: 9.09, z: 3, txPower: -69, major: 65029, minor: 187),
-                          
-                          INBeaconConfiguration(x: 1.17, y: 17.42, z: 3, txPower: -69, major: 65020, minor: 187),
-                          INBeaconConfiguration(x: 7.6, y: 16.44, z: 3, txPower: -69, major: 65003, minor: 187),
-                          INBeaconConfiguration(x: 1.26, y: 22.88, z: 3, txPower: -69, major: 65006, minor: 187),
-                          INBeaconConfiguration(x: 7, y: 23.22, z: 3, txPower: -69, major: 65009, minor: 187)]
+                          INBeaconConfiguration(x: 3461, y: 1459, z: 300, txPower: -69, major: 65047, minor: 187),
+                          INBeaconConfiguration(x: 2434, y: 1441, z: 300, txPower: -69, major: 65046, minor: 187)]
     
     let destination = INPoint(x: 2600, y: 200)
     
@@ -50,6 +44,7 @@ class MapViewController: UIViewController {
     var circle2: INCircle!
     var bleLocationManager: BLELocationManager?
     var navigation: INNavigation?
+    var ble: INBle!
     
     var lastPosition: INPoint?
     
@@ -58,7 +53,11 @@ class MapViewController: UIViewController {
     var areas = [INArea]() {
         didSet {
             for area in areas {
+                area.border = Border(width: 4, color: .red)
                 area.draw()
+                print("Database ID: \(area.databaseID ?? 0)")
+                let circle = INCircle(withMap: map, position: area.center, color: .red)
+                circle.draw()
             }
         }
     }
@@ -74,6 +73,10 @@ class MapViewController: UIViewController {
         bleLocationManager = BLELocationManager(beaconUUID: UUID(uuidString: BeaconUUID)!, configurations: configurations, delegate: self)
         bleLocationManager!.useCLBeaconAccuracy = true
         bleLocationManager!.startUpdatingLocation()
+        ble = INBle(map: self.map, targetHost: self.BackendTargetHost, floorID: 2, apiKey: self.ApiKey, bleLocationManager: self.bleLocationManager!)
+        ble!.addAreaEventListener() { event in
+            print("event \(event)")
+        }
     }
     
     func showAlert() {
@@ -109,16 +112,29 @@ class MapViewController: UIViewController {
         print("Polyline 2 ID: %d", polyline.objectID != nil ? polyline.objectID! : 0)
     }
     
+    var area: INArea!
+    
     func drawArea() {
-        let area = INArea(withMap: map, points: points1, color: UIColor(red: 0.8, green: 0.4, blue: 0.2, alpha: 0.5))
-        area.draw()
+        if let area = area {
+            area.addEventListener {
+                self.showAlert()
+            }
+            area.draw()
+        } else {
+            area = INArea(withMap: map, points: points1, color: UIColor(red: 0.8, green: 0.4, blue: 0.2, alpha: 0.5))
+            area.addEventListener {
+                self.showAlert()
+            }
+            area.draw()
+        }
     }
     
     func placeMarker() {
-        let marker = INMarker(withMap: map, position: INPoint(x: 600, y: 600), iconPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png", label: "Tekst ABCD")
+        marker = INMarker(withMap: map, position: INPoint(x: 600, y: 600), iconPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png", label: "Tekst ABCD")
         marker.addEventListener {
             self.showAlert()
         }
+        marker.draw()
     }
     
     func createReport() {
@@ -136,12 +152,12 @@ class MapViewController: UIViewController {
         map.load(2) {
             self.circle1 = INCircle(withMap: self.map)
             self.circle1.radius = 10
-            self.circle1.border = INCircle.Border(width: 5, color: .blue)
+            self.circle1.border = Border(width: 5, color: .blue)
             self.circle1.color = .red
             sleep(1)
             self.circle2 = INCircle(withMap: self.map)
             self.circle2.radius = 10
-            self.circle2.border = INCircle.Border(width: 5, color: .green)
+            self.circle2.border = Border(width: 5, color: .green)
             self.circle2.color = .red
             
             self.mapLoaded = true
@@ -150,11 +166,12 @@ class MapViewController: UIViewController {
         
         map.addLongClickListener { point in
             let marker = INMarker(withMap: self.map)
-            marker.setIcon(withPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png")
+            marker.iconPath = "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png"
             marker.position = point
             marker.addEventListener {
                 self.showAlert()
             }
+            marker.draw()
         }
         
         map.toggleTagVisibility(withID: 10999)
@@ -173,15 +190,22 @@ class MapViewController: UIViewController {
         }
     }
     
-
     func navigate() {
-        navigation = INNavigation(map: map, bleLocationManager: bleLocationManager)
-        
-        if let lastPosition = lastPosition {
+        if let navigation = navigation {
+            navigation.restartNavigation()
+        } else if let lastPosition = lastPosition {
+            navigation = INNavigation(map: map, bleLocationManager: bleLocationManager)
             navigation!.startNavigation(from: lastPosition, to: destination, withAccuracy: 200)
+//            navigation!.startNavigation(from: lastPosition, to: destination, withAccuracy: 200) { event in
+//                print("Event: \(event)")
+//            }
         }
     }
-
+    
+    func stopNavigation() {
+        navigation?.stopNavigation()
+    }
+    
     func getAreas() {
         let data = INData(map: map, targetHost: BackendTargetHost, apiKey: ApiKey)
         data.getAreas(fromFloorWithID: 2) { areas in
@@ -204,7 +228,6 @@ class MapViewController: UIViewController {
             startLocalization()
         case 3:
             placeMarker()
-            placeMarker()
         case 4:
             drawPolyline1()
         case 5:
@@ -216,7 +239,11 @@ class MapViewController: UIViewController {
         case 8:
             navigate()
         case 9:
+            stopNavigation()
+        case 10:
             getAreas()
+        case 11:
+            load()
         default:
             return
         }
@@ -226,26 +253,19 @@ class MapViewController: UIViewController {
 extension MapViewController: BLELocationManagerDelegate {
     
     func bleLocationManager(_ manager: BLELocationManager, didUpdateLocation location: INLocation) {
-        guard let scale = map.scale else {
-            return
-        }
-        
-        let positionInCentimeters = scale.measure == .centimeters ? INPoint(x: Int32( (location.x * 100).rounded()), y: Int32( (location.y * 100).rounded())) : INPoint(x: Int32( (location.x * 100).rounded()), y: Int32( (location.y * 100).rounded()))
-        lastPosition = positionInCentimeters
-        self.circle1.position = positionInCentimeters
+        lastPosition = INPoint(x: Int32(location.x.rounded()), y: Int32(location.y.rounded()))
+        self.circle1.position = lastPosition!
         self.circle1.draw()
         
         if mapLoaded {
-            let positionInPixels = MapHelper.pixel(fromReaCoodinates: positionInCentimeters, scale: scale)
-            map.pullToPath(point: positionInPixels, accuracy: 10000) { pixel in
-                let newPositionInCentimeters = MapHelper.realCoordinates(fromPixel: pixel, scale: scale)
-                self.circle2.position = newPositionInCentimeters
+            map.pullToPath(point: lastPosition!, accuracy: 10000) { position in
+                self.circle2.position = position
                 self.circle2.draw()
             }
         }
     }
     
     func bleLocationManager(_ manager: BLELocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print("no i co")
+        print("Did change authorization")
     }
 }

@@ -1,18 +1,18 @@
 //
-//  AreaEventListenerCallbacksController.swift
+//  NavigationCallbacksController.swift
 //  IndoorNavi
 //
-//  Created by Michał Pastwa on 11.07.2018.
+//  Created by Michał Pastwa on 24/10/2018.
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
-import WebKit
+import  WebKit
 
-class AreaEventListenerCallbacksController: NSObject, WKScriptMessageHandler {
+class NavigationCallbacksController: NSObject, WKScriptMessageHandler {
     
-    static let ControllerName = "AreaEventListenerCallbacksController"
+    static let ControllerName = "NavigationCallbacksController"
     
-    var areaEventListenerCallbacks = [String: (AreaEvent) -> Void]()
+    var navigationCallbacks = [String: (INNavigation.Event) -> Void]()
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if let dictionary = message.body as? [String: Any], let uuid = dictionary["uuid"] as? String, let response = dictionary["response"] {
@@ -21,8 +21,9 @@ class AreaEventListenerCallbacksController: NSObject, WKScriptMessageHandler {
     }
     
     private func receivedMessage(withUUID uuid: String, andJSONObject jsonObject: Any) {
-        if let areaEventListenerCallback = areaEventListenerCallbacks[uuid], let areaEvent = AreaEvent(fromJSONObject: jsonObject) ?? AreaEvent(fromBleJSONObject: jsonObject) {
-            areaEventListenerCallback(areaEvent)
+        if let navigationCallback = navigationCallbacks[uuid], let dictionary = jsonObject as? [String: Any], let action = dictionary["action"] as? String, let event = INNavigation.Event(rawValue: action) {
+            navigationCallback(event)
         }
     }
 }
+
