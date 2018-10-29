@@ -21,6 +21,8 @@ public class INArea: INObject {
         static let IsWithin = "%@.isWithin(%@);"
         static let AddEventListener = "%@.addEventListener(Event.MOUSE.CLICK, () => webkit.messageHandlers.EventCallbacksController.postMessage('%@'));"
         static let RemoveEventListener = "%@.removeEventListener(Event.MOUSE.CLICK);"
+        static let SetBorder = "%@.setBorder(%@);"
+        static let Border = "new Border(%d, '%@')"
     }
     
     private var callbackUUID: UUID?
@@ -83,6 +85,7 @@ public class INArea: INObject {
         var javaScriptString = String()
         javaScriptString += getSetPointsScript()
         javaScriptString += getAppplyColorScript()
+        javaScriptString += getSetBorderScript()
         javaScriptString += getAddEventListenerScript() ?? getRemoveEventListener()
         javaScriptString += String(format: ScriptTemplates.Draw, self.javaScriptVariableName)
         ready(javaScriptString)
@@ -181,6 +184,16 @@ public class INArea: INObject {
         let centerPoint = INPoint(x: x, y: y)
         return centerPoint
     }
+    
+    private func getSetBorderScript() -> String {
+        let stringColor = ColorHelper.colorString(fromColor: border.color)
+        let borderString = String(format: ScriptTemplates.Border, border.width, stringColor)
+        let javaScriptString = String(format: ScriptTemplates.SetBorder, javaScriptVariableName, borderString)
+        return javaScriptString
+    }
+    
+    /// Border of the Area. Describes width and color of the border. To apply this it's necessary to call `draw()` after. Default width is `0` and default color is `.black`.
+    public var border: Border = Border(width: 0, color: .black)
     
     private func getAppplyColorScript() -> String {
         let javaScriptString = getSetColorScript(withRed: color.rgba.red, green: color.rgba.green, blue: color.rgba.blue) + getSetOpacityScript(opacity: color.rgba.alpha)

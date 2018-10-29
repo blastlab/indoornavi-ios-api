@@ -21,16 +21,6 @@ public class INCircle: INObject {
         static let Border = "new Border(%d, '%@')"
     }
     
-    public struct Border {
-        public var width: Int
-        public var color: UIColor
-        
-        public init(width: Int, color: UIColor) {
-            self.width = width
-            self.color = color
-        }
-    }
-    
     /// Initializes a new `INCircle` object inside given `INMap` object.
     ///
     /// - Parameters:
@@ -65,7 +55,7 @@ public class INCircle: INObject {
         var javaScriptString = String()
         javaScriptString += getSetPositionScript()
         javaScriptString += getApplyColorScript()
-        javaScriptString += getSetBorderScript() ?? ""
+        javaScriptString += getSetBorderScript()
         javaScriptString += getSetRadiusScript()
         javaScriptString += String(format: ScriptTemplates.DrawTemplate, javaScriptVariableName)
         ready(javaScriptString)
@@ -88,7 +78,7 @@ public class INCircle: INObject {
     /// Radius of the Circle. To apply this it's necessary to call `draw()` after. Default value is `5`.
     @objc public var radius: Int = 5
     
-    private func getSetBorderScript() -> String? {
+    private func getSetBorderScript() -> String {
         let stringColor = ColorHelper.colorString(fromColor: border.color)
         let borderString = String(format: ScriptTemplates.Border, border.width, stringColor)
         let javaScriptString = String(format: ScriptTemplates.SetBorder, javaScriptVariableName, borderString)

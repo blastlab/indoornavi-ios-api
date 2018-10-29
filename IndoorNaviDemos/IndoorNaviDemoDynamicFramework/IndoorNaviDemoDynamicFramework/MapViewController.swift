@@ -12,7 +12,7 @@ import CoreLocation
 
 class MapViewController: UIViewController {
     
-    let FrontendTargetHost = "http://172.16.170.6:4200"
+    let FrontendTargetHost = "http://172.16.170.50:4200"
     let BackendTargetHost = "http://172.16.170.50:90"
     let ApiKey = "TestAdmin"
     let BeaconUUID = "30FD7D40-2EDC-4D83-9D47-D88AA7E0492A"
@@ -53,6 +53,7 @@ class MapViewController: UIViewController {
     var areas = [INArea]() {
         didSet {
             for area in areas {
+                area.border = Border(width: 4, color: .red)
                 area.draw()
                 print("Database ID: \(area.databaseID ?? 0)")
                 let circle = INCircle(withMap: map, position: area.center, color: .red)
@@ -151,12 +152,12 @@ class MapViewController: UIViewController {
         map.load(2) {
             self.circle1 = INCircle(withMap: self.map)
             self.circle1.radius = 10
-            self.circle1.border = INCircle.Border(width: 5, color: .blue)
+            self.circle1.border = Border(width: 5, color: .blue)
             self.circle1.color = .red
             sleep(1)
             self.circle2 = INCircle(withMap: self.map)
             self.circle2.radius = 10
-            self.circle2.border = INCircle.Border(width: 5, color: .green)
+            self.circle2.border = Border(width: 5, color: .green)
             self.circle2.color = .red
             
             self.mapLoaded = true
