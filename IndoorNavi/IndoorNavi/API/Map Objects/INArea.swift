@@ -49,6 +49,7 @@ public class INArea: INObject {
             let pointsInRealDimensions = MapHelper.realCoordinatesArray(fromPixelArray: points, scale: scale)
             let defaultColor = UIColor(red: 0, green: 1, blue: 0, alpha: 0.3)
             self.init(withMap: map, points: pointsInRealDimensions, color: defaultColor)
+            databaseID = dictionary["id"] as? Int
             return
         }
         
@@ -72,6 +73,9 @@ public class INArea: INObject {
         let javaScriptString = String(format: ScriptTemplates.Initialization, javaScriptVariableName)
         map.evaluate(javaScriptString: javaScriptString)
     }
+    
+    /// ID of the object in database. It uniquely identifies `INArea` downloaded from backend. This value is optional, area's created locally does not have ID in database, so this value is `nil` for them.
+    private(set) public var databaseID: Int?
     
     /// Place Area on the map with all given settings. There is necessary to use `points()` before `draw()` to indicate where area should to be located.
     /// Use of this method is indispensable to draw area with set configuration in the IndoorNavi Map.

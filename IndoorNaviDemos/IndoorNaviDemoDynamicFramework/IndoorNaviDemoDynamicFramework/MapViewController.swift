@@ -54,6 +54,7 @@ class MapViewController: UIViewController {
         didSet {
             for area in areas {
                 area.draw()
+                print("Database ID: \(area.databaseID ?? 0)")
                 let circle = INCircle(withMap: map, position: area.center, color: .red)
                 circle.draw()
             }
