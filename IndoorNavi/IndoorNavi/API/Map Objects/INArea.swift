@@ -40,9 +40,7 @@ public class INArea: INObject {
         }
         if let color = color {
             self.color = color
-            if let colorScript = getAppplyColorScript() {
-                javaScriptString += colorScript
-            }
+            javaScriptString += getAppplyColorScript()
         }
         
         if javaScriptString.count > 0 {
@@ -91,15 +89,8 @@ public class INArea: INObject {
     @objc public func draw() {
         var javaScriptString = String()
         javaScriptString += getSetPointsScript()
-        if let colorScript = getAppplyColorScript() {
-            javaScriptString += colorScript
-        }
-        if let addEventListenerScript = getAddEventListenerScript() {
-            javaScriptString += addEventListenerScript
-        } else {
-            javaScriptString += getRemoveEventListener()
-        }
-        
+        javaScriptString += getAppplyColorScript()
+        javaScriptString += getAddEventListenerScript() ?? getRemoveEventListener()
         javaScriptString += String(format: ScriptTemplates.Draw, self.javaScriptVariableName)
         ready(javaScriptString)
     }
@@ -198,13 +189,9 @@ public class INArea: INObject {
         return centerPoint
     }
     
-    private func getAppplyColorScript() -> String? {
-        if let (red, green, blue, opacity) = ColorHelper.colorComponents(fromColor: color) {
-            let javaScriptString = getSetColorScript(withRed: red, green: green, blue: blue) + getSetOpacityScript(opacity: opacity)
-            return javaScriptString
-        }
-        
-        return nil
+    private func getAppplyColorScript() -> String {
+        let javaScriptString = getSetColorScript(withRed: color.rgba.red, green: color.rgba.green, blue: color.rgba.blue) + getSetOpacityScript(opacity: color.rgba.alpha)
+        return javaScriptString
     }
     
     private func getSetColorScript(withRed red: CGFloat, green: CGFloat, blue: CGFloat) -> String {

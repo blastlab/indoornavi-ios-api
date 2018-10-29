@@ -45,9 +45,7 @@ public class INMarker: INObject {
         }
         if let label = label {
             self.label = label
-            if let labelScript = getSetLabelScript() {
-                javaScriptString += labelScript
-            }
+            javaScriptString += getSetLabelScript() ?? ""
         }
         
         if javaScriptString.count > 0 {
@@ -110,19 +108,10 @@ public class INMarker: INObject {
     /// Use of this method is indispensable to display marker with set configuration in the IndoorNavi Map.
     @objc public func draw() {
         var javaScriptString = String()
-        if let iconPath = iconPath {
-            javaScriptString += getSetIconScript(withPath: iconPath)
-        }
+        javaScriptString += iconPath != nil ? getSetIconScript(withPath: iconPath!) : ""
         javaScriptString += getSetPositionScript()
-        if let labelScript = getSetLabelScript() {
-            javaScriptString += labelScript
-        }
-        if let addEventListenerScript = getAddEventListenerScript() {
-            javaScriptString += addEventListenerScript
-        } else {
-            javaScriptString += getRemoveEventListenerScript()
-        }
-        
+        javaScriptString += getSetLabelScript() ?? ""
+        javaScriptString += getAddEventListenerScript() ?? getRemoveEventListenerScript()
         javaScriptString += String(format: ScriptTemplates.Place, self.javaScriptVariableName)
         ready(javaScriptString)
     }

@@ -14,7 +14,7 @@ public class INPolyline: INObject {
         static let Initialization = "var %@ = new INPolyline(navi);"
         static let SetPoints = "%@.setPoints(points);"
         static let Draw = "%@.draw();"
-        static let SetLineColor = "%@.setLineColor('%@')"
+        static let SetLineColor = "%@.setColor('%@');"
         static let PointsDeclaration = "var points = %@;"
     }
     
@@ -33,9 +33,7 @@ public class INPolyline: INObject {
         }
         if let color = color {
             self.color = color
-            if let colorScript = getColorScript() {
-                javaScriptString += colorScript
-            }
+            javaScriptString += getColorScript()
         }
         if javaScriptString.count > 0 {
             ready(javaScriptString)
@@ -71,11 +69,6 @@ public class INPolyline: INObject {
         return javaScriptString
     }
     
-    private func setPointsInJavaScript() {
-        let javaScriptString = getSetPointsScript()
-        ready(javaScriptString)
-    }
-    
     @available(swift, obsoleted: 1.0)
     @objc(setPointsArray:withArraySize:) public func set(pointsArray: UnsafePointer<INPoint>, withArraySize size:Int) {
         points = PointHelper.pointsArray(fromCArray: pointsArray, withSize: size)
@@ -87,9 +80,7 @@ public class INPolyline: INObject {
     @objc public func draw() {
         var javaScriptString = String()
         javaScriptString += getSetPointsScript()
-        if let colorScript = getColorScript() {
-            javaScriptString += colorScript
-        }
+        javaScriptString += getColorScript()
         javaScriptString += String(format: ScriptTemplates.Draw, self.javaScriptVariableName)
         ready(javaScriptString)
     }
@@ -97,19 +88,9 @@ public class INPolyline: INObject {
     /// `INPolyline`'s color. To apply this it's necessary to call `draw()` after. It cannot be opaque, so color's opacity parameter is omitted. Default value is `.black`.
     @objc public var color: UIColor = .black
     
-    private func getColorScript() -> String? {
-        if let (red, green, blue, _) = ColorHelper.colorComponents(fromColor: color) {
-            let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
-            let javaScriptString = String(format: ScriptTemplates.SetLineColor, self.javaScriptVariableName, stringColor)
-            return javaScriptString
-        }
-        
-        return nil
-    }
-    
-    private func setColorInJavaScript() {
-        if let javaScriptString = getColorScript() {
-            ready(javaScriptString)
-        }
+    private func getColorScript() -> String {
+        let stringColor = ColorHelper.colorStringFromColorComponents(red: color.rgba.red, green: color.rgba.green, blue: color.rgba.blue)
+        let javaScriptString = String(format: ScriptTemplates.SetLineColor, self.javaScriptVariableName, stringColor)
+        return javaScriptString
     }
 }
