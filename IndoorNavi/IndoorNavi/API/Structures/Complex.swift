@@ -52,6 +52,7 @@ public struct Complex: Equatable {
             }
         }
         
+        assertionFailure("Could not initialize Complex from JSON object.")
         return nil
     }
 }

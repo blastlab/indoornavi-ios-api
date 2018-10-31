@@ -67,7 +67,7 @@ public class INPolyline: INObject {
     /// Place polyline on the map with all given settings.
     /// There is necessary to use `points()` before `draw()` to indicate where polyline should to be located.
     /// Use of this method is indispensable to draw polyline with set configuration.
-    @objc public func draw() {
+    @objc public func draw(completionHandler: ((Error?) -> Void)? = nil) {
         var javaScriptString = String()
         javaScriptString += getSetPointsScript()
         javaScriptString += getColorScript()

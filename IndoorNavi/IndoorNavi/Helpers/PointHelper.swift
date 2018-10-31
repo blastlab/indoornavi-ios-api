@@ -33,6 +33,7 @@ class PointHelper {
             }
             return coordinatesArray
         } else {
+            assertionFailure("Could not initialize arrat of INPoint's from JSON object.")
             return [INPoint]()
         }
     }

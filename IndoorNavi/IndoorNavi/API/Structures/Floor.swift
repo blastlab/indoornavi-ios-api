@@ -52,6 +52,7 @@ public struct Floor: Equatable {
             }
         }
         
+        assertionFailure("Could not initialize Floor from JSON object.")
         return nil
     }
 }

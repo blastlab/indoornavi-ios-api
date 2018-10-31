@@ -55,6 +55,7 @@ public class INArea: INObject {
             return
         }
         
+        assertionFailure("Could not initialize INArea from JSON object.")
         return nil
     }
     
@@ -119,17 +120,14 @@ public class INArea: INObject {
         ready {
             self.map.evaluate(javaScriptString: javaScriptString) { response, error in
                 
-                guard error == nil, response != nil else {
-                    NSLog("Error: \(String(describing: error))")
+                guard let isWithPoint = response as? Bool, error == nil else {
+                    assert(error == nil, "An error occured while performing isWithin method: \(error!.localizedDescription).")
+                    assertionFailure("Could not retrieve response while performing isWithin method.")
                     callbackHandler(nil)
                     return
                 }
                 
-                if let isWithPoint = response! as? Bool {
-                    callbackHandler(isWithPoint)
-                } else {
-                    callbackHandler(nil)
-                }
+                callbackHandler(isWithPoint)
             }
         }
     }

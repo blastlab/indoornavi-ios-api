@@ -45,6 +45,7 @@ public struct Coordinates: Equatable {
             }
         }
         
+        assertionFailure("Could not initialize Coordinates from JSON object.")
         return nil
     }
     

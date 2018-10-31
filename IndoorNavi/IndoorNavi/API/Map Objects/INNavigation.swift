@@ -74,7 +74,7 @@ public class INNavigation: NSObject {
     public func startNavigation(from position: INPoint, to destination: INPoint, withAccuracy accuracy: Int, onCompletion: ((Event) -> Void)? = nil) {
         
         guard let scale = map.scale else {
-            NSLog("Scale has not loaded yet. Navigation could not be performed.")
+            assertionFailure("Scale has not loaded yet. Navigation could not be performed.")
             return
         }
         
@@ -142,6 +142,8 @@ public class INNavigation: NSObject {
         if let location = notification.userInfo?["location"] as? INLocation {
             let position = INPoint(x: Int32(location.x.rounded()), y: Int32(location.y.rounded()))
             update(position: position)
+        } else {
+            assertionFailure("Could not read location data.")
         }
     }
     

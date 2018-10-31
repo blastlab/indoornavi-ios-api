@@ -46,7 +46,8 @@ public struct Path: Equatable {
                 return
             }
         }
-
+        
+        assertionFailure("Could not initialize Path from JSON object.")
         return nil
     }
 }
