@@ -72,7 +72,6 @@ class MapViewController: UIViewController {
     func startLocalization() {
         bleLocationManager = BLELocationManager(beaconUUID: UUID(uuidString: BeaconUUID)!, configurations: configurations, delegate: self)
         bleLocationManager!.useCLBeaconAccuracy = true
-        bleLocationManager!.startUpdatingLocation()
         ble = INBle(map: self.map, targetHost: self.BackendTargetHost, floorID: 2, apiKey: self.ApiKey, bleLocationManager: self.bleLocationManager!)
         ble!.addAreaEventListener() { event in
             print("event \(event)")
@@ -266,6 +265,18 @@ extension MapViewController: BLELocationManagerDelegate {
     }
     
     func bleLocationManager(_ manager: BLELocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print("Did change authorization")
+        if status == .notDetermined {
+            manager.requestWhenInUseAuthorization()
+        } else if status == .authorizedWhenInUse {
+            manager.startUpdatingLocation()
+        } else {
+            showNotAuthorizedAlert()
+        }
+    }
+    
+    func showNotAuthorizedAlert() {
+        let alert = UIAlertController(title: "WARNING!", message: "Not authorized to use location service!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
