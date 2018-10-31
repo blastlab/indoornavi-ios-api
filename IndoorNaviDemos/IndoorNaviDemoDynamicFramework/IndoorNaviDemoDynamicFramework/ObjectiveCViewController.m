@@ -63,17 +63,17 @@ NSString* const ApiKey = @"TestAdmin";
 - (IBAction)drawPolyline1:(id)sender {
     INPolyline* polyline = [[INPolyline alloc] initWithMap:map pointsArray:points1 withArraySize:10 color:UIColor.brownColor];
     [polyline setPointsArray:points1 withArraySize:10];
-    [polyline draw];
+//    [polyline draw];
 }
 
 - (IBAction)drawPolyline2:(id)sender {
     INPolyline* polyline = [[INPolyline alloc] initWithMap:map pointsArray:points2 withArraySize:10 color:UIColor.greenColor];
-    [polyline draw];
+//    [polyline draw];
 }
 
 - (IBAction)drawArea:(id)sender {
     INArea* area = [[INArea alloc] initWithMap:map pointsArray:points1 withArraySize:10 color:[UIColor colorWithRed:0.8 green:.4 blue:0.2 alpha:0.5]];
-    [area draw];
+//    [area draw];
 }
 
 - (IBAction)placeMarker:(id)sender {
@@ -82,7 +82,7 @@ NSString* const ApiKey = @"TestAdmin";
     [marker addEventListenerOnClickCallback:^{
         [weakSelf showAlert];
     }];
-    [marker draw];
+//    [marker draw];
 }
 
 - (IBAction)createReport:(id)sender {
@@ -130,7 +130,7 @@ NSString* const ApiKey = @"TestAdmin";
         
         [polyline setPointsArray:points withArraySize:10];
         polyline.color = [UIColor colorWithRed:randomRed green:randomGreen blue:randomBlue alpha:1.0];
-        [polyline draw];
+//        [polyline draw];
         [polylines addObject:polyline];
         usleep(10000);
     }
@@ -145,10 +145,10 @@ NSString* const ApiKey = @"TestAdmin";
     
     [map addLongClickListener:^(INPoint point){
         INMarker* marker = [[INMarker alloc] initWithMap:self->map];
-        [marker setIconWithPath:@"https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png"];
+//        [marker setIconWithPath:@"https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png"];
         INPoint pointWithRealCoordinates = [MapHelper realCoordinatesFromPixel:point scale:self->map.scale];
         [marker setPosition:pointWithRealCoordinates];
-        [marker draw];
+//        [marker draw];
     }];
     
     [map toggleTagVisibilityWithID:10999];

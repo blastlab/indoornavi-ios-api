@@ -27,11 +27,11 @@ struct INBeacon {
 
 /// Configuration of iBeacon, describing its coordinates, major, minor and txPower.
 public struct INBeaconConfiguration {
-    /// The x-coordinate of the iBeacon.
+    /// The x-coordinate of the iBeacon in centimeters.
     var x: Double
-    /// The y-coordinate of the iBeacon.
+    /// The y-coordinate of the iBeacon in centimeters.
     var y: Double
-    /// The z-coordinate of the iBeacon.
+    /// The z-coordinate of the iBeacon in centimeters.
     var z: Double
     /// The most significant value in the beacon.
     var major: Int
@@ -43,9 +43,9 @@ public struct INBeaconConfiguration {
     /// Initializes a new `INBeaconConfiguration` with the provided parameters.
     ///
     /// - Parameters:
-    ///   - x: The x-coordinate of the iBeacon.
-    ///   - y: The y-coordinate of the iBeacon.
-    ///   - z: The z-coordinate of the iBeacon.
+    ///   - x: The x-coordinate of the iBeacon in centimeters.
+    ///   - y: The y-coordinate of the iBeacon in centimeters.
+    ///   - z: The z-coordinate of the iBeacon in centimeters.
     ///   - txPower: The one-meter RSSI level.
     ///   - major: The most significant value in the beacon.
     ///   - minor: The least significant value in the beacon.
@@ -66,7 +66,7 @@ public protocol BLELocationManagerDelegate {
     ///
     /// - Parameters:
     ///   - manager: The object that you use to start and stop the delivery of location events to your app.
-    ///   - location: The XY coordinates representing current location.
+    ///   - location: The XY coordinates representing current location in centimeters.
     func bleLocationManager(_ manager: BLELocationManager, didUpdateLocation location: INLocation)
     
     /// Tells the delegate that the authorization status for the application changed.
@@ -86,10 +86,10 @@ public class BLELocationManager: NSObject {
     public var maxStepEnabled = false
     /// Boolean value specifying wether distance should be obtained as `CLBeacon`'s accuracy or calculated. Default value is `false`.
     public var useCLBeaconAccuracy = false
-    /// Average receiver's height. Default value is `1.2`.
-    public var receiverHeight = 1.2
-    /// If `maxStepEnabled` is `true`, this is the value of maximum step a reciver is able to make. Default value is `2.0`.
-    public var maxStep = 2.0
+    /// Average receiver's height in centimeters. Default value is `120`.
+    public var receiverHeight = 120.0
+    /// If `maxStepEnabled` is `true`, this is the value of maximum step a reciver is able to make in centimeters. Default value is `200`.
+    public var maxStep = 200.0
     /// A path-loss exponent that varies in value depending on the environment. Default value is `2.0`.
     public var n = 2.0
     
@@ -108,6 +108,11 @@ public class BLELocationManager: NSObject {
         self.delegate = delegate
         super.init()
         beaconManager.delegate = self
+    }
+    
+    /// Requests permission to use location services while the app is in the foreground.
+    public func requestWhenInUseAuthorization() {
+        beaconManager.requestWhenInUseAuthorization()
     }
     
     /// Starts the generation of updates that report the user’s current location.
@@ -232,12 +237,12 @@ public class BLELocationManager: NSObject {
     
     private func distance(fromBeacon beacon: INBeacon) -> Double {
         if useCLBeaconAccuracy {
-            return beacon.beacon.accuracy
+            return beacon.beacon.accuracy * 100
         }
         
         let rssi = Double(beacon.beacon.rssi)
         let oneMeterRSSI = Double(beacon.configuration.txPower)
-        let distance = pow(10.0, (oneMeterRSSI - rssi) / (10.0 * n) )
+        let distance = pow(10.0, (oneMeterRSSI - rssi) / (10.0 * n) ) * 100
         return distance
     }
     

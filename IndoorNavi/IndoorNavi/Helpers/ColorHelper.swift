@@ -8,25 +8,9 @@
 
 class ColorHelper: NSObject {
     
-    static func colorString(fromColor color: UIColor) -> String? {
-        if let (red, green, blue, _) = colorComponents(fromColor: color) {
-            let colorString = colorStringFromColorComponents(red: red, green: green, blue: blue)
-            return colorString
-        }
-        
-        return nil
-    }
-    
-    static func colorComponents(fromColor color: UIColor) -> (CGFloat, CGFloat, CGFloat, CGFloat)? {
-        if let colorComponents = color.cgColor.components {
-            let red = colorComponents[0]
-            let green = colorComponents[1]
-            let blue = colorComponents[2]
-            let opacity = colorComponents[3]
-            return (red, green, blue, opacity)
-        }
-        
-        return nil
+    static func colorString(fromColor color: UIColor) -> String {
+        let colorString = colorStringFromColorComponents(red: color.rgba.red, green: color.rgba.green, blue: color.rgba.blue)
+        return colorString
     }
     
     static func colorStringFromColorComponents(red: CGFloat, green: CGFloat, blue: CGFloat) -> String {
@@ -44,5 +28,17 @@ class ColorHelper: NSObject {
     
     static private func standarize(value: CGFloat) -> CGFloat {
         return min(max(value, 0), 1)
+    }
+}
+
+extension UIColor {
+    var rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        
+        return (red, green, blue, alpha)
     }
 }
