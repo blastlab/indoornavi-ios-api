@@ -194,13 +194,10 @@ class MapViewController: UIViewController {
             navigation.restartNavigation()
         } else if let lastPosition = lastPosition {
             navigation = INNavigation(map: map, bleLocationManager: bleLocationManager, delegate: self)
-            navigation!.pathColor = .yellow
+            navigation!.pathColor = .brown
             navigation!.startPointProperties = INNavigation.NavigationPointProperties(radius: 5, border: Border(width: 4, color: .cyan), color: .brown)
-            navigation!.startPointProperties = INNavigation.NavigationPointProperties(radius: 6, border: Border(width: 10, color: .magenta), color: .darkGray)
+            navigation!.endPointProperties = INNavigation.NavigationPointProperties(radius: 6, border: Border(width: 10, color: .magenta), color: .darkGray)
             navigation!.startNavigation(from: lastPosition, to: destination, withAccuracy: 200)
-//            navigation!.startNavigation(from: lastPosition, to: destination, withAccuracy: 200) { event in
-//                print("Event: \(event)")
-//            }
         }
     }
     

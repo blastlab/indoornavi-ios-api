@@ -40,13 +40,24 @@ public class INNavigation: NSObject {
         case working = "working"
     }
     
+    /// Struct representing graphic properties of navigation start and end points.
     public struct NavigationPointProperties {
+        
         private static let ScriptTemplate = "new NavigationPoint(%d, %@, %f, '%@')"
         
+        /// Radius of the point.
         public var radius: Int
+        /// Point's `Border`.
         public var border: Border
+        /// Color of the point.
         public var color: UIColor
         
+        /// Initializes a new `NavigationPointProperties` with the provided parameters.
+        ///
+        /// - Parameters:
+        ///   - radius: Radius of the point.
+        ///   - border: Point's `Border`.
+        ///   - color: Color of the point.
         public init(radius: Int? = nil, border: Border? = nil, color: UIColor? = nil) {
             self.radius = radius ?? 10
             self.border = border ?? Border(width: 2, color: .defaultNavigationColor)
@@ -86,29 +97,33 @@ public class INNavigation: NSObject {
     /// `BLELocationManager` object, used to update remaining route. It should be set appropriately so that correct position can be obtained.
     public var bleLocationManager: BLELocationManager?
     
+    /// The delegate object to receive navigation events.
     public var delegate: INNavigationDelegate? {
         didSet {
             delegate != nil ? addEventListener() : removeEventListener()
         }
     }
     
-    /// Boolean value indicating whether there is a navigation process.
+    /// A Boolean value indicating whether there is a navigation process.
     private(set) public var isNavigating = false
     
-    public var startPointDisabled = false {
+    /// A Boolean value indicating whether the start point is hidden.
+    public var startPointHidden = false {
         didSet {
-            let javaScriptString = String(format: ScriptTemplates.DisableStartPoint, javaScriptVariableName, startPointDisabled ? "true" : "false")
+            let javaScriptString = String(format: ScriptTemplates.DisableStartPoint, javaScriptVariableName, startPointHidden ? "true" : "false")
             map.evaluate(javaScriptString)
         }
     }
     
-    public var endPointDisabled = false {
+    /// A Boolean value indicating whether the end point is hidden.
+    public var endPointHidden = false {
         didSet {
-            let javaScriptString = String(format: ScriptTemplates.DisableEndPoint, javaScriptVariableName, endPointDisabled ? "true" : "false")
+            let javaScriptString = String(format: ScriptTemplates.DisableEndPoint, javaScriptVariableName, endPointHidden ? "true" : "false")
             map.evaluate(javaScriptString)
         }
     }
     
+    /// Color of the navigation path.
     public var pathColor = UIColor.defaultNavigationColor {
         didSet {
             let javaScriptString = String(format: ScriptTemplates.SetPathColor, javaScriptVariableName, pathColor.colorString)
@@ -116,6 +131,7 @@ public class INNavigation: NSObject {
         }
     }
     
+    /// Graphic properties of the navigation's start point.
     public var startPointProperties = NavigationPointProperties() {
         didSet {
             let javaScriptString = String(format: ScriptTemplates.SetStartPoint, javaScriptVariableName, startPointProperties.navigationPointScript)
@@ -123,6 +139,7 @@ public class INNavigation: NSObject {
         }
     }
     
+    /// Graphic properties of the navigation's end point.
     public var endPointProperties = NavigationPointProperties() {
         didSet {
             let javaScriptString = String(format: ScriptTemplates.SetEndPoint, javaScriptVariableName, endPointProperties.navigationPointScript)
