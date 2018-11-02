@@ -82,7 +82,7 @@ public class INInfoWindow: INObject {
     override func initInJavaScript() {
         javaScriptVariableName = String(format: ScriptTemplates.VariableName, hash)
         let javaScriptString = String(format: ScriptTemplates.Initialization, javaScriptVariableName)
-        map.evaluate(javaScriptString: javaScriptString)
+        map.evaluate(javaScriptString)
     }
     
     private func getSetHeightScript() -> String {

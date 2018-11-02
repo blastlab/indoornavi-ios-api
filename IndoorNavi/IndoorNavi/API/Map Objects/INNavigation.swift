@@ -6,30 +6,73 @@
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
+/// The delegate of a `INNavigation` object must adopt the `INNavigationDelegate` protocol. Methods of the protocol allow the delegate to monitor navigation activity.
+public protocol INNavigationDelegate {
+    
+    /// Invoked when navigation has been created.
+    ///
+    /// - Parameter navigation: The navigation providing this information.
+    func navigationCreated(_ navigation: INNavigation)
+    
+    /// Invoked when navigation has finished.
+    ///
+    /// - Parameter navigation: The navigation providing this information.
+    func navigationFinished(_ navigation: INNavigation)
+    
+    /// Invoked when an error occured in navigation.
+    ///
+    /// - Parameter navigation: The navigation providing this information.
+    func errorOccured(in navigation: INNavigation)
+    
+    /// Invoked when navigation is currently working and start was requested.
+    ///
+    /// - Parameter navigation: The navigation providing this information.
+    func navigationIsWorking(_ navigation: INNavigation)
+}
+
 /// Class managing a BLE navigation. It calculates and draws a route from given postion to given destination. Updating ramaining route could be achieved by setting `bleLocationManager` with apprioprate object so that `INNavigation` knows how much of it left to reach destination.
 public class INNavigation: NSObject {
     
-    /// An event that occured during navigation.
-    ///
-    /// - created: Navigation has started.
-    /// - finished: Navigation has finished.
-    /// - error: Error occured while starting navigation.
-    /// - working: Start was requested, but navigation is already running.
-    public enum Event: String {
+    enum Event: String {
         case created = "created"
         case finished = "finished"
         case error = "error"
         case working = "working"
     }
     
+    public struct NavigationPointProperties {
+        private static let ScriptTemplate = "new NavigationPoint(%d, %@, %f, '%@')"
+        
+        public var radius: Int
+        public var border: Border
+        public var color: UIColor
+        
+        public init(radius: Int? = nil, border: Border? = nil, color: UIColor? = nil) {
+            self.radius = radius ?? 10
+            self.border = border ?? Border(width: 2, color: .defaultNavigationColor)
+            self.color = color ?? .defaultNavigationColor
+        }
+        
+        var navigationPointScript: String {
+            let navigationPointScript = String(format: NavigationPointProperties.ScriptTemplate, radius, border.borderScript, color.standarizedOpacity, color.colorString)
+            return navigationPointScript
+        }
+    }
+    
     fileprivate struct ScriptTemplates {
         static let VariableName = "navigation%u"
         static let Initialization = "var %@ = new INNavigation(navi);"
-        static let Start = "%@.start({x: %d, y: %d}, {x: %d, y: %d}, %d, function(){});"
+        static let Start = "%@.start({x: %d, y: %d}, {x: %d, y: %d}, %d);"
         static let Message = "{uuid: '%@', response: res}"
-        static let StartWithCallback = "%@.start({x: %d, y: %d}, {x: %d, y: %d}, %d, res => webkit.messageHandlers.NavigationCallbacksController.postMessage(%@));"
         static let Stop = "%@.stop();"
         static let UpdatePosition = "%@.updatePosition({x: %d, y: %d});"
+        static let AddEventListener = "%@.addEventListener(res => webkit.messageHandlers.NavigationCallbacksController.postMessage(%@));"
+        static let RemoveEventListener = "%@.removeEventListener();"
+        static let DisableStartPoint = "%@.disableStartPoint(%@);"
+        static let DisableEndPoint = "%@.disableEndPoint(%@);"
+        static let SetPathColor = "%@.setPathColor('%@');"
+        static let SetStartPoint = "%@.setStartPoint(%@);"
+        static let SetEndPoint = "%@.setEndPoint(%@);"
     }
     
     private let map: INMap
@@ -43,25 +86,70 @@ public class INNavigation: NSObject {
     /// `BLELocationManager` object, used to update remaining route. It should be set appropriately so that correct position can be obtained.
     public var bleLocationManager: BLELocationManager?
     
+    public var delegate: INNavigationDelegate? {
+        didSet {
+            delegate != nil ? addEventListener() : removeEventListener()
+        }
+    }
+    
     /// Boolean value indicating whether there is a navigation process.
     private(set) public var isNavigating = false
+    
+    public var startPointDisabled = false {
+        didSet {
+            let javaScriptString = String(format: ScriptTemplates.DisableStartPoint, javaScriptVariableName, startPointDisabled ? "true" : "false")
+            map.evaluate(javaScriptString)
+        }
+    }
+    
+    public var endPointDisabled = false {
+        didSet {
+            let javaScriptString = String(format: ScriptTemplates.DisableEndPoint, javaScriptVariableName, endPointDisabled ? "true" : "false")
+            map.evaluate(javaScriptString)
+        }
+    }
+    
+    public var pathColor = UIColor.defaultNavigationColor {
+        didSet {
+            let javaScriptString = String(format: ScriptTemplates.SetPathColor, javaScriptVariableName, pathColor.colorString)
+            map.evaluate(javaScriptString)
+        }
+    }
+    
+    public var startPointProperties = NavigationPointProperties() {
+        didSet {
+            let javaScriptString = String(format: ScriptTemplates.SetStartPoint, javaScriptVariableName, startPointProperties.navigationPointScript)
+            map.evaluate(javaScriptString)
+        }
+    }
+    
+    public var endPointProperties = NavigationPointProperties() {
+        didSet {
+            let javaScriptString = String(format: ScriptTemplates.SetEndPoint, javaScriptVariableName, endPointProperties.navigationPointScript)
+            map.evaluate(javaScriptString)
+        }
+    }
     
     /// Initializes a new `INNavigation` object with the provided parameters.
     ///
     /// - Parameters:
     ///   - map: An `INMap` object, in which object is going to be created.
     ///   - bleLocationManager: `BLELocationManager` object, used to update remaining route. Setting this value is optional. If set appriopriately, remaining route during navigation is being updated. If not set, `INNavigation` only draws a route. Default value is nil.
-    public init(map: INMap, bleLocationManager: BLELocationManager? = nil) {
+    public init(map: INMap, bleLocationManager: BLELocationManager? = nil, delegate: INNavigationDelegate? = nil) {
         self.map = map
         self.bleLocationManager = bleLocationManager
+        self.delegate = delegate
         super.init()
         javaScriptVariableName = String(format: ScriptTemplates.VariableName, hash)
         initInJavaScript()
+        if delegate != nil {
+            addEventListener()
+        }
     }
     
     private func initInJavaScript() {
         let javaScriptString = String(format: ScriptTemplates.Initialization, javaScriptVariableName)
-        map.evaluate(javaScriptString: javaScriptString)
+        map.evaluate(javaScriptString)
     }
     
     /// Calculates shortest path for given beginning and destination coordinates.
@@ -70,8 +158,7 @@ public class INNavigation: NSObject {
     ///   - position: `INPoint` representing starting position from which navigation is going to begin. Should be given in real world dimensions, same as set for map's scale.
     ///   - destination: `INPoint` representing destination to which navigation is going to calculate and draw a path. Should be given in real world dimensions, same as set for map's scale.
     ///   - accuracy: Number representing margin for which navigation will pull point to the nearest path.
-    ///   - onCompletion: A block to invoke when the navigation has received `Event`. You can use it to monitor navigation activity. This value is optional.
-    public func startNavigation(from position: INPoint, to destination: INPoint, withAccuracy accuracy: Int, onCompletion: ((Event) -> Void)? = nil) {
+    public func startNavigation(from position: INPoint, to destination: INPoint, withAccuracy accuracy: Int) {
         
         guard let scale = map.scale else {
             assertionFailure("Scale has not loaded yet. Navigation could not be performed.")
@@ -90,27 +177,8 @@ public class INNavigation: NSObject {
         let lastPositionInPixels = MapHelper.pixel(fromRealCoodinates: position, scale: scale)
         let destinationInPixels = MapHelper.pixel(fromRealCoodinates: destination, scale: scale)
 
-        let javaScriptString: String
-        if let onCompletion = onCompletion {
-            if let uuid = navigationCallbackUUID?.uuidString {
-                map.navigationCallbacksController.navigationCallbacks.removeValue(forKey: uuid)
-                navigationCallbackUUID = nil
-            }
-            
-            navigationCallbackUUID = UUID()
-            let uuid = navigationCallbackUUID!.uuidString
-            map.navigationCallbacksController.navigationCallbacks[uuid] = onCompletion
-            let message = String(format: ScriptTemplates.Message, uuid)
-            
-            javaScriptString = String(format: ScriptTemplates.StartWithCallback, javaScriptVariableName, lastPositionInPixels.x, lastPositionInPixels.y, destinationInPixels.x, destinationInPixels.y, accuracy, message)
-        } else if let uuid = navigationCallbackUUID?.uuidString {
-            let message = String(format: ScriptTemplates.Message, uuid)
-            javaScriptString = String(format: ScriptTemplates.StartWithCallback, javaScriptVariableName, lastPositionInPixels.x, lastPositionInPixels.y, destinationInPixels.x, destinationInPixels.y, accuracy, message)
-        } else {
-            javaScriptString = String(format: ScriptTemplates.Start, javaScriptVariableName, lastPositionInPixels.x, lastPositionInPixels.y, destinationInPixels.x, destinationInPixels.y, accuracy)
-        }
-        
-        map.evaluate(javaScriptString: javaScriptString)
+        let javaScriptString = String(format: ScriptTemplates.Start, javaScriptVariableName, lastPositionInPixels.x, lastPositionInPixels.y, destinationInPixels.x, destinationInPixels.y, accuracy)
+        map.evaluate(javaScriptString)
         self.isNavigating = true
         
         if let bleLocationManager = bleLocationManager {
@@ -122,7 +190,7 @@ public class INNavigation: NSObject {
     public func stopNavigation() {
         if isNavigating {
             let javaScriptString = String(format: ScriptTemplates.Stop, javaScriptVariableName)
-            map.evaluate(javaScriptString: javaScriptString)
+            map.evaluate(javaScriptString)
             isNavigating = false
             NotificationCenter.default.removeObserver(self)
         }
@@ -135,6 +203,36 @@ public class INNavigation: NSObject {
         }
         if let lastPosition = lastPosition, let destination = destination, let accuracy = accuracy {
             startNavigation(from: lastPosition, to: destination, withAccuracy: accuracy)
+        }
+    }
+    
+    private func addEventListener() {
+        navigationCallbackUUID = navigationCallbackUUID ?? UUID()
+        map.navigationCallbacksController.navigationCallbacks[navigationCallbackUUID!.uuidString] = didReceice(_:)
+        let message = String(format: ScriptTemplates.Message, navigationCallbackUUID!.uuidString)
+        let javaScriptString = String(format: ScriptTemplates.AddEventListener, javaScriptVariableName, message)
+        map.evaluate(javaScriptString)
+    }
+    
+    private func didReceice(_ event: Event) {
+        switch event {
+        case .created:
+            delegate?.navigationCreated(self)
+        case .finished:
+            delegate?.navigationFinished(self)
+        case .error:
+            delegate?.errorOccured(in: self)
+        case .working:
+            delegate?.navigationIsWorking(self)
+        }
+    }
+    
+    private func removeEventListener() {
+        if let uuid = navigationCallbackUUID?.uuidString {
+            map.navigationCallbacksController.navigationCallbacks.removeValue(forKey: uuid)
+            navigationCallbackUUID = nil
+            let javaScriptString = String(format: ScriptTemplates.RemoveEventListener, javaScriptVariableName)
+            map.evaluate(javaScriptString)
         }
     }
     
@@ -156,6 +254,6 @@ public class INNavigation: NSObject {
         lastPosition = position
         let lastPositionInPixels = MapHelper.pixel(fromRealCoodinates: position, scale: scale)
         let javaScriptString = String(format: ScriptTemplates.UpdatePosition, javaScriptVariableName, lastPositionInPixels.x, lastPositionInPixels.y)
-        map.evaluate(javaScriptString: javaScriptString)
+        map.evaluate(javaScriptString)
     }
 }
