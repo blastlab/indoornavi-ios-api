@@ -6,7 +6,7 @@
 //  Copyright © 2018 BlastLab. All rights reserved.
 //
 
-import  WebKit
+import WebKit
 
 class GetAreasCallbacksController: NSObject, WKScriptMessageHandler {
     

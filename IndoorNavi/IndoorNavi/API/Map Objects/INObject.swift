@@ -10,7 +10,8 @@
 public class INObject: NSObject {
     
     fileprivate struct ScriptTemplates {
-        static let Ready = "%@.ready().then(() => webkit.messageHandlers.PromisesController.postMessage('%@'));"
+        static let ReadyNative = "%@.ready().then(() => webkit.messageHandlers.PromisesController.postMessage('%@'));"
+        static let Ready = "%@.ready().then(() => {%@});"
         static let GetID = "%@.getID();"
         static let Remove = "%@.remove();"
     }
@@ -43,14 +44,14 @@ public class INObject: NSObject {
     private func getID() {
         let javaScriptString = String(format: ScriptTemplates.GetID, self.javaScriptVariableName)
         ready {
-            self.map.evaluate(javaScriptString: javaScriptString) { response, error in
-                
-                guard error == nil, response != nil else {
-                    print("Error: \(String(describing: error))")
+            self.map.evaluate(javaScriptString) { response, error in
+                guard let response = response, error == nil else {
+                    assert(error == nil || (error! as NSError).code == 5, "An error occured while retrieveing objectID: \"\(error!.localizedDescription)\"")
+                    assertionFailure("Could not retrieve objectID for \(String(describing: self)).")
                     return
                 }
                 
-                if let idNumber = response! as? Int {
+                if let idNumber = response as? Int {
                     self.objectID = idNumber
                 }
             }
@@ -66,16 +67,19 @@ public class INObject: NSObject {
         } else {
             let uuid = UUID().uuidString
             map.promisesController.promises[uuid] = readyClousure
-            let javaScriptString = String(format: ScriptTemplates.Ready, javaScriptVariableName, uuid)
-            map.evaluate(javaScriptString: javaScriptString)
+            let javaScriptString = String(format: ScriptTemplates.ReadyNative, javaScriptVariableName, uuid)
+            map.evaluate(javaScriptString)
         }
+    }
+    
+    func ready(_ readyScript: String) {
+        let javaScriptString = String(format: ScriptTemplates.Ready, javaScriptVariableName, readyScript)
+        map.evaluate(javaScriptString)
     }
     
     /// Removes object and destroys instance of the object in the frontend server, but do not destroys object class instance in your app.
     @objc public func remove() {
         let javaScriptString = String(format: ScriptTemplates.Remove, self.javaScriptVariableName)
-        ready {
-            self.map.evaluate(javaScriptString: javaScriptString)
-        }
+        ready(javaScriptString)
     }
 }

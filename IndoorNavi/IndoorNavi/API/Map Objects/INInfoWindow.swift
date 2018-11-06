@@ -39,9 +39,6 @@ public class INInfoWindow: INObject {
         case bottomLeft
     }
     
-    private var privateWidth = 250
-    private var privateHeight = 250
-    
     /// Initializes a new `INInfoWindow` object inside given `INMap` object.
     ///
     /// - Parameters:
@@ -54,14 +51,17 @@ public class INInfoWindow: INObject {
         self.init(withMap: map)
         self.width = width ?? 250
         self.height = height ?? 250
-        if let position = position {
-            self.position = position
-            setPositionInJavaScript()
-        }
-        if let content = content {
-            self.content = content
-            setContentInJavaScript()
-        }
+        self.position = position ?? .top
+        self.content = content
+    }
+    
+    func getSetPropertiesScript() -> String {
+        var javaScriptString = String()
+        javaScriptString += getSetPositionScript()
+        javaScriptString += getSetContentScript()
+        javaScriptString += getSetWidthScript()
+        javaScriptString += getSetHeightScript()
+        return javaScriptString
     }
     
     @available(swift, obsoleted: 1.0)
@@ -82,75 +82,39 @@ public class INInfoWindow: INObject {
     override func initInJavaScript() {
         javaScriptVariableName = String(format: ScriptTemplates.VariableName, hash)
         let javaScriptString = String(format: ScriptTemplates.Initialization, javaScriptVariableName)
-        map.evaluate(javaScriptString: javaScriptString)
+        map.evaluate(javaScriptString)
+    }
+    
+    private func getSetHeightScript() -> String {
+        let javaScriptString = String(format: ScriptTemplates.SetHeight, self.javaScriptVariableName, height > 50 ? height : 50)
+        return javaScriptString
     }
     
     /// Height dimension of info window. Setting this value is optional. Default value is 250px, minimum value is 50px.
-    @objc public var height: Int {
-        get {
-            return privateHeight
-        }
-        set {
-            if newValue >= 50 {
-                privateHeight = newValue
-            } else {
-                NSLog("INInfoWindow's height cannot be less than 50px. Height is set to 50px.")
-                privateHeight = 50
-            }
-            
-            let javaScriptString = String(format: ScriptTemplates.SetHeight, self.javaScriptVariableName, self.height)
-            ready {
-                self.map.evaluate(javaScriptString: javaScriptString)
-            }
-        }
+    @objc public var height: Int = 250
+    
+    private func getSetWidthScript() -> String {
+        let javaScriptString = String(format: ScriptTemplates.SetWidth, self.javaScriptVariableName, width > 50 ? width : 50)
+        return javaScriptString
     }
     
     /// Width dimension of info window. Setting this value is optional. Default value is 250px, minimum value is 50px.
-    @objc public var width: Int {
-        get {
-            return privateWidth
-        }
-        set {
-            if newValue >= 50 {
-                privateHeight = newValue
-            } else {
-                NSLog("INInfoWindow's width cannot be less than 50px. Width is set to 50px.")
-                privateHeight = 50
-            }
-            
-            let javaScriptString = String(format: ScriptTemplates.SetWidth, self.javaScriptVariableName, self.privateWidth)
-            ready {
-                self.map.evaluate(javaScriptString: javaScriptString)
-            }
-        }
-    }
+    @objc public var width: Int = 250
     
     /// Text or HTML template in string format that is displayed in InfoWindow. To reset label to a new content set this property to a new value and call `draw()`.
-    @objc public var content: String? {
-        didSet {
-            setContentInJavaScript()
-        }
-    }
+    @objc public var content: String?
     
-    private func setContentInJavaScript() {
+    private func getSetContentScript() -> String {
         let contentString = content ?? ""
         let javaScriptString = String(format: ScriptTemplates.SetContent, self.javaScriptVariableName, contentString)
-        ready {
-            self.map.evaluate(javaScriptString: javaScriptString)
-        }
+        return javaScriptString
     }
     
     /// Position of info window regarding to object that info window will be appended to. Default position for info window is `.top`.
-    @objc public var position: Position = .top {
-        didSet {
-            setPositionInJavaScript()
-        }
-    }
+    @objc public var position: Position = .top
     
-    private func setPositionInJavaScript() {
+    private func getSetPositionScript() -> String {
         let javaScriptString = String(format: ScriptTemplates.SetPosition, self.javaScriptVariableName, self.position.rawValue)
-        ready {
-            self.map.evaluate(javaScriptString: javaScriptString)
-        }
+        return javaScriptString
     }
 }

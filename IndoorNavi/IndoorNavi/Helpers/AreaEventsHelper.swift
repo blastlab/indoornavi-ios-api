@@ -18,6 +18,22 @@ class AreaEventsHelper: NSObject {
             
             return areaEvents
         } else {
+            assertionFailure("Could not initialize array of AreaEvent's from JSON object.")
+            return [AreaEvent]()
+        }
+    }
+    
+    static func bleAreaEvents(fromJSONObject jsonObject: Any?) -> [AreaEvent] {
+        if let dictionaries = jsonObject as? [[String: Any]] {
+            
+            let bleAreaEvents = dictionaries.compactMap { element -> AreaEvent? in
+                let areaEvent = AreaEvent(fromBleJSONObject: element)
+                return areaEvent
+            }
+            
+            return bleAreaEvents
+        } else {
+            assertionFailure("Could not initialize arrat of AreaEvent's from JSON object.")
             return [AreaEvent]()
         }
     }

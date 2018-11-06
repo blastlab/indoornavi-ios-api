@@ -17,16 +17,16 @@ public class INReport: NSObject {
         static let GetCoordinates = "%@.getCoordinates(%d, new Date(%lu), new Date(%lu)).then(res => webkit.messageHandlers.CoordinatesCallbacksController.postMessage(%@));"
     }
     
-    private var map: INMap
+    private let map: INMap
     private var javaScriptVariableName: String!
-    private var targetHost: String
-    private var apiKey: String
+    private let targetHost: String
+    private let apiKey: String
     
     /// Initializes a new `INReport` object with the provided parameters.
     ///
     /// - Parameters:
     ///   - map: An `INMap` object, in which object is going to be created.
-    ///   - targetHost: Address to the `INMap` server.
+    ///   - targetHost: Address to the `INMap` backend server.
     ///   - apiKey: The API key created on the `INMap` server.
     @objc public init(map: INMap, targetHost: String, apiKey: String) {
         self.map = map
@@ -39,7 +39,7 @@ public class INReport: NSObject {
     
     private func initInJavaScript() {
         let javaScriptString = String(format: ScriptTemplates.Initialization, javaScriptVariableName, targetHost, apiKey)
-        map.evaluate(javaScriptString: javaScriptString)
+        map.evaluate(javaScriptString)
     }
     
     /// Returns array of historical `INArea` events.
@@ -54,7 +54,7 @@ public class INReport: NSObject {
         map.areaEventsCallbacksController.areaEventCallbacks[uuid] = completionHandler
         let message = String(format: ScriptTemplates.Message, uuid)
         let javaScriptString = String(format: ScriptTemplates.GetAreaEvents, javaScriptVariableName, floorID, from.timeIntervalSince1970.miliseconds, to.timeIntervalSince1970.miliseconds, message)
-        map.evaluate(javaScriptString: javaScriptString)
+        map.evaluate(javaScriptString)
     }
     
     @available(swift, obsoleted: 1.0)
@@ -75,7 +75,7 @@ public class INReport: NSObject {
         map.coordinatesCallbacksController.coordinatesCallbacks[uuid] = completionHandler
         let message = String(format: ScriptTemplates.Message, uuid)
         let javaScriptString = String(format: ScriptTemplates.GetCoordinates, javaScriptVariableName, floorID, from.timeIntervalSince1970.miliseconds, to.timeIntervalSince1970.miliseconds, message)
-        map.evaluate(javaScriptString: javaScriptString)
+        map.evaluate(javaScriptString)
     }
     
     @available(swift, obsoleted: 1.0)

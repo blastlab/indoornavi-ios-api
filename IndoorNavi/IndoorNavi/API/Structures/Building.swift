@@ -52,6 +52,7 @@ public struct Building: Equatable {
             }
         }
         
+        assertionFailure("Could not initialize Building from JSON object.")
         return nil
     }
 }
