@@ -225,13 +225,13 @@ public class INNavigation: NSObject {
     
     private func addEventListener() {
         navigationCallbackUUID = navigationCallbackUUID ?? UUID()
-        map.navigationCallbacksController.navigationCallbacks[navigationCallbackUUID!.uuidString] = didReceice(_:)
+        map.navigationCallbacksController.navigationCallbacks[navigationCallbackUUID!.uuidString] = didReceive(_:)
         let message = String(format: ScriptTemplates.Message, navigationCallbackUUID!.uuidString)
         let javaScriptString = String(format: ScriptTemplates.AddEventListener, javaScriptVariableName, message)
         map.evaluate(javaScriptString)
     }
     
-    private func didReceice(_ event: Event) {
+    private func didReceive(_ event: Event) {
         switch event {
         case .created:
             delegate?.navigationCreated(self)
