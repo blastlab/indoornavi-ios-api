@@ -352,7 +352,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
             return
         }
         
-        if floorID != floorID {
+        if self.floorID != floorID {
             load(floorID)
         }
     }
