@@ -98,6 +98,7 @@ public class BLELocationManager: NSObject {
     /// A path-loss exponent that varies in value depending on the environment. Default value is `2.0`.
     public var n = 2.0
     
+    /// Current floor ID estimated by BLE localization.
     private(set) public var currentFloor: Int?
     
     private var beaconManager: BeaconManager
