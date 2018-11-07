@@ -71,13 +71,14 @@ public class INBle: NSObject {
     }
     
     @objc private func didReceiveData(_ notification: Notification) {
-        if let location = notification.userInfo?["location"] as? INLocation {
-            let unitMultiplier = map.scale?.measure == .meters ? 1.0 : 100.0
-            let position = INPoint(x: Int32((location.x * unitMultiplier).rounded()), y: Int32((location.y * unitMultiplier).rounded()))
-            update(position: position)
-        } else {
+        guard let location = notification.userInfo?["location"] as? INLocation else {
             assertionFailure("Could not read location data.")
+            return
         }
+        
+        let unitMultiplier = map.scale?.measure == .meters ? 1.0 : 100.0
+        let position = INPoint(x: Int32((location.x * unitMultiplier).rounded()), y: Int32((location.y * unitMultiplier).rounded()))
+        update(position: position)
     }
     
     private func update(position: INPoint) {

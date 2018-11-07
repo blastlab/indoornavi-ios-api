@@ -33,6 +33,9 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
             "var head = document.getElementsByTagName('head')[0];" + "head.appendChild(meta);"
     }
     
+    private(set) public var floorChangeEnabled = false
+    private(set) public var bleLocationManager: BLELocationManager?
+    
     var promisesController = PromisesController()
     var eventCallbacksController = EventCallbacksController()
     var areaEventsCallbacksController = AreaEventsCallbacksController()
@@ -57,6 +60,8 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     
     private var areaEventListenerUUID: UUID?
     private var coordinatesEventListenerUUID: UUID?
+    
+    private var mapID: Int?
     
     /// `Scale` object representing scale of the map
     private(set) public var scale: Scale? {
@@ -84,6 +89,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     ///   - mapId: ID number of the map you want to load.
     ///   - onCompletion: A block to invoke when the map is loaded.
     @objc public func load(_ mapId: Int, onCompletion: (() -> Void)? = nil) {
+        self.mapID = mapId
         var javaScriptString = String()
         let uuid = UUID().uuidString
         
@@ -93,6 +99,18 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         
         javaScriptString = String(format: ScriptTemplates.LoadMapPromise, mapId, uuid)
         evaluate(javaScriptString)
+    }
+    
+    public func enableFloorChange(wtihBLELocationManager bleLocationManager: BLELocationManager) {
+        self.bleLocationManager = bleLocationManager
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveData(_:)), name: .didChangeFloor, object: bleLocationManager)
+        floorChangeEnabled = true
+    }
+    
+    public func disableFloorChange() {
+        bleLocationManager = nil
+        NotificationCenter.default.removeObserver(self)
+        floorChangeEnabled = false
     }
     
     /// Initializes a new `INMap` object with the provided parameters to communicate with `INMap` frontend server.
@@ -208,8 +226,8 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     /// - Parameters:
     ///   - point: The XY coordinates representing current coordinates in real world dimensions.
     ///   - accuracy: Accuracy of path pull.
-    ///   - completionHandler: A block to invoke when calculated position on path is available. This completion handler takes `INPoint` as a position on Path.
-    public func pullToPath(point: INPoint, accuracy: Int, withCompletionHandler completionHandler: @escaping (INPoint) -> Void) {
+    ///   - completionHandler: A block to invoke when calculated position on path is available. This completion handler takes an optional `INPoint` as a position on Path. Value is `nil` if position could not be calculated.
+    public func pullToPath(point: INPoint, accuracy: Int, withCompletionHandler completionHandler: @escaping (INPoint?) -> Void) {
         guard let scale = scale else {
             assertionFailure("Scale has not loaded yet. Could not pull to path.")
             return
@@ -310,6 +328,17 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
             evaluate(script)
         }
         scriptsToEvaluateAfterScaleLoad.removeAll()
+    }
+    
+    @objc private func didReceiveData(_ notification: Notification) {
+        guard let floorID = notification.userInfo?["floorID"] as? Int else {
+            assertionFailure("Could not read floorID.")
+            return
+        }
+        
+        if mapID != floorID {
+            load(floorID)
+        }
     }
     
     // WKNavigationDelegate

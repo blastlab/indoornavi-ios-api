@@ -254,12 +254,13 @@ public class INNavigation: NSObject {
     }
     
     @objc private func didReceiveData(_ notification: Notification) {
-        if let location = notification.userInfo?["location"] as? INLocation {
-            let position = INPoint(x: Int32(location.x.rounded()), y: Int32(location.y.rounded()))
-            update(position: position)
-        } else {
+        guard let location = notification.userInfo?["location"] as? INLocation else {
             assertionFailure("Could not read location data.")
+            return
         }
+        
+        let position = INPoint(x: Int32(location.x.rounded()), y: Int32(location.y.rounded()))
+        update(position: position)
     }
     
     private func update(position: INPoint) {
