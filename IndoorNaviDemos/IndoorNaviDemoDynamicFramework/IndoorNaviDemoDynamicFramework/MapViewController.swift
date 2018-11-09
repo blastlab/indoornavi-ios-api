@@ -27,18 +27,18 @@ class MapViewController: UIViewController {
     let points1: [INPoint] = [INPoint(x: 480, y: 480), INPoint(x: 1220, y: 480), INPoint(x: 1220, y: 1220), INPoint(x: 480, y: 1220), INPoint(x: 750, y: 750)]
     let points2: [INPoint] = [INPoint(x: 2000, y: 2000), INPoint(x: 2500, y: 2000), INPoint(x: 3000, y: 2000), INPoint(x: 3000, y: 1500), INPoint(x: 2500, y: 1500)]
     
-    let configurations = [INBeaconConfiguration(x: 3212, y: 246, z: 300, txPower: -69, major: 65050, minor: 187),
-                          INBeaconConfiguration(x: 3681, y: 140, z: 300, txPower: -69, major: 65045, minor: 187),
-                          INBeaconConfiguration(x: 3220, y: 1161, z: 300, txPower: -69, major: 65049, minor: 187),
-                          INBeaconConfiguration(x: 3749, y: 1227, z: 300, txPower: -69, major: 65048, minor: 187),
+    let configurations = [INBeaconConfiguration(x: 3212, y: 246, z: 300, txPower: -69, major: 65050, minor: 187, floorID: 2),
+                          INBeaconConfiguration(x: 3681, y: 140, z: 300, txPower: -69, major: 65045, minor: 187, floorID: 2),
+                          INBeaconConfiguration(x: 3220, y: 1161, z: 300, txPower: -69, major: 65049, minor: 187, floorID: 2),
+                          INBeaconConfiguration(x: 3749, y: 1227, z: 300, txPower: -69, major: 65048, minor: 187, floorID: 2),
                           
-                          INBeaconConfiguration(x: 2460, y: 869, z: 300, txPower: -69, major: 65051, minor: 187),
-                          INBeaconConfiguration(x: 2445, y: 197, z: 300, txPower: -69, major: 65044, minor: 187),
-                          INBeaconConfiguration(x: 2991, y: 197, z: 300, txPower: -69, major: 65052, minor: 187),
-                          INBeaconConfiguration(x: 2991, y: 909, z: 300, txPower: -69, major: 65043, minor: 187),
+                          INBeaconConfiguration(x: 2460, y: 869, z: 300, txPower: -69, major: 65051, minor: 187, floorID: 3),
+                          INBeaconConfiguration(x: 2445, y: 197, z: 300, txPower: -69, major: 65044, minor: 187, floorID: 3),
+                          INBeaconConfiguration(x: 2991, y: 197, z: 300, txPower: -69, major: 65052, minor: 187, floorID: 3),
+                          INBeaconConfiguration(x: 2991, y: 909, z: 300, txPower: -69, major: 65043, minor: 187, floorID: 3),
                           
-                          INBeaconConfiguration(x: 3461, y: 1459, z: 300, txPower: -69, major: 65047, minor: 187),
-                          INBeaconConfiguration(x: 2434, y: 1441, z: 300, txPower: -69, major: 65046, minor: 187)]
+                          INBeaconConfiguration(x: 3461, y: 1459, z: 300, txPower: -69, major: 65047, minor: 187, floorID: 2),
+                          INBeaconConfiguration(x: 2434, y: 1441, z: 300, txPower: -69, major: 65046, minor: 187, floorID: 2)]
     
     let destination = INPoint(x: 2600, y: 200)
     
@@ -56,6 +56,9 @@ class MapViewController: UIViewController {
         didSet {
             for area in areas {
                 area.border = Border(width: 4, color: .red)
+                area.addEventListener {
+                    self.showAlert()
+                }
                 area.draw()
                 print("Database ID: \(area.databaseID ?? 0)")
                 let circle = INCircle(withMap: map, position: area.center, color: .red)
@@ -84,6 +87,7 @@ class MapViewController: UIViewController {
     func startLocalization() {
         bleLocationManager = BLELocationManager(beaconUUID: UUID(uuidString: BeaconUUID)!, configurations: configurations, delegate: self)
         bleLocationManager!.useCLBeaconAccuracy = true
+        map.enableFloorChange(wtihBLELocationManager: self.bleLocationManager!)
         ble = INBle(map: self.map, targetHost: self.BackendTargetHost, floorID: 2, apiKey: self.ApiKey, bleLocationManager: self.bleLocationManager!)
         ble!.addAreaEventListener() { event in
             print("event \(event)")
@@ -160,7 +164,7 @@ class MapViewController: UIViewController {
     }
     
     func load() {
-        map.load(2) {
+        map.load(3) {
             self.circle1 = INCircle(withMap: self.map)
             self.circle1.radius = 10
             self.circle1.border = Border(width: 5, color: .blue)
@@ -205,11 +209,11 @@ class MapViewController: UIViewController {
         if let navigation = navigation {
             navigation.restartNavigation()
         } else if let lastPosition = lastPosition {
-            navigation = INNavigation(map: map, bleLocationManager: bleLocationManager)
+            navigation = INNavigation(map: map, bleLocationManager: bleLocationManager, delegate: self)
+            navigation!.pathColor = .brown
+            navigation!.startPointProperties = INNavigation.NavigationPointProperties(radius: 5, border: Border(width: 4, color: .cyan), color: .brown)
+            navigation!.endPointProperties = INNavigation.NavigationPointProperties(radius: 6, border: Border(width: 10, color: .magenta), color: .darkGray)
             navigation!.startNavigation(from: lastPosition, to: destination, withAccuracy: 200)
-//            navigation!.startNavigation(from: lastPosition, to: destination, withAccuracy: 200) { event in
-//                print("Event: \(event)")
-//            }
         }
     }
     
@@ -270,8 +274,12 @@ extension MapViewController: BLELocationManagerDelegate {
         
         if mapLoaded {
             map.pullToPath(point: lastPosition!, accuracy: 10000) { position in
-                self.circle2.position = position
-                self.circle2.draw()
+                if let position = position {
+                    self.circle2.position = position
+                    self.circle2.draw()
+                } else {
+                    print("Could not pull to path.")
+                }
             }
         }
     }
@@ -297,11 +305,30 @@ extension MapViewController: PulleyPrimaryContentControllerDelegate {
     
     func makeUIAdjustmentsForFullscreen(progress: CGFloat, bottomSafeArea: CGFloat)
     {
-        
+        print("UI adjustments for full screen...")
     }
     
     func drawerChangedDistanceFromBottom(drawer: PulleyViewController, distance: CGFloat, bottomSafeArea: CGFloat)
     {
+        print("Drawer changed distance from bottom.")
+    }
+}
         
+extension MapViewController: INNavigationDelegate {
+    
+    func navigationCreated(_ navigation: INNavigation) {
+        print("Navigation created.")
+    }
+    
+    func navigationFinished(_ navigation: INNavigation) {
+        print("Navigation finished.")
+    }
+    
+    func errorOccured(in navigation: INNavigation) {
+        print("Error occured in navigation.")
+    }
+    
+    func navigationIsWorking(_ navigation: INNavigation) {
+        print("Navigation is working")
     }
 }

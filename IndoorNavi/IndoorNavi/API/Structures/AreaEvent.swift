@@ -60,6 +60,7 @@ public struct AreaEvent: Equatable {
             }
         }
         
+        assertionFailure("Could not initialize AreaEvent from JSON object.")
         return nil
     }
     
@@ -80,6 +81,7 @@ public struct AreaEvent: Equatable {
             }
         }
         
+        assertionFailure("Could not initialize AreaEvent from JSON object.")
         return nil
     }
     

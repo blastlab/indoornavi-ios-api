@@ -39,7 +39,7 @@ public class INData: NSObject {
     
     private func initInJavaScript() {
         let javaScriptString = String(format: ScriptTemplates.Initialization, javaScriptVariableName, targetHost, apiKey)
-        map.evaluate(javaScriptString: javaScriptString)
+        map.evaluate(javaScriptString)
     }
     
     /// Returns array of `Path` representing paths on specified `floorID`.
@@ -52,7 +52,7 @@ public class INData: NSObject {
         map.getPathsCallbacksController.getPathsCallbacks[uuid] = completionHandler
         let message = String(format: ScriptTemplates.Message, uuid)
         let javaScriptString = String(format: ScriptTemplates.GetPaths, javaScriptVariableName, floorID, message)
-        map.evaluate(javaScriptString: javaScriptString)
+        map.evaluate(javaScriptString)
     }
     
     /// Returns array of `INArea` representing areas on specified `floorID`.
@@ -65,6 +65,6 @@ public class INData: NSObject {
         map.getAreasCallbacksController.getAreasCallbacks[uuid] = completionHandler
         let message = String(format: ScriptTemplates.Message, uuid)
         let javaScriptString = String(format: ScriptTemplates.GetAreas, javaScriptVariableName, floorID, message)
-        map.evaluate(javaScriptString: javaScriptString)
+        map.evaluate(javaScriptString)
     }
 }

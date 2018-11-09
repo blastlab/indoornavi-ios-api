@@ -18,6 +18,7 @@ class DataHelper: NSObject {
             
             return paths
         } else {
+            assertionFailure("Could not initialize arrat of Path's from JSON object.")
             return [Path]()
         }
     }
@@ -32,6 +33,7 @@ class DataHelper: NSObject {
             
             return areas
         } else {
+            assertionFailure("Could not initialize arrat of INArea's from JSON object.")
             return [INArea]()
         }
     }

@@ -46,19 +46,18 @@ public class INBle: NSObject {
     
     private func initInJavaScript() {
         let javaScriptString = String(format: ScriptTemplates.Initialization, javaScriptVariableName, floorID, targetHost, apiKey)
-        map.evaluate(javaScriptString: javaScriptString)
+        map.evaluate(javaScriptString)
     }
     
     /// Adds a block to invoke when area event occurs.
     ///
     /// - Parameter areaEventCallback: A block to invoke when area event occurs.
     public func addAreaEventListener(withCallback areaEventCallback: @escaping (AreaEvent) -> Void) {
-        areaEventListenerUUID = UUID()
-        let uuid = areaEventListenerUUID!.uuidString
-        map.areaEventListenerCallbacksController.areaEventListenerCallbacks[uuid] = areaEventCallback
-        let message = String(format: ScriptTemplates.Message, uuid)
+        areaEventListenerUUID = areaEventListenerUUID ?? UUID()
+        map.areaEventListenerCallbacksController.areaEventListenerCallbacks[areaEventListenerUUID!.uuidString] = areaEventCallback
+        let message = String(format: ScriptTemplates.Message, areaEventListenerUUID!.uuidString)
         let javaScriptString = String(format: ScriptTemplates.AddCallback, javaScriptVariableName, message)
-        map.evaluate(javaScriptString: javaScriptString)
+        map.evaluate(javaScriptString)
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveData(_:)), name: .didUpdateLocation, object: bleLocationManager)
     }
     
@@ -72,11 +71,14 @@ public class INBle: NSObject {
     }
     
     @objc private func didReceiveData(_ notification: Notification) {
-        if let location = notification.userInfo?["location"] as? INLocation {
-            let unitMultiplier = map.scale?.measure == .meters ? 1.0 : 100.0
-            let position = INPoint(x: Int32((location.x * unitMultiplier).rounded()), y: Int32((location.y * unitMultiplier).rounded()))
-            update(position: position)
+        guard let location = notification.userInfo?["location"] as? INLocation else {
+            assertionFailure("Could not read location data.")
+            return
         }
+        
+        let unitMultiplier = map.scale?.measure == .meters ? 1.0 : 100.0
+        let position = INPoint(x: Int32((location.x * unitMultiplier).rounded()), y: Int32((location.y * unitMultiplier).rounded()))
+        update(position: position)
     }
     
     private func update(position: INPoint) {
@@ -87,7 +89,7 @@ public class INBle: NSObject {
         
         let pixelPosition = MapHelper.pixel(fromRealCoodinates: position, scale: scale)
         let javaScriptString = String(format: ScriptTemplates.UpdatePosition, javaScriptVariableName, pixelPosition.x, pixelPosition.y)
-        map.evaluate(javaScriptString: javaScriptString)
+        map.evaluate(javaScriptString)
     }
 }
 
