@@ -21,16 +21,6 @@ public class INCircle: INObject {
         static let Border = "new Border(%d, '%@')"
     }
     
-    public struct Border {
-        public var width: Int
-        public var color: UIColor
-        
-        public init(width: Int, color: UIColor) {
-            self.width = width
-            self.color = color
-        }
-    }
-    
     /// Initializes a new `INCircle` object inside given `INMap` object.
     ///
     /// - Parameters:
@@ -39,13 +29,8 @@ public class INCircle: INObject {
     ///   - color: Circles's fill color and opacity.
     public convenience init(withMap map: INMap, position: INPoint? = nil, color: UIColor? = nil) {
         self.init(withMap: map)
-        if let position = position {
-            set(position: position)
-        }
-        if let color = color {
-            self.color = color
-            applyColorInJavaScript()
-        }
+        self.position = position ?? .zero
+        self.color = color ?? .black
     }
     
     @available(swift, obsoleted: 1.0)
@@ -67,57 +52,41 @@ public class INCircle: INObject {
     /// Places Circle on the map with all given settings. 'position' should be set before `draw()` to indicate where Circle should to be located.
     /// Use of this method is indispensable to draw Circle with set configuration in the IndoorNavi Map.
     @objc public func draw() {
-        let javaScriptString = String(format: ScriptTemplates.DrawTemplate, javaScriptVariableName)
-        ready {
-            self.map.evaluate(javaScriptString: javaScriptString)
-        }
+        var javaScriptString = String()
+        javaScriptString += getSetPositionScript()
+        javaScriptString += getApplyColorScript()
+        javaScriptString += getSetBorderScript()
+        javaScriptString += getSetRadiusScript()
+        javaScriptString += String(format: ScriptTemplates.DrawTemplate, javaScriptVariableName)
+        ready(javaScriptString)
     }
     
-    /// Locates Circle at given coordinates. Coordinates needs to be given as real world dimensions that map is representing. Use of this method is indispensable.
-    /// Coordinates needs to be given as real world dimensions that map is representing. Use of this method is indispensable.
-    ///
-    /// - Parameter position: Represents position of the Circle in real world. Coordinates are calculated to the map scale and then displayed. Position will be clipped to the point in the bottom center of marker icon.
-    @objc(setPoint:) public func set(position: INPoint) {
+    private func getSetPositionScript() -> String {
         let positionString = PointHelper.pointString(fromCoordinates: position)
         let javaScriptString = String(format: ScriptTemplates.SetPosition, javaScriptVariableName, positionString)
-        ready {
-            self.map.evaluate(javaScriptString: javaScriptString)
-        }
+        return javaScriptString
     }
     
     /// Represents position of the Circle in real world. Coordinates needs to be given as real world dimensions that map is representing. To apply this it's necessary to call `draw()` after. Default value is `INPoint.zero`.
-    @objc public var position: INPoint = INPoint.zero {
-        didSet {
-            let positionString = PointHelper.pointString(fromCoordinates: position)
-            let javaScriptString = String(format: ScriptTemplates.SetPosition, javaScriptVariableName, positionString)
-            ready {
-                self.map.evaluate(javaScriptString: javaScriptString)
-            }
-        }
+    @objc public var position: INPoint = INPoint.zero
+    
+    private func getSetRadiusScript() -> String {
+        let javaScriptString = String(format: ScriptTemplates.SetRadius, javaScriptVariableName, radius)
+        return javaScriptString
     }
     
     /// Radius of the Circle. To apply this it's necessary to call `draw()` after. Default value is `5`.
-    @objc public var radius: Int = 5 {
-        didSet {
-            let javaScriptString = String(format: ScriptTemplates.SetRadius, javaScriptVariableName, radius)
-            ready {
-                self.map.evaluate(javaScriptString: javaScriptString)
-            }
-        }
+    @objc public var radius: Int = 5
+    
+    private func getSetBorderScript() -> String {
+        let stringColor = ColorHelper.colorString(fromColor: border.color)
+        let borderString = String(format: ScriptTemplates.Border, border.width, stringColor)
+        let javaScriptString = String(format: ScriptTemplates.SetBorder, javaScriptVariableName, borderString)
+        return javaScriptString
     }
     
     /// Border of the Circle. Describes width and color of the border. To apply this it's necessary to call `draw()` after. Default width is `0` and default color is `.black`.
-    public var border: Border = Border(width: 0, color: .black) {
-        didSet {
-            if let stringColor = ColorHelper.colorString(fromColor: border.color) {
-                let borderString = String(format: ScriptTemplates.Border, border.width, stringColor)
-                let javaScriptString = String(format: ScriptTemplates.SetBorder, javaScriptVariableName, borderString)
-                ready {
-                    self.map.evaluate(javaScriptString: javaScriptString)
-                }
-            }
-        }
-    }
+    public var border: Border = Border(width: 0, color: .black)
     
     @available(swift, obsoleted: 1.0)
     @objc public var borderWidth: Int {
@@ -140,32 +109,22 @@ public class INCircle: INObject {
     }
     
     /// `INCircles`'s color and opacity. To apply this it's necessary to call `draw()` after. Default value is `.black`.
-    @objc public var color: UIColor = .black {
-        didSet {
-            applyColorInJavaScript()
-        }
+    @objc public var color: UIColor = .black
+    
+    private func getApplyColorScript() -> String {
+        let javaScriptString = getSetColorScript(withRed: color.rgba.red, green: color.rgba.green, blue: color.rgba.blue) + getSetOpacityScript(withOpacity: color.rgba.alpha)
+        return javaScriptString
     }
     
-    private func applyColorInJavaScript() {
-        if let (red, green, blue, opacity) = ColorHelper.colorComponents(fromColor: color) {
-            setColorInJavaScript(withRed: red, green: green, blue: blue)
-            setOpacityInJavaScript(opacity: opacity)
-        }
-    }
-    
-    private func setColorInJavaScript(withRed red: CGFloat, green: CGFloat, blue: CGFloat) {
+    private func getSetColorScript(withRed red: CGFloat, green: CGFloat, blue: CGFloat) -> String {
         let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
         let javaScriptString = String(format: ScriptTemplates.SetColor, javaScriptVariableName, stringColor)
-        ready {
-            self.map.evaluate(javaScriptString: javaScriptString)
-        }
+        return javaScriptString
     }
     
-    private func setOpacityInJavaScript(opacity: CGFloat) {
+    private func getSetOpacityScript(withOpacity opacity: CGFloat) -> String {
         let standarizedOpacity = ColorHelper.standarizedOpacity(fromValue: opacity)
         let javaScriptString = String(format: ScriptTemplates.SetOpacity, javaScriptVariableName, standarizedOpacity)
-        ready {
-            self.map.evaluate(javaScriptString: javaScriptString)
-        }
+        return javaScriptString
     }
 }

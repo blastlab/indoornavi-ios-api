@@ -62,8 +62,11 @@
 		7B866E4B215E358B00607BDD /* ComplexesCallbacksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B866E4A215E358B00607BDD /* ComplexesCallbacksController.swift */; };
 		7B866E4D215E39F500607BDD /* ComplexHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B866E4C215E39F500607BDD /* ComplexHelper.swift */; };
 		7B901C3120D51AA100A1D216 /* INPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B901C2C20D519AF00A1D216 /* INPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B962EC62180978700FE2CBB /* NavigationCallbacksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B962EC52180978700FE2CBB /* NavigationCallbacksController.swift */; };
 		7B9ABA3320820B6A00A8849F /* WebViewScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */; };
 		7B9BC33320DD134C00426E78 /* IndoorNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD46764206CF34A00B9F2AD /* IndoorNavi.framework */; };
+		7B9F8FB5218722B800798881 /* Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F8FB4218722B800798881 /* Border.swift */; };
+		7BAD0CF22179B6CA00BBF5E2 /* INBle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAD0CF12179B6CA00BBF5E2 /* INBle.swift */; };
 		7BB6161121355E17003DD41C /* INCircleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB6161021355E17003DD41C /* INCircleTests.swift */; };
 		7BB616152135934E003DD41C /* BeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB616142135934E003DD41C /* BeaconManager.swift */; };
 		7BB616172135946A003DD41C /* BLELocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB616162135946A003DD41C /* BLELocationManager.swift */; };
@@ -4307,7 +4310,10 @@
 		7B866E4A215E358B00607BDD /* ComplexesCallbacksController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexesCallbacksController.swift; sourceTree = "<group>"; };
 		7B866E4C215E39F500607BDD /* ComplexHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexHelper.swift; sourceTree = "<group>"; };
 		7B901C2C20D519AF00A1D216 /* INPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = INPoint.h; sourceTree = "<group>"; };
+		7B962EC52180978700FE2CBB /* NavigationCallbacksController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCallbacksController.swift; sourceTree = "<group>"; };
 		7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewScrollViewDelegate.swift; sourceTree = "<group>"; };
+		7B9F8FB4218722B800798881 /* Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Border.swift; sourceTree = "<group>"; };
+		7BAD0CF12179B6CA00BBF5E2 /* INBle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INBle.swift; sourceTree = "<group>"; };
 		7BB6161021355E17003DD41C /* INCircleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INCircleTests.swift; sourceTree = "<group>"; };
 		7BB616142135934E003DD41C /* BeaconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconManager.swift; sourceTree = "<group>"; };
 		7BB616162135946A003DD41C /* BLELocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLELocationManager.swift; sourceTree = "<group>"; };
@@ -4358,6 +4364,7 @@
 		7B560E9B2099C2510055F42E /* API */ = {
 			isa = PBXGroup;
 			children = (
+				7BB616132135932F003DD41C /* BLE Localization */,
 				7B866E42215E2D6100607BDD /* Map Objects */,
 				7B866E43215E2DA300607BDD /* Structures */,
 				7B10D8AE2140161800638C06 /* DeviceDataManager.swift */,
@@ -11521,6 +11528,7 @@
 				7B866E46215E300B00607BDD /* Floor.swift */,
 				7B866E48215E31E100607BDD /* Complex.swift */,
 				7B682BF62166503B00533948 /* Path.swift */,
+				7B9F8FB4218722B800798881 /* Border.swift */,
 			);
 			path = Structures;
 			sourceTree = "<group>";
@@ -11538,6 +11546,7 @@
 				7BB616142135934E003DD41C /* BeaconManager.swift */,
 				7BB616162135946A003DD41C /* BLELocationManager.swift */,
 				7BC6D0C3214B96B3002B252C /* INLocation.swift */,
+				7BAD0CF12179B6CA00BBF5E2 /* INBle.swift */,
 			);
 			path = "BLE Localization";
 			sourceTree = "<group>";
@@ -11556,6 +11565,7 @@
 				7BDE207C2163888800E9D707 /* PullToPathCallbacksController.swift */,
 				7B682BF82166545A00533948 /* GetPathsCallbacksController.swift */,
 				7B682C042167A58E00533948 /* GetAreasCallbacksController.swift */,
+				7B962EC52180978700FE2CBB /* NavigationCallbacksController.swift */,
 			);
 			path = HandlerControllers;
 			sourceTree = "<group>";
@@ -11582,7 +11592,6 @@
 		7BD46766206CF34A00B9F2AD /* IndoorNavi */ = {
 			isa = PBXGroup;
 			children = (
-				7BB616132135932F003DD41C /* BLE Localization */,
 				7B71808A207CAF1B00EC3E34 /* Web resources */,
 				7B6948B920863EF100E22BD9 /* Supporting files */,
 				7B560E9B2099C2510055F42E /* API */,
@@ -11702,7 +11711,7 @@
 					};
 					7BD46763206CF34A00B9F2AD = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = "";
 						ProvisioningStyle = Automatic;
 					};
 					7BD4676C206CF34A00B9F2AD = {
@@ -11773,8 +11782,10 @@
 			files = (
 				7B682BF92166545A00533948 /* GetPathsCallbacksController.swift in Sources */,
 				7B866E4B215E358B00607BDD /* ComplexesCallbacksController.swift in Sources */,
+				7B962EC62180978700FE2CBB /* NavigationCallbacksController.swift in Sources */,
 				7B560E9D2099C2B60055F42E /* INInfoWindow.swift in Sources */,
 				7B682BF421664D0800533948 /* INData.swift in Sources */,
+				7BAD0CF22179B6CA00BBF5E2 /* INBle.swift in Sources */,
 				7B9ABA3320820B6A00A8849F /* WebViewScrollViewDelegate.swift in Sources */,
 				7B75CD6C2133CF70002598AB /* INCircle.swift in Sources */,
 				7B10D8AF2140161800638C06 /* DeviceDataManager.swift in Sources */,
@@ -11812,6 +11823,7 @@
 				7BEFEBFD20ED23C900A55FCC /* Scale.swift in Sources */,
 				7BD4679D206CF59500B9F2AD /* INMap.swift in Sources */,
 				7B666AF42088D3A60031780A /* INObject.swift in Sources */,
+				7B9F8FB5218722B800798881 /* Border.swift in Sources */,
 				7B682C052167A58E00533948 /* GetAreasCallbacksController.swift in Sources */,
 				7BCB74BB20BE7B96006386D1 /* Coordinates.swift in Sources */,
 			);
