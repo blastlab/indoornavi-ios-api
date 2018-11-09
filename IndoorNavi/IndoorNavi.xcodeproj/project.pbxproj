@@ -11711,7 +11711,7 @@
 					};
 					7BD46763206CF34A00B9F2AD = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = "";
 						ProvisioningStyle = Automatic;
 					};
 					7BD4676C206CF34A00B9F2AD = {

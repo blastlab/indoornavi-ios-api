@@ -19,6 +19,8 @@ class MapViewController: UIViewController {
     
     @IBOutlet weak var map: INMap!
     
+//    var pulleyMenuController: MenuViewController!
+    
     var marker: INMarker!
     var infoWindow: INInfoWindow!
     
@@ -62,9 +64,19 @@ class MapViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.pulleyViewController?.displayMode = .automatic
+        _ = self.pulleyViewController?.drawerContentViewController.view
+    }
+    
+    private func setupPulley() {
+        let primaryContent = UIStoryboard(name: "Main",bundle: nil).instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
+        self.pulleyViewController?.setPrimaryContentViewController(controller: primaryContent, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         map.setupConnection(withTargetHost: FrontendTargetHost, andApiKey: ApiKey)
         load()
     }
@@ -278,5 +290,18 @@ extension MapViewController: BLELocationManagerDelegate {
         let alert = UIAlertController(title: "WARNING!", message: "Not authorized to use location service!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+}
+
+extension MapViewController: PulleyPrimaryContentControllerDelegate {
+    
+    func makeUIAdjustmentsForFullscreen(progress: CGFloat, bottomSafeArea: CGFloat)
+    {
+        
+    }
+    
+    func drawerChangedDistanceFromBottom(drawer: PulleyViewController, distance: CGFloat, bottomSafeArea: CGFloat)
+    {
+        
     }
 }
