@@ -112,9 +112,6 @@ extension MenuViewController: PulleyDrawerViewControllerDelegate {
     
     /// This function is called when the current drawer display mode changes. Make UI customizations here.
     func drawerDisplayModeDidChange(drawer: PulleyViewController) {
-        
-        print("Drawer: \(drawer.currentDisplayMode)")
-        
         gripperTopConstraint.isActive = drawer.currentDisplayMode == .drawer
     }
 }

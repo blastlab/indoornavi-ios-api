@@ -16,6 +16,8 @@ protocol BeaconManagerDelegate {
     func didRange(beacons: [INBeacon])
     
     func didChange(authorization status: CLAuthorizationStatus)
+    
+    func errorOccured(_ error: Error)
 }
 
 class BeaconManager: NSObject {
@@ -99,5 +101,13 @@ extension BeaconManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
         let newBeacons = inBeacons(fromCLBeacons: beacons)
         delegate?.didRange(beacons: newBeacons)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        delegate?.errorOccured(error)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, rangingBeaconsDidFailFor region: CLBeaconRegion, withError error: Error) {
+        delegate?.errorOccured(error)
     }
 }

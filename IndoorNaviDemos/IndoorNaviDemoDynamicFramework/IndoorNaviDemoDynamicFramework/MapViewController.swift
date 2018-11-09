@@ -19,8 +19,6 @@ class MapViewController: UIViewController {
     
     @IBOutlet weak var map: INMap!
     
-//    var pulleyMenuController: MenuViewController!
-    
     var marker: INMarker!
     var infoWindow: INInfoWindow!
     
@@ -298,19 +296,6 @@ extension MapViewController: BLELocationManagerDelegate {
         let alert = UIAlertController(title: "WARNING!", message: "Not authorized to use location service!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
-    }
-}
-
-extension MapViewController: PulleyPrimaryContentControllerDelegate {
-    
-    func makeUIAdjustmentsForFullscreen(progress: CGFloat, bottomSafeArea: CGFloat)
-    {
-        print("UI adjustments for full screen...")
-    }
-    
-    func drawerChangedDistanceFromBottom(drawer: PulleyViewController, distance: CGFloat, bottomSafeArea: CGFloat)
-    {
-        print("Drawer changed distance from bottom.")
     }
 }
         

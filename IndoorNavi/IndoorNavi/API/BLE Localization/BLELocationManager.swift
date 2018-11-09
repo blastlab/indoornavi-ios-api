@@ -80,6 +80,37 @@ public protocol BLELocationManagerDelegate {
     ///   - manager: The object that you use to start and stop the delivery of location events to your app.
     ///   - status: The new authorization status for the application.
     func bleLocationManager(_ manager: BLELocationManager, didChangeAuthorization status: CLAuthorizationStatus)
+    
+    /// Tells the delegate that an error occurred while getting new location data.
+    ///
+    /// - Parameters:
+    ///   - manager: The object that you use to start and stop the delivery of location events to your app.
+    ///   - error: An error object containing the error code that indicates why localization failed.
+    func bleLocationManager(_ manager: BLELocationManager, didFailWithError error: Error)
+    
+    /// Tells the delegate that the user left the region, where localization was set and is out of range.
+    ///
+    /// - Parameter manager: The object that you use to start and stop the delivery of location events to your app.
+    func bleLocationManagerLeftRegion(_ manager: BLELocationManager)
+    
+    /// Tells the delegate that no beacon device was detected.
+    ///
+    /// - Parameter manager: The object that you use to start and stop the delivery of location events to your app.
+    func bleLocationManagerNoBeaconsDetected(_ manager: BLELocationManager)
+    
+    /// Tells the delegate that the user moved to other floor.
+    ///
+    /// - Parameters:
+    ///   - manager: The object that you use to start and stop the delivery of location events to your app.
+    ///   - floorID: Current floor ID estimated by BLE localization.
+    func bleLocationManager(_ manager: BLELocationManager, didChangeFloor floorID: Int)
+}
+
+public extension BLELocationManagerDelegate {
+    func bleLocationManager(_ manager: BLELocationManager, didFailWithError error: Error) {}
+    func bleLocationManagerLeftRegion(_ manager: BLELocationManager) {}
+    func bleLocationManagerNoBeaconsDetected(_ manager: BLELocationManager) {}
+    func bleLocationManager(_ manager: BLELocationManager, didChangeFloor floorID: Int) {}
 }
 
 /// The object that you use to start and stop the delivery of location events to your app based on iBeacons.
@@ -318,7 +349,6 @@ extension BLELocationManager {
         } else {
             newPosition = position
         }
-        lastPosition = newPosition
         
         return newPosition
     }
@@ -341,17 +371,29 @@ extension BLELocationManager {
 extension BLELocationManager: BeaconManagerDelegate {
     
     func didRange(beacons: [INBeacon]) {
-        if let location = maxStepEnabled ? getPositionMaxStep(withBeacons: beacons) : getCurrentLocation(withBeacons: beacons) {
+        guard beacons.count > 0 else {
+            lastPosition == nil ? delegate?.bleLocationManagerNoBeaconsDetected(self) : delegate?.bleLocationManagerLeftRegion(self)
+            return
+        }
+        
+        lastPosition = maxStepEnabled ? getPositionMaxStep(withBeacons: beacons) : getCurrentLocation(withBeacons: beacons)
+        
+        if let location = lastPosition {
             NotificationCenter.default.post(name: .didUpdateLocation, object: self, userInfo: ["location": location])
             delegate?.bleLocationManager(self, didUpdateLocation: location)
-        }
-        updateCurrentFloor(withBeacons: beacons)
-        if let currentFloor = currentFloor, sameFloorCounter > 2 {
-            NotificationCenter.default.post(name: .didChangeFloor, object: self, userInfo: ["floorID": currentFloor])
+            updateCurrentFloor(withBeacons: beacons)
+            if let currentFloor = currentFloor, sameFloorCounter > 2 {
+                NotificationCenter.default.post(name: .didChangeFloor, object: self, userInfo: ["floorID": currentFloor])
+                delegate?.bleLocationManager(self, didChangeFloor: currentFloor)
+            }
         }
     }
     
     func didChange(authorization status: CLAuthorizationStatus) {
         delegate?.bleLocationManager(self, didChangeAuthorization: status)
+    }
+    
+    func errorOccured(_ error: Error) {
+        delegate?.bleLocationManager(self, didFailWithError: error)
     }
 }
