@@ -12,7 +12,7 @@ import CoreLocation
 
 class MapViewController: UIViewController {
     
-    let FrontendTargetHost = "http://172.16.170.50:4200"
+    let FrontendTargetHost = "http://172.16.170.6:4200"
     let BackendTargetHost = "http://172.16.170.50:90"
     let ApiKey = "TestAdmin"
     let BeaconUUID = "30FD7D40-2EDC-4D83-9D47-D88AA7E0492A"
@@ -53,7 +53,11 @@ class MapViewController: UIViewController {
     var areas = [INArea]() {
         didSet {
             for area in areas {
+                area.border = Border(width: 4, color: .red)
                 area.draw()
+                print("Database ID: \(area.databaseID ?? 0)")
+                let circle = INCircle(withMap: map, position: area.center, color: .red)
+                circle.draw()
             }
         }
     }
@@ -68,7 +72,6 @@ class MapViewController: UIViewController {
     func startLocalization() {
         bleLocationManager = BLELocationManager(beaconUUID: UUID(uuidString: BeaconUUID)!, configurations: configurations, delegate: self)
         bleLocationManager!.useCLBeaconAccuracy = true
-        bleLocationManager!.startUpdatingLocation()
         ble = INBle(map: self.map, targetHost: self.BackendTargetHost, floorID: 2, apiKey: self.ApiKey, bleLocationManager: self.bleLocationManager!)
         ble!.addAreaEventListener() { event in
             print("event \(event)")
@@ -108,16 +111,29 @@ class MapViewController: UIViewController {
         print("Polyline 2 ID: %d", polyline.objectID != nil ? polyline.objectID! : 0)
     }
     
+    var area: INArea!
+    
     func drawArea() {
-        let area = INArea(withMap: map, points: points1, color: UIColor(red: 0.8, green: 0.4, blue: 0.2, alpha: 0.5))
-        area.draw()
+        if let area = area {
+            area.addEventListener {
+                self.showAlert()
+            }
+            area.draw()
+        } else {
+            area = INArea(withMap: map, points: points1, color: UIColor(red: 0.8, green: 0.4, blue: 0.2, alpha: 0.5))
+            area.addEventListener {
+                self.showAlert()
+            }
+            area.draw()
+        }
     }
     
     func placeMarker() {
-        let marker = INMarker(withMap: map, position: INPoint(x: 600, y: 600), iconPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png", label: "Tekst ABCD")
+        marker = INMarker(withMap: map, position: INPoint(x: 600, y: 600), iconPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png", label: "Tekst ABCD")
         marker.addEventListener {
             self.showAlert()
         }
+        marker.draw()
     }
     
     func createReport() {
@@ -135,12 +151,12 @@ class MapViewController: UIViewController {
         map.load(2) {
             self.circle1 = INCircle(withMap: self.map)
             self.circle1.radius = 10
-            self.circle1.border = INCircle.Border(width: 5, color: .blue)
+            self.circle1.border = Border(width: 5, color: .blue)
             self.circle1.color = .red
             sleep(1)
             self.circle2 = INCircle(withMap: self.map)
             self.circle2.radius = 10
-            self.circle2.border = INCircle.Border(width: 5, color: .green)
+            self.circle2.border = Border(width: 5, color: .green)
             self.circle2.color = .red
             
             self.mapLoaded = true
@@ -149,11 +165,12 @@ class MapViewController: UIViewController {
         
         map.addLongClickListener { point in
             let marker = INMarker(withMap: self.map)
-            marker.setIcon(withPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png")
+            marker.iconPath = "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png"
             marker.position = point
             marker.addEventListener {
                 self.showAlert()
             }
+            marker.draw()
         }
         
         map.toggleTagVisibility(withID: 10999)
@@ -173,13 +190,21 @@ class MapViewController: UIViewController {
     }
     
     func navigate() {
-        navigation = INNavigation(map: map, bleLocationManager: bleLocationManager)
-        
-        if let lastPosition = lastPosition {
+        if let navigation = navigation {
+            navigation.restartNavigation()
+        } else if let lastPosition = lastPosition {
+            navigation = INNavigation(map: map, bleLocationManager: bleLocationManager)
             navigation!.startNavigation(from: lastPosition, to: destination, withAccuracy: 200)
+//            navigation!.startNavigation(from: lastPosition, to: destination, withAccuracy: 200) { event in
+//                print("Event: \(event)")
+//            }
         }
     }
-
+    
+    func stopNavigation() {
+        navigation?.stopNavigation()
+    }
+    
     func getAreas() {
         let data = INData(map: map, targetHost: BackendTargetHost, apiKey: ApiKey)
         data.getAreas(fromFloorWithID: 2) { areas in
@@ -213,7 +238,11 @@ class MapViewController: UIViewController {
         case 8:
             navigate()
         case 9:
+            stopNavigation()
+        case 10:
             getAreas()
+        case 11:
+            load()
         default:
             return
         }
@@ -236,6 +265,18 @@ extension MapViewController: BLELocationManagerDelegate {
     }
     
     func bleLocationManager(_ manager: BLELocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print("Did change authorization")
+        if status == .notDetermined {
+            manager.requestWhenInUseAuthorization()
+        } else if status == .authorizedWhenInUse {
+            manager.startUpdatingLocation()
+        } else {
+            showNotAuthorizedAlert()
+        }
+    }
+    
+    func showNotAuthorizedAlert() {
+        let alert = UIAlertController(title: "WARNING!", message: "Not authorized to use location service!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }

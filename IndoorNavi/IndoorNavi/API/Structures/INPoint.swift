@@ -38,6 +38,7 @@ extension INPoint: Equatable {
             }
         }
         
+        assertionFailure("Could not initialize INPoint from JSON object.")
         return nil
     }
 }

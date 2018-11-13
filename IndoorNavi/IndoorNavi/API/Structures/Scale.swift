@@ -70,6 +70,7 @@ public struct Scale: Equatable {
             }
         }
         
+        assertionFailure("Could not initialize Scale from JSON object.")
         return nil
     }
 }

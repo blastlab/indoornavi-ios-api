@@ -36,6 +36,10 @@ class BeaconManager: NSObject {
     private var locationManager = CLLocationManager()
     private var beaconRegion: CLBeaconRegion
     
+    func requestWhenInUseAuthorization() {
+        locationManager.requestWhenInUseAuthorization()
+    }
+    
     func startScanning() {
         locationManager.startMonitoring(for: beaconRegion)
     }

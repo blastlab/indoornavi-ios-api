@@ -110,6 +110,11 @@ public class BLELocationManager: NSObject {
         beaconManager.delegate = self
     }
     
+    /// Requests permission to use location services while the app is in the foreground.
+    public func requestWhenInUseAuthorization() {
+        beaconManager.requestWhenInUseAuthorization()
+    }
+    
     /// Starts the generation of updates that report the user’s current location.
     public func startUpdatingLocation() {
         beaconManager.startScanning()

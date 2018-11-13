@@ -76,6 +76,8 @@ public class INBle: NSObject {
             let unitMultiplier = map.scale?.measure == .meters ? 1.0 : 100.0
             let position = INPoint(x: Int32((location.x * unitMultiplier).rounded()), y: Int32((location.y * unitMultiplier).rounded()))
             update(position: position)
+        } else {
+            assertionFailure("Could not read location data.")
         }
     }
     
@@ -85,7 +87,7 @@ public class INBle: NSObject {
             return
         }
         
-        let pixelPosition = MapHelper.pixel(fromReaCoodinates: position, scale: scale)
+        let pixelPosition = MapHelper.pixel(fromRealCoodinates: position, scale: scale)
         let javaScriptString = String(format: ScriptTemplates.UpdatePosition, javaScriptVariableName, pixelPosition.x, pixelPosition.y)
         map.evaluate(javaScriptString: javaScriptString)
     }

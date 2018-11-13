@@ -31,8 +31,6 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
             "meta.name = 'viewport';" +
             "meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';" +
             "var head = document.getElementsByTagName('head')[0];" + "head.appendChild(meta);"
-        static let DisableSelectionScriptString = "document.documentElement.style.webkitUserSelect='none';"
-        static let DisableCalloutScriptString = "document.documentElement.style.webkitTouchCallout='none';"
     }
     
     var promisesController = PromisesController()
@@ -46,6 +44,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     var pullToPathCallbacksController = PullToPathCallbacksController()
     var getPathsCallbacksController = GetPathsCallbacksController()
     var getAreasCallbacksController = GetAreasCallbacksController()
+    var navigationCallbacksController = NavigationCallbacksController()
     
     private var webView: WKWebView!
     
@@ -214,13 +213,13 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     ///   - completionHandler: A block to invoke when calculated position on path is available. This completion handler takes `INPoint` as a position on Path.
     public func pullToPath(point: INPoint, accuracy: Int, withCompletionHandler completionHandler: @escaping (INPoint) -> Void) {
         guard let scale = scale else {
-            NSLog("Scale has not loaded yet. Could not pull to path.")
+            assertionFailure("Scale has not loaded yet. Could not pull to path.")
             return
         }
         let uuid = UUID().uuidString
         pullToPathCallbacksController.pullToPathCallbacks[uuid] = completionHandler
         let message = String(format: ScriptTemplates.Message, uuid)
-        let pixel = MapHelper.pixel(fromReaCoodinates: point, scale: scale)
+        let pixel = MapHelper.pixel(fromRealCoodinates: point, scale: scale)
         let javaScriptString = String(format: ScriptTemplates.PullToPath, pixel.x, pixel.y, accuracy, message)
         evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
     }
@@ -236,18 +235,20 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
             let javaScriptString = String(format: ScriptTemplates.Initialization, host, apiKey)
             initializedInJavaScript = true
             evaluate(javaScriptString: javaScriptString)
+        } else {
+            assertionFailure("Could not initialize \(String(describing: self))")
         }
     }
     
     private func getDimensions(onCompletion: (() -> Void)? = nil) {
         evaluate(javaScriptString: ScriptTemplates.Parameters) { response, error in
-            
-            guard error == nil, response != nil else {
-                NSLog("Error: \(String(describing: error?.localizedDescription))")
+            guard let response = response, error == nil else {
+                assert(error == nil || (error! as NSError).code == 5, "An error occured while obtaining map dimensions: \"\(error!.localizedDescription)\"")
+                assertionFailure("Map dimensions could not be loaded.")
                 return
             }
             
-            if let scale = Scale(fromJSONObject: response!) {
+            if let scale = Scale(fromJSONObject: response) {
                 self.scale = scale
                 onCompletion?()
             }
@@ -279,12 +280,8 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         let controller = WKUserContentController()
         
         let viewportScript = WKUserScript(source: WebViewConfigurationScripts.ViewportScriptString, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-        let disableSelectionScript = WKUserScript(source: WebViewConfigurationScripts.DisableSelectionScriptString, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-        let disableCalloutScript = WKUserScript(source: WebViewConfigurationScripts.DisableCalloutScriptString, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         
         controller.addUserScript(viewportScript)
-        controller.addUserScript(disableSelectionScript)
-        controller.addUserScript(disableCalloutScript)
         
         controller.add(promisesController, name: PromisesController.ControllerName)
         controller.add(eventCallbacksController, name: EventCallbacksController.ControllerName)
@@ -297,6 +294,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         controller.add(pullToPathCallbacksController, name: PullToPathCallbacksController.ControllerName)
         controller.add(getPathsCallbacksController, name: GetPathsCallbacksController.ControllerName)
         controller.add(getAreasCallbacksController, name: GetAreasCallbacksController.ControllerName)
+        controller.add(navigationCallbacksController, name: NavigationCallbacksController.ControllerName)
         configuration.userContentController = controller
         
         return configuration
@@ -322,9 +320,11 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         evaluateScriptsAfterInitialization()
     }
     
-    func evaluate(javaScriptString string: String, completionHandler: ((Any?, Error?) -> Void)? = nil ) {
+    func evaluate(javaScriptString string: String, completionHandler: ((Any?, Error?) -> Void)? = nil) {
         if initializedInJavaScript {
-            webView.evaluateJavaScript(string, completionHandler: completionHandler)
+            webView.evaluateJavaScript(string) { response, error in
+                completionHandler?(response, error)
+            }
         } else {
             scriptsToEvaluateAfterInitialization.append(string)
         }
