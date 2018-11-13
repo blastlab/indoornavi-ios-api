@@ -25,10 +25,10 @@ class MapViewController: UIViewController {
     let points1: [INPoint] = [INPoint(x: 480, y: 480), INPoint(x: 1220, y: 480), INPoint(x: 1220, y: 1220), INPoint(x: 480, y: 1220), INPoint(x: 750, y: 750)]
     let points2: [INPoint] = [INPoint(x: 2000, y: 2000), INPoint(x: 2500, y: 2000), INPoint(x: 3000, y: 2000), INPoint(x: 3000, y: 1500), INPoint(x: 2500, y: 1500)]
     
-    let configurations = [INBeaconConfiguration(x: 3212, y: 246, z: 300, txPower: -69, major: 65050, minor: 187, floorID: 2),
-                          INBeaconConfiguration(x: 3681, y: 140, z: 300, txPower: -69, major: 65045, minor: 187, floorID: 2),
-                          INBeaconConfiguration(x: 3220, y: 1161, z: 300, txPower: -69, major: 65049, minor: 187, floorID: 2),
-                          INBeaconConfiguration(x: 3749, y: 1227, z: 300, txPower: -69, major: 65048, minor: 187, floorID: 2),
+    let configurations = [INBeaconConfiguration(x: 3212, y: 246, z: 300, txPower: -69, major: 65050, minor: 187, floorID: 3),
+                          INBeaconConfiguration(x: 3681, y: 140, z: 300, txPower: -69, major: 65045, minor: 187, floorID: 3),
+                          INBeaconConfiguration(x: 3220, y: 1161, z: 300, txPower: -69, major: 65049, minor: 187, floorID: 3),
+                          INBeaconConfiguration(x: 3749, y: 1227, z: 300, txPower: -69, major: 65048, minor: 187, floorID: 3),
                           
                           INBeaconConfiguration(x: 2460, y: 869, z: 300, txPower: -69, major: 65051, minor: 187, floorID: 3),
                           INBeaconConfiguration(x: 2445, y: 197, z: 300, txPower: -69, major: 65044, minor: 187, floorID: 3),
@@ -100,6 +100,12 @@ class MapViewController: UIViewController {
     
     func showMapNotLoadedAlert() {
         let alert = UIAlertController(title: "Error", message: "Map is not ready yet.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showErrorAlert(withMessage message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
@@ -282,14 +288,56 @@ extension MapViewController: BLELocationManagerDelegate {
         }
     }
     
-    func bleLocationManager(_ manager: BLELocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    func bleLocationManager(_ manager: BLELocationManager, didChangeAuthorization status: INAuthorizationStatus) {
         if status == .notDetermined {
             manager.requestWhenInUseAuthorization()
-        } else if status == .authorizedWhenInUse {
+        } else if status == .authorizedWhenInUse || status == .authorizedAlways {
             manager.startUpdatingLocation()
         } else {
             showNotAuthorizedAlert()
         }
+    }
+    
+    func bleLocationManagerLeftRegion(_ manager: BLELocationManager) {
+        showErrorAlert(withMessage: "User left region.")
+        print("User left region.")
+    }
+    
+    func bleLocationManagerNoBeaconsDetected(_ manager: BLELocationManager) {
+        showErrorAlert(withMessage: "No beacons detected.")
+        print("No beacons detected.")
+    }
+    
+    func bleLocationManager(_ manager: BLELocationManager, didChangeFloor floorID: Int) {
+        showErrorAlert(withMessage: "Did change floor: \(floorID).")
+        print("Did change floor: \(floorID).")
+    }
+    
+    func bleLocationManager(_ manager: BLELocationManager, didFailWithError error: Error) {
+        showErrorAlert(withMessage: "BLE manager did fail with error: \(error.localizedDescription)")
+        print("BLE manager did fail with error: \(error.localizedDescription)")
+    }
+    
+    func bleLocationManager(_ manager: BLELocationManager, didUpdateBluetoothState state: INBluetoothState) {
+        let stateString: String
+        switch state {
+        case .poweredOn:
+            stateString = "Powered On."
+        case .poweredOff:
+            stateString = "Powered Off."
+        case .resetting:
+            stateString = "Resetting."
+        case .unauthorized:
+            stateString = "Unauthorized."
+        case .unknown:
+            stateString = "Unknown."
+        case .unsupported:
+            stateString = "Unsupported."
+        default:
+            stateString = ""
+        }
+        showErrorAlert(withMessage: "State: \(String(describing: stateString))")
+        print("State: \(String(describing: stateString))")
     }
     
     func showNotAuthorizedAlert() {
