@@ -28,7 +28,7 @@ class INMarkerTests: XCTestCase {
             let marker = INMarker(withMap: self.map)
             
             marker.position = INPoint(x: 480, y: 480)
-            marker.setIcon(withPath: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png")
+            marker.iconPath = "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png"
             marker.label = "Tekst ABCD"
             marker.addEventListener {}
             
