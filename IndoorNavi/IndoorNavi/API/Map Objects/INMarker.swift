@@ -19,7 +19,8 @@ public class INMarker: INObject {
         static let SetLabel = "%@.setLabel('%@');"
         static let RemoveLabel = "%@.removeLabel();"
         static let Open = "%@.open(%@);"
-        static let SetIcon = "%@.setIcon('%@');"
+        static let SetIconURL = "%@.setIconUrl('%@');"
+        static let SetIconImage = "%@.setIconImgFromBase64('%@');"
         static let Ready = "%@.ready().then(() => {%@});"
     }
     
@@ -94,7 +95,11 @@ public class INMarker: INObject {
     /// Use of this method is indispensable to display marker with set configuration in the IndoorNavi Map.
     @objc public func draw() {
         var javaScriptString = String()
-        javaScriptString += iconPath != nil ? getSetIconScript(withPath: iconPath!) : ""
+        if let image = icon, let iconScript = getSetIconScript(withImage: image) {
+            javaScriptString += iconScript
+        } else if let iconPath = iconPath {
+            javaScriptString += getSetIconScript(withPath: iconPath)
+        }
         javaScriptString += getSetPositionScript()
         javaScriptString += getSetLabelScript() ?? ""
         javaScriptString += getAddEventListenerScript() ?? getRemoveEventListenerScript()
@@ -144,10 +149,22 @@ public class INMarker: INObject {
     }
     
     private func getSetIconScript(withPath path: String) -> String {
-        let javaScriptString = String(format: ScriptTemplates.SetIcon, self.javaScriptVariableName, path)
+        let javaScriptString = String(format: ScriptTemplates.SetIconURL, self.javaScriptVariableName, path)
         return javaScriptString
     }
     
-    /// Marker's icon. In order to change it, set new value and call `draw()`.
+    private func getSetIconScript(withImage image: UIImage) -> String? {
+        if let imageString = image.pngData()?.base64EncodedString() {
+            let javaScriptString = String(format: ScriptTemplates.SetIconImage, self.javaScriptVariableName, imageString)
+            return javaScriptString
+        }
+        
+        return nil
+    }
+    
+    /// Marker's icon URL. In order to change it, set new value and call `draw()`. Default value is `nil`.
     @objc public var iconPath: String?
+    
+    /// Marker's icon. In order to change it, set new value and call `draw()`. If set, `iconPath` property is ignored. Default value is `nil`.
+    @objc public var icon: UIImage?
 }
