@@ -22,6 +22,20 @@ class AreaEventsHelper: NSObject {
         }
     }
     
+    static func bleAreaEvents(fromJSONObject jsonObject: Any?) -> [String] {
+        if let dictionaries = jsonObject as? [[String: Any]] {
+            
+            let bleAreaEvents = dictionaries.compactMap { element -> String? in
+                print("element = \(element)")
+                return nil
+            }
+            
+            return bleAreaEvents
+        } else {
+            return [String]()
+        }
+    }
+    
     static func callbackHandlerTakingStruct(fromCallbackHandlerTakingObject callbackHandlerTakingObject: @escaping (ObjCAreaEvent) -> Void) -> (AreaEvent) -> Void {
         let callbackHandlerTakingStruct: (AreaEvent) -> Void = { areaEvent in
             let objCAreaEvent = ObjCAreaEvent(fromAreaEvent: areaEvent)

@@ -17,7 +17,7 @@ public class INNavigation: NSObject {
         static let UpdatePosition = "%@.updatePosition({x: %d, y: %d});"
     }
     
-    private var map: INMap
+    private let map: INMap
     private var javaScriptVariableName: String!
     
     private var lastPosition: INPoint?

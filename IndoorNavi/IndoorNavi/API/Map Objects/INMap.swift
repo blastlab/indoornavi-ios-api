@@ -56,11 +56,15 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     private var scriptsToEvaluateAfterInitialization = [String]()
     private var scriptsToEvaluateAfterScaleLoad = [String]()
     
+    private var areaEventListenerUUID: UUID?
+    private var coordinatesEventListenerUUID: UUID?
+    
     /// `Scale` object representing scale of the map
     private(set) public var scale: Scale? {
         didSet {
             if scale != nil {
                 longClickEventCallbacksController.scale = scale
+                pullToPathCallbacksController.scale = scale
                 evaluateScriptsAfterScaleLoad()
             }
         }
@@ -96,8 +100,8 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     ///
     /// - Parameters:
     ///   - frame: Frame of the view containing map.
-    ///   - targetHost: Address to the INMap server.
-    ///   - apiKey: The API key created on the INMap server.
+    ///   - targetHost: Address to the `INMap` backend server.
+    ///   - apiKey: The API key created on the `INMap` server.
     @objc public init(frame: CGRect, targetHost: String, apiKey: String) {
         self.targetHost = targetHost
         self.apiKey = apiKey
@@ -112,8 +116,8 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     /// Setups communication with `INMap` frontend server.
     ///
     /// - Parameters:
-    ///   - targetHost: Address to the INMap server.
-    ///   - apiKey: The API key created on the INMap server.
+    ///   - targetHost: Address to the `INMap` backend server.
+    ///   - apiKey: The API key created on the `INMap` server.
     @objc public func setupConnection(withTargetHost targetHost: String, andApiKey apiKey: String) {
         self.targetHost = targetHost
         self.apiKey = apiKey
@@ -135,7 +139,8 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     ///
     /// - Parameter areaEventCallback: A block to invoke when area event occurs. This handler takes the point as a parameter given in real dimensions.
     public func addAreaEventListener(withCallback areaEventCallback: @escaping (AreaEvent) -> Void) {
-        let uuid = UUID().uuidString
+        areaEventListenerUUID = UUID()
+        let uuid = areaEventListenerUUID!.uuidString
         areaEventListenerCallbacksController.areaEventListenerCallbacks[uuid] = areaEventCallback
         let message = String(format: ScriptTemplates.Message, uuid)
         let javaScriptString = String(format: ScriptTemplates.AddAreaEventListener, message)
@@ -148,15 +153,32 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         addAreaEventListener(withCallback: callbackTakingStructs)
     }
     
+    /// Removes area event listener.
+    public func removeAreaEventListener() {
+        if let uuid = areaEventListenerUUID?.uuidString {
+            areaEventListenerCallbacksController.areaEventListenerCallbacks.removeValue(forKey: uuid)
+        }
+        areaEventListenerUUID = nil
+    }
+    
     /// Adds a block to invoke when coordinates event occurs.
     ///
     /// - Parameter coordinatesListenerEventCallback: A block to invoke when coordinates event occurs.
     public func addCoordinatesEventListener(withCallback coordinatesListenerEventCallback: @escaping (Coordinates) -> Void) {
-        let uuid = UUID().uuidString
+        coordinatesEventListenerUUID = UUID()
+        let uuid = coordinatesEventListenerUUID!.uuidString
         coordinatesEventListenerCallbacksController.coordinatesListenerCallbacks[uuid] = coordinatesListenerEventCallback
         let message = String(format: ScriptTemplates.Message, uuid)
         let javaScriptString = String(format: ScriptTemplates.AddAreaEventListener, message)
         evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
+    }
+    
+    /// Removes coordinates event listener.
+    public func removeCoordinatesEventListener() {
+        if let uuid = coordinatesEventListenerUUID?.uuidString {
+            coordinatesEventListenerCallbacksController.coordinatesListenerCallbacks.removeValue(forKey: uuid)
+        }
+        coordinatesEventListenerUUID = nil
     }
     
     @available(swift, obsoleted: 1.0)
@@ -187,14 +209,19 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     /// Returns nearest position on path for given coordinates.
     ///
     /// - Parameters:
-    ///   - location: The XY coordinates representing current coordinates in pixels.
-    ///   - accuracy: Accuracy of path pull
+    ///   - point: The XY coordinates representing current coordinates in real world dimensions.
+    ///   - accuracy: Accuracy of path pull.
     ///   - completionHandler: A block to invoke when calculated position on path is available. This completion handler takes `INPoint` as a position on Path.
     public func pullToPath(point: INPoint, accuracy: Int, withCompletionHandler completionHandler: @escaping (INPoint) -> Void) {
+        guard let scale = scale else {
+            NSLog("Scale has not loaded yet. Could not pull to path.")
+            return
+        }
         let uuid = UUID().uuidString
         pullToPathCallbacksController.pullToPathCallbacks[uuid] = completionHandler
         let message = String(format: ScriptTemplates.Message, uuid)
-        let javaScriptString = String(format: ScriptTemplates.PullToPath, point.x, point.y, accuracy, message)
+        let pixel = MapHelper.pixel(fromReaCoodinates: point, scale: scale)
+        let javaScriptString = String(format: ScriptTemplates.PullToPath, pixel.x, pixel.y, accuracy, message)
         evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
     }
     
