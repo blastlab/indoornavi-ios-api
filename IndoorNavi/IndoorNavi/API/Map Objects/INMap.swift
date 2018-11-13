@@ -33,6 +33,20 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
             "var head = document.getElementsByTagName('head')[0];" + "head.appendChild(meta);"
     }
     
+    /// Boolean value indicating if automatic floor change is enabled.
+    ///
+    /// To enable automatic floor change use instance method:
+    /// ```
+    /// enableFloorChange(wtihBLELocationManager: yourBLELocationManager)
+    /// ```
+    /// To disable automatic floor change use instance method:
+    /// ```
+    /// yourBLELocationManager.disableFloorChange()
+    /// ```
+    private(set) public var floorChangeEnabled = false
+    /// `BLELocationManager` object, used to check foor floor changes if set. It should be set appropriately so that floor change could be performed.
+    private(set) public var bleLocationManager: BLELocationManager?
+    
     var promisesController = PromisesController()
     var eventCallbacksController = EventCallbacksController()
     var areaEventsCallbacksController = AreaEventsCallbacksController()
@@ -58,6 +72,9 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     private var areaEventListenerUUID: UUID?
     private var coordinatesEventListenerUUID: UUID?
     
+    /// ID of the floor, which is currently displayed.
+    private(set) public var floorID: Int?
+    
     /// `Scale` object representing scale of the map
     private(set) public var scale: Scale? {
         didSet {
@@ -81,9 +98,10 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     /// Loads map specified in function call.
     ///
     /// - Parameters:
-    ///   - mapId: ID number of the map you want to load.
+    ///   - floorID: ID number of the map you want to load.
     ///   - onCompletion: A block to invoke when the map is loaded.
-    @objc public func load(_ mapId: Int, onCompletion: (() -> Void)? = nil) {
+    @objc public func load(_ floorID: Int, onCompletion: (() -> Void)? = nil) {
+        self.floorID = floorID
         var javaScriptString = String()
         let uuid = UUID().uuidString
         
@@ -91,8 +109,24 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
             self.getDimensions(onCompletion: onCompletion)
         }
         
-        javaScriptString = String(format: ScriptTemplates.LoadMapPromise, mapId, uuid)
+        javaScriptString = String(format: ScriptTemplates.LoadMapPromise, floorID, uuid)
         evaluate(javaScriptString)
+    }
+    
+    /// Enables automatic floor change on the `INMap` object. It also sets `bleLocationManager` property and `floorChangeEnabled` to `true`.
+    ///
+    /// - Parameter bleLocationManager: `BLELocationManager` object, used to check foor floor changes if set. It should be set appropriately so that floor change could be performed.
+    public func enableFloorChange(wtihBLELocationManager bleLocationManager: BLELocationManager) {
+        self.bleLocationManager = bleLocationManager
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveData(_:)), name: .didChangeFloor, object: bleLocationManager)
+        floorChangeEnabled = true
+    }
+    
+    /// Disables automatic floor change. It also sets `bleLocationManager` property to `nil` and `floorChangeEnabled` to `false`.
+    public func disableFloorChange() {
+        bleLocationManager = nil
+        NotificationCenter.default.removeObserver(self)
+        floorChangeEnabled = false
     }
     
     /// Initializes a new `INMap` object with the provided parameters to communicate with `INMap` frontend server.
@@ -208,8 +242,8 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     /// - Parameters:
     ///   - point: The XY coordinates representing current coordinates in real world dimensions.
     ///   - accuracy: Accuracy of path pull.
-    ///   - completionHandler: A block to invoke when calculated position on path is available. This completion handler takes `INPoint` as a position on Path.
-    public func pullToPath(point: INPoint, accuracy: Int, withCompletionHandler completionHandler: @escaping (INPoint) -> Void) {
+    ///   - completionHandler: A block to invoke when calculated position on path is available. This completion handler takes an optional `INPoint` as a position on Path. Value is `nil` if position could not be calculated.
+    public func pullToPath(point: INPoint, accuracy: Int, withCompletionHandler completionHandler: @escaping (INPoint?) -> Void) {
         guard let scale = scale else {
             assertionFailure("Scale has not loaded yet. Could not pull to path.")
             return
@@ -310,6 +344,17 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
             evaluate(script)
         }
         scriptsToEvaluateAfterScaleLoad.removeAll()
+    }
+    
+    @objc private func didReceiveData(_ notification: Notification) {
+        guard let floorID = notification.userInfo?["floorID"] as? Int else {
+            assertionFailure("Could not read floorID.")
+            return
+        }
+        
+        if self.floorID != floorID {
+            load(floorID)
+        }
     }
     
     // WKNavigationDelegate

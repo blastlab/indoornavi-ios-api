@@ -25,18 +25,18 @@ class MapViewController: UIViewController {
     let points1: [INPoint] = [INPoint(x: 480, y: 480), INPoint(x: 1220, y: 480), INPoint(x: 1220, y: 1220), INPoint(x: 480, y: 1220), INPoint(x: 750, y: 750)]
     let points2: [INPoint] = [INPoint(x: 2000, y: 2000), INPoint(x: 2500, y: 2000), INPoint(x: 3000, y: 2000), INPoint(x: 3000, y: 1500), INPoint(x: 2500, y: 1500)]
     
-    let configurations = [INBeaconConfiguration(x: 3212, y: 246, z: 300, txPower: -69, major: 65050, minor: 187),
-                          INBeaconConfiguration(x: 3681, y: 140, z: 300, txPower: -69, major: 65045, minor: 187),
-                          INBeaconConfiguration(x: 3220, y: 1161, z: 300, txPower: -69, major: 65049, minor: 187),
-                          INBeaconConfiguration(x: 3749, y: 1227, z: 300, txPower: -69, major: 65048, minor: 187),
+    let configurations = [INBeaconConfiguration(x: 3212, y: 246, z: 300, txPower: -69, major: 65050, minor: 187, floorID: 3),
+                          INBeaconConfiguration(x: 3681, y: 140, z: 300, txPower: -69, major: 65045, minor: 187, floorID: 3),
+                          INBeaconConfiguration(x: 3220, y: 1161, z: 300, txPower: -69, major: 65049, minor: 187, floorID: 3),
+                          INBeaconConfiguration(x: 3749, y: 1227, z: 300, txPower: -69, major: 65048, minor: 187, floorID: 3),
                           
-                          INBeaconConfiguration(x: 2460, y: 869, z: 300, txPower: -69, major: 65051, minor: 187),
-                          INBeaconConfiguration(x: 2445, y: 197, z: 300, txPower: -69, major: 65044, minor: 187),
-                          INBeaconConfiguration(x: 2991, y: 197, z: 300, txPower: -69, major: 65052, minor: 187),
-                          INBeaconConfiguration(x: 2991, y: 909, z: 300, txPower: -69, major: 65043, minor: 187),
+                          INBeaconConfiguration(x: 2460, y: 869, z: 300, txPower: -69, major: 65051, minor: 187, floorID: 3),
+                          INBeaconConfiguration(x: 2445, y: 197, z: 300, txPower: -69, major: 65044, minor: 187, floorID: 3),
+                          INBeaconConfiguration(x: 2991, y: 197, z: 300, txPower: -69, major: 65052, minor: 187, floorID: 3),
+                          INBeaconConfiguration(x: 2991, y: 909, z: 300, txPower: -69, major: 65043, minor: 187, floorID: 3),
                           
-                          INBeaconConfiguration(x: 3461, y: 1459, z: 300, txPower: -69, major: 65047, minor: 187),
-                          INBeaconConfiguration(x: 2434, y: 1441, z: 300, txPower: -69, major: 65046, minor: 187)]
+                          INBeaconConfiguration(x: 3461, y: 1459, z: 300, txPower: -69, major: 65047, minor: 187, floorID: 2),
+                          INBeaconConfiguration(x: 2434, y: 1441, z: 300, txPower: -69, major: 65046, minor: 187, floorID: 2)]
     
     let destination = INPoint(x: 2600, y: 200)
     
@@ -54,6 +54,9 @@ class MapViewController: UIViewController {
         didSet {
             for area in areas {
                 area.border = Border(width: 4, color: .red)
+                area.addEventListener {
+                    self.showAlert()
+                }
                 area.draw()
                 print("Database ID: \(area.databaseID ?? 0)")
                 let circle = INCircle(withMap: map, position: area.center, color: .red)
@@ -62,9 +65,19 @@ class MapViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.pulleyViewController?.displayMode = .automatic
+        _ = self.pulleyViewController?.drawerContentViewController.view
+    }
+    
+    private func setupPulley() {
+        let primaryContent = UIStoryboard(name: "Main",bundle: nil).instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
+        self.pulleyViewController?.setPrimaryContentViewController(controller: primaryContent, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         map.setupConnection(withTargetHost: FrontendTargetHost, andApiKey: ApiKey)
         load()
     }
@@ -72,6 +85,7 @@ class MapViewController: UIViewController {
     func startLocalization() {
         bleLocationManager = BLELocationManager(beaconUUID: UUID(uuidString: BeaconUUID)!, configurations: configurations, delegate: self)
         bleLocationManager!.useCLBeaconAccuracy = true
+        map.enableFloorChange(wtihBLELocationManager: self.bleLocationManager!)
         ble = INBle(map: self.map, targetHost: self.BackendTargetHost, floorID: 2, apiKey: self.ApiKey, bleLocationManager: self.bleLocationManager!)
         ble!.addAreaEventListener() { event in
             print("event \(event)")
@@ -86,6 +100,12 @@ class MapViewController: UIViewController {
     
     func showMapNotLoadedAlert() {
         let alert = UIAlertController(title: "Error", message: "Map is not ready yet.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showErrorAlert(withMessage message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
@@ -148,7 +168,7 @@ class MapViewController: UIViewController {
     }
     
     func load() {
-        map.load(2) {
+        map.load(3) {
             self.circle1 = INCircle(withMap: self.map)
             self.circle1.radius = 10
             self.circle1.border = Border(width: 5, color: .blue)
@@ -258,20 +278,66 @@ extension MapViewController: BLELocationManagerDelegate {
         
         if mapLoaded {
             map.pullToPath(point: lastPosition!, accuracy: 10000) { position in
-                self.circle2.position = position
-                self.circle2.draw()
+                if let position = position {
+                    self.circle2.position = position
+                    self.circle2.draw()
+                } else {
+                    print("Could not pull to path.")
+                }
             }
         }
     }
     
-    func bleLocationManager(_ manager: BLELocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    func bleLocationManager(_ manager: BLELocationManager, didChangeAuthorization status: INAuthorizationStatus) {
         if status == .notDetermined {
             manager.requestWhenInUseAuthorization()
-        } else if status == .authorizedWhenInUse {
+        } else if status == .authorizedWhenInUse || status == .authorizedAlways {
             manager.startUpdatingLocation()
         } else {
             showNotAuthorizedAlert()
         }
+    }
+    
+    func bleLocationManagerLeftRegion(_ manager: BLELocationManager) {
+        showErrorAlert(withMessage: "User left region.")
+        print("User left region.")
+    }
+    
+    func bleLocationManagerNoBeaconsDetected(_ manager: BLELocationManager) {
+        showErrorAlert(withMessage: "No beacons detected.")
+        print("No beacons detected.")
+    }
+    
+    func bleLocationManager(_ manager: BLELocationManager, didChangeFloor floorID: Int) {
+        showErrorAlert(withMessage: "Did change floor: \(floorID).")
+        print("Did change floor: \(floorID).")
+    }
+    
+    func bleLocationManager(_ manager: BLELocationManager, didFailWithError error: Error) {
+        showErrorAlert(withMessage: "BLE manager did fail with error: \(error.localizedDescription)")
+        print("BLE manager did fail with error: \(error.localizedDescription)")
+    }
+    
+    func bleLocationManager(_ manager: BLELocationManager, didUpdateBluetoothState state: INBluetoothState) {
+        let stateString: String
+        switch state {
+        case .poweredOn:
+            stateString = "Powered On."
+        case .poweredOff:
+            stateString = "Powered Off."
+        case .resetting:
+            stateString = "Resetting."
+        case .unauthorized:
+            stateString = "Unauthorized."
+        case .unknown:
+            stateString = "Unknown."
+        case .unsupported:
+            stateString = "Unsupported."
+        default:
+            stateString = ""
+        }
+        showErrorAlert(withMessage: "State: \(String(describing: stateString))")
+        print("State: \(String(describing: stateString))")
     }
     
     func showNotAuthorizedAlert() {
@@ -280,7 +346,7 @@ extension MapViewController: BLELocationManagerDelegate {
         self.present(alert, animated: true, completion: nil)
     }
 }
-
+        
 extension MapViewController: INNavigationDelegate {
     
     func navigationCreated(_ navigation: INNavigation) {

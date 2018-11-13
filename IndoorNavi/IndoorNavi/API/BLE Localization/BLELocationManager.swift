@@ -9,8 +9,11 @@
 import UIKit
 import CoreLocation
 
+let NumberOfFloorMeasurements = 3
+
 extension Notification.Name {
     static let didUpdateLocation = Notification.Name("didUpdateLocation")
+    static let didChangeFloor = Notification.Name("didChangeFloor")
 }
 
 /// Structure representing information about a detected iBeacon, its configuration and location.
@@ -39,6 +42,8 @@ public struct INBeaconConfiguration {
     var minor: Int
     /// The one-meter RSSI level.
     var txPower: Int
+    /// ID of the floor, where iBeacon is placed.
+    var floorID: Int
     
     /// Initializes a new `INBeaconConfiguration` with the provided parameters.
     ///
@@ -49,13 +54,15 @@ public struct INBeaconConfiguration {
     ///   - txPower: The one-meter RSSI level.
     ///   - major: The most significant value in the beacon.
     ///   - minor: The least significant value in the beacon.
-    public init(x: Double, y: Double, z: Double, txPower: Int, major: Int, minor: Int) {
+    ///   - floorID: ID of the floor, where iBeacon is placed.
+    public init(x: Double, y: Double, z: Double, txPower: Int, major: Int, minor: Int, floorID: Int) {
         self.x = x
         self.y = y
         self.z = z
         self.major = major
         self.minor = minor
         self.txPower = txPower
+        self.floorID = floorID
     }
 }
 
@@ -74,7 +81,45 @@ public protocol BLELocationManagerDelegate {
     /// - Parameters:
     ///   - manager: The object that you use to start and stop the delivery of location events to your app.
     ///   - status: The new authorization status for the application.
-    func bleLocationManager(_ manager: BLELocationManager, didChangeAuthorization status: CLAuthorizationStatus)
+    func bleLocationManager(_ manager: BLELocationManager, didChangeAuthorization status: INAuthorizationStatus)
+    
+    /// Tells the delegate that the bluetooth state changed.
+    ///
+    /// - Parameters:
+    ///   - manager: The object that you use to start and stop the delivery of location events to your app.
+    ///   - state: State of the Bluetooth.
+    func bleLocationManager(_ manager: BLELocationManager, didUpdateBluetoothState state: INBluetoothState)
+    
+    /// Tells the delegate that an error occurred while getting new location data.
+    ///
+    /// - Parameters:
+    ///   - manager: The object that you use to start and stop the delivery of location events to your app.
+    ///   - error: An error object containing the error code that indicates why localization failed.
+    func bleLocationManager(_ manager: BLELocationManager, didFailWithError error: Error)
+    
+    /// Tells the delegate that the user left the region, where localization was set and is out of range.
+    ///
+    /// - Parameter manager: The object that you use to start and stop the delivery of location events to your app.
+    func bleLocationManagerLeftRegion(_ manager: BLELocationManager, withLatestKnownLocation location: INLocation)
+    
+    /// Tells the delegate that no beacon device was detected. The method is called every time the `BLELocationManager` tries to get new location data.
+    ///
+    /// - Parameter manager: The object that you use to start and stop the delivery of location events to your app.
+    func bleLocationManagerNoBeaconsDetected(_ manager: BLELocationManager)
+    
+    /// Tells the delegate that the user moved to other floor.
+    ///
+    /// - Parameters:
+    ///   - manager: The object that you use to start and stop the delivery of location events to your app.
+    ///   - floorID: Current floor ID estimated by BLE localization.
+    func bleLocationManager(_ manager: BLELocationManager, didChangeFloor floorID: Int)
+}
+
+public extension BLELocationManagerDelegate {
+    func bleLocationManager(_ manager: BLELocationManager, didFailWithError error: Error) {}
+    func bleLocationManagerLeftRegion(_ manager: BLELocationManager, withLatestKnownLocation location: INLocation) {}
+    func bleLocationManagerNoBeaconsDetected(_ manager: BLELocationManager) {}
+    func bleLocationManager(_ manager: BLELocationManager, didChangeFloor floorID: Int) {}
 }
 
 /// The object that you use to start and stop the delivery of location events to your app based on iBeacons.
@@ -93,9 +138,14 @@ public class BLELocationManager: NSObject {
     /// A path-loss exponent that varies in value depending on the environment. Default value is `2.0`.
     public var n = 2.0
     
+    /// Current floor ID estimated by BLE localization.
+    private(set) public var currentFloor: Int?
+    
     private var beaconManager: BeaconManager
+    private var authorizationStatus: INAuthorizationStatus?
     private var lastPosition: INLocation?
     private var lastPositions = [INLocation]()
+    private var sameFloorCounter = 0
     
     /// Initializes a new `BLELocationManager` with the provided parameters.
     ///
@@ -270,6 +320,17 @@ public class BLELocationManager: NSObject {
         let planeDistance = sqrt(fabs(pow(realDistance, 2) - pow(height - receiverHeight, 2)))
         return planeDistance
     }
+    
+    private func updateCurrentFloor(withBeacons beacons: [INBeacon]) {
+        let currentFloor = getCurrentFloor(withBeacons: beacons)
+        sameFloorCounter = self.currentFloor == currentFloor ? sameFloorCounter + 1 : 0
+        self.currentFloor = currentFloor
+    }
+    
+    private func getCurrentFloor(withBeacons beacons: [INBeacon]) -> Int? {
+        let currentFloor = beacons.min(by: { $0.beacon.accuracy < $1.beacon.accuracy })?.configuration.floorID
+        return currentFloor
+    }
 }
 
 extension BLELocationManager {
@@ -298,7 +359,6 @@ extension BLELocationManager {
         } else {
             newPosition = position
         }
-        lastPosition = newPosition
         
         return newPosition
     }
@@ -321,13 +381,36 @@ extension BLELocationManager {
 extension BLELocationManager: BeaconManagerDelegate {
     
     func didRange(beacons: [INBeacon]) {
-        if let location = maxStepEnabled ? getPositionMaxStep(withBeacons: beacons) : getCurrentLocation(withBeacons: beacons) {
+        guard beacons.count > 0 else {
+            lastPosition == nil ? delegate?.bleLocationManagerNoBeaconsDetected(self) : delegate?.bleLocationManagerLeftRegion(self, withLatestKnownLocation: lastPosition!)
+            lastPosition = nil
+            return
+        }
+        
+        lastPosition = maxStepEnabled ? getPositionMaxStep(withBeacons: beacons) : getCurrentLocation(withBeacons: beacons)
+        
+        if let location = lastPosition {
             NotificationCenter.default.post(name: .didUpdateLocation, object: self, userInfo: ["location": location])
             delegate?.bleLocationManager(self, didUpdateLocation: location)
+            updateCurrentFloor(withBeacons: beacons)
+            if let currentFloor = currentFloor, sameFloorCounter == NumberOfFloorMeasurements {
+                NotificationCenter.default.post(name: .didChangeFloor, object: self, userInfo: ["floorID": currentFloor])
+                delegate?.bleLocationManager(self, didChangeFloor: currentFloor)
+            }
+        } else {
+            delegate?.bleLocationManagerNoBeaconsDetected(self)
         }
     }
     
     func didChange(authorization status: CLAuthorizationStatus) {
         delegate?.bleLocationManager(self, didChangeAuthorization: status)
+    }
+    
+    func didUpdate(bluetoothState state: INBluetoothState) {
+        delegate?.bleLocationManager(self, didUpdateBluetoothState: state)
+    }
+    
+    func errorOccured(_ error: Error) {
+        delegate?.bleLocationManager(self, didFailWithError: error)
     }
 }

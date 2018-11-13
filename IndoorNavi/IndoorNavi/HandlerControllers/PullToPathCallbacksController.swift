@@ -12,7 +12,7 @@ class PullToPathCallbacksController: NSObject, WKScriptMessageHandler {
     
     static let ControllerName = "PullToPathCallbacksController"
     
-    var pullToPathCallbacks = [String: (INPoint) -> Void]()
+    var pullToPathCallbacks = [String: (INPoint?) -> Void]()
     var scale: Scale?
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
@@ -22,9 +22,13 @@ class PullToPathCallbacksController: NSObject, WKScriptMessageHandler {
     }
     
     private func receivedMessage(withUUID uuid: String, andJSONObject jsonObject: Any) {
-        if let pullToPathCallback = pullToPathCallbacks[uuid], let dictionary = jsonObject as? [String: Any], let locationDictionary = dictionary["calculatedPosition"], let pixel = INPoint(fromJSONObject: locationDictionary), let scale = scale {
-            let realPosition = MapHelper.realCoordinates(fromPixel: pixel, scale: scale)
-            pullToPathCallback(realPosition)
+        if let pullToPathCallback = pullToPathCallbacks[uuid] {
+            if let dictionary = jsonObject as? [String: Any], let locationDictionary = dictionary["calculatedPosition"], let pixel = INPoint(fromJSONObject: locationDictionary), let scale = scale {
+                let realPosition = MapHelper.realCoordinates(fromPixel: pixel, scale: scale)
+                pullToPathCallback(realPosition)
+            } else {
+                pullToPathCallback(nil)
+            }
         }
         
         pullToPathCallbacks.removeValue(forKey: uuid)
