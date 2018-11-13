@@ -45,7 +45,7 @@ public class INPolyline: INObject {
     override func initInJavaScript() {
         javaScriptVariableName = String(format: ScriptTemplates.VariableName, hash)
         let javaScriptString = String(format: ScriptTemplates.Initialization, javaScriptVariableName)
-        self.map.evaluate(javaScriptString: javaScriptString)
+        self.map.evaluate(javaScriptString)
     }
     
     /// Locates polyline at given coordinates. Coordinates needs to be given as real world dimensions that map is representing. Use of this method is indispensable.
@@ -79,8 +79,7 @@ public class INPolyline: INObject {
     @objc public var color: UIColor = .black
     
     private func getColorScript() -> String {
-        let stringColor = ColorHelper.colorStringFromColorComponents(red: color.rgba.red, green: color.rgba.green, blue: color.rgba.blue)
-        let javaScriptString = String(format: ScriptTemplates.SetLineColor, self.javaScriptVariableName, stringColor)
+        let javaScriptString = String(format: ScriptTemplates.SetLineColor, self.javaScriptVariableName, color.colorString)
         return javaScriptString
     }
 }

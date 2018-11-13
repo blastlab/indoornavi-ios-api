@@ -44,7 +44,7 @@ public class INObject: NSObject {
     private func getID() {
         let javaScriptString = String(format: ScriptTemplates.GetID, self.javaScriptVariableName)
         ready {
-            self.map.evaluate(javaScriptString: javaScriptString) { response, error in
+            self.map.evaluate(javaScriptString) { response, error in
                 guard let response = response, error == nil else {
                     assert(error == nil || (error! as NSError).code == 5, "An error occured while retrieveing objectID: \"\(error!.localizedDescription)\"")
                     assertionFailure("Could not retrieve objectID for \(String(describing: self)).")
@@ -68,13 +68,13 @@ public class INObject: NSObject {
             let uuid = UUID().uuidString
             map.promisesController.promises[uuid] = readyClousure
             let javaScriptString = String(format: ScriptTemplates.ReadyNative, javaScriptVariableName, uuid)
-            map.evaluate(javaScriptString: javaScriptString)
+            map.evaluate(javaScriptString)
         }
     }
     
     func ready(_ readyScript: String) {
         let javaScriptString = String(format: ScriptTemplates.Ready, javaScriptVariableName, readyScript)
-        map.evaluate(javaScriptString: javaScriptString)
+        map.evaluate(javaScriptString)
     }
     
     /// Removes object and destroys instance of the object in the frontend server, but do not destroys object class instance in your app.

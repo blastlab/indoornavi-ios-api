@@ -92,7 +92,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         }
         
         javaScriptString = String(format: ScriptTemplates.LoadMapPromise, mapId, uuid)
-        evaluate(javaScriptString: javaScriptString)
+        evaluate(javaScriptString)
     }
     
     /// Initializes a new `INMap` object with the provided parameters to communicate with `INMap` frontend server.
@@ -131,19 +131,18 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         longClickEventCallbacksController.longClickEventCallbacks[uuid] = onLongClickCallback
         let message = String(format: ScriptTemplates.Message, uuid)
         let javaScriptString = String(format: ScriptTemplates.AddLongClickListener, message)
-        evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
+        evaluateWhenScaleLoaded(javaScriptString)
     }
     
     /// Adds a block to invoke when area event occurs.
     ///
     /// - Parameter areaEventCallback: A block to invoke when area event occurs. This handler takes the point as a parameter given in real dimensions.
     public func addAreaEventListener(withCallback areaEventCallback: @escaping (AreaEvent) -> Void) {
-        areaEventListenerUUID = UUID()
-        let uuid = areaEventListenerUUID!.uuidString
-        areaEventListenerCallbacksController.areaEventListenerCallbacks[uuid] = areaEventCallback
-        let message = String(format: ScriptTemplates.Message, uuid)
+        areaEventListenerUUID = areaEventListenerUUID ?? UUID()
+        areaEventListenerCallbacksController.areaEventListenerCallbacks[areaEventListenerUUID!.uuidString] = areaEventCallback
+        let message = String(format: ScriptTemplates.Message, areaEventListenerUUID!.uuidString)
         let javaScriptString = String(format: ScriptTemplates.AddAreaEventListener, message)
-        evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
+        evaluateWhenScaleLoaded(javaScriptString)
     }
     
     @available(swift, obsoleted: 1.0)
@@ -164,12 +163,11 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     ///
     /// - Parameter coordinatesListenerEventCallback: A block to invoke when coordinates event occurs.
     public func addCoordinatesEventListener(withCallback coordinatesListenerEventCallback: @escaping (Coordinates) -> Void) {
-        coordinatesEventListenerUUID = UUID()
-        let uuid = coordinatesEventListenerUUID!.uuidString
-        coordinatesEventListenerCallbacksController.coordinatesListenerCallbacks[uuid] = coordinatesListenerEventCallback
-        let message = String(format: ScriptTemplates.Message, uuid)
+        coordinatesEventListenerUUID = coordinatesEventListenerUUID ?? UUID()
+        coordinatesEventListenerCallbacksController.coordinatesListenerCallbacks[coordinatesEventListenerUUID!.uuidString] = coordinatesListenerEventCallback
+        let message = String(format: ScriptTemplates.Message, coordinatesEventListenerUUID!.uuidString)
         let javaScriptString = String(format: ScriptTemplates.AddAreaEventListener, message)
-        evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
+        evaluateWhenScaleLoaded(javaScriptString)
     }
     
     /// Removes coordinates event listener.
@@ -191,7 +189,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     /// - Parameter ID: ID number of the specified tag.
     @objc public func toggleTagVisibility(withID ID: Int) {
         let javaScriptString = String(format: ScriptTemplates.ToggleTagVisibility, ID)
-        evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
+        evaluateWhenScaleLoaded(javaScriptString)
     }
     
     /// Returns the list of complexes with all buildings and floors.
@@ -202,7 +200,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         complexesCallbacksController.complexesCallbacks[uuid] = completionHandler
         let message = String(format: ScriptTemplates.Message, uuid)
         let javaScriptString = String(format: ScriptTemplates.GetComplexes, message)
-        evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
+        evaluateWhenScaleLoaded(javaScriptString)
     }
     
     /// Returns nearest position on path for given coordinates.
@@ -221,7 +219,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         let message = String(format: ScriptTemplates.Message, uuid)
         let pixel = MapHelper.pixel(fromRealCoodinates: point, scale: scale)
         let javaScriptString = String(format: ScriptTemplates.PullToPath, pixel.x, pixel.y, accuracy, message)
-        evaluateWhenScaleLoaded(javaScriptString: javaScriptString)
+        evaluateWhenScaleLoaded(javaScriptString)
     }
     
     @objc public required init?(coder aDecoder: NSCoder) {
@@ -234,14 +232,14 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         if let host = targetHost, let apiKey = apiKey {
             let javaScriptString = String(format: ScriptTemplates.Initialization, host, apiKey)
             initializedInJavaScript = true
-            evaluate(javaScriptString: javaScriptString)
+            evaluate(javaScriptString)
         } else {
             assertionFailure("Could not initialize \(String(describing: self))")
         }
     }
     
     private func getDimensions(onCompletion: (() -> Void)? = nil) {
-        evaluate(javaScriptString: ScriptTemplates.Parameters) { response, error in
+        evaluate(ScriptTemplates.Parameters) { response, error in
             guard let response = response, error == nil else {
                 assert(error == nil || (error! as NSError).code == 5, "An error occured while obtaining map dimensions: \"\(error!.localizedDescription)\"")
                 assertionFailure("Map dimensions could not be loaded.")
@@ -302,14 +300,14 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     
     private func evaluateScriptsAfterInitialization() {
         for script in scriptsToEvaluateAfterInitialization {
-            evaluate(javaScriptString: script)
+            evaluate(script)
         }
         scriptsToEvaluateAfterInitialization.removeAll()
     }
     
     private func evaluateScriptsAfterScaleLoad() {
         for script in scriptsToEvaluateAfterScaleLoad {
-            evaluate(javaScriptString: script)
+            evaluate(script)
         }
         scriptsToEvaluateAfterScaleLoad.removeAll()
     }
@@ -320,21 +318,21 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         evaluateScriptsAfterInitialization()
     }
     
-    func evaluate(javaScriptString string: String, completionHandler: ((Any?, Error?) -> Void)? = nil) {
+    func evaluate(_ javaScriptString: String, completionHandler: ((Any?, Error?) -> Void)? = nil) {
         if initializedInJavaScript {
-            webView.evaluateJavaScript(string) { response, error in
+            webView.evaluateJavaScript(javaScriptString) { response, error in
                 completionHandler?(response, error)
             }
         } else {
-            scriptsToEvaluateAfterInitialization.append(string)
+            scriptsToEvaluateAfterInitialization.append(javaScriptString)
         }
     }
     
-    private func evaluateWhenScaleLoaded(javaScriptString string: String) {
+    private func evaluateWhenScaleLoaded(_ javaScriptString: String) {
         if scale != nil {
-            evaluate(javaScriptString: string)
+            evaluate(javaScriptString)
         } else {
-            scriptsToEvaluateAfterScaleLoad.append(string)
+            scriptsToEvaluateAfterScaleLoad.append(javaScriptString)
         }
     }
     

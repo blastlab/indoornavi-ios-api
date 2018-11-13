@@ -193,11 +193,11 @@ class MapViewController: UIViewController {
         if let navigation = navigation {
             navigation.restartNavigation()
         } else if let lastPosition = lastPosition {
-            navigation = INNavigation(map: map, bleLocationManager: bleLocationManager)
+            navigation = INNavigation(map: map, bleLocationManager: bleLocationManager, delegate: self)
+            navigation!.pathColor = .brown
+            navigation!.startPointProperties = INNavigation.NavigationPointProperties(radius: 5, border: Border(width: 4, color: .cyan), color: .brown)
+            navigation!.endPointProperties = INNavigation.NavigationPointProperties(radius: 6, border: Border(width: 10, color: .magenta), color: .darkGray)
             navigation!.startNavigation(from: lastPosition, to: destination, withAccuracy: 200)
-//            navigation!.startNavigation(from: lastPosition, to: destination, withAccuracy: 200) { event in
-//                print("Event: \(event)")
-//            }
         }
     }
     
@@ -278,5 +278,24 @@ extension MapViewController: BLELocationManagerDelegate {
         let alert = UIAlertController(title: "WARNING!", message: "Not authorized to use location service!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+}
+
+extension MapViewController: INNavigationDelegate {
+    
+    func navigationCreated(_ navigation: INNavigation) {
+        print("Navigation created.")
+    }
+    
+    func navigationFinished(_ navigation: INNavigation) {
+        print("Navigation finished.")
+    }
+    
+    func errorOccured(in navigation: INNavigation) {
+        print("Error occured in navigation.")
+    }
+    
+    func navigationIsWorking(_ navigation: INNavigation) {
+        print("Navigation is working")
     }
 }

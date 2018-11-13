@@ -57,7 +57,7 @@ public class INMarker: INObject {
     override func initInJavaScript() {
         javaScriptVariableName = String(format: ScriptTemplates.VariableName, hash)
         let javaScriptString = String(format: ScriptTemplates.Initialization, javaScriptVariableName)
-        map.evaluate(javaScriptString: javaScriptString)
+        map.evaluate(javaScriptString)
     }
     
     private func getAddEventListenerScript() -> String? {
@@ -73,7 +73,7 @@ public class INMarker: INObject {
     ///
     /// - Parameter onClickCallback: A block to invoke when marker is tapped.
     @objc public func addEventListener(onClickCallback: @escaping () -> Void) {
-        self.callbackUUID = UUID()
+        callbackUUID = callbackUUID ?? UUID()
         self.map.eventCallbacksController.eventCallbacks[callbackUUID!.uuidString] = onClickCallback
     }
     
@@ -82,7 +82,7 @@ public class INMarker: INObject {
         return javaScriptString
     }
     
-    /// Removes block invoked on tap if exists. Use of this method is optional.
+    /// Removes block invoked on tap if exists.
     @objc public func removeEventListener() {
         if let uuid = self.callbackUUID?.uuidString {
             callbackUUID = nil
