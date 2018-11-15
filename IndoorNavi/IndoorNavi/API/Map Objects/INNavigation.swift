@@ -30,6 +30,10 @@ public protocol INNavigationDelegate {
     func navigationIsWorking(_ navigation: INNavigation)
 }
 
+public extension INNavigationDelegate {
+    func navigationIsWorking(_ navigation: INNavigation) {}
+}
+
 /// Class managing a BLE navigation. It calculates and draws a route from given postion to given destination. Updating ramaining route could be achieved by setting `bleLocationManager` with apprioprate object so that `INNavigation` knows how much of it left to reach destination.
 public class INNavigation: NSObject {
     
