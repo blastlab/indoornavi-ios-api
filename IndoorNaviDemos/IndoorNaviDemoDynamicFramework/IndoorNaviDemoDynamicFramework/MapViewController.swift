@@ -58,7 +58,7 @@ class MapViewController: UIViewController {
                     self.showAlert()
                 }
                 area.draw()
-                print("Database ID: \(area.databaseID ?? 0)")
+                print("Database ID: \(area.databaseID ?? -1)")
                 let circle = INCircle(withMap: map, position: area.center, color: .red)
                 circle.draw()
             }
@@ -173,7 +173,6 @@ class MapViewController: UIViewController {
             self.circle1.radius = 10
             self.circle1.border = Border(width: 5, color: .blue)
             self.circle1.color = .red
-            sleep(1)
             self.circle2 = INCircle(withMap: self.map)
             self.circle2.radius = 10
             self.circle2.border = Border(width: 5, color: .green)

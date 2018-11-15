@@ -36,7 +36,7 @@ public class INArea: INObject {
     public convenience init(withMap map: INMap, points: [INPoint] = [INPoint](), color: UIColor = .black) {
         self.init(withMap: map)
         self.points = points
-        self.color = color
+        self.color = color 
     }
     
     convenience init?(withMap map: INMap, fromJSONObject jsonObject: Any?) {
