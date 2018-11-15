@@ -88,7 +88,7 @@ class MapViewController: UIViewController {
         map.enableFloorChange(wtihBLELocationManager: self.bleLocationManager!)
         ble = INBle(map: self.map, targetHost: self.BackendTargetHost, floorID: 2, apiKey: self.ApiKey, bleLocationManager: self.bleLocationManager!)
         ble!.addAreaEventListener() { event in
-            print("event \(event)")
+            print("event \(event.date)")
         }
     }
     
@@ -193,7 +193,6 @@ class MapViewController: UIViewController {
             }
             marker.draw()
         }
-        
         map.toggleTagVisibility(withID: 10999)
     }
     

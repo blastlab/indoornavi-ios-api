@@ -33,10 +33,10 @@ public class INMarker: INObject {
     ///   - point:  Represents marker position in real world. Coordinates are calculated to the map scale and then displayed. Position will be clipped to the point in the bottom center of marker icon.
     ///   - iconPath: URL path to icon.
     ///   - labelText: `String` that will be used as a marker label.
-    public convenience init(withMap map: INMap, position: INPoint? = nil, iconPath: String? = nil, label: String? = nil) {
+    public convenience init(withMap map: INMap, position: INPoint = .zero, iconPath: String? = nil, label: String? = nil) {
         self.init(withMap: map)
         self.iconPath = iconPath
-        self.position = position ?? .zero
+        self.position = position
         self.label = label
     }
     

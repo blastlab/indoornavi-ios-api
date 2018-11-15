@@ -58,10 +58,10 @@ public class INNavigation: NSObject {
         ///   - radius: Radius of the point.
         ///   - border: Point's `Border`.
         ///   - color: Color of the point.
-        public init(radius: Int? = nil, border: Border? = nil, color: UIColor? = nil) {
-            self.radius = radius ?? 10
-            self.border = border ?? Border(width: 2, color: .defaultNavigationColor)
-            self.color = color ?? .defaultNavigationColor
+        public init(radius: Int = 10, border: Border = Border(width: 2, color: .defaultNavigationColor), color: UIColor = .defaultNavigationColor) {
+            self.radius = radius
+            self.border = border
+            self.color = color
         }
         
         var navigationPointScript: String {

@@ -26,20 +26,10 @@ public class INCircle: INObject {
     ///   - map:  An `INMap` object, in which `INCircle` is going to be created.
     ///   - position: Point describing Circle's position in real world dimensions. Coordinates are calculated to the map scale and then displayed.
     ///   - color: Circles's fill color and opacity.
-    public convenience init(withMap map: INMap, position: INPoint? = nil, color: UIColor? = nil) {
+    @objc public convenience init(withMap map: INMap, position: INPoint = .zero, color: UIColor = .black) {
         self.init(withMap: map)
-        self.position = position ?? .zero
-        self.color = color ?? .black
-    }
-    
-    @available(swift, obsoleted: 1.0)
-    @objc public convenience init(withMap map: INMap, position: INPoint) {
-        self.init(withMap: map, position: position)
-    }
-    
-    @available(swift, obsoleted: 1.0)
-    @objc public convenience init(withMap map: INMap, position: INPoint, color: UIColor) {
-        self.init(withMap: map, position: position, color: color)
+        self.position = position
+        self.color = color
     }
     
     override func initInJavaScript() {

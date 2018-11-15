@@ -33,10 +33,10 @@ public class INArea: INObject {
     ///   - map:  An `INMap` object, in which `INArea` is going to be created.
     ///   - points: Array of Point's that are describing area in real world dimensions. Coordinates are calculated to the map scale and then displayed. For less than 3 points supplied to this method, Area isn't going to be drawn.
     ///   - color: Area's fill color and opacity.
-    public convenience init(withMap map: INMap, points: [INPoint]? = nil, color: UIColor? = nil) {
+    public convenience init(withMap map: INMap, points: [INPoint] = [INPoint](), color: UIColor = .black) {
         self.init(withMap: map)
-        self.points = points ?? [INPoint]()
-        self.color = color ?? .black
+        self.points = points
+        self.color = color
     }
     
     convenience init?(withMap map: INMap, fromJSONObject jsonObject: Any?) {
