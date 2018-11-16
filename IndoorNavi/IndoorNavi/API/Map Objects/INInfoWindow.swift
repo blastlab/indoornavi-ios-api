@@ -47,11 +47,11 @@ public class INInfoWindow: INObject {
     ///   - height: Height dimension of info window. Setting this value is optional. Default value is 250px, minimum value is 50px.
     ///   - position: Position of info window regarding to object that info window will be appended to. Default position for info window is `.top`.
     ///   - innerHTML: Text or HTML template in string format that will be passed to info window as text.
-    public convenience init(withMap map: INMap, width: Int? = nil, height: Int? = nil, position: Position? = nil, content: String? = nil) {
+    public convenience init(withMap map: INMap, width: Int = 250, height: Int = 250, position: Position = .top, content: String? = nil) {
         self.init(withMap: map)
-        self.width = width ?? 250
-        self.height = height ?? 250
-        self.position = position ?? .top
+        self.width = width
+        self.height = height
+        self.position = position
         self.content = content
     }
     

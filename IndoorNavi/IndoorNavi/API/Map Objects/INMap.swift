@@ -241,9 +241,9 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
     ///
     /// - Parameters:
     ///   - point: The XY coordinates representing current coordinates in real world dimensions.
-    ///   - accuracy: Accuracy of path pull.
+    ///   - accuracy: Accuracy of path pull. If set to 0, no accuracy is used and every position is pulled to path. This argument is optional. Default value is `0`.
     ///   - completionHandler: A block to invoke when calculated position on path is available. This completion handler takes an optional `INPoint` as a position on Path. Value is `nil` if position could not be calculated.
-    public func pullToPath(point: INPoint, accuracy: Int, withCompletionHandler completionHandler: @escaping (INPoint?) -> Void) {
+    public func pullToPath(point: INPoint, accuracy: Int = 0, withCompletionHandler completionHandler: @escaping (INPoint?) -> Void) {
         guard let scale = scale else {
             assertionFailure("Scale has not loaded yet. Could not pull to path.")
             return
@@ -252,7 +252,8 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         pullToPathCallbacksController.pullToPathCallbacks[uuid] = completionHandler
         let message = String(format: ScriptTemplates.Message, uuid)
         let pixel = MapHelper.pixel(fromRealCoodinates: point, scale: scale)
-        let javaScriptString = String(format: ScriptTemplates.PullToPath, pixel.x, pixel.y, accuracy, message)
+        let normalizedAccuracy = accuracy >= 0 ? accuracy : 0
+        let javaScriptString = String(format: ScriptTemplates.PullToPath, pixel.x, pixel.y, normalizedAccuracy, message)
         evaluateWhenScaleLoaded(javaScriptString)
     }
     

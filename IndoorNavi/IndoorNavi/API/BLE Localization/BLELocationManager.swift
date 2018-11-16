@@ -127,10 +127,10 @@ public class BLELocationManager: NSObject {
     
     /// The delegate object to receive update events.
     public var delegate: BLELocationManagerDelegate?
-    /// Boolean value specifying wether max step algorithm should be enabled. Default value is `false`.
+    /// Boolean value specifying whether max step algorithm should be enabled. Default value is `false`.
     public var maxStepEnabled = false
-    /// Boolean value specifying wether distance should be obtained as `CLBeacon`'s accuracy or calculated. Default value is `false`.
-    public var useCLBeaconAccuracy = false
+    /// Boolean value specifying whether distance should be obtained as `CLBeacon`'s accuracy or calculated. Default value is `true`.
+    public var useCLBeaconAccuracy = true
     /// Average receiver's height in centimeters. Default value is `120`.
     public var receiverHeight = 120.0
     /// If `maxStepEnabled` is `true`, this is the value of maximum step a reciver is able to make in centimeters. Default value is `200`.
