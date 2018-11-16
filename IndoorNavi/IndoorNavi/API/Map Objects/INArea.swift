@@ -55,6 +55,7 @@ public class INArea: INObject {
             return
         }
         
+        assertionFailure("Could not initialize INArea from JSON object.")
         return nil
     }
     
@@ -73,7 +74,7 @@ public class INArea: INObject {
     override func initInJavaScript() {
         javaScriptVariableName = String(format: ScriptTemplates.VariableName, hash)
         let javaScriptString = String(format: ScriptTemplates.Initialization, javaScriptVariableName)
-        map.evaluate(javaScriptString: javaScriptString)
+        map.evaluate(javaScriptString)
     }
     
     /// ID of the object in database. It uniquely identifies `INArea` downloaded from backend. This value is optional, area's created locally does not have ID in database, so this value is `nil` for them.
@@ -117,19 +118,16 @@ public class INArea: INObject {
         let coordinatesString = PointHelper.pointString(fromCoordinates: coordinates)
         let javaScriptString = String(format: ScriptTemplates.IsWithin, self.javaScriptVariableName, coordinatesString)
         ready {
-            self.map.evaluate(javaScriptString: javaScriptString) { response, error in
+            self.map.evaluate(javaScriptString) { response, error in
                 
-                guard error == nil, response != nil else {
-                    NSLog("Error: \(String(describing: error))")
+                guard let isWithPoint = response as? Bool, error == nil else {
+                    assert(error == nil, "An error occured while performing isWithin method: \(error!.localizedDescription).")
+                    assertionFailure("Could not retrieve response while performing isWithin method.")
                     callbackHandler(nil)
                     return
                 }
                 
-                if let isWithPoint = response! as? Bool {
-                    callbackHandler(isWithPoint)
-                } else {
-                    callbackHandler(nil)
-                }
+                callbackHandler(isWithPoint)
             }
         }
     }
@@ -160,8 +158,8 @@ public class INArea: INObject {
     ///
     /// - Parameter onClickCallback: A block to invoke when area is tapped.
     @objc public func addEventListener(onClickCallback: @escaping () -> Void) {
-        self.callbackUUID = UUID()
-        self.map.eventCallbacksController.eventCallbacks[self.callbackUUID!.uuidString] = onClickCallback
+        callbackUUID = callbackUUID ?? UUID()
+        self.map.eventCallbacksController.eventCallbacks[callbackUUID!.uuidString] = onClickCallback
     }
     
     private func getRemoveEventListener() -> String {
@@ -169,7 +167,7 @@ public class INArea: INObject {
         return javaScriptString
     }
     
-    /// Removes block invoked on tap if exists. Use of this method is optional.
+    /// Removes block invoked on tap if exists.
     @objc public func removeEventListener() {
         if let uuid = self.callbackUUID?.uuidString {
             callbackUUID = nil
@@ -186,8 +184,7 @@ public class INArea: INObject {
     }
     
     private func getSetBorderScript() -> String {
-        let stringColor = ColorHelper.colorString(fromColor: border.color)
-        let borderString = String(format: ScriptTemplates.Border, border.width, stringColor)
+        let borderString = String(format: ScriptTemplates.Border, border.width, border.color.colorString)
         let javaScriptString = String(format: ScriptTemplates.SetBorder, javaScriptVariableName, borderString)
         return javaScriptString
     }
@@ -196,19 +193,17 @@ public class INArea: INObject {
     public var border: Border = Border(width: 0, color: .black)
     
     private func getAppplyColorScript() -> String {
-        let javaScriptString = getSetColorScript(withRed: color.rgba.red, green: color.rgba.green, blue: color.rgba.blue) + getSetOpacityScript(opacity: color.rgba.alpha)
+        let javaScriptString = getSetColorScript() + getSetOpacityScript()
         return javaScriptString
     }
     
-    private func getSetColorScript(withRed red: CGFloat, green: CGFloat, blue: CGFloat) -> String {
-        let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
-        let javaScriptString = String(format: ScriptTemplates.SetFillColor, self.javaScriptVariableName, stringColor)
+    private func getSetColorScript() -> String {
+        let javaScriptString = String(format: ScriptTemplates.SetFillColor, self.javaScriptVariableName, color.colorString)
         return javaScriptString
     }
     
-    private func getSetOpacityScript(opacity: CGFloat) -> String {
-        let standarizedOpacity = ColorHelper.standarizedOpacity(fromValue: opacity)
-        let javaScriptString = String(format: ScriptTemplates.SetOpacity, self.javaScriptVariableName, standarizedOpacity)
+    private func getSetOpacityScript() -> String {
+        let javaScriptString = String(format: ScriptTemplates.SetOpacity, self.javaScriptVariableName, color.standarizedOpacity)
         return javaScriptString
     }
 }

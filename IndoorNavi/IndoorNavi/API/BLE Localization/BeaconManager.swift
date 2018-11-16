@@ -8,14 +8,37 @@
 
 import UIKit
 import CoreLocation
+import CoreBluetooth
 
 let BeaconIdentifier = "INBeacon"
+
+/// Constants indicating whether the app is authorized to use location services.
+public typealias INAuthorizationStatus = CLAuthorizationStatus
+/// Constants indicating whether the Bluetooth is available in the app.
+public typealias INBluetoothState = CBManagerState
+
+/// Enumeration conforming to `Error` protocol describing an error that indicates why localization failed during start.
+///
+/// - bluetoothUnavailable: Bluetooth is not available for this app.
+/// - bluetoothDisabled: Bluetooth is currently turned off.
+/// - localizationNotAuthorized: This app is not authorized to use location services.
+/// - localizationDisabled: Location services are disabled on the device.
+public enum LocalizationError: Error {
+    case bluetoothUnavailable
+    case bluetoothDisabled
+    case localizationNotAuthorized
+    case localizationDisabled
+}
 
 protocol BeaconManagerDelegate {
     
     func didRange(beacons: [INBeacon])
     
-    func didChange(authorization status: CLAuthorizationStatus)
+    func didChange(authorization status: INAuthorizationStatus)
+    
+    func didUpdate(bluetoothState state: INBluetoothState)
+    
+    func errorOccured(_ error: Error)
 }
 
 class BeaconManager: NSObject {
@@ -31,9 +54,12 @@ class BeaconManager: NSObject {
         beaconRegion = CLBeaconRegion(proximityUUID: beaconUUID, identifier: BeaconIdentifier)
         super.init()
         locationManager.delegate = self
+        bluetoothManager.delegate = self
     }
     
     private var locationManager = CLLocationManager()
+    private var bluetoothManager = CBCentralManager()
+    private var bluetoothState: INBluetoothState?
     private var beaconRegion: CLBeaconRegion
     
     func requestWhenInUseAuthorization() {
@@ -41,6 +67,21 @@ class BeaconManager: NSObject {
     }
     
     func startScanning() {
+        guard bluetoothState == .poweredOn else {
+            delegate?.errorOccured(bluetoothState == .poweredOff ? LocalizationError.bluetoothDisabled : LocalizationError.bluetoothUnavailable )
+            return
+        }
+        
+        guard CLLocationManager.locationServicesEnabled() else {
+            delegate?.errorOccured(LocalizationError.localizationDisabled)
+            return
+        }
+        
+        guard CLLocationManager.authorizationStatus() == .authorizedAlways || CLLocationManager.authorizationStatus() == .authorizedWhenInUse else {
+            delegate?.errorOccured(LocalizationError.localizationNotAuthorized)
+            return
+        }
+        
         locationManager.startMonitoring(for: beaconRegion)
     }
     
@@ -76,7 +117,7 @@ class BeaconManager: NSObject {
 
 extension BeaconManager: CLLocationManagerDelegate {
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: INAuthorizationStatus) {
         delegate?.didChange(authorization: status)
     }
     
@@ -99,5 +140,21 @@ extension BeaconManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
         let newBeacons = inBeacons(fromCLBeacons: beacons)
         delegate?.didRange(beacons: newBeacons)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        delegate?.errorOccured(error)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, rangingBeaconsDidFailFor region: CLBeaconRegion, withError error: Error) {
+        delegate?.errorOccured(error)
+    }
+}
+
+extension BeaconManager: CBCentralManagerDelegate {
+    
+    public func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        bluetoothState = central.state
+        delegate?.didUpdate(bluetoothState: central.state)
     }
 }

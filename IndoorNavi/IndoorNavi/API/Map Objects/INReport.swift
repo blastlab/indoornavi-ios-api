@@ -39,7 +39,7 @@ public class INReport: NSObject {
     
     private func initInJavaScript() {
         let javaScriptString = String(format: ScriptTemplates.Initialization, javaScriptVariableName, targetHost, apiKey)
-        map.evaluate(javaScriptString: javaScriptString)
+        map.evaluate(javaScriptString)
     }
     
     /// Returns array of historical `INArea` events.
@@ -54,7 +54,7 @@ public class INReport: NSObject {
         map.areaEventsCallbacksController.areaEventCallbacks[uuid] = completionHandler
         let message = String(format: ScriptTemplates.Message, uuid)
         let javaScriptString = String(format: ScriptTemplates.GetAreaEvents, javaScriptVariableName, floorID, from.timeIntervalSince1970.miliseconds, to.timeIntervalSince1970.miliseconds, message)
-        map.evaluate(javaScriptString: javaScriptString)
+        map.evaluate(javaScriptString)
     }
     
     @available(swift, obsoleted: 1.0)
@@ -75,7 +75,7 @@ public class INReport: NSObject {
         map.coordinatesCallbacksController.coordinatesCallbacks[uuid] = completionHandler
         let message = String(format: ScriptTemplates.Message, uuid)
         let javaScriptString = String(format: ScriptTemplates.GetCoordinates, javaScriptVariableName, floorID, from.timeIntervalSince1970.miliseconds, to.timeIntervalSince1970.miliseconds, message)
-        map.evaluate(javaScriptString: javaScriptString)
+        map.evaluate(javaScriptString)
     }
     
     @available(swift, obsoleted: 1.0)

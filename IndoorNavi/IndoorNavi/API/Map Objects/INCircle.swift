@@ -18,7 +18,6 @@ public class INCircle: INObject {
         static let SetColor = "%@.setColor('%@');"
         static let SetOpacity = "%@.setOpacity(%f);"
         static let SetBorder = "%@.setBorder(%@);"
-        static let Border = "new Border(%d, '%@')"
     }
     
     /// Initializes a new `INCircle` object inside given `INMap` object.
@@ -46,7 +45,7 @@ public class INCircle: INObject {
     override func initInJavaScript() {
         javaScriptVariableName = String(format: ScriptTemplates.VariableName, hash)
         let javaScriptString = String(format: ScriptTemplates.Initialization, javaScriptVariableName)
-        map.evaluate(javaScriptString: javaScriptString)
+        map.evaluate(javaScriptString)
     }
     
     /// Places Circle on the map with all given settings. 'position' should be set before `draw()` to indicate where Circle should to be located.
@@ -79,9 +78,7 @@ public class INCircle: INObject {
     @objc public var radius: Int = 5
     
     private func getSetBorderScript() -> String {
-        let stringColor = ColorHelper.colorString(fromColor: border.color)
-        let borderString = String(format: ScriptTemplates.Border, border.width, stringColor)
-        let javaScriptString = String(format: ScriptTemplates.SetBorder, javaScriptVariableName, borderString)
+        let javaScriptString = String(format: ScriptTemplates.SetBorder, javaScriptVariableName, border.borderScript)
         return javaScriptString
     }
     
@@ -112,19 +109,17 @@ public class INCircle: INObject {
     @objc public var color: UIColor = .black
     
     private func getApplyColorScript() -> String {
-        let javaScriptString = getSetColorScript(withRed: color.rgba.red, green: color.rgba.green, blue: color.rgba.blue) + getSetOpacityScript(withOpacity: color.rgba.alpha)
+        let javaScriptString = getSetColorScript() + getSetOpacityScript()
         return javaScriptString
     }
     
-    private func getSetColorScript(withRed red: CGFloat, green: CGFloat, blue: CGFloat) -> String {
-        let stringColor = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
-        let javaScriptString = String(format: ScriptTemplates.SetColor, javaScriptVariableName, stringColor)
+    private func getSetColorScript() -> String {
+        let javaScriptString = String(format: ScriptTemplates.SetColor, javaScriptVariableName, color.colorString)
         return javaScriptString
     }
     
-    private func getSetOpacityScript(withOpacity opacity: CGFloat) -> String {
-        let standarizedOpacity = ColorHelper.standarizedOpacity(fromValue: opacity)
-        let javaScriptString = String(format: ScriptTemplates.SetOpacity, javaScriptVariableName, standarizedOpacity)
+    private func getSetOpacityScript() -> String {
+        let javaScriptString = String(format: ScriptTemplates.SetOpacity, javaScriptVariableName, color.standarizedOpacity)
         return javaScriptString
     }
 }

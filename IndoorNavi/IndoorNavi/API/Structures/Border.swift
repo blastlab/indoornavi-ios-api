@@ -8,6 +8,9 @@
 
 /// Struct representing border with specified `width` and `color`.
 public struct Border {
+    
+    private static let ScriptTemplate = "new Border(%d, '%@')"
+    
     /// Border's width in pixels.
     public var width: Int
     /// Color of the Border.
@@ -21,5 +24,10 @@ public struct Border {
     public init(width: Int, color: UIColor) {
         self.width = width
         self.color = color
+    }
+    
+    var borderScript: String {
+        let borderScript = String(format: Border.ScriptTemplate, width, color.colorString)
+        return borderScript
     }
 }
