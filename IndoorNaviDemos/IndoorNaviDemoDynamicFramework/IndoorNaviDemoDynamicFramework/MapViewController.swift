@@ -84,7 +84,7 @@ class MapViewController: UIViewController {
     
     func startLocalization() {
         bleLocationManager = BLELocationManager(beaconUUID: UUID(uuidString: BeaconUUID)!, configurations: configurations, delegate: self)
-        bleLocationManager!.useCLBeaconAccuracy = true
+        bleLocationManager!.maxStepEnabled = true
         map.enableFloorChange(wtihBLELocationManager: self.bleLocationManager!)
         ble = INBle(map: self.map, targetHost: self.BackendTargetHost, floorID: 2, apiKey: self.ApiKey, bleLocationManager: self.bleLocationManager!)
         ble!.addAreaEventListener() { event in

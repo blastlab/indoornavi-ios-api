@@ -346,8 +346,9 @@ extension BLELocationManager {
             if lastPositions.count == 5 {
                 let x = lastPositions.map({ $0.x }).reduce(0, +) / Double(lastPositions.count)
                 let y = lastPositions.map({ $0.y }).reduce(0, +) / Double(lastPositions.count)
-                lastPosition = INLocation(x: x, y: y)
+                let newPosition = INLocation(x: x, y: y)
                 lastPositions.removeAll()
+                return newPosition
             }
             
             return nil
@@ -397,7 +398,7 @@ extension BLELocationManager: BeaconManagerDelegate {
                 NotificationCenter.default.post(name: .didChangeFloor, object: self, userInfo: ["floorID": currentFloor])
                 delegate?.bleLocationManager(self, didChangeFloor: currentFloor)
             }
-        } else {
+        } else if !(maxStepEnabled && lastPositions.count > 0) {
             delegate?.bleLocationManagerNoBeaconsDetected(self)
         }
     }
