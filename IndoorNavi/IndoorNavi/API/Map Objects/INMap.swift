@@ -23,7 +23,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         static let AddAreaEventListener = "navi.addEventListener(Event.LISTENER.AREA, res => webkit.messageHandlers.AreaEventListenerCallbacksController.postMessage(%@));"
         static let AddCoordinatesEventListener = "navi.addEventListener(Event.LISTENER.COORDINATES, res => webkit.messageHandlers.CoordinatesEventListenerCallbacksController.postMessage(%@));"
         static let GetComplexes = "navi.getComplexes(res => webkit.messageHandlers.ComplexesCallbacksController.postMessage(%@));"
-        static let PullToPath = "navi.pullToPath({x: %d, y: %d}, %d).then(res => webkit.messageHandlers.PullToPathCallbacksController.postMessage(%@));"
+        static let PullToPath = "navi.pullToPath({x: %d, y: %d}, %d, res => webkit.messageHandlers.PullToPathCallbacksController.postMessage(%@));"
     }
     
     fileprivate struct WebViewConfigurationScripts {
