@@ -90,12 +90,19 @@ public protocol BLELocationManagerDelegate {
     ///   - state: State of the Bluetooth.
     func bleLocationManager(_ manager: BLELocationManager, didUpdateBluetoothState state: INBluetoothState)
     
-    /// Tells the delegate that an error occurred while getting new location data.
+    /// Tells the delegate that an internal error occurred while getting new location data.
     ///
     /// - Parameters:
     ///   - manager: The object that you use to start and stop the delivery of location events to your app.
-    ///   - error: An error object containing the error code that indicates why localization failed.
+    ///   - error: An error object containing the error code that indicates why getting new location data failed.
     func bleLocationManager(_ manager: BLELocationManager, didFailWithError error: Error)
+    
+    /// Tells the delegate that an error occurred while starting location..
+    ///
+    /// - Parameters:
+    ///   - manager: The object that you use to start and stop the delivery of location events to your app.
+    ///   - localizationError: An error object containing the error code that indicates why starting localization failed.
+    func bleLocationManager(_ manager: BLELocationManager, didFailWithLocalizationError localizationError: LocalizationError)
     
     /// Tells the delegate that the user left the region, where localization was set and is out of range.
     ///
@@ -117,6 +124,7 @@ public protocol BLELocationManagerDelegate {
 
 public extension BLELocationManagerDelegate {
     func bleLocationManager(_ manager: BLELocationManager, didFailWithError error: Error) {}
+    func bleLocationManager(_ manager: BLELocationManager, didFailWithLocalizationError localizationError: LocalizationError) {}
     func bleLocationManagerLeftRegion(_ manager: BLELocationManager, withLatestKnownLocation location: INLocation) {}
     func bleLocationManagerNoBeaconsDetected(_ manager: BLELocationManager) {}
     func bleLocationManager(_ manager: BLELocationManager, didChangeFloor floorID: Int) {}
@@ -381,6 +389,14 @@ extension BLELocationManager {
 
 extension BLELocationManager: BeaconManagerDelegate {
     
+    func errorOccuredWhileStarting(_ localizationError: LocalizationError) {
+        delegate?.bleLocationManager(self, didFailWithLocalizationError: localizationError)
+    }
+    
+    func errorOccuredWhileGettingNewData(_ error: Error) {
+        delegate?.bleLocationManager(self, didFailWithError: error)
+    }
+    
     func didRange(beacons: [INBeacon]) {
         guard beacons.count > 0 else {
             lastPosition == nil ? delegate?.bleLocationManagerNoBeaconsDetected(self) : delegate?.bleLocationManagerLeftRegion(self, withLatestKnownLocation: lastPosition!)
@@ -409,9 +425,5 @@ extension BLELocationManager: BeaconManagerDelegate {
     
     func didUpdate(bluetoothState state: INBluetoothState) {
         delegate?.bleLocationManager(self, didUpdateBluetoothState: state)
-    }
-    
-    func errorOccured(_ error: Error) {
-        delegate?.bleLocationManager(self, didFailWithError: error)
     }
 }
