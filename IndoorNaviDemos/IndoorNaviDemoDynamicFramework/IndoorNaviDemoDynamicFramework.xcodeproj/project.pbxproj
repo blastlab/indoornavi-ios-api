@@ -12,7 +12,10 @@
 		7B59DA25207CC7090021C33D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B59DA23207CC7090021C33D /* Main.storyboard */; };
 		7B59DA27207CC7100021C33D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B59DA26207CC7100021C33D /* Assets.xcassets */; };
 		7B59DA2A207CC7100021C33D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B59DA28207CC7100021C33D /* LaunchScreen.storyboard */; };
-		7B73B97F20D2B23E00154507 /* ObjectiveCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B73B97E20D2B23E00154507 /* ObjectiveCViewController.m */; };
+		7B6CF2EB219563FC00A51CFE /* PulleyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6CF2E7219563FC00A51CFE /* PulleyViewController.swift */; };
+		7B6CF2EC219563FC00A51CFE /* UIViewController+PulleyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6CF2E8219563FC00A51CFE /* UIViewController+PulleyViewController.swift */; };
+		7B6CF2ED219563FC00A51CFE /* PulleyPassthroughScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6CF2E9219563FC00A51CFE /* PulleyPassthroughScrollView.swift */; };
+		7B6CF2EE219563FC00A51CFE /* UIView+constrainToParent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6CF2EA219563FC00A51CFE /* UIView+constrainToParent.swift */; };
 		7B866E40215BDDFE00607BDD /* IndoorNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B866E3F215BDDFE00607BDD /* IndoorNavi.framework */; };
 		7B866E41215BDDFE00607BDD /* IndoorNavi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B866E3F215BDDFE00607BDD /* IndoorNavi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7BBEB6622154F9EA00A4A0D3 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBEB6612154F9EA00A4A0D3 /* MenuViewController.swift */; };
@@ -41,9 +44,11 @@
 		7B59DA26207CC7100021C33D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B59DA29207CC7100021C33D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7B59DA2B207CC7100021C33D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B6CF2E7219563FC00A51CFE /* PulleyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulleyViewController.swift; sourceTree = "<group>"; };
+		7B6CF2E8219563FC00A51CFE /* UIViewController+PulleyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+PulleyViewController.swift"; sourceTree = "<group>"; };
+		7B6CF2E9219563FC00A51CFE /* PulleyPassthroughScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulleyPassthroughScrollView.swift; sourceTree = "<group>"; };
+		7B6CF2EA219563FC00A51CFE /* UIView+constrainToParent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+constrainToParent.swift"; sourceTree = "<group>"; };
 		7B73B97C20D2B23D00154507 /* IndoorNaviDemoDynamicFramework-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IndoorNaviDemoDynamicFramework-Bridging-Header.h"; sourceTree = "<group>"; };
-		7B73B97D20D2B23E00154507 /* ObjectiveCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectiveCViewController.h; sourceTree = "<group>"; };
-		7B73B97E20D2B23E00154507 /* ObjectiveCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectiveCViewController.m; sourceTree = "<group>"; };
 		7B866E3F215BDDFE00607BDD /* IndoorNavi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = IndoorNavi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BBEB6612154F9EA00A4A0D3 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		7BF035942158E7DE00A88E44 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
@@ -81,6 +86,7 @@
 		7B59DA1E207CC7090021C33D /* IndoorNaviDemoDynamicFramework */ = {
 			isa = PBXGroup;
 			children = (
+				7B6CF2E6219563FC00A51CFE /* PulleyLib */,
 				7B59DA1F207CC7090021C33D /* AppDelegate.swift */,
 				7BBEB6612154F9EA00A4A0D3 /* MenuViewController.swift */,
 				7B59DA21207CC7090021C33D /* MapViewController.swift */,
@@ -88,12 +94,21 @@
 				7B59DA26207CC7100021C33D /* Assets.xcassets */,
 				7B59DA28207CC7100021C33D /* LaunchScreen.storyboard */,
 				7B59DA2B207CC7100021C33D /* Info.plist */,
-				7B73B97D20D2B23E00154507 /* ObjectiveCViewController.h */,
-				7B73B97E20D2B23E00154507 /* ObjectiveCViewController.m */,
 				7B73B97C20D2B23D00154507 /* IndoorNaviDemoDynamicFramework-Bridging-Header.h */,
 				7BF035942158E7DE00A88E44 /* MenuTableViewCell.swift */,
 			);
 			path = IndoorNaviDemoDynamicFramework;
+			sourceTree = "<group>";
+		};
+		7B6CF2E6219563FC00A51CFE /* PulleyLib */ = {
+			isa = PBXGroup;
+			children = (
+				7B6CF2E7219563FC00A51CFE /* PulleyViewController.swift */,
+				7B6CF2E8219563FC00A51CFE /* UIViewController+PulleyViewController.swift */,
+				7B6CF2E9219563FC00A51CFE /* PulleyPassthroughScrollView.swift */,
+				7B6CF2EA219563FC00A51CFE /* UIView+constrainToParent.swift */,
+			);
+			path = PulleyLib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -129,7 +144,7 @@
 				TargetAttributes = {
 					7B59DA1B207CC7090021C33D = {
 						CreatedOnToolsVersion = 9.3;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1010;
 					};
 				};
 			};
@@ -169,11 +184,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B6CF2EC219563FC00A51CFE /* UIViewController+PulleyViewController.swift in Sources */,
 				7B59DA22207CC7090021C33D /* MapViewController.swift in Sources */,
 				7B59DA20207CC7090021C33D /* AppDelegate.swift in Sources */,
-				7B73B97F20D2B23E00154507 /* ObjectiveCViewController.m in Sources */,
+				7B6CF2ED219563FC00A51CFE /* PulleyPassthroughScrollView.swift in Sources */,
 				7BBEB6622154F9EA00A4A0D3 /* MenuViewController.swift in Sources */,
 				7BF035952158E7DE00A88E44 /* MenuTableViewCell.swift in Sources */,
+				7B6CF2EE219563FC00A51CFE /* UIView+constrainToParent.swift in Sources */,
+				7B6CF2EB219563FC00A51CFE /* PulleyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,7 +348,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "IndoorNaviDemoDynamicFramework/IndoorNaviDemoDynamicFramework-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -351,7 +369,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.blastlab.IndoorNaviDemoDynamicFramework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "IndoorNaviDemoDynamicFramework/IndoorNaviDemoDynamicFramework-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
