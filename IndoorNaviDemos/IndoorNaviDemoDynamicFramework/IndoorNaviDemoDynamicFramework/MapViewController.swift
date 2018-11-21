@@ -184,7 +184,6 @@ class MapViewController: UIViewController {
         
         map.addLongClickListener { point in
             let marker = INMarker(withMap: self.map)
-//            marker.iconPath = "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png"
             marker.icon = UIImage(named: "car")
             marker.position = point
             marker.addEventListener {
