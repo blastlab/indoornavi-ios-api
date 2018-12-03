@@ -30,6 +30,10 @@ public protocol INNavigationDelegate {
     func navigationIsWorking(_ navigation: INNavigation)
 }
 
+public extension INNavigationDelegate {
+    func navigationIsWorking(_ navigation: INNavigation) {}
+}
+
 /// Class managing a BLE navigation. It calculates and draws a route from given postion to given destination. Updating ramaining route could be achieved by setting `bleLocationManager` with apprioprate object so that `INNavigation` knows how much of it left to reach destination.
 public class INNavigation: NSObject {
     
@@ -58,8 +62,8 @@ public class INNavigation: NSObject {
         ///   - radius: Radius of the point.
         ///   - border: Point's `Border`.
         ///   - color: Color of the point.
-        public init(radius: Int? = nil, border: Border? = nil, color: UIColor? = nil) {
-            self.radius = radius ?? 10
+        public init(radius: Int = 10, border: Border? = nil, color: UIColor? = nil) {
+            self.radius = radius
             self.border = border ?? Border(width: 2, color: .defaultNavigationColor)
             self.color = color ?? .defaultNavigationColor
         }

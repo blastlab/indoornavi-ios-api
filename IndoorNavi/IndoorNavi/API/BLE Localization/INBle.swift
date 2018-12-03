@@ -49,6 +49,9 @@ public class INBle: NSObject {
         map.evaluate(javaScriptString)
     }
     
+    /// Boolean value specifying whether it's the point pulled to path or the simple location data that should be monitored for possible area events. Default value is `false`.
+    public var usePullToPath = false
+    
     /// Adds a block to invoke when area event occurs.
     ///
     /// - Parameter areaEventCallback: A block to invoke when area event occurs.
@@ -82,8 +85,18 @@ public class INBle: NSObject {
     }
     
     private func update(position: INPoint) {
-        
+        if usePullToPath {
+            map.pullToPath(point: position, accuracy: 0) { pulledPosition in
+                self.updatePositionInJavaScript(pulledPosition ?? position)
+            }
+        } else {
+            updatePositionInJavaScript(position)
+        }
+    }
+    
+    private func updatePositionInJavaScript(_ position: INPoint) {
         guard let scale = map.scale else {
+            assertionFailure("Scale has not loaded.")
             return
         }
         

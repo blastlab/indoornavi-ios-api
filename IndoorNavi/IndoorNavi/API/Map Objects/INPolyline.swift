@@ -24,10 +24,10 @@ public class INPolyline: INObject {
     ///   - map: An `INMap` object, in which `INPolyline` object is going to be created.
     ///   - points: Array of `Point`'s that are describing polyline in real world dimensions. Coordinates are calculated to the map scale and then displayed.
     ///   - color: Polyline's lines and points color.
-    public convenience init(withMap map: INMap, points: [INPoint]? = nil, color: UIColor? = nil) {
+    public convenience init(withMap map: INMap, points: [INPoint] = [INPoint](), color: UIColor = .black) {
         self.init(withMap: map)
-        self.points = points ?? [INPoint]()
-        self.color = color ?? .black
+        self.points = points
+        self.color = color
     }
     
     @available(swift, obsoleted: 1.0)
