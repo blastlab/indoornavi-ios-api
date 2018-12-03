@@ -29,7 +29,7 @@ class INCircleTests: XCTestCase {
             
             circle.position = INPoint(x: 480, y: 480)
             circle.color = .blue
-            circle.border = INCircle.Border(width: 5, color: .red)
+            circle.border = Border(width: 5, color: .red)
             circle.radius = 4
             
             Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in

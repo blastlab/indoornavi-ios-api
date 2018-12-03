@@ -38,7 +38,9 @@ protocol BeaconManagerDelegate {
     
     func didUpdate(bluetoothState state: INBluetoothState)
     
-    func errorOccured(_ error: Error)
+    func errorOccuredWhileStarting(_ localizationError: LocalizationError)
+    
+    func errorOccuredWhileGettingNewData(_ error: Error)
 }
 
 class BeaconManager: NSObject {
@@ -68,17 +70,17 @@ class BeaconManager: NSObject {
     
     func startScanning() {
         guard bluetoothState == .poweredOn else {
-            delegate?.errorOccured(bluetoothState == .poweredOff ? LocalizationError.bluetoothDisabled : LocalizationError.bluetoothUnavailable )
+            delegate?.errorOccuredWhileStarting(bluetoothState == .poweredOff ? LocalizationError.bluetoothDisabled : LocalizationError.bluetoothUnavailable)
             return
         }
         
         guard CLLocationManager.locationServicesEnabled() else {
-            delegate?.errorOccured(LocalizationError.localizationDisabled)
+            delegate?.errorOccuredWhileStarting(LocalizationError.localizationDisabled)
             return
         }
         
         guard CLLocationManager.authorizationStatus() == .authorizedAlways || CLLocationManager.authorizationStatus() == .authorizedWhenInUse else {
-            delegate?.errorOccured(LocalizationError.localizationNotAuthorized)
+            delegate?.errorOccuredWhileStarting(LocalizationError.localizationNotAuthorized)
             return
         }
         
@@ -143,11 +145,11 @@ extension BeaconManager: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        delegate?.errorOccured(error)
+        delegate?.errorOccuredWhileGettingNewData(error)
     }
     
     func locationManager(_ manager: CLLocationManager, rangingBeaconsDidFailFor region: CLBeaconRegion, withError error: Error) {
-        delegate?.errorOccured(error)
+        delegate?.errorOccuredWhileGettingNewData(error)
     }
 }
 

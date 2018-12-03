@@ -54,7 +54,7 @@
 		7B83921A2147963A00BC4448 /* DeviceDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8392192147963A00BC4448 /* DeviceDataManagerTests.swift */; };
 		7B83921C21479EB300BC4448 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B83921B21479EB300BC4448 /* Constants.swift */; };
 		7B8570BF20E0DBD400295D00 /* INPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8570BE20E0DBD400295D00 /* INPoint.swift */; };
-		7B8570C120E0E51600295D00 /* ColorHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8570C020E0E51600295D00 /* ColorHelperTests.swift */; };
+		7B8570C120E0E51600295D00 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8570C020E0E51600295D00 /* UIColorExtension.swift */; };
 		7B8570C320E0F0AA00295D00 /* AreaEventsHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8570C220E0F0AA00295D00 /* AreaEventsHelperTests.swift */; };
 		7B866E45215E2EEB00607BDD /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B866E44215E2EEB00607BDD /* Building.swift */; };
 		7B866E47215E300B00607BDD /* Floor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B866E46215E300B00607BDD /* Floor.swift */; };
@@ -4302,7 +4302,7 @@
 		7B8392192147963A00BC4448 /* DeviceDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDataManagerTests.swift; sourceTree = "<group>"; };
 		7B83921B21479EB300BC4448 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7B8570BE20E0DBD400295D00 /* INPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INPoint.swift; sourceTree = "<group>"; };
-		7B8570C020E0E51600295D00 /* ColorHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelperTests.swift; sourceTree = "<group>"; };
+		7B8570C020E0E51600295D00 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		7B8570C220E0F0AA00295D00 /* AreaEventsHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaEventsHelperTests.swift; sourceTree = "<group>"; };
 		7B866E44215E2EEB00607BDD /* Building.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
 		7B866E46215E300B00607BDD /* Floor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Floor.swift; sourceTree = "<group>"; };
@@ -11618,7 +11618,7 @@
 			isa = PBXGroup;
 			children = (
 				7BD46772206CF34A00B9F2AD /* PointHelperTests.swift */,
-				7B8570C020E0E51600295D00 /* ColorHelperTests.swift */,
+				7B8570C020E0E51600295D00 /* UIColorExtension.swift */,
 				7B8570C220E0F0AA00295D00 /* AreaEventsHelperTests.swift */,
 				7B2F3EB320E527E9006D98B4 /* CoordinatesHelperTests.swift */,
 				7BEFEC0420F34CC900A55FCC /* MapHelperTests.swift */,
@@ -11848,7 +11848,7 @@
 				7B682C0121676E1100533948 /* ComplexHelperTests.swift in Sources */,
 				7BEFEBF120EB738D00A55FCC /* INAreaTests.swift in Sources */,
 				7B682BFF216663D600533948 /* DataHelperTests.swift in Sources */,
-				7B8570C120E0E51600295D00 /* ColorHelperTests.swift in Sources */,
+				7B8570C120E0E51600295D00 /* UIColorExtension.swift in Sources */,
 				7B682BFD2166630800533948 /* INDataTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

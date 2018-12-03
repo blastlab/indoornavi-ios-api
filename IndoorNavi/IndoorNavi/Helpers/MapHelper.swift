@@ -47,7 +47,7 @@ public class MapHelper: NSObject {
     ///   - realCoordinates: `INPoint` describing location of the point given in real dimensions, specified in `scale`.
     ///   - scale: `Scale` of the map.
     /// - Returns: `INPoint` describing location of the pixel.
-    public static func pixel(fromRealCoodinates realCoordinates: INPoint, scale: Scale) -> INPoint {
+    public static func pixel(fromRealCoordinates realCoordinates: INPoint, scale: Scale) -> INPoint {
         let x = Int32(Double(realCoordinates.x) / scale.centimetresPerPixel)
         let y = Int32(Double(realCoordinates.y) / scale.centimetresPerPixel)
         let point = INPoint(x: x, y: y)
@@ -55,7 +55,7 @@ public class MapHelper: NSObject {
     }
     
     @available(swift, obsoleted: 1.0)
-    @objc public static func pixel(fromlReaCoodinates realCoordinates: INPoint, scale: ObjCScale) -> INPoint {
+    @objc public static func pixel(fromRealCoodinates realCoordinates: INPoint, scale: ObjCScale) -> INPoint {
         let x = Int32(Double(realCoordinates.x) / scale.centimetresPerPixel)
         let y = Int32(Double(realCoordinates.y) / scale.centimetresPerPixel)
         let point = INPoint(x: x, y: y)

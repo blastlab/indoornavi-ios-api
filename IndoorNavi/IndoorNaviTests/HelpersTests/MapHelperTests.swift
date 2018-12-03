@@ -21,7 +21,7 @@ class MapHelperTests: XCTestCase {
     }
     
     func testPixelFromRealCoordinates() {
-        let pixelFromRealCoordinates = MapHelper.pixel(fromReaCoodinates: realCoordinates, scale: scale)
+        let pixelFromRealCoordinates = MapHelper.pixel(fromRealCoordinates: realCoordinates, scale: scale)
         XCTAssertEqual(pixelFromRealCoordinates, pixel)
     }
 }

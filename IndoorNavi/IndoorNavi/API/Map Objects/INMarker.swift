@@ -20,7 +20,7 @@ public class INMarker: INObject {
         static let RemoveLabel = "%@.removeLabel();"
         static let Open = "%@.open(%@);"
         static let SetIconURL = "%@.setIconUrl('%@');"
-        static let SetIconImage = "%@.setIconImgFromBase64('%@');"
+        static let SetIconImage = "%@.setIconBase64('%@');"
         static let Ready = "%@.ready().then(() => {%@});"
     }
     

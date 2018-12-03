@@ -1,5 +1,5 @@
 //
-//  ColorHelperTests.swift
+//  UIColorExtension.swift
 //  IndoorNaviTests
 //
 //  Created by Michał Pastwa on 25.06.2018.
@@ -9,23 +9,23 @@
 import XCTest
 @testable import IndoorNavi
 
-class ColorHelperTests: XCTestCase {
+class UIColorExtensionTests: XCTestCase {
 
     func testColorStringFromComponents() {
-        let (red, green, blue): (CGFloat, CGFloat, CGFloat) = (0.5, 0.8, 0.2)
+        let color = UIColor(red: 0.5, green: 0.8, blue: 0.2, alpha: 1.0)
         let colorString = "rgb(127,204,51)"
+        let colorStringFromComponents = color.colorString
         
-        let colorStringFromComponents = ColorHelper.colorStringFromColorComponents(red: red, green: green, blue: blue)
         XCTAssertEqual(colorStringFromComponents, colorString)
     }
     
     func testStandarizedOpacityMax() {
-        let standarizedOpacityMax = ColorHelper.standarizedOpacity(fromValue: 4)
+        let standarizedOpacityMax = UIColor(red: 0.5, green: 0.8, blue: 0.2, alpha: 4.0).standarizedOpacity
         XCTAssertEqual(standarizedOpacityMax, 1)
     }
     
     func testStandarizedOpacityMin() {
-        let standarizedOpacityMin = ColorHelper.standarizedOpacity(fromValue: -5)
+        let standarizedOpacityMin = UIColor(red: 0.5, green: 0.8, blue: 0.2, alpha: -2.0).standarizedOpacity
         XCTAssertEqual(standarizedOpacityMin, 0)
     }
 }
