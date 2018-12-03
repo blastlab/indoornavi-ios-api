@@ -251,7 +251,7 @@ public class INMap: UIView, WKUIDelegate, WKNavigationDelegate {
         let uuid = UUID().uuidString
         pullToPathCallbacksController.pullToPathCallbacks[uuid] = completionHandler
         let message = String(format: ScriptTemplates.Message, uuid)
-        let pixel = MapHelper.pixel(fromRealCoodinates: point, scale: scale)
+        let pixel = MapHelper.pixel(fromRealCoordinates: point, scale: scale)
         let normalizedAccuracy = accuracy >= 0 ? accuracy : 0
         let javaScriptString = String(format: ScriptTemplates.PullToPath, pixel.x, pixel.y, normalizedAccuracy, message)
         evaluateWhenScaleLoaded(javaScriptString)

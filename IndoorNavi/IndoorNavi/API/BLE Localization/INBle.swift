@@ -100,7 +100,7 @@ public class INBle: NSObject {
             return
         }
         
-        let pixelPosition = MapHelper.pixel(fromRealCoodinates: position, scale: scale)
+        let pixelPosition = MapHelper.pixel(fromRealCoordinates: position, scale: scale)
         let javaScriptString = String(format: ScriptTemplates.UpdatePosition, javaScriptVariableName, pixelPosition.x, pixelPosition.y)
         map.evaluate(javaScriptString)
     }

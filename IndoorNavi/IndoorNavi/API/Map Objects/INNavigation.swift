@@ -195,8 +195,8 @@ public class INNavigation: NSObject {
             return
         }
         
-        let lastPositionInPixels = MapHelper.pixel(fromRealCoodinates: position, scale: scale)
-        let destinationInPixels = MapHelper.pixel(fromRealCoodinates: destination, scale: scale)
+        let lastPositionInPixels = MapHelper.pixel(fromRealCoordinates: position, scale: scale)
+        let destinationInPixels = MapHelper.pixel(fromRealCoordinates: destination, scale: scale)
 
         let javaScriptString = String(format: ScriptTemplates.Start, javaScriptVariableName, lastPositionInPixels.x, lastPositionInPixels.y, destinationInPixels.x, destinationInPixels.y, accuracy)
         map.evaluate(javaScriptString)
@@ -274,7 +274,7 @@ public class INNavigation: NSObject {
         }
         
         lastPosition = position
-        let lastPositionInPixels = MapHelper.pixel(fromRealCoodinates: position, scale: scale)
+        let lastPositionInPixels = MapHelper.pixel(fromRealCoordinates: position, scale: scale)
         let javaScriptString = String(format: ScriptTemplates.UpdatePosition, javaScriptVariableName, lastPositionInPixels.x, lastPositionInPixels.y)
         map.evaluate(javaScriptString)
     }
