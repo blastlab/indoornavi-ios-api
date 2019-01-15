@@ -15,6 +15,7 @@ public class INData: NSObject {
         static let Message = "{uuid: '%@', response: res}"
         static let GetPaths = "%@.getPaths(%d).then(res => webkit.messageHandlers.GetPathsCallbacksController.postMessage(%@));"
         static let GetAreas = "%@.getAreas(%d).then(res => webkit.messageHandlers.GetAreasCallbacksController.postMessage(%@));"
+        static let GetComplexes = "%@.getComplexes(res => webkit.messageHandlers.ComplexesCallbacksController.postMessage(%@));"
     }
     
     private let map: INMap
@@ -65,6 +66,17 @@ public class INData: NSObject {
         map.getAreasCallbacksController.getAreasCallbacks[uuid] = completionHandler
         let message = String(format: ScriptTemplates.Message, uuid)
         let javaScriptString = String(format: ScriptTemplates.GetAreas, javaScriptVariableName, floorID, message)
+        map.evaluate(javaScriptString)
+    }
+    
+    /// Returns the list of complexes with all buildings and floors.
+    ///
+    /// - Parameter completionHandler: A block to invoke when array of `Complex` is available. This completion handler takes array of `Complex`'es.
+    public func getComplexes(withCallbackHandler completionHandler: @escaping ([Complex]) -> Void) {
+        let uuid = UUID().uuidString
+        map.complexesCallbacksController.complexesCallbacks[uuid] = completionHandler
+        let message = String(format: ScriptTemplates.Message, uuid)
+        let javaScriptString = String(format: ScriptTemplates.GetComplexes, javaScriptVariableName, message)
         map.evaluate(javaScriptString)
     }
 }

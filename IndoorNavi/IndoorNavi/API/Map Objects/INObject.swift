@@ -13,7 +13,7 @@ public class INObject: NSObject {
         static let ReadyNative = "%@.ready().then(() => webkit.messageHandlers.PromisesController.postMessage('%@'));"
         static let Ready = "%@.ready().then(() => {%@});"
         static let GetID = "%@.getID();"
-        static let Remove = "%@.remove();"
+        static let Remove = "%@.erase();"
     }
     
     var javaScriptVariableName: String!
