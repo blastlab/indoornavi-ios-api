@@ -15,7 +15,7 @@ public class INData: NSObject {
         static let Message = "{uuid: '%@', response: res}"
         static let GetPaths = "%@.getPaths(%d).then(res => webkit.messageHandlers.GetPathsCallbacksController.postMessage(%@));"
         static let GetAreas = "%@.getAreas(%d).then(res => webkit.messageHandlers.GetAreasCallbacksController.postMessage(%@));"
-        static let GetComplexes = "%@.getComplexes(res => webkit.messageHandlers.ComplexesCallbacksController.postMessage(%@));"
+        static let GetComplexes = "%@.getComplexes().then(res => webkit.messageHandlers.ComplexesCallbacksController.postMessage(%@));"
     }
     
     private let map: INMap

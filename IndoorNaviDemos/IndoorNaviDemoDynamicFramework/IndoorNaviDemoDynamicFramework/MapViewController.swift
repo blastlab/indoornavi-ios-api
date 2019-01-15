@@ -12,8 +12,8 @@ import CoreLocation
 
 class MapViewController: UIViewController {
     
-    let FrontendTargetHost = "https://expoxxi-indoornavi.azurewebsites.net"
-    let BackendTargetHost = "https://expoxxi-indoornavi.azurewebsites.net"
+    let FrontendTargetHost = "https://expoxxi-indoornavi.azurewebsites.net/"
+    let BackendTargetHost = "https://expoxxi-indoornavi.azurewebsites.net/"
     let ApiKey = "TestAdmin"
     let BeaconUUID = "30FD7D40-2EDC-4D83-9D47-D88AA7E0492A"
     

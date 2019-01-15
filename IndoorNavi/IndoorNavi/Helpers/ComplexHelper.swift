@@ -9,7 +9,7 @@
 class ComplexHelper: NSObject {
     
     static func complexes(fromJSONObject jsonObject: Any?) -> [Complex] {
-        if let dictionary = jsonObject as? [String: Any], let complexesDictionaries = dictionary["complexes"] as? [[String: Any]] {
+        if let complexesDictionaries = jsonObject as? [[String: Any]] {
             
             let complexes = complexesDictionaries.compactMap { element -> Complex? in
                 let complex = Complex(fromJSONObject: element)
