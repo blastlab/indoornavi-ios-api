@@ -25,18 +25,18 @@ class MapViewController: UIViewController {
     let points1: [INPoint] = [INPoint(x: 480, y: 480), INPoint(x: 1220, y: 480), INPoint(x: 1220, y: 1220), INPoint(x: 480, y: 1220), INPoint(x: 750, y: 750)]
     let points2: [INPoint] = [INPoint(x: 2000, y: 2000), INPoint(x: 2500, y: 2000), INPoint(x: 3000, y: 2000), INPoint(x: 3000, y: 1500), INPoint(x: 2500, y: 1500)]
     
-    let configurations = [INBeaconConfiguration(x: 3212, y: 246, z: 300, txPower: -69, major: 65042, minor: 187, floorID: 7),
-                          INBeaconConfiguration(x: 3681, y: 140, z: 300, txPower: -69, major: 65000, minor: 187, floorID: 7),
-                          INBeaconConfiguration(x: 3220, y: 1161, z: 300, txPower: -69, major: 65049, minor: 187, floorID: 7),
-                          INBeaconConfiguration(x: 3749, y: 1227, z: 300, txPower: -69, major: 65048, minor: 187, floorID: 7),
+    let configurations = [INBeaconConfiguration(x: 3212, y: 246, z: 300, txPower: -69, major: 65042, minor: 187, floorID: 11),
+                          INBeaconConfiguration(x: 3681, y: 140, z: 300, txPower: -69, major: 65000, minor: 187, floorID: 11),
+                          INBeaconConfiguration(x: 3220, y: 1161, z: 300, txPower: -69, major: 65049, minor: 187, floorID: 11),
+                          INBeaconConfiguration(x: 3749, y: 1227, z: 300, txPower: -69, major: 65048, minor: 187, floorID: 11),
                           
-                          INBeaconConfiguration(x: 2460, y: 869, z: 300, txPower: -69, major: 65051, minor: 187, floorID: 7),
-                          INBeaconConfiguration(x: 2445, y: 197, z: 300, txPower: -69, major: 65044, minor: 187, floorID: 7),
-                          INBeaconConfiguration(x: 2991, y: 197, z: 300, txPower: -69, major: 65052, minor: 187, floorID: 7),
-                          INBeaconConfiguration(x: 2991, y: 909, z: 300, txPower: -69, major: 65043, minor: 187, floorID: 7),
+                          INBeaconConfiguration(x: 2460, y: 869, z: 300, txPower: -69, major: 65051, minor: 187, floorID: 11),
+                          INBeaconConfiguration(x: 2445, y: 197, z: 300, txPower: -69, major: 65054, minor: 187, floorID: 11),
+                          INBeaconConfiguration(x: 2991, y: 197, z: 300, txPower: -69, major: 65052, minor: 187, floorID: 11),
+                          INBeaconConfiguration(x: 2991, y: 909, z: 300, txPower: -69, major: 65043, minor: 187, floorID: 11),
                           
-                          INBeaconConfiguration(x: 3461, y: 1459, z: 300, txPower: -69, major: 65047, minor: 187, floorID: 7),
-                          INBeaconConfiguration(x: 2434, y: 1441, z: 300, txPower: -69, major: 65046, minor: 187, floorID: 7)]
+                          INBeaconConfiguration(x: 3461, y: 1459, z: 300, txPower: -69, major: 65047, minor: 187, floorID: 11),
+                          INBeaconConfiguration(x: 2434, y: 1441, z: 300, txPower: -69, major: 65046, minor: 187, floorID: 11)]
     
     let destination = INPoint(x: 2600, y: 200)
     
@@ -342,6 +342,20 @@ extension MapViewController: BLELocationManagerDelegate {
         }
         showErrorAlert(withMessage: "State: \(String(describing: stateString))")
         print("State: \(String(describing: stateString))")
+    }
+    
+    func bleLocationManager(_ manager: BLELocationManager, didRangeBeacons beacons: [INBeacon]) {
+        print("INBeacons:")
+        for beacon in beacons {
+            print("- Major: \(beacon.beacon.major)")
+        }
+    }
+    
+    func bleLocationManager(_ manager: BLELocationManager, didDetectNearbyBeacons beacons: [CLBeacon]) {
+        print("CLBeacons:")
+        for beacon in beacons {
+            print("- Major: \(beacon.major)")
+        }
     }
     
     func showNotAuthorizedAlert() {

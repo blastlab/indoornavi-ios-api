@@ -34,6 +34,8 @@ protocol BeaconManagerDelegate {
     
     func didRange(beacons: [INBeacon])
     
+    func didDetectNearby(beacons: [CLBeacon])
+    
     func didChange(authorization status: INAuthorizationStatus)
     
     func didUpdate(bluetoothState state: INBluetoothState)
@@ -142,6 +144,7 @@ extension BeaconManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
         let newBeacons = inBeacons(fromCLBeacons: beacons)
         delegate?.didRange(beacons: newBeacons)
+        delegate?.didDetectNearby(beacons: beacons)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

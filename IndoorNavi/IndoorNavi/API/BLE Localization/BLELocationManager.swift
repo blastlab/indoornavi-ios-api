@@ -17,13 +17,13 @@ extension Notification.Name {
 }
 
 /// Structure representing information about a detected iBeacon, its configuration and location.
-struct INBeacon {
+public struct INBeacon {
     /// Information about a detected iBeacon.
-    var beacon: CLBeacon
+    public var beacon: CLBeacon
     /// Configuration of iBeacon, describing its coordinates, major, minor and txPower.
-    var configuration: INBeaconConfiguration
+    public var configuration: INBeaconConfiguration
     /// Location of iBeacon.
-    var location: INLocation {
+    public var location: INLocation {
         return INLocation(x: configuration.x, y: configuration.y)
     }
 }
@@ -120,6 +120,16 @@ public protocol BLELocationManagerDelegate {
     ///   - manager: The object that you use to start and stop the delivery of location events to your app.
     ///   - floorID: Current floor ID estimated by BLE localization.
     func bleLocationManager(_ manager: BLELocationManager, didChangeFloor floorID: Int)
+    
+    /// Tells the delegate about three nearest beacons that are in range, their `accuracy`'s are known and corresponding `INBeaconConfiguration`'s were found. These beacons are used to calculate `INLocation`.
+    ///
+    /// - Parameter beacons: Array of ranged beacons, with corresponding `INBeaconConfiguration`.
+    func bleLocationManager(_ manager: BLELocationManager, didRangeBeacons beacons: [INBeacon])
+    
+    /// Tells the delegate about all of the beacons that are in range, no matter if they were specified in configuration or not. This method can be used to get debug information.
+    ///
+    /// - Parameter beacons: Array of all ranged beacons, that have been detected.
+    func bleLocationManager(_ manager: BLELocationManager, didDetectNearbyBeacons beacons: [CLBeacon])
 }
 
 public extension BLELocationManagerDelegate {
@@ -128,6 +138,8 @@ public extension BLELocationManagerDelegate {
     func bleLocationManagerLeftRegion(_ manager: BLELocationManager, withLatestKnownLocation location: INLocation) {}
     func bleLocationManagerNoBeaconsDetected(_ manager: BLELocationManager) {}
     func bleLocationManager(_ manager: BLELocationManager, didChangeFloor floorID: Int) {}
+    func bleLocationManager(_ manager: BLELocationManager, didRangeBeacons beacons: [INBeacon]) {}
+    func bleLocationManager(_ manager: BLELocationManager, didDetectNearbyBeacons beacons: [CLBeacon]) {}
 }
 
 /// The object that you use to start and stop the delivery of location events to your app based on iBeacons.
@@ -404,6 +416,7 @@ extension BLELocationManager: BeaconManagerDelegate {
             return
         }
         
+        delegate?.bleLocationManager(self, didRangeBeacons: beacons)
         lastPosition = maxStepEnabled ? getPositionMaxStep(withBeacons: beacons) : getCurrentLocation(withBeacons: beacons)
         
         if let location = lastPosition {
@@ -417,6 +430,10 @@ extension BLELocationManager: BeaconManagerDelegate {
         } else if !(maxStepEnabled && lastPositions.count > 0) {
             delegate?.bleLocationManagerNoBeaconsDetected(self)
         }
+    }
+    
+    func didDetectNearby(beacons: [CLBeacon]) {
+        delegate?.bleLocationManager(self, didDetectNearbyBeacons: beacons)
     }
     
     func didChange(authorization status: CLAuthorizationStatus) {
