@@ -20,7 +20,7 @@ extension Notification.Name {
 public struct INBeacon {
     /// Information about a detected iBeacon.
     public var beacon: CLBeacon
-    /// Configuration of iBeacon, describing its coordinates, major, minor and txPower.
+    /// Configuration of iBeacon, describing its coordinates, major and floor ID.
     public var configuration: INBeaconConfiguration
     /// Location of iBeacon.
     public var location: INLocation {
@@ -28,7 +28,7 @@ public struct INBeacon {
     }
 }
 
-/// Configuration of iBeacon, describing its coordinates, major, minor and txPower.
+/// Configuration of iBeacon, describing its coordinates, major and floor ID.
 public struct INBeaconConfiguration {
     /// The x-coordinate of the iBeacon in centimeters.
     var x: Double
@@ -38,10 +38,6 @@ public struct INBeaconConfiguration {
     var z: Double
     /// The most significant value in the beacon.
     var major: Int
-    /// The least significant value in the beacon.
-    var minor: Int
-    /// The one-meter RSSI level.
-    var txPower: Int
     /// ID of the floor, where iBeacon is placed.
     var floorID: Int
     
@@ -51,17 +47,13 @@ public struct INBeaconConfiguration {
     ///   - x: The x-coordinate of the iBeacon in centimeters.
     ///   - y: The y-coordinate of the iBeacon in centimeters.
     ///   - z: The z-coordinate of the iBeacon in centimeters.
-    ///   - txPower: The one-meter RSSI level.
     ///   - major: The most significant value in the beacon.
-    ///   - minor: The least significant value in the beacon.
     ///   - floorID: ID of the floor, where iBeacon is placed.
-    public init(x: Double, y: Double, z: Double, txPower: Int, major: Int, minor: Int, floorID: Int) {
+    public init(x: Double, y: Double, z: Double, major: Int, floorID: Int) {
         self.x = x
         self.y = y
         self.z = z
         self.major = major
-        self.minor = minor
-        self.txPower = txPower
         self.floorID = floorID
     }
 }
@@ -311,7 +303,8 @@ public class BLELocationManager: NSObject {
         }
         
         let rssi = Double(beacon.beacon.rssi)
-        let oneMeterRSSI = Double(beacon.configuration.txPower)
+        
+        let oneMeterRSSI = 255 - beacon.beacon.minor.doubleValue
         let distance = pow(10.0, (oneMeterRSSI - rssi) / (10.0 * n) ) * 100
         return distance
     }

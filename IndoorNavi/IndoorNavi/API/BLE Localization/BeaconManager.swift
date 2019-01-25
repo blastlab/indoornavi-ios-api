@@ -101,7 +101,7 @@ class BeaconManager: NSObject {
                 return nil
             }
             
-            let configuration = configurations.filter { $0.major == beacon.major.intValue && $0.minor == beacon.minor.intValue }
+            let configuration = configurations.filter { $0.major == beacon.major.intValue }
             
             if configuration.count > 0 {
                 return INBeacon(beacon: beacon, configuration: configuration[0])
