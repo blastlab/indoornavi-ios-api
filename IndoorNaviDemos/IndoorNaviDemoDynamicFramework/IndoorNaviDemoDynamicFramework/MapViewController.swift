@@ -12,8 +12,8 @@ import CoreLocation
 
 class MapViewController: UIViewController {
     
-    let FrontendTargetHost = "https://expoxxi-indoornavi.azurewebsites.net/"
-    let BackendTargetHost = "https://expoxxi-indoornavi.azurewebsites.net/"
+    let FrontendTargetHost = "http://expoxxi-indoornavi.azurewebsites.net"
+    let BackendTargetHost = "http://expoxxi-indoornavi.azurewebsites.net"
     let ApiKey = "TestAdmin"
     let BeaconUUID = "30FD7D40-2EDC-4D83-9D47-D88AA7E0492A"
     
@@ -196,8 +196,9 @@ class MapViewController: UIViewController {
     
     func getComplexes() {
         let data = INData(map: map, targetHost: BackendTargetHost, apiKey: ApiKey)
-        data.getComplexes { complexes in
-            print("Complexes: \(complexes)")
+        data.getComplexes { complexes, error in
+            print("Complexes: \(String(describing: complexes))")
+            print("Error: \(String(describing: error))")
         }
     }
     

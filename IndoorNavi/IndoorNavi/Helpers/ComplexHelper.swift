@@ -18,7 +18,7 @@ class ComplexHelper: NSObject {
             
             return complexes
         } else {
-            assertionFailure("Could not initialize arrat of Complex's from JSON object.")
+            assertionFailure("Could not initialize array of Complex's from JSON object.")
             return [Complex]()
         }
     }
@@ -33,7 +33,7 @@ class ComplexHelper: NSObject {
             
             return buildings
         } else {
-            assertionFailure("Could not initialize arrat of Building's from JSON object.")
+            assertionFailure("Could not initialize array of Building's from JSON object.")
             return [Building]()
         }
     }
@@ -48,7 +48,7 @@ class ComplexHelper: NSObject {
             
             return floors
         } else {
-            assertionFailure("Could not initialize arrat of Floor's from JSON object.")
+            assertionFailure("Could not initialize array of Floor's from JSON object.")
             return [Floor]()
         }
     }

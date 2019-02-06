@@ -7,7 +7,7 @@
 //
 
 /// Structure representing building.
-public struct Building: Equatable {
+public struct Building: Equatable, Decodable {
     
     /// `Building`'s unique identifier.
     public var identifier: Int

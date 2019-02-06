@@ -51,6 +51,8 @@
 		7B75CD6C2133CF70002598AB /* INCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B75CD6B2133CF70002598AB /* INCircle.swift */; };
 		7B77E6E9207515010019D061 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B77E6E8207515010019D061 /* Paths.swift */; };
 		7B7FD56820936CE200AD409C /* INArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7FD56720936CE200AD409C /* INArea.swift */; };
+		7B80F54B220B23AB008E64C9 /* WebRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B80F54A220B23AB008E64C9 /* WebRoutes.swift */; };
+		7B80F54D220B2752008E64C9 /* HTTPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B80F54C220B2752008E64C9 /* HTTPHelper.swift */; };
 		7B83921A2147963A00BC4448 /* DeviceDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8392192147963A00BC4448 /* DeviceDataManagerTests.swift */; };
 		7B83921C21479EB300BC4448 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B83921B21479EB300BC4448 /* Constants.swift */; };
 		7B8570BF20E0DBD400295D00 /* INPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8570BE20E0DBD400295D00 /* INPoint.swift */; };
@@ -4299,6 +4301,8 @@
 		7B75CD6B2133CF70002598AB /* INCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INCircle.swift; sourceTree = "<group>"; };
 		7B77E6E8207515010019D061 /* Paths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paths.swift; sourceTree = "<group>"; };
 		7B7FD56720936CE200AD409C /* INArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INArea.swift; sourceTree = "<group>"; };
+		7B80F54A220B23AB008E64C9 /* WebRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRoutes.swift; sourceTree = "<group>"; };
+		7B80F54C220B2752008E64C9 /* HTTPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHelper.swift; sourceTree = "<group>"; };
 		7B8392192147963A00BC4448 /* DeviceDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDataManagerTests.swift; sourceTree = "<group>"; };
 		7B83921B21479EB300BC4448 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7B8570BE20E0DBD400295D00 /* INPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INPoint.swift; sourceTree = "<group>"; };
@@ -11486,6 +11490,7 @@
 				7BEFEBFE20ED32BC00A55FCC /* MapHelper.swift */,
 				7B866E4C215E39F500607BDD /* ComplexHelper.swift */,
 				7B682BFA216654DD00533948 /* DataHelper.swift */,
+				7B80F54C220B2752008E64C9 /* HTTPHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -11529,6 +11534,7 @@
 				7B866E48215E31E100607BDD /* Complex.swift */,
 				7B682BF62166503B00533948 /* Path.swift */,
 				7B9F8FB4218722B800798881 /* Border.swift */,
+				7B80F54A220B23AB008E64C9 /* WebRoutes.swift */,
 			);
 			path = Structures;
 			sourceTree = "<group>";
@@ -11792,6 +11798,7 @@
 				7B5F039F20972F0900D112F6 /* UIColor+IndoorNavi.swift in Sources */,
 				7B682BFB216654DD00533948 /* DataHelper.swift in Sources */,
 				7B866E4D215E39F500607BDD /* ComplexHelper.swift in Sources */,
+				7B80F54B220B23AB008E64C9 /* WebRoutes.swift in Sources */,
 				7BB78B3C20A1CF5C0087BFEC /* PromisesController.swift in Sources */,
 				7B866E47215E300B00607BDD /* Floor.swift in Sources */,
 				7B682BF72166503B00533948 /* Path.swift in Sources */,
@@ -11806,6 +11813,7 @@
 				7B5F03A12097455B00D112F6 /* INMarker.swift in Sources */,
 				7BDE207D2163888800E9D707 /* PullToPathCallbacksController.swift in Sources */,
 				7B714FBE20A1EEAF00836BBD /* AreaEventsHelper.swift in Sources */,
+				7B80F54D220B2752008E64C9 /* HTTPHelper.swift in Sources */,
 				7BB616152135934E003DD41C /* BeaconManager.swift in Sources */,
 				7B4D689A20F5DD6A00D491A2 /* AreaEventListenerCallbacksController.swift in Sources */,
 				7B866E49215E31E100607BDD /* Complex.swift in Sources */,

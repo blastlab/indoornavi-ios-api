@@ -9,12 +9,6 @@
 /// A DeviceDataManager class is responsible for communication with backend server.
 public class DeviceDataManager {
     
-    fileprivate struct WebRoutes {
-        static let Auth = "/auth"
-        static let Coordinates = "/coordinates"
-        static let RestPhones = "/rest/v1/phones"
-    }
-    
     private var targetHost: String
     private var apiKey: String
     
@@ -24,7 +18,7 @@ public class DeviceDataManager {
     ///   - targetHost: Address to the backend server.
     ///   - apiKey: The API key created on the backend server.
     public init(targetHost: String, apiKey: String) {
-        self.targetHost = targetHost + WebRoutes.RestPhones
+        self.targetHost = targetHost + WebRoutes.Rest + WebRoutes.Phones
         self.apiKey = apiKey
     }
     
@@ -77,7 +71,7 @@ public class DeviceDataManager {
         let url = URL(string: targetHost + WebRoutes.Auth)!
         let parameterDictionary = ["userData" : userData]
         if let httpBody = try? JSONSerialization.data(withJSONObject: parameterDictionary, options: []) {
-            let request = getRequest(withURL: url, andHTTPBody: httpBody)
+            let request = HTTPHelper.getRequest(withURL: url, andHTTPBody: httpBody, apiKey: apiKey, httpMethod: .post)
             return request
         }
         
@@ -93,7 +87,7 @@ public class DeviceDataManager {
         }
         
         if let httpBody = try? JSONSerialization.data(withJSONObject: coordinatesDictionaryArray, options: []) {
-            let request = getRequest(withURL: url, andHTTPBody: httpBody)
+            let request = HTTPHelper.getRequest(withURL: url, andHTTPBody: httpBody, apiKey: apiKey, httpMethod: .post)
             return request
         }
         
@@ -108,14 +102,4 @@ public class DeviceDataManager {
         return dateString
     }
     
-    private func getRequest(withURL url: URL, andHTTPBody httpBody: Data) -> URLRequest {
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("Application/json", forHTTPHeaderField: "Accept")
-        request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("Token " + apiKey, forHTTPHeaderField: "Authorization")
-        request.httpBody = httpBody
-        
-        return request
-    }
 }

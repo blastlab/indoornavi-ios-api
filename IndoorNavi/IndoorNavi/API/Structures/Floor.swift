@@ -7,7 +7,7 @@
 //
 
 /// Structure representing a floor.
-public struct Floor: Equatable {
+public struct Floor: Equatable, Decodable {
     
     /// `Flour`'s unique identifier.
     public var identifier: Int

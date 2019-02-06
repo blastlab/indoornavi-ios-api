@@ -7,7 +7,7 @@
 //
 
 /// Structure representing a complex.
-public struct Complex: Equatable {
+public struct Complex: Equatable, Decodable {
     
     /// `Complex`'s unique ifentifier.
     public var identifier: Int
