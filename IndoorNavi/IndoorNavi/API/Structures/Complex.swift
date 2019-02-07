@@ -7,7 +7,7 @@
 //
 
 /// Structure representing a complex.
-public struct Complex: Equatable, Decodable {
+public struct Complex: Equatable, Codable {
     
     /// `Complex`'s unique ifentifier.
     public var id: Int
@@ -40,19 +40,4 @@ public struct Complex: Equatable, Decodable {
         self.buildings = buildings
     }
     
-    init?(fromJSONObject jsonObject: Any?) {
-        if let dictionary = jsonObject as? [String: Any] {
-            let id = dictionary["id"] as? Int
-            let name = dictionary["name"] as? String
-            let buildings = ComplexHelper.buildings(fromJSONObject: dictionary["buildings"])
-            
-            if let id = id, let name = name{
-                self.init(id: id, name: name, buildings: buildings)
-                return
-            }
-        }
-        
-        assertionFailure("Could not initialize Complex from JSON object.")
-        return nil
-    }
 }

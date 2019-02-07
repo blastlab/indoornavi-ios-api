@@ -7,7 +7,7 @@
 //
 
 /// Structure representing a floor.
-public struct Floor: Equatable, Decodable {
+public struct Floor: Equatable, Codable {
     
     /// `Flour`'s unique identifier.
     public var id: Int
@@ -40,19 +40,4 @@ public struct Floor: Equatable, Decodable {
         self.level = level
     }
     
-    init?(fromJSONObject jsonObject: Any?) {
-        if let dictionary = jsonObject as? [String: Any] {
-            let id = dictionary["id"] as? Int
-            let name = dictionary["name"] as? String
-            let level = dictionary["level"] as? Int
-            
-            if let id = id, let name = name, let level = level {
-                self.init(id: id, name: name, level: level)
-                return
-            }
-        }
-        
-        assertionFailure("Could not initialize Floor from JSON object.")
-        return nil
-    }
 }

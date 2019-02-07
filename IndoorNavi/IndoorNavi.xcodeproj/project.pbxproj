@@ -62,7 +62,6 @@
 		7B866E47215E300B00607BDD /* Floor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B866E46215E300B00607BDD /* Floor.swift */; };
 		7B866E49215E31E100607BDD /* Complex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B866E48215E31E100607BDD /* Complex.swift */; };
 		7B866E4B215E358B00607BDD /* ComplexesCallbacksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B866E4A215E358B00607BDD /* ComplexesCallbacksController.swift */; };
-		7B866E4D215E39F500607BDD /* ComplexHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B866E4C215E39F500607BDD /* ComplexHelper.swift */; };
 		7B901C3120D51AA100A1D216 /* INPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B901C2C20D519AF00A1D216 /* INPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B962EC62180978700FE2CBB /* NavigationCallbacksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B962EC52180978700FE2CBB /* NavigationCallbacksController.swift */; };
 		7B9ABA3320820B6A00A8849F /* WebViewScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */; };
@@ -4312,7 +4311,6 @@
 		7B866E46215E300B00607BDD /* Floor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Floor.swift; sourceTree = "<group>"; };
 		7B866E48215E31E100607BDD /* Complex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Complex.swift; sourceTree = "<group>"; };
 		7B866E4A215E358B00607BDD /* ComplexesCallbacksController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexesCallbacksController.swift; sourceTree = "<group>"; };
-		7B866E4C215E39F500607BDD /* ComplexHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexHelper.swift; sourceTree = "<group>"; };
 		7B901C2C20D519AF00A1D216 /* INPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = INPoint.h; sourceTree = "<group>"; };
 		7B962EC52180978700FE2CBB /* NavigationCallbacksController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCallbacksController.swift; sourceTree = "<group>"; };
 		7B9ABA3220820B6A00A8849F /* WebViewScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewScrollViewDelegate.swift; sourceTree = "<group>"; };
@@ -11488,7 +11486,6 @@
 				7BCB74B820BE70C7006386D1 /* TimeIntervalExtension.swift */,
 				7BCB74BC20BE7F05006386D1 /* CoordinatesHelper.swift */,
 				7BEFEBFE20ED32BC00A55FCC /* MapHelper.swift */,
-				7B866E4C215E39F500607BDD /* ComplexHelper.swift */,
 				7B682BFA216654DD00533948 /* DataHelper.swift */,
 				7B80F54C220B2752008E64C9 /* HTTPHelper.swift */,
 			);
@@ -11797,7 +11794,6 @@
 				7B10D8AF2140161800638C06 /* DeviceDataManager.swift in Sources */,
 				7B5F039F20972F0900D112F6 /* UIColor+IndoorNavi.swift in Sources */,
 				7B682BFB216654DD00533948 /* DataHelper.swift in Sources */,
-				7B866E4D215E39F500607BDD /* ComplexHelper.swift in Sources */,
 				7B80F54B220B23AB008E64C9 /* WebRoutes.swift in Sources */,
 				7BB78B3C20A1CF5C0087BFEC /* PromisesController.swift in Sources */,
 				7B866E47215E300B00607BDD /* Floor.swift in Sources */,
