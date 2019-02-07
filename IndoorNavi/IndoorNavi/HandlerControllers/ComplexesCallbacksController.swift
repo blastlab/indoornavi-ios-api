@@ -15,7 +15,7 @@ class ComplexesCallbacksController: NSObject, WKScriptMessageHandler {
     var complexesCallbacks = [String: ([Complex]) -> Void]()
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        if let dictionary = message.body as? [String: Any], let uuid = dictionary["uuid"] as? String, let data = try? JSONSerialization.data(withJSONObject: response, options: .prettyPrinted) {
+        if let dictionary = message.body as? [String: Any], let uuid = dictionary["uuid"] as? String, let response = dictionary["response"] as? String, let data = try? JSONSerialization.data(withJSONObject: response, options: .prettyPrinted) {
             receivedMessage(withUUID: uuid, andData: data)
         }
     }
