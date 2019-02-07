@@ -74,8 +74,7 @@ public class INData: NSObject {
     ///   - Parameter complexes: An array of `Complex`'es.
     ///   - Parameter error: An error object that in dicates why the request failed, or nil if the request was successful.
     public func getComplexes(withCallbackHandler completionHandler: @escaping (_ complexes: [Complex]?, _ error: Error?) -> Void) {
-        print("URL: \(targetHost + WebRoutes.Rest + WebRoutes.Complexes)")
-        let url = URL(string: targetHost + WebRoutes.Rest + WebRoutes.Complexes + "/")!
+        let url = URL(string: targetHost + WebRoutes.Rest + WebRoutes.Complexes)!
         let request = HTTPHelper.getRequest(withURL: url, apiKey: apiKey, httpMethod: .get)
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             
@@ -84,27 +83,24 @@ public class INData: NSObject {
                 return
             }
             
-            print("Data: ", data as NSData)
-            print("Data count: ", data.count)
-            print("error: \(String(describing: error))")
-            
-            guard let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-                print("nil")
-                return
-            }
-            
-            do {
-                let complexes1 = try JSONDecoder().decode([Complex].self, from: data)
-                print("complexes1 \(complexes1)")
-            } catch let error {
-                print("catch error \(error.localizedDescription)")
-            }
-            
-            if let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                print("jsonObject: \(jsonObject)")
-                let complexes = ComplexHelper.complexes(fromJSONObject: jsonObject)
+            if let complexes = try? JSONDecoder().decode([Complex].self, from: data) {
                 completionHandler(complexes, nil)
+            } else {
+                completionHandler(nil, nil)
             }
+            
+//            do {
+//                let complexes1 = try JSONDecoder().decode([Complex].self, from: data)
+//                print("complexes1 \(complexes1)")
+//            } catch let error {
+//                print("catch error \(error.localizedDescription)")
+//            }
+            
+//            if let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+//                print("jsonObject: \(jsonObject)")
+//                let complexes = ComplexHelper.complexes(fromJSONObject: jsonObject)
+//                completionHandler(complexes, nil)
+//            }
             
         }.resume()
     }

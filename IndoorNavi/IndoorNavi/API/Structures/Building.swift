@@ -10,7 +10,7 @@
 public struct Building: Equatable, Decodable {
     
     /// `Building`'s unique identifier.
-    public var identifier: Int
+    public var id: Int
     /// Name of the building.
     public var name: String
     /// Array of all floors in the `Building`.
@@ -25,29 +25,29 @@ public struct Building: Equatable, Decodable {
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
     public static func == (lhs: Building, rhs: Building) -> Bool {
-        return lhs.identifier == rhs.identifier && lhs.name == rhs.name && lhs.floors == rhs.floors
+        return lhs.id == rhs.id && lhs.name == rhs.name && lhs.floors == rhs.floors
     }
     
     /// Initializes a new `Floor` with the provided parameters.
     ///
     /// - Parameters:
-    ///   - identifier: `Building`'s unique identifier.
+    ///   - id: `Building`'s unique identifier.
     ///   - name: Name of the building.
     ///   - floors: Array of all floors in the `Building`.
-    init(identifier: Int, name: String, floors: [Floor]) {
-        self.identifier = identifier
+    init(id: Int, name: String, floors: [Floor]) {
+        self.id = id
         self.name = name
         self.floors = floors
     }
     
     init?(fromJSONObject jsonObject: Any?) {
         if let dictionary = jsonObject as? [String: Any] {
-            let identifier = dictionary["id"] as? Int
+            let id = dictionary["id"] as? Int
             let name = dictionary["name"] as? String
             let floors = ComplexHelper.floors(fromJSONObject: dictionary["floors"])
             
-            if let identifier = identifier, let name = name {
-                self.init(identifier: identifier, name: name, floors: floors)
+            if let id = id, let name = name {
+                self.init(id: id, name: name, floors: floors)
                 return
             }
         }

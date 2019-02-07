@@ -10,7 +10,7 @@
 public struct Complex: Equatable, Decodable {
     
     /// `Complex`'s unique ifentifier.
-    public var identifier: Int
+    public var id: Int
     /// Name of the complex.
     public var name: String
     /// Array of all buildings in the `Complex`.
@@ -25,29 +25,29 @@ public struct Complex: Equatable, Decodable {
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
     public static func == (lhs: Complex, rhs: Complex) -> Bool {
-        return lhs.identifier == rhs.identifier && lhs.name == rhs.name && lhs.buildings == rhs.buildings
+        return lhs.id == rhs.id && lhs.name == rhs.name && lhs.buildings == rhs.buildings
     }
     
     /// Initializes a new `Complex` with the provided parameters.
     ///
     /// - Parameters:
-    ///   - identifier: `Complex`'s unique ifentifier.
+    ///   - id: `Complex`'s unique ifentifier.
     ///   - name: Name of the complex.
     ///   - buildings: Array of all buildings in the `Complex`.
-    init(identifier: Int, name: String, buildings: [Building]) {
-        self.identifier = identifier
+    init(id: Int, name: String, buildings: [Building]) {
+        self.id = id
         self.name = name
         self.buildings = buildings
     }
     
     init?(fromJSONObject jsonObject: Any?) {
         if let dictionary = jsonObject as? [String: Any] {
-            let identifier = dictionary["id"] as? Int
+            let id = dictionary["id"] as? Int
             let name = dictionary["name"] as? String
             let buildings = ComplexHelper.buildings(fromJSONObject: dictionary["buildings"])
             
-            if let identifier = identifier, let name = name{
-                self.init(identifier: identifier, name: name, buildings: buildings)
+            if let id = id, let name = name{
+                self.init(id: id, name: name, buildings: buildings)
                 return
             }
         }
