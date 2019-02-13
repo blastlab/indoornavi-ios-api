@@ -17,7 +17,7 @@ public class INArea: INObject {
         static let SetFillColor = "%@.setColor('%@');"
         static let SetOpacity = "%@.setOpacity('%f');"
         static let PointsDeclaration = "var points = %@;"
-        static let Remove = "%@.remove();"
+        static let Remove = "%@.erase();"
         static let IsWithin = "%@.isWithin(%@);"
         static let AddEventListener = "%@.addEventListener(Event.MOUSE.CLICK, () => webkit.messageHandlers.EventCallbacksController.postMessage('%@'));"
         static let RemoveEventListener = "%@.removeEventListener(Event.MOUSE.CLICK);"
