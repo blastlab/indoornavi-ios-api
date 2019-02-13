@@ -31,7 +31,7 @@ public class INArea: INObject {
     ///
     /// - Parameters:
     ///   - map:  An `INMap` object, in which `INArea` is going to be created.
-    ///   - points: Array of Point's that are describing area in real world dimensions. Coordinates are calculated to the map scale and then displayed. For less than 3 points supplied to this method, Area isn't going to be drawn.
+    ///   - points: Array of Point's that are describing area in pixels. For less than 3 points supplied to this method, Area isn't going to be drawn.
     ///   - color: Area's fill color and opacity.
     public convenience init(withMap map: INMap, points: [INPoint] = [INPoint](), color: UIColor = .black) {
         self.init(withMap: map)
@@ -41,16 +41,15 @@ public class INArea: INObject {
     
     convenience init?(withMap map: INMap, fromJSONObject jsonObject: Any?) {
         
-        if let dictionary = jsonObject as? [String: Any], let scale = map.scale {
+        if let dictionary = jsonObject as? [String: Any] {
             let points = PointHelper.points(fromJSONObject: dictionary["points"])
             
             guard points.count > 2 else {
                 return nil
             }
             
-            let pointsInRealDimensions = MapHelper.realCoordinatesArray(fromPixelArray: points, scale: scale)
             let defaultColor = UIColor(red: 0, green: 1, blue: 0, alpha: 0.3)
-            self.init(withMap: map, points: pointsInRealDimensions, color: defaultColor)
+            self.init(withMap: map, points: points, color: defaultColor)
             databaseID = dictionary["id"] as? Int
             return
         }

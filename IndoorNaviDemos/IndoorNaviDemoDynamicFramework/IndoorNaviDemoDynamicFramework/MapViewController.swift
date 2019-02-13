@@ -12,8 +12,8 @@ import CoreLocation
 
 class MapViewController: UIViewController {
     
-    let FrontendTargetHost = "http://expoxxi-indoornavi.azurewebsites.net"
-    let BackendTargetHost = "http://expoxxi-indoornavi.azurewebsites.net"
+    let FrontendTargetHost = "http://13.95.225.230:90"
+    let BackendTargetHost = "http://13.95.225.230:90"
     let ApiKey = "TestAdmin"
     let BeaconUUID = "30FD7D40-2EDC-4D83-9D47-D88AA7E0492A"
     
@@ -39,6 +39,7 @@ class MapViewController: UIViewController {
                           INBeaconConfiguration(x: 2434, y: 1441, z: 300, major: 65046, floorID: 11)]
     
     let destination = INPoint(x: 2600, y: 200)
+    let floorID = 11
     
     var circle1: INCircle!
     var circle2: INCircle!
@@ -86,7 +87,7 @@ class MapViewController: UIViewController {
         bleLocationManager = BLELocationManager(beaconUUID: UUID(uuidString: BeaconUUID)!, configurations: configurations, delegate: self)
         bleLocationManager!.maxStepEnabled = true
         map.enableFloorChange(wtihBLELocationManager: self.bleLocationManager!)
-        ble = INBle(map: self.map, targetHost: self.BackendTargetHost, floorID: 2, apiKey: self.ApiKey, bleLocationManager: self.bleLocationManager!)
+        ble = INBle(map: self.map, targetHost: self.BackendTargetHost, floorID: floorID, apiKey: self.ApiKey, bleLocationManager: self.bleLocationManager!)
         ble!.addAreaEventListener() { event in
             print("event \(event.date)")
         }
@@ -168,7 +169,7 @@ class MapViewController: UIViewController {
     }
     
     func load() {
-        map.load(11) {
+        map.load(floorID) {
             self.circle1 = INCircle(withMap: self.map)
             self.circle1.radius = 10
             self.circle1.border = Border(width: 5, color: .blue)
@@ -204,7 +205,7 @@ class MapViewController: UIViewController {
     
     func getPaths() {
         let data = INData(map: map, targetHost: BackendTargetHost, apiKey: ApiKey)
-        data.getPaths(fromFloorWithID: 11) { paths in
+        data.getPaths(fromFloorWithID: floorID) { paths in
             print("Paths: \(paths)")
         }
     }
@@ -227,7 +228,7 @@ class MapViewController: UIViewController {
     
     func getAreas() {
         let data = INData(map: map, targetHost: BackendTargetHost, apiKey: ApiKey)
-        data.getAreas(fromFloorWithID: 2) { areas in
+        data.getAreas(fromFloorWithID: floorID) { areas in
             self.areas = areas
         }
     }
