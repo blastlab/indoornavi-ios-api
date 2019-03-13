@@ -21,7 +21,7 @@ class NavigationCallbacksController: NSObject, WKScriptMessageHandler {
     }
     
     private func receivedMessage(withUUID uuid: String, andJSONObject jsonObject: Any) {
-        if let navigationCallback = navigationCallbacks[uuid], let dictionary = jsonObject as? [String: Any], let action = dictionary["action"] as? String, let event = INNavigation.Event(rawValue: action) {
+        if let navigationCallback = navigationCallbacks[uuid], let dictionary = jsonObject as? [String: Any], let action = dictionary["status"] as? String, let event = INNavigation.Event(rawValue: action) {
             navigationCallback(event)
         }
     }
